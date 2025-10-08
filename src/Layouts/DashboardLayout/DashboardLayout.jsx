@@ -1,6 +1,6 @@
 import { NavLink, Outlet } from "react-router";
 import Pothik from "../../Shared/Pothik/Pothik";
-import { FaHeart, FaHistory, FaHome, FaMapMarkedAlt, FaMoneyCheckAlt, FaPlusSquare, FaShoppingCart } from "react-icons/fa";
+import { FaHeart, FaHistory, FaHome, FaMapMarkedAlt, FaMoneyCheckAlt, FaMotorcycle, FaPlusSquare, FaShoppingCart, FaUserPlus } from "react-icons/fa";
 const DashboardLayout = () => {
   return (
     <div className="drawer lg:drawer-open max-w-7xl mx-auto">
@@ -106,7 +106,7 @@ const DashboardLayout = () => {
                 <FaMoneyCheckAlt className="inline mr-2" size={15} /> Payment History
               </NavLink>
             </li>
-            {/* seller nav links */}
+            {/* seller add product nav links */}
             <li>
               <NavLink
                 to="/dashboard/addProduct"
@@ -117,6 +117,40 @@ const DashboardLayout = () => {
                 <FaPlusSquare className="inline mr-2" size={15} /> Add Product
               </NavLink>
             </li>
+            {/* assign seller nav links */}
+            <li>
+              <NavLink
+                to="/dashboard/assign-seller"
+                className={({ isActive }) =>
+                  isActive ? "text-green-500" : "text-white"
+                }
+              >
+                <FaUserPlus className="inline mr-2" size={15} /> Assign Sellers
+              </NavLink>
+            </li>
+            {/*   seller pro duct list nav links */}
+            <li>
+              <NavLink
+                to="/dashboard/my-products"
+                className={({ isActive }) =>
+                  isActive ? "text-green-500" : "text-white"
+                }
+              >
+                <FaUserPlus className="inline mr-2" size={15} /> My Products
+              </NavLink>
+            </li>
+            {/*   rider assign pro duct list nav links */}
+            <li>
+              <NavLink
+                to="/dashboard/assign-rider"
+                className={({ isActive }) =>
+                  isActive ? "text-green-500" : "text-white"
+                }
+              >
+                <FaMotorcycle className="inline mr-2" size={15} /> Assign Rider
+              </NavLink>
+            </li>
+           
           </div>
         </ul>
       </div>

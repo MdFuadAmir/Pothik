@@ -5,6 +5,7 @@ import axios from "axios";
 import { useState } from "react";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import useAuth from "../../../Hooks/useAuth";
 
 const AddProducts = () => {
   const {
@@ -12,6 +13,7 @@ const AddProducts = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const {user} = useAuth();
   const [productImage, setProductImage] = useState("");
   const [upLoading, setUploading] = useState(false);
   const axiosSecure = useAxiosSecure();
@@ -48,6 +50,7 @@ const AddProducts = () => {
         const newProduct = {
           ...data,
           image: productImage,
+          discountPrice: Math.round(data.price - (data.price * data.discount / 100)),
           createdAt: new Date().toISOString(),
         };
         console.log(newProduct);
@@ -164,9 +167,9 @@ const AddProducts = () => {
             </span>
           )}
         </div>
-        {/* Price */}
+        {/* reguler price Price */}
         <div>
-          <label className="font-semibold">Price (৳)</label>
+          <label className="font-semibold">Reguler Price (৳)</label>
           <input
             {...register("price", { required: true })}
             type="number"
@@ -179,11 +182,11 @@ const AddProducts = () => {
         </div>
         {/* Discount Price */}
         <div>
-          <label className="font-semibold">Discount Price (optional)</label>
+          <label className="font-semibold">Discount(%)</label>
           <input
             {...register("discount")}
             type="number"
-            placeholder="Discounted Price"
+            placeholder="Discounted Price 5%"
             className="input input-bordered w-full"
           />
         </div>
@@ -303,6 +306,20 @@ const AddProducts = () => {
           />
           {errors.returnPolicy?.type === "required" && (
             <span className="text-red-500">This field is required</span>
+          )}
+        </div>
+        {/* email */}
+        <div>
+          <label className="font-semibold">Your Email</label>
+          <input
+            {...register("email", { required: true })}
+            type="email"
+            value={user?.email || ""}
+            readOnly
+            className="input input-bordered w-full"
+          />
+          {errors.email?.type === "required" && (
+            <span className="text-red-500">email is required</span>
           )}
         </div>
         {/* Image URL */}

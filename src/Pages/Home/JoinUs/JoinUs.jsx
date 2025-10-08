@@ -15,7 +15,7 @@ const JoinUs = () => {
       <div className="flex flex-col md:flex-row justify-center gap-6">
     
         {/* Seller */}
-       {user ? <NavLink to={'/sellerApplication'}>
+       {user ? <NavLink to={'/seller-application'}>
         <button className="px-6 py-3 bg-yellow-500 text-white font-semibold rounded-lg hover:bg-yellow-600 transition">
           Apply to Selling Account
         </button>
@@ -25,7 +25,7 @@ const JoinUs = () => {
         </button>
         </NavLink>}
         {/* Rider */}
-        {user ? <NavLink to={'/riderApplication'}>
+        {user ? <NavLink to={'/rider-application'}>
         <button className="px-6 py-3 bg-purple-500 text-white font-semibold rounded-lg hover:bg-purple-600 transition">
           Apply to Rider Account
         </button>

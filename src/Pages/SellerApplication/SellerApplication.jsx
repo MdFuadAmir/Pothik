@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import useAuth from "../../Hooks/useAuth";
 import { useState } from "react";
 import axios from "axios";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const SellerApplication = () => {
   const { user } = useAuth();
@@ -12,6 +13,7 @@ const SellerApplication = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const axiosSecure = useAxiosSecure();
   const [shopLogo, setShopLogo] = useState("");
   const [upLoading, setUploading] = useState(false);
 
@@ -31,10 +33,9 @@ const SellerApplication = () => {
   const onSubmit = (data) => {
     console.log(data);
     if (!shopLogo) {
-          Swal.fire("Please upload your shop logo!");
-          return;
-        }
-
+      Swal.fire("Please upload your shop logo!");
+      return;
+    }
     Swal.fire({
       title: "Confirm Submission",
       text: "Are you sure you want to apply for a seller account?",
@@ -46,15 +47,21 @@ const SellerApplication = () => {
         const newApplication = {
           ...data,
           image: shopLogo,
+          role: "seller",
+          status: "pending",
           createdAt: new Date().toISOString(),
         };
         console.log(newApplication);
-
-        Swal.fire(
-          "Success!",
-          "Your seller request has been submitted.",
-          "success"
-        );
+        axiosSecure.post("/seller-application", newApplication).then((res) => {
+          if (res.data.insertedId) {
+            console.log(res.data);
+            Swal.fire(
+              "Success!",
+              "Your seller request has been submitted.",
+              "success"
+            );
+          }
+        });
       }
     });
   };
@@ -87,24 +94,30 @@ const SellerApplication = () => {
           <div>
             <label className="font-semibold">Owner Name</label>
             <input
-              {...register("ownerName")}
+              {...register("ownerName", { required: true })}
               type="text"
-              placeholder="Owner Name"
-              defaultValue={user?.displayName}
+              value={user?.displayName || ""}
+              readOnly
               className="input input-bordered w-full"
             />
+            {errors.ownerName && (
+              <span className="text-red-500">Name is Required</span>
+            )}
           </div>
 
           {/* Email */}
           <div>
             <label className="font-semibold">Email</label>
             <input
-              {...register("email")}
+              {...register("email", { required: true })}
               type="email"
-              defaultValue={user?.email}
-              placeholder="Email"
+              value={user?.email || ""}
+              readOnly
               className="input input-bordered w-full"
             />
+            {errors.email && (
+              <span className="text-red-500">Email is Required</span>
+            )}
           </div>
 
           {/* Phone Number */}
@@ -128,7 +141,9 @@ const SellerApplication = () => {
               {...register("category", { required: "Category is required" })}
               className="select select-bordered w-full"
             >
-              <option value="">Select Category</option>
+              <option disabled value="">
+                Select Category
+              </option>
               <option>Fashion</option>
               <option>Electronics</option>
               <option>Groceries</option>
@@ -141,7 +156,7 @@ const SellerApplication = () => {
               <span className="text-red-500">{errors.category.message}</span>
             )}
           </div>
-          {/* Phone Number */}
+          {/* nid no Number */}
           <div>
             <label className="font-semibold">
               National ID / Passport Number
@@ -186,9 +201,7 @@ const SellerApplication = () => {
           </div>
           {/* Shop Logo */}
           <div className="md:col-span-2">
-            <label className="font-semibold mr-4 block">
-              Shop Logo
-            </label>
+            <label className="font-semibold mr-4 block">Shop Logo</label>
             <input
               onChange={handleImageUploade}
               type="file"
@@ -200,9 +213,9 @@ const SellerApplication = () => {
               </p>
             )}
             {shopLogo && (
-              <img 
-              src={shopLogo} 
-              alt="Preview"
+              <img
+                src={shopLogo}
+                alt="Preview"
                 className="w-32 h-32 object-cover rounded-lg mt-3 border"
               />
             )}
