@@ -20,13 +20,13 @@ const Navbar = () => {
         <NavLink to="/">Home</NavLink>
       </li>
       <li>
-        <NavLink to="/covrage">Covrage</NavLink>
+        <NavLink to="/covrage" >Covrage</NavLink>
       </li>
       <li>
-        <NavLink to="/categories">Categories</NavLink>
+        <NavLink to="/categories" >Categories</NavLink>
       </li>
       <li>
-        <NavLink to="/aboutUs">About Us</NavLink>
+        <NavLink to="/aboutUs" >About Us</NavLink>
       </li>
       <li>
         <NavLink to="/Contact">Contact</NavLink>
@@ -56,7 +56,7 @@ const Navbar = () => {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+            className="menu menu-sm dropdown-content text-black bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
           >
             {navLinks}
           </ul>
@@ -64,22 +64,25 @@ const Navbar = () => {
         <Pothik></Pothik>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">{navLinks}</ul>
+        <ul className="menu menu-horizontal px-1 text-black">{navLinks}</ul>
       </div>
       {/* profile menu section */}
       <div className="navbar-end ">
         <div className="dropdown dropdown-end">
       <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+        {
+          user ? <img src={user.photoURL} className="w-10 h-10 rounded-full"/> :
         <div className="w-10 rounded-full bg-blue-500 flex items-center justify-center text-blue-950">
-          SJ
+          pro
         </div>
+        }
       </label>
       <ul
         tabIndex={0}
         className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 text-blue-950"
       >
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/dashboard">Dashboard</Link></li>
+        <li><Link to="/" >Home</Link></li>
+        <li><Link to="/dashboard" >Dashboard</Link></li>
         {user ? <li><Link onClick={handleLogout} className="text-red-500"><FaSignOutAlt/> LogOut</Link></li> : 
         <li><Link to="/login" className="text-green-500"><FaSignInAlt/> Login</Link></li>
         }

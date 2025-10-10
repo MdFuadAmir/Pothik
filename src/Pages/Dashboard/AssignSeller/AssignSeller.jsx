@@ -4,13 +4,17 @@ import Swal from "sweetalert2";
 import { FaCheck, FaTimes } from "react-icons/fa";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import SectionTitle from "../../../Shared/Sectiontitle/SectionTitle";
+import useAuth from "../../../Hooks/useAuth";
+import Loading from "../../../Shared/Loading/Loading";
 
 const AssignSeller = () => {
   const axiosSecure = useAxiosSecure();
+  const {user} = useAuth();
+
 
   // Get all seller applications (sorted by latest)
-  const { data: applications = [], refetch } = useQuery({
-    queryKey: ["sellerApplications"],
+  const { data: applications = [], refetch,isLoading } = useQuery({
+    queryKey: ["sellerApplications",user?.email],
     queryFn: async () => {
       const res = await axiosSecure.get("/seller-application");
       return res.data.sort(
@@ -18,6 +22,9 @@ const AssignSeller = () => {
       );
     },
   });
+  if(isLoading){
+    return <Loading></Loading>
+  }
 
   // Handle approve/reject action
   const handleAction = async (id, status) => {

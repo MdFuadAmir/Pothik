@@ -1,10 +1,11 @@
 import { useForm } from "react-hook-form";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import SocilaLogin from "../SocilaLogin/SocilaLogin";
 import { IoIosCloudUpload } from "react-icons/io";
 import axios from "axios";
 import { useState } from "react";
 import useAuth from "../../../Hooks/useAuth";
+import useAxios from "../../../Hooks/useAxios";
 
 const SignUp = () => {
   const {
@@ -13,38 +14,52 @@ const SignUp = () => {
     formState: { errors },
   } = useForm();
   const { creatUser, updateUserProfile } = useAuth();
-  const [profileImage, setProfileImage] = useState("");
+  const navigate = useNavigate();
+  const from = location?.state?.from || "/";
+  const axiosInstance = useAxios();
+  const [upLoading, setUploading] = useState(false);
+  const [profileImage,setProfileImage] = useState();
 
   const handleImageUploade = async (e) => {
     const image = e.target.files[0];
+    setUploading(true);
     const formData = new FormData();
     formData.append("image", image);
     const imageUploadeUrl = `https://api.imgbb.com/1/upload?expiration=600&key=${
       import.meta.env.VITE_image_upload_key
     }`;
     const res = await axios.post(imageUploadeUrl, formData);
-    setProfileImage(res.data.data.url);
+    setProfileImage(res.data.data.display_url);
+    setUploading(false)
   };
 
   const onSubmit = (data) => {
-    console.log(data);
     creatUser(data.email, data.password)
-      .then((result) => {
-        console.log(result.user);
+      .then(async (result) => {
+        const user = result.user;
+        console.log(user);
         // update user info in database
-
+        const userInfo = {
+          email: user.email,
+          role: "user", //default role
+          created_at: new Date().toISOString(),
+          last_log_in: new Date().toISOString(),
+        };
+        const userRes = await axiosInstance.post("/users", userInfo);
+        console.log(userRes.data);
         // update user profile in firebase
-        const userProfile ={
-          displayName: data.name,
-          photoUrl: profileImage
-        }
+        const userProfile = {
+          displayName: data?.name,
+          photoURL: profileImage,
+        };
         updateUserProfile(userProfile)
-        .then(()=>{
-          console.log('Profile name and image updated');
-        })
-        .catch(error=>{
-          console.log(error);
-        })
+          .then(() => {
+            console.log("Profile name and image updated");
+            navigate(from);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       })
       .catch((error) => {
         console.log(error);
@@ -62,10 +77,17 @@ const SignUp = () => {
             {/* photo */}
             <div className="fieldset flex">
               <div className="flex">
+                {
+                  profileImage ? <img
+                src={profileImage}
+                alt="Preview"
+                className="w-24 h-24 object-center rounded-lg mt-3 border"
+              /> :
                 <div className="w-24 h-24 bg-cyan-950 rounded-lg flex justify-center items-center flex-col text-center text-white">
                   <IoIosCloudUpload size={50} />
                   Choose Your Photo
                 </div>
+                }
                 <input
                   onChange={handleImageUploade}
                   type="file"
@@ -73,6 +95,11 @@ const SignUp = () => {
                   placeholder="photo"
                 />
               </div>
+              {upLoading && (
+              <p className="text-blue-600 mt-1 animate-pulse">
+                Uploading ......
+              </p>
+            )}
             </div>
             {/* name */}
             <div className="fieldset">
@@ -120,9 +147,13 @@ const SignUp = () => {
             </div>
 
             {/* submit button */}
-            <button className="border-none btn bg-indigo-900 text-white mt-4">
+            {
+              upLoading ? <button disabled className="border-none btn bg-indigo-900 text-white mt-4">
+              Sign Up
+            </button>:<button className="border-none btn bg-indigo-900 text-white mt-4">
               Sign Up
             </button>
+            }
             {/* troggl to sign up page */}
             <p className="text-amber-400 mt-4 text-center">
               Already Have an account ?{" "}
@@ -142,3 +173,10 @@ const SignUp = () => {
 };
 
 export default SignUp;
+// Swal.fire({
+//   position: "top-end",
+//   icon: "success",
+//   title: "Your work has been saved",
+//   showConfirmButton: false,
+//   timer: 1500
+// });

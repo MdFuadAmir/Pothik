@@ -2,6 +2,11 @@ import { NavLink, Outlet } from "react-router";
 import Pothik from "../../Shared/Pothik/Pothik";
 import { FaHeart, FaHistory, FaHome, FaMapMarkedAlt, FaMoneyCheckAlt, FaMotorcycle, FaPlusSquare, FaShoppingCart, FaUserPlus } from "react-icons/fa";
 const DashboardLayout = () => {
+   // close drawer when clicking link
+  const handleCloseDrawer = () => {
+    const drawerCheckbox = document.getElementById("my-drawer-2");
+    if (drawerCheckbox) drawerCheckbox.checked = false;
+  };
   return (
     <div className="drawer lg:drawer-open max-w-7xl mx-auto">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -49,6 +54,7 @@ const DashboardLayout = () => {
             <li>
               <NavLink
                 to="/dashboard"
+                onClick={handleCloseDrawer}
                 className={({ isActive }) =>
                   isActive ? "text-amber-500" : "text-white"
                 }
@@ -59,6 +65,7 @@ const DashboardLayout = () => {
             <li>
               <NavLink
                 to="/dashboard/myCart"
+                onClick={handleCloseDrawer}
                 className={({ isActive }) =>
                   isActive ? "text-green-500" : "text-white"
                 }
@@ -69,6 +76,7 @@ const DashboardLayout = () => {
             <li>
               <NavLink
                 to="/dashboard/favorite"
+                onClick={handleCloseDrawer}
                 className={({ isActive }) =>
                   isActive ? "text-green-500" : "text-white"
                 }
@@ -79,6 +87,7 @@ const DashboardLayout = () => {
             <li>
               <NavLink
                 to="/dashboard/trackMyProduct"
+                onClick={handleCloseDrawer}
                 className={({ isActive }) =>
                   isActive ? "text-green-500" : "text-white"
                 }
@@ -89,6 +98,7 @@ const DashboardLayout = () => {
             <li>
               <NavLink
                 to="/dashboard/orderHistory"
+                onClick={handleCloseDrawer}
                 className={({ isActive }) =>
                   isActive ? "text-green-500" : "text-white"
                 }
@@ -99,6 +109,7 @@ const DashboardLayout = () => {
             <li>
               <NavLink
                 to="/dashboard/paymentHistory"
+                onClick={handleCloseDrawer}
                 className={({ isActive }) =>
                   isActive ? "text-green-500" : "text-white"
                 }
@@ -110,6 +121,7 @@ const DashboardLayout = () => {
             <li>
               <NavLink
                 to="/dashboard/addProduct"
+                onClick={handleCloseDrawer}
                 className={({ isActive }) =>
                   isActive ? "text-green-500" : "text-white"
                 }
@@ -121,6 +133,7 @@ const DashboardLayout = () => {
             <li>
               <NavLink
                 to="/dashboard/assign-seller"
+                onClick={handleCloseDrawer}
                 className={({ isActive }) =>
                   isActive ? "text-green-500" : "text-white"
                 }
@@ -132,6 +145,7 @@ const DashboardLayout = () => {
             <li>
               <NavLink
                 to="/dashboard/my-products"
+                onClick={handleCloseDrawer}
                 className={({ isActive }) =>
                   isActive ? "text-green-500" : "text-white"
                 }
@@ -143,6 +157,7 @@ const DashboardLayout = () => {
             <li>
               <NavLink
                 to="/dashboard/assign-rider"
+                onClick={handleCloseDrawer}
                 className={({ isActive }) =>
                   isActive ? "text-green-500" : "text-white"
                 }

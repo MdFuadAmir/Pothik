@@ -1,17 +1,29 @@
 import { FaFacebook, FaGithub, FaGoogle } from "react-icons/fa";
 import useAuth from "../../../Hooks/useAuth";
 import {  useNavigate } from "react-router";
+import useAxios from "../../../Hooks/useAxios";
 
 
 const SocilaLogin = () => {
     const {loginWithGoogle} = useAuth();
     const navigate = useNavigate();
     const from = location?.state?.from || '/';
+    const axiosInstance = useAxios();
+
     const haldleGoogleSignIn = () =>{
         loginWithGoogle()
-        .then((result) => {
+        .then(async(result) => {
+          const user = result.user;
+          // update user profile info in database
+        const userInfo = {
+          email: user.email,
+          role: "user", //default role
+          created_at: new Date().toISOString(),
+          last_log_in: new Date().toISOString(),
+        };
+        const res = await axiosInstance.post('/users',userInfo);
+        console.log('user update info', res.data);
           navigate(from);
-        console.log(result.user);
       })
       .catch((error) => {
         console.log(error);

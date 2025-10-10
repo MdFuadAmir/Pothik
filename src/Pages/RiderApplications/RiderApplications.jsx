@@ -40,7 +40,7 @@ const RiderApplications = () => {
           created_at: new Date().toISOString(),
         };
         console.log("rider application", riderData);
-        axiosSecure.post("/riders", riderData).then((res) => {
+        axiosSecure.post("/riders-application", riderData).then((res) => {
           if (res.data.insertedId) {
             console.log(res.data);
             Swal.fire(
