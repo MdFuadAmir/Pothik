@@ -1,6 +1,7 @@
 import { NavLink, Outlet } from "react-router";
 import Pothik from "../../Shared/Pothik/Pothik";
-import { FaHeart, FaHistory, FaHome, FaMapMarkedAlt, FaMoneyCheckAlt, FaMotorcycle, FaPlusSquare, FaShoppingCart, FaUserPlus } from "react-icons/fa";
+import { FaHeart, FaHistory, FaHome, FaMapMarkedAlt, FaMoneyCheckAlt, FaMotorcycle, FaPlusSquare, FaShoppingCart, FaStore, FaUserPlus } from "react-icons/fa";
+import { GiDeliveryDrone } from "react-icons/gi";
 const DashboardLayout = () => {
    // close drawer when clicking link
   const handleCloseDrawer = () => {
@@ -51,6 +52,7 @@ const DashboardLayout = () => {
           <div className="divider divider-primary -mt-2"></div>
           {/* Sidebar content here */}
           <div className=" space-y-2">
+            {/* user actions start */}
             <li>
               <NavLink
                 to="/dashboard"
@@ -117,7 +119,8 @@ const DashboardLayout = () => {
                 <FaMoneyCheckAlt className="inline mr-2" size={15} /> Payment History
               </NavLink>
             </li>
-            {/* seller add product nav links */}
+            {/* user actions end */}
+            {/* seller actions staart */}
             <li>
               <NavLink
                 to="/dashboard/addProduct"
@@ -129,19 +132,6 @@ const DashboardLayout = () => {
                 <FaPlusSquare className="inline mr-2" size={15} /> Add Product
               </NavLink>
             </li>
-            {/* assign seller nav links */}
-            <li>
-              <NavLink
-                to="/dashboard/assign-seller"
-                onClick={handleCloseDrawer}
-                className={({ isActive }) =>
-                  isActive ? "text-green-500" : "text-white"
-                }
-              >
-                <FaUserPlus className="inline mr-2" size={15} /> Assign Sellers
-              </NavLink>
-            </li>
-            {/*   seller pro duct list nav links */}
             <li>
               <NavLink
                 to="/dashboard/my-products"
@@ -153,19 +143,55 @@ const DashboardLayout = () => {
                 <FaUserPlus className="inline mr-2" size={15} /> My Products
               </NavLink>
             </li>
-            {/*   rider assign pro duct list nav links */}
+            {/* seller actions end */}
+           {/* rider actions start*/}
+            {/* rider actions end*/}
+            {/* Admin actions start*/}
             <li>
               <NavLink
-                to="/dashboard/assign-rider"
+                to="/dashboard/pending-seller"
                 onClick={handleCloseDrawer}
                 className={({ isActive }) =>
                   isActive ? "text-green-500" : "text-white"
                 }
               >
-                <FaMotorcycle className="inline mr-2" size={15} /> Assign Rider
+                <FaUserPlus className="inline mr-2" size={15} /> Pending Sellers
               </NavLink>
             </li>
-           
+            <li>
+              <NavLink
+                to="/dashboard/active-seller"
+                onClick={handleCloseDrawer}
+                className={({ isActive }) =>
+                  isActive ? "text-green-500" : "text-white"
+                }
+              >
+                <FaStore className="inline mr-2" size={15} /> Active Sellers
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/dashboard/pending-rider"
+                onClick={handleCloseDrawer}
+                className={({ isActive }) =>
+                  isActive ? "text-green-500" : "text-white"
+                }
+              >
+                <FaMotorcycle className="inline mr-2" size={15} /> Pending Rider
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/dashboard/active-rider"
+                onClick={handleCloseDrawer}
+                className={({ isActive }) =>
+                  isActive ? "text-green-500" : "text-white"
+                }
+              >
+                <GiDeliveryDrone className="inline mr-2" size={15} /> Active Riders
+              </NavLink>
+            </li>
+           {/* admin actions end */}
           </div>
         </ul>
       </div>

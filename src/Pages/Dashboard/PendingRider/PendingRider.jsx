@@ -6,7 +6,7 @@ import { FaCheckCircle, FaEye, FaTimesCircle } from "react-icons/fa";
 import useAuth from "../../../Hooks/useAuth";
 import Loading from "../../../Shared/Loading/Loading";
 
-const AssignRider = () => {
+const PendingRider = () => {
   const axiosSecure = useAxiosSecure();
   const {user} = useAuth();
   // Get all Riders applications (sorted by latest)
@@ -56,7 +56,7 @@ const AssignRider = () => {
   return (
     <div className="p-6">
       <SectionTitle
-        sectionTitle="Assign Rider"
+        sectionTitle="Prnding Rider"
         sectionSubTitle="Review rider applications and approve or reject them."
       />
 
@@ -122,4 +122,4 @@ const AssignRider = () => {
   );
 };
 
-export default AssignRider;
+export default PendingRider;

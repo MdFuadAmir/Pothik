@@ -6,6 +6,7 @@ import axios from "axios";
 import { useState } from "react";
 import useAuth from "../../../Hooks/useAuth";
 import useAxios from "../../../Hooks/useAxios";
+import Swal from "sweetalert2";
 
 const SignUp = () => {
   const {
@@ -18,7 +19,7 @@ const SignUp = () => {
   const from = location?.state?.from || "/";
   const axiosInstance = useAxios();
   const [upLoading, setUploading] = useState(false);
-  const [profileImage,setProfileImage] = useState();
+  const [profileImage, setProfileImage] = useState();
 
   const handleImageUploade = async (e) => {
     const image = e.target.files[0];
@@ -30,7 +31,7 @@ const SignUp = () => {
     }`;
     const res = await axios.post(imageUploadeUrl, formData);
     setProfileImage(res.data.data.display_url);
-    setUploading(false)
+    setUploading(false);
   };
 
   const onSubmit = (data) => {
@@ -46,7 +47,25 @@ const SignUp = () => {
           last_log_in: new Date().toISOString(),
         };
         const userRes = await axiosInstance.post("/users", userInfo);
-        console.log(userRes.data);
+        if (userRes.data.success && userRes.data.insertedId) {
+          console.log("New user added to database");
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Your Account Created Successfully",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        } else {
+          console.log("User already exists");
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "User already exists",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
         // update user profile in firebase
         const userProfile = {
           displayName: data?.name,
@@ -77,17 +96,18 @@ const SignUp = () => {
             {/* photo */}
             <div className="fieldset flex">
               <div className="flex">
-                {
-                  profileImage ? <img
-                src={profileImage}
-                alt="Preview"
-                className="w-24 h-24 object-center rounded-lg mt-3 border"
-              /> :
-                <div className="w-24 h-24 bg-cyan-950 rounded-lg flex justify-center items-center flex-col text-center text-white">
-                  <IoIosCloudUpload size={50} />
-                  Choose Your Photo
-                </div>
-                }
+                {profileImage ? (
+                  <img
+                    src={profileImage}
+                    alt="Preview"
+                    className="w-24 h-24 object-center rounded-lg mt-3 border"
+                  />
+                ) : (
+                  <div className="w-24 h-24 bg-cyan-950 rounded-lg flex justify-center items-center flex-col text-center text-white">
+                    <IoIosCloudUpload size={50} />
+                    Choose Your Photo
+                  </div>
+                )}
                 <input
                   onChange={handleImageUploade}
                   type="file"
@@ -96,10 +116,10 @@ const SignUp = () => {
                 />
               </div>
               {upLoading && (
-              <p className="text-blue-600 mt-1 animate-pulse">
-                Uploading ......
-              </p>
-            )}
+                <p className="text-blue-600 mt-1 animate-pulse">
+                  Uploading ......
+                </p>
+              )}
             </div>
             {/* name */}
             <div className="fieldset">
@@ -147,13 +167,18 @@ const SignUp = () => {
             </div>
 
             {/* submit button */}
-            {
-              upLoading ? <button disabled className="border-none btn bg-indigo-900 text-white mt-4">
-              Sign Up
-            </button>:<button className="border-none btn bg-indigo-900 text-white mt-4">
-              Sign Up
-            </button>
-            }
+            {upLoading ? (
+              <button
+                disabled
+                className="border-none btn bg-indigo-900 text-white mt-4"
+              >
+                Sign Up
+              </button>
+            ) : (
+              <button className="border-none btn bg-indigo-900 text-white mt-4">
+                Sign Up
+              </button>
+            )}
             {/* troggl to sign up page */}
             <p className="text-amber-400 mt-4 text-center">
               Already Have an account ?{" "}

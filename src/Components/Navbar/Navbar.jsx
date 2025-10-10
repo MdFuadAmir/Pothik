@@ -64,7 +64,7 @@ const Navbar = () => {
         <Pothik></Pothik>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 text-black">{navLinks}</ul>
+        <ul className="menu menu-horizontal px-1 text-white">{navLinks}</ul>
       </div>
       {/* profile menu section */}
       <div className="navbar-end ">

@@ -82,10 +82,10 @@ const MyProducts = () => {
                 <b>Stock:</b> {product.stock} pcs
               </p>
               <p className="flex flex-wrap gap-2">
-                <b>Colors:</b> {product.color.split(",").map((clr,index) => <p key={index} className="bg-gray-700 text-white px-2 py-1 rounded-sm w-fit">{clr.trim()}</p>)} 
+                <b>Colors:</b> {product.color.split(",").map((clr,index) => <span key={index} className="bg-gray-700 text-white px-2 py-1 rounded-sm w-fit">{clr.trim()}</span>)} 
               </p>
               <p className="flex gap-2">
-                <b>Sise:</b> {product.size.split(",").map((siz,index) => <p key={index} className="px-2 py-1 text-xs font-semibold bg-gray-700 text-white rounded-sm w-fit">{siz.trim()}</p>)} 
+                <b>Sise:</b> {product.size.split(",").map((siz,index) => <span key={index} className="px-2 py-1 text-xs font-semibold bg-gray-700 text-white rounded-sm w-fit">{siz.trim()}</span>)} 
               </p>
               <p>
                 <b>Warranty:</b> {product.warranty} months

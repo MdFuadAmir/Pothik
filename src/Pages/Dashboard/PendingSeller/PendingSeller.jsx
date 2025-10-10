@@ -7,119 +7,119 @@ import SectionTitle from "../../../Shared/Sectiontitle/SectionTitle";
 import useAuth from "../../../Hooks/useAuth";
 import Loading from "../../../Shared/Loading/Loading";
 
-const AssignSeller = () => {
+const PendingSeller = () => {
   const axiosSecure = useAxiosSecure();
-  const {user} = useAuth();
-
+  const { user } = useAuth();
 
   // Get all seller applications (sorted by latest)
-  const { data: applications = [], refetch,isLoading } = useQuery({
-    queryKey: ["sellerApplications",user?.email],
+  const {
+    data: sellers = [],
+    refetch,
+    isLoading,
+  } = useQuery({
+    queryKey: ["pending-seller", user?.email],
     queryFn: async () => {
-      const res = await axiosSecure.get("/seller-application");
+      const res = await axiosSecure.get("/seller-application/pending-seller");
       return res.data.sort(
-        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        (a, b) => new Date(b.created_at) - new Date(a.created_at)
       );
     },
   });
-  if(isLoading){
-    return <Loading></Loading>
+  if (isLoading) {
+    return <Loading></Loading>;
   }
 
   // Handle approve/reject action
-  const handleAction = async (id, status) => {
+  const handleDecision = async (id, status) => {
     const confirm = await Swal.fire({
-      title: `Are you sure to ${status} this seller?`,
+      title: `Are you sure to ${status === 'accepted' ? 'Accepted' : 'Rejected'} this seller?`,
       icon: "question",
       showCancelButton: true,
       confirmButtonText: `Yes, ${status}`,
     });
-
-    if (confirm.isConfirmed) {
-      await axiosSecure.patch(`/seller-application/${id}`, { status });
-      Swal.fire(
-        "Updated!",
-        `Seller has been ${status} successfully.`,
-        "success"
-      );
-      refetch();
-    }
+    if (!confirm.isConfirmed) return;
+    await axiosSecure.patch(`/seller-application/${id}/status`, { status: status === 'accepted' ? 'accepted' : 'rejected' });
+    Swal.fire("Updated!", `Seller has been ${status} successfully.`, "success");
+    refetch();
   };
 
   return (
     <div className="p-6 bg-base-100 min-h-screen">
-        <SectionTitle sectionTitle={'Assign Sellers'} sectionSubTitle={'Seller Applications'}></SectionTitle>
+      <SectionTitle
+        sectionTitle={"Pending Sellers Aplications"}
+        sectionSubTitle={"All Seller Applications"}
+      ></SectionTitle>
 
       {/* Grid view */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {applications.map((app) => (
+        {sellers.map((seller) => (
           <div
-            key={app._id}
+            key={seller._id}
             className="card bg-indigo-50 shadow-md rounded-xl overflow-hidden border border-gray-200"
           >
             {/* Shop logo */}
             <figure className="bg-indigo-50">
               <img
-                src={app.image}
-                alt={app.shopName}
+                src={seller.image}
+                alt={seller.shopName}
                 className="w-full h-32 object-contain  mx-auto"
               />
             </figure>
 
             {/* Shop details */}
             <div className="card-body">
-              <h3 className="font-bold text-lg">{app.shopName}</h3>
+              <h3 className="font-bold text-lg">{seller.shopName}</h3>
               <p className="text-sm text-gray-600">
-                <b>Owner Name:</b> {app.ownerName}
+                <b>Owner Name:</b> {seller.ownerName}
               </p>
               <p className="text-sm text-gray-600">
-                <b>Email:</b> {app.email}
+                <b>Email:</b> {seller.email}
               </p>
               <p className="text-sm text-gray-600">
-                <b>Phone:</b> {app.phone}
+                <b>Phone:</b> {seller.phone}
               </p>
               <p className="text-sm text-gray-600">
-                <b>NationalId:</b> {app.nidNo}
+                <b>NationalId:</b> {seller.nidNo}
               </p>
               <p className="text-sm text-gray-600">
-                <b>Bank Account:</b> {app.bankAccount}
+                <b>Bank Account:</b> {seller.bankAccount}
               </p>
               <p className="text-sm text-gray-600">
-                <b>Category:</b> {app.category}
+                <b>Category:</b> {seller.category}
               </p>
               <p className="text-sm text-gray-600">
-                <b>Address:</b> {app.address}
+                <b>Address:</b> {seller.address}
               </p>
               <p className="text-sm text-gray-500">
-                <b>Applied:</b>{" "}
-                {new Date(app.createdAt).toLocaleDateString("en-GB")}
+                <b>sellerlied:</b>{" "}
+                {new Date(seller.created_at).toLocaleDateString("en-GB")}
               </p>
               <div className="mt-3 flex items-center justify-between">
                 {/* Status Badge */}
                 <span
                   className={`px-3 py-1 rounded-full text-sm font-semibold ${
-                    app.status === "accepted"
+                    seller.status === "accepted"
                       ? "bg-green-100 text-green-700"
-                      : app.status === "rejected"
+                      : seller.status === "rejected"
                       ? "bg-red-100 text-red-700"
                       : "bg-yellow-100 text-yellow-700"
                   }`}
                 >
-                  {app.status}
+                  {seller.status}
                 </span>
 
                 {/* Action buttons */}
                 <div className="flex gap-2">
                   <button
-                    onClick={() => handleAction(app._id, "accepted")}
-                    disabled={app.status === "accepted"}
+                    onClick={() => handleDecision(seller._id, "accepted")}
+                    disabled={seller.status === "accepted"}
                     className="btn btn-success btn-xs flex items-center gap-1"
                   >
                     <FaCheck /> Accept
                   </button>
                   <button
-                    onClick={() => handleAction(app._id, "rejected")}
-                    disabled={app.status === "rejected"}
+                    onClick={() => handleDecision(seller._id, "rejected")}
+                    disabled={seller.status === "rejected"}
                     className="btn btn-error btn-xs flex items-center gap-1"
                   >
                     <FaTimes /> Reject
@@ -131,7 +131,7 @@ const AssignSeller = () => {
         ))}
       </div>
 
-      {applications.length === 0 && (
+      {sellers.length === 0 && (
         <p className="text-center text-gray-500 mt-10">
           No seller applications found.
         </p>
@@ -140,4 +140,4 @@ const AssignSeller = () => {
   );
 };
 
-export default AssignSeller;
+export default PendingSeller;
