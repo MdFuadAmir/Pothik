@@ -7,12 +7,12 @@ import axios from "axios";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const SellerApplication = () => {
-  const { user } = useAuth();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const [shopLogo, setShopLogo] = useState("");
   const [upLoading, setUploading] = useState(false);
@@ -52,7 +52,7 @@ const SellerApplication = () => {
           createdAt: new Date().toISOString(),
         };
         console.log(newApplication);
-        axiosSecure.post("/seller-application", newApplication).then((res) => {
+        axiosSecure.post("/sellers", newApplication).then((res) => {
           if (res.data.insertedId) {
             console.log(res.data);
             Swal.fire(

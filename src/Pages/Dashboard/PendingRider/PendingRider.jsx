@@ -8,20 +8,42 @@ import Loading from "../../../Shared/Loading/Loading";
 
 const PendingRider = () => {
   const axiosSecure = useAxiosSecure();
-  const {user} = useAuth();
+  const { user } = useAuth();
   // Get all Riders applications (sorted by latest)
-  const { data: riders = [],isLoading } = useQuery({
-    queryKey: ["ridersApplications",user?.email],
+  const {
+    data: riders = [],
+    refetch,
+    isLoading,
+  } = useQuery({
+    queryKey: ["pending-riders", user?.email],
     queryFn: async () => {
-      const res = await axiosSecure.get("/riders-application");
+      const res = await axiosSecure.get("/riders/pending-riders");
       return res.data.sort(
-        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        (a, b) => new Date(b.created_at) - new Date(a.created_at)
       );
     },
   });
-  if(isLoading){
-    return <Loading></Loading>
+
+  if (isLoading) {
+    return <Loading></Loading>;
   }
+  const handleDecision = async (id,status) => {
+    const confirm = await Swal.fire({
+      title: `Are you sure to ${
+        status === "active" ? "Active" : "Reject"
+      } this seller?`,
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: `Yes, ${status}`,
+    });
+    if (!confirm.isConfirmed) return;
+    await axiosSecure.patch(`/riders/${id}/status`, {
+      status: status === "active" ? "active" : "rejected",
+    });
+    Swal.fire("Updated!", `Riders has been ${status} successfully.`, "success");
+    refetch();
+  };
+
   const handleView = (rider) => {
     Swal.fire({
       title: rider.name,
@@ -50,16 +72,13 @@ const PendingRider = () => {
       confirmButtonText: "Close",
     });
   };
-  // Handle approve/reject action
-  const handleStatusChange = () => {};
 
   return (
     <div className="p-6">
       <SectionTitle
         sectionTitle="Prnding Rider"
         sectionSubTitle="Review rider applications and approve or reject them."
-      />
-
+      ></SectionTitle>
       <div className="overflow-x-auto">
         <table className="table w-full text-center">
           <thead className="bg-indigo-950 text-white">
@@ -68,6 +87,7 @@ const PendingRider = () => {
               <th>Name</th>
               <th>Email</th>
               <th>Age</th>
+              <th>Apply Date</th>
               <th>Status</th>
               <th>Actions</th>
             </tr>
@@ -80,10 +100,11 @@ const PendingRider = () => {
                 <td>{rider.name}</td>
                 <td>{rider.email}</td>
                 <td>{rider.age}</td>
+                <td>{new Date(rider.created_at).toLocaleDateString("en-GB")}</td>
                 <td>
                   <span
                     className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                      rider.status === "accepted"
+                      rider.status === "active"
                         ? "bg-green-100 text-green-700"
                         : rider.status === "rejected"
                         ? "bg-red-100 text-red-700"
@@ -96,27 +117,36 @@ const PendingRider = () => {
                 <td className="flex items-center justify-center gap-2">
                   <button
                     onClick={() => handleView(rider)}
-                    className="btn  btn-info"
+                    className="btn btn-success btn-xs flex items-center gap-1"
                   >
                     <FaEye color="white" />
                   </button>
                   <button
-                    onClick={() => handleStatusChange(rider._id)}
-                    className="btn bg-green-600 hover:bg-green-700 text-white flex items-center gap-1"
+                    onClick={() =>
+                      handleDecision(rider._id, "active")
+                    }
+                    className="btn btn-success btn-xs flex items-center gap-1"
                   >
-                    <FaCheckCircle /> Accept
+                    <FaCheckCircle /> Active
                   </button>
                   <button
-                    onClick={() => handleStatusChange(rider._id)}
-                    className="btn bg-red-600 hover:bg-red-700 text-white flex items-center gap-1"
+                    onClick={() =>
+                      handleDecision(rider._id, "rejected")
+                    }
+                    className="btn btn-error btn-xs flex items-center gap-1"
                   >
-                    <FaTimesCircle /> Reject
+                    <FaTimesCircle /> Rejected
                   </button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
+        {riders.length === 0 && (
+          <p className="text-center text-gray-500 mt-10">
+            No Rider applications found.
+          </p>
+        )}
       </div>
     </div>
   );
