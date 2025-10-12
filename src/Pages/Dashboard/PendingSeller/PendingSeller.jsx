@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 
-import { FaCheck, FaTimes } from "react-icons/fa";
+import { FaCheck, FaEye, FaTimes } from "react-icons/fa";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import SectionTitle from "../../../Shared/Sectiontitle/SectionTitle";
 import useAuth from "../../../Hooks/useAuth";
@@ -24,12 +24,46 @@ const PendingSeller = () => {
       );
     },
   });
+
+  const handleView = (seller) => {
+    Swal.fire({
+      title: seller.shopName,
+      html: `
+          <div class="text-gray-700 text-start mb-2"><b>Owner:</b> ${
+            seller.ownerName || "—"
+          }</div>
+          <div class="text-gray-700 text-start mb-2"><b>Email:</b> ${
+            seller.email || "—"
+          }</div>
+          <div class="text-gray-700 text-start mb-2"><b>Phone:</b> ${
+            seller.phone || "—"
+          }</div>
+          <div class="text-gray-700 text-start mb-2"><b>Category:</b> ${
+            seller.category || "—"
+          }</div>
+          <div class="text-gray-700 text-start mb-2"><b>National Id:</b> ${
+            seller.nidNo || "—"
+          }</div>
+          <div class="text-gray-700 text-start mb-2"><b>Bank Account:</b> ${
+            seller.bankAccount || "—"
+          }</div>
+          <div class="text-gray-700 text-start mb-2"><b>Role:</b> ${
+            seller.role || "—"
+          }</div>
+          <div class="text-gray-700 text-start mb-2"><b>Joined:</b> ${new Date(
+            seller.created_at
+          ).toLocaleDateString("en-GB")}</div>
+        `,
+      confirmButtonText: "Close",
+    });
+  };
+
   if (isLoading) {
     return <Loading></Loading>;
   }
 
   // Handle approve/reject action
-  const handleDecision = async (id, status) => {
+  const handleDecision = async (id, status, email) => {
     const confirm = await Swal.fire({
       title: `Are you sure to ${
         status === "active" ? "Active" : "Reject"
@@ -41,6 +75,7 @@ const PendingSeller = () => {
     if (!confirm.isConfirmed) return;
     await axiosSecure.patch(`/sellers/${id}/status`, {
       status: status === "active" ? "active" : "rejected",
+      email,
     });
     Swal.fire("Updated!", `Seller has been ${status} successfully.`, "success");
     refetch();
@@ -89,14 +124,25 @@ const PendingSeller = () => {
                   </span>
                 </td>
                 <td className="flex items-center justify-center gap-2">
+                  {/* 👁 View button - always active */}
                   <button
-                    onClick={() => handleDecision(seller._id, "active")}
+                    onClick={() => handleView(seller)}
+                    className="btn btn-xs btn-info  flex items-center gap-1"
+                  >
+                    <FaEye />
+                  </button>
+                  <button
+                    onClick={() =>
+                      handleDecision(seller._id, "active", seller.email)
+                    }
                     className="btn btn-success btn-xs flex items-center gap-1"
                   >
                     <FaCheck /> Active
                   </button>
                   <button
-                    onClick={() => handleDecision(seller._id, "rejected")}
+                    onClick={() =>
+                      handleDecision(seller._id, "rejected", seller.email)
+                    }
                     className="btn btn-error btn-xs flex items-center gap-1"
                   >
                     <FaTimes /> Reject

@@ -27,7 +27,7 @@ const PendingRider = () => {
   if (isLoading) {
     return <Loading></Loading>;
   }
-  const handleDecision = async (id,status) => {
+  const handleDecision = async (id,status,email) => {
     const confirm = await Swal.fire({
       title: `Are you sure to ${
         status === "active" ? "Active" : "Reject"
@@ -38,7 +38,8 @@ const PendingRider = () => {
     });
     if (!confirm.isConfirmed) return;
     await axiosSecure.patch(`/riders/${id}/status`, {
-      status: status === "active" ? "active" : "rejected",
+      status: status === "active" ? "active" : "rejected", 
+      email
     });
     Swal.fire("Updated!", `Riders has been ${status} successfully.`, "success");
     refetch();
@@ -76,7 +77,7 @@ const PendingRider = () => {
   return (
     <div className="p-6">
       <SectionTitle
-        sectionTitle="Prnding Rider"
+        sectionTitle="Pending Rider Applications"
         sectionSubTitle="Review rider applications and approve or reject them."
       ></SectionTitle>
       <div className="overflow-x-auto">
@@ -123,7 +124,7 @@ const PendingRider = () => {
                   </button>
                   <button
                     onClick={() =>
-                      handleDecision(rider._id, "active")
+                      handleDecision(rider._id, "active",rider.email)
                     }
                     className="btn btn-success btn-xs flex items-center gap-1"
                   >
@@ -131,7 +132,7 @@ const PendingRider = () => {
                   </button>
                   <button
                     onClick={() =>
-                      handleDecision(rider._id, "rejected")
+                      handleDecision(rider._id, "rejected",rider.email)
                     }
                     className="btn btn-error btn-xs flex items-center gap-1"
                   >

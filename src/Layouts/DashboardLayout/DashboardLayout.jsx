@@ -1,6 +1,6 @@
 import { NavLink, Outlet } from "react-router";
 import Pothik from "../../Shared/Pothik/Pothik";
-import { FaHeart, FaHistory, FaHome, FaMapMarkedAlt, FaMoneyCheckAlt, FaMotorcycle, FaPlusSquare, FaShoppingCart, FaStore, FaUserPlus } from "react-icons/fa";
+import { FaHeart, FaHistory, FaHome, FaMapMarkedAlt, FaMoneyCheckAlt, FaMotorcycle, FaPlusSquare, FaShoppingCart, FaStore, FaUserPlus, FaUserShield } from "react-icons/fa";
 import { GiDeliveryDrone } from "react-icons/gi";
 const DashboardLayout = () => {
    // close drawer when clicking link
@@ -147,6 +147,17 @@ const DashboardLayout = () => {
            {/* rider actions start*/}
             {/* rider actions end*/}
             {/* Admin actions start*/}
+            <li>
+              <NavLink
+                to="/dashboard/make-admin"
+                onClick={handleCloseDrawer}
+                className={({ isActive }) =>
+                  isActive ? "text-green-500" : "text-white"
+                }
+              >
+                <FaUserShield className="inline mr-2" size={15} /> Make Admin
+              </NavLink>
+            </li>
             <li>
               <NavLink
                 to="/dashboard/pending-seller"

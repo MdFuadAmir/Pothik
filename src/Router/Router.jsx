@@ -17,6 +17,7 @@ import PendingSeller from "../Pages/Dashboard/PendingSeller/PendingSeller";
 import Forbidden from "../Shared/Forbidden/Forbidden";
 import ActiveSellers from "../Pages/Dashboard/ActiveSellers/ActiveSellers";
 import ActiveRiders from "../Pages/Dashboard/ActiveRiders/ActiveRiders";
+import MakeAdmin from "../Pages/Dashboard/MakeAdmin/MakeAdmin";
 
 const router = createBrowserRouter([
     {
@@ -69,6 +70,10 @@ const router = createBrowserRouter([
                 element: <DashboardHome></DashboardHome>
             },
             // admin access
+            {
+                path:'make-admin',
+                element: <MakeAdmin></MakeAdmin>
+            },
             {
                 path:'pending-seller',
                 element: <PendingSeller></PendingSeller>

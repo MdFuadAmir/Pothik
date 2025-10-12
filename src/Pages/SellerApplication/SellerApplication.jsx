@@ -47,9 +47,8 @@ const SellerApplication = () => {
         const newApplication = {
           ...data,
           image: shopLogo,
-          role: "seller",
           status: "pending",
-          createdAt: new Date().toISOString(),
+          created_at: new Date().toISOString(),
         };
         console.log(newApplication);
         axiosSecure.post("/sellers", newApplication).then((res) => {
