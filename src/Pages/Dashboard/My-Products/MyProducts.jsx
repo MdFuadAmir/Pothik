@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 const MyProducts = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
-  const { data: products,isLoading,refetch} = useQuery({
+  const { data: products =[],isLoading,refetch} = useQuery({
     queryKey: ["my-products", user.email],
     queryFn: async () => {
       const res = await axiosSecure.get(`/products?email=${user.email}`);
@@ -18,6 +18,36 @@ const MyProducts = () => {
   if(isLoading){
     return <Loading/>
   }
+  const handleUpdate = async (id) => {
+  const { value: formValues } = await Swal.fire({
+    title: "Update Product",
+    html:
+      `<input id="name" class="swal2-input" placeholder="Name" value="">` +
+      `<input id="price" type="number" class="swal2-input" placeholder="Price" value="">` +
+      `<input id="stock" type="number" class="swal2-input" placeholder="Stock" value="">`,
+    focusConfirm: false,
+    preConfirm: () => {
+      return {
+        name: document.getElementById("name").value,
+        price: parseFloat(document.getElementById("price").value),
+        stock: parseInt(document.getElementById("stock").value),
+      };
+    },
+  });
+
+  if (formValues) {
+    try {
+      const res = await axiosSecure.put(`/products/${id}`, formValues);
+      if (res.data.success) {
+        Swal.fire("Updated!", "Product has been updated.", "success");
+        refetch(); // react-query refetch
+      }
+    } catch (error) {
+      console.error(error);
+      Swal.fire("Error", "Failed to update product", "error");
+    }
+  }
+};
   const handleDelete = async(id) =>{
     const confirm = await Swal.fire({
       title: "Are you sure?",
@@ -43,6 +73,7 @@ const MyProducts = () => {
     }
 
   }
+
   return (
     <div className="p-4 md:p-8">
       <SectionTitle
@@ -97,8 +128,10 @@ const MyProducts = () => {
                 <b>Return Policy:</b> {product.returnPolicy} days Easy Return
               </p>
             </div>
-
-            <button onClick={() => handleDelete(product._id)} className="w-full bg-indigo-950 text-white py-2 mt-2 rounded-lg transition-colors duration-300 font-semibold"> Delete Product</button>
+            <div className="flex justify-between items-center">
+            <button onClick={() => handleDelete(product._id)} className="bg-red-800 text-white rounded-lg transition-colors duration-300 font-semibold btn btn-sm"> Delete</button>
+            <button onClick={() => handleUpdate(product._id)} className="bg-green-800 text-white rounded-lg transition-colors duration-300 font-semibold btn btn-sm">Update</button>
+            </div>
           </div>
         </div>
       ))}

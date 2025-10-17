@@ -18,6 +18,9 @@ import Forbidden from "../Shared/Forbidden/Forbidden";
 import ActiveSellers from "../Pages/Dashboard/ActiveSellers/ActiveSellers";
 import ActiveRiders from "../Pages/Dashboard/ActiveRiders/ActiveRiders";
 import MakeAdmin from "../Pages/Dashboard/MakeAdmin/MakeAdmin";
+import AdminRoutes from "../Routes/AdminRoutes";
+import SellerRoutes from "../Routes/SellerRoutes";
+import SellerAssignRider from "../Pages/Dashboard/SellerAssignRider/SellerAssignRider";
 
 const router = createBrowserRouter([
     {
@@ -72,33 +75,37 @@ const router = createBrowserRouter([
             // admin access
             {
                 path:'make-admin',
-                element: <MakeAdmin></MakeAdmin>
+                element: <AdminRoutes><MakeAdmin></MakeAdmin></AdminRoutes>
             },
             {
                 path:'pending-seller',
-                element: <PendingSeller></PendingSeller>
+                element: <AdminRoutes><PendingSeller></PendingSeller></AdminRoutes>
             },
             {
                 path:'active-seller',
-                element: <ActiveSellers></ActiveSellers>
+                element: <AdminRoutes><ActiveSellers></ActiveSellers></AdminRoutes>
             },
             {
                 path:'pending-rider',
-                element: <PendingRider></PendingRider>
+                element: <AdminRoutes><PendingRider></PendingRider></AdminRoutes>
             },
             {
                 path:'active-rider',
-                element: <ActiveRiders></ActiveRiders>
+                element: <AdminRoutes><ActiveRiders></ActiveRiders></AdminRoutes>
             },
             
             // seller access
             {
                 path:'addProduct',
-                element: <AddProducts></AddProducts>
+                element: <SellerRoutes><AddProducts></AddProducts></SellerRoutes>
             },
             {
                 path:'my-products',
-                element: <MyProducts></MyProducts>
+                element: <SellerRoutes><MyProducts></MyProducts></SellerRoutes>
+            },
+            {
+                path:'seller-assign-rider',
+                element: <SellerRoutes><SellerAssignRider></SellerAssignRider></SellerRoutes>
             },
             // rider access
             

@@ -4,13 +4,12 @@ import SectionTitle from "../../../Shared/Sectiontitle/SectionTitle";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { FaUserMinus, FaUserShield } from "react-icons/fa";
 import Swal from "sweetalert2";
-import Loading from "../../../Shared/Loading/Loading";
 
 const MakeAdmin = () => {
   const axiosSecure = useAxiosSecure();
   const [emailQuery, setEmailQuery] = useState("");
 
-  const { data: users = [],refetch,isLoading } = useQuery({
+  const { data: users = [], refetch } = useQuery({
     queryKey: ["searchUsers", emailQuery],
     enabled: !!emailQuery,
     queryFn: async () => {
@@ -18,17 +17,17 @@ const MakeAdmin = () => {
       return res.data;
     },
   });
-
-     const { mutateAsync: updateRole } = useMutation({
+  
+  const { mutateAsync: updateRole } = useMutation({
     mutationFn: async ({ id, role }) => {
-      await axiosSecure.patch(`/users/${id}/role`, { role });
+      await axiosSecure.patch(`/users/role/${id}`, { role });
     },
     onSuccess: () => {
       refetch();
     },
   });
 
-   // Handle make admin
+  // Handle make admin
   const handleMakeAdmin = async (id, currentRole) => {
     const action = currentRole === "admin" ? "Remove Admin" : "Make Admin";
     const newRole = currentRole === "admin" ? "user" : "admin";
@@ -49,10 +48,7 @@ const MakeAdmin = () => {
       Swal.fire("Error", "Failed to update user role", error);
     }
   };
-  if(isLoading){
-    return <Loading></Loading>
-  }
-
+  
   return (
     <div className="p-6">
       <SectionTitle
@@ -83,11 +79,15 @@ const MakeAdmin = () => {
           </thead>
           <tbody>
             {users.length > 0 ? (
-              users.map((user,index) => (
+              users.map((user, index) => (
                 <tr key={user._id} className=" hover:bg-indigo-50">
                   <td>{index + 1}</td>
                   <td>{user.email}</td>
-                  <td>{user.created_at ? new Date(user.created_at).toLocaleDateString() : "N/A"}</td>
+                  <td>
+                    {user.created_at
+                      ? new Date(user.created_at).toLocaleDateString()
+                      : "N/A"}
+                  </td>
                   <td>
                     <span
                       className={`px-2 py-1 rounded font-medium text-xs ${
@@ -104,23 +104,21 @@ const MakeAdmin = () => {
                     </span>
                   </td>
                   <td className="flex justify-center gap-2">
-                    {
-                      user.role === 'admin' ? (
+                    {user.role === "admin" ? (
                       <button
                         onClick={() => handleMakeAdmin(user._id, user.role)}
                         className="btn btn-xs btn-error flex items-center gap-2"
                       >
                         <FaUserMinus /> Remove Admin
                       </button>
-                      ) : (
+                    ) : (
                       <button
                         onClick={() => handleMakeAdmin(user._id, user.role)}
                         className="btn btn-xs btn-success flex items-center gap-2"
                       >
                         <FaUserShield /> Make Admin
                       </button>
-                      )
-                    }
+                    )}
                   </td>
                 </tr>
               ))

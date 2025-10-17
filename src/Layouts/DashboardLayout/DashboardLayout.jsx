@@ -1,13 +1,31 @@
 import { NavLink, Outlet } from "react-router";
 import Pothik from "../../Shared/Pothik/Pothik";
-import { FaHeart, FaHistory, FaHome, FaMapMarkedAlt, FaMoneyCheckAlt, FaMotorcycle, FaPlusSquare, FaShoppingCart, FaStore, FaUserPlus, FaUserShield } from "react-icons/fa";
+import {
+  FaHeart,
+  FaHistory,
+  FaHome,
+  FaMapMarkedAlt,
+  FaMoneyCheckAlt,
+  FaMotorcycle,
+  FaPlusSquare,
+  FaShoppingCart,
+  FaStore,
+  FaUserPlus,
+  FaUserShield,
+} from "react-icons/fa";
 import { GiDeliveryDrone } from "react-icons/gi";
+import useUserRole from "../../Hooks/useUserRole";
+import Loading from "../../Shared/Loading/Loading";
 const DashboardLayout = () => {
-   // close drawer when clicking link
+  const { role, roleLoading } = useUserRole();
+  // close drawer when clicking link
   const handleCloseDrawer = () => {
     const drawerCheckbox = document.getElementById("my-drawer-2");
     if (drawerCheckbox) drawerCheckbox.checked = false;
   };
+  if (roleLoading) {
+    return <Loading></Loading>;
+  }
   return (
     <div className="drawer lg:drawer-open max-w-7xl mx-auto">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -48,11 +66,16 @@ const DashboardLayout = () => {
           className="drawer-overlay"
         ></label>
         <ul className="menu bg-indigo-950 text-base-content min-h-full w-80 p-4">
-          <Pothik></Pothik>
+          <div className="flex justify-between items-center">
+            <Pothik></Pothik>
+            <h2 className="text-emerald-500 px-2 py-1 bg-indigo-800 rounded shadow-2xl">
+              {role}
+            </h2>
+          </div>
           <div className="divider divider-primary -mt-2"></div>
           {/* Sidebar content here */}
           <div className=" space-y-2">
-            {/* user actions start */}
+            {/* dashbord for all */}
             <li>
               <NavLink
                 to="/dashboard"
@@ -64,6 +87,117 @@ const DashboardLayout = () => {
                 <FaHome className="inline mr-2" size={15} /> Home
               </NavLink>
             </li>
+            {/* Admin actions start*/}
+            {!roleLoading && role === "admin" && (
+              <>
+                <li>
+                  <NavLink
+                    to="/dashboard/make-admin"
+                    onClick={handleCloseDrawer}
+                    className={({ isActive }) =>
+                      isActive ? "text-green-500" : "text-white"
+                    }
+                  >
+                    <FaUserShield className="inline mr-2" size={15} /> Make
+                    Admin
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/pending-seller"
+                    onClick={handleCloseDrawer}
+                    className={({ isActive }) =>
+                      isActive ? "text-green-500" : "text-white"
+                    }
+                  >
+                    <FaUserPlus className="inline mr-2" size={15} /> Pending
+                    Sellers
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/active-seller"
+                    onClick={handleCloseDrawer}
+                    className={({ isActive }) =>
+                      isActive ? "text-green-500" : "text-white"
+                    }
+                  >
+                    <FaStore className="inline mr-2" size={15} /> Active Sellers
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/pending-rider"
+                    onClick={handleCloseDrawer}
+                    className={({ isActive }) =>
+                      isActive ? "text-green-500" : "text-white"
+                    }
+                  >
+                    <FaMotorcycle className="inline mr-2" size={15} /> Pending
+                    Rider
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/active-rider"
+                    onClick={handleCloseDrawer}
+                    className={({ isActive }) =>
+                      isActive ? "text-green-500" : "text-white"
+                    }
+                  >
+                    <GiDeliveryDrone className="inline mr-2" size={15} /> Active
+                    Riders
+                  </NavLink>
+                </li>
+              </>
+            )}
+            {/* admin actions end */}
+            {/* seller actions staart */}
+            {!roleLoading && role === "seller" && (
+              <>
+                <li>
+                  <NavLink
+                    to="/dashboard/addProduct"
+                    onClick={handleCloseDrawer}
+                    className={({ isActive }) =>
+                      isActive ? "text-green-500" : "text-white"
+                    }
+                  >
+                    <FaPlusSquare className="inline mr-2" size={15} /> Add
+                    Product
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/my-products"
+                    onClick={handleCloseDrawer}
+                    className={({ isActive }) =>
+                      isActive ? "text-green-500" : "text-white"
+                    }
+                  >
+                    <FaUserPlus className="inline mr-2" size={15} /> My Products
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/seller-assign-rider"
+                    onClick={handleCloseDrawer}
+                    className={({ isActive }) =>
+                      isActive ? "text-green-500" : "text-white"
+                    }
+                  >
+                    <FaUserPlus className="inline mr-2" size={15} /> Assign Rider
+                  </NavLink>
+                </li>
+              </>
+            )}
+            {/* seller actions end */}
+            {/* rider actions start*/}
+            {/* rider actions end*/}
+            {/* user actions start */}
+            {
+              role === 'admin' ? <div className="divider divider-accent"></div> : role === 'seller' ? <div className="divider divider-primary"></div> : role === 'rider' ? <div className="divider divider-primary"></div> : ''
+            }
             <li>
               <NavLink
                 to="/dashboard/myCart"
@@ -83,7 +217,8 @@ const DashboardLayout = () => {
                   isActive ? "text-green-500" : "text-white"
                 }
               >
-                <FaHeart className="inline mr-2" size={15} /> My Favorite Products
+                <FaHeart className="inline mr-2" size={15} /> My Favorite
+                Products
               </NavLink>
             </li>
             <li>
@@ -94,7 +229,8 @@ const DashboardLayout = () => {
                   isActive ? "text-green-500" : "text-white"
                 }
               >
-                <FaMapMarkedAlt className="inline mr-2" size={15} /> Track my Product
+                <FaMapMarkedAlt className="inline mr-2" size={15} /> Track my
+                Product
               </NavLink>
             </li>
             <li>
@@ -116,93 +252,11 @@ const DashboardLayout = () => {
                   isActive ? "text-green-500" : "text-white"
                 }
               >
-                <FaMoneyCheckAlt className="inline mr-2" size={15} /> Payment History
+                <FaMoneyCheckAlt className="inline mr-2" size={15} /> Payment
+                History
               </NavLink>
             </li>
             {/* user actions end */}
-            {/* seller actions staart */}
-            <li>
-              <NavLink
-                to="/dashboard/addProduct"
-                onClick={handleCloseDrawer}
-                className={({ isActive }) =>
-                  isActive ? "text-green-500" : "text-white"
-                }
-              >
-                <FaPlusSquare className="inline mr-2" size={15} /> Add Product
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/dashboard/my-products"
-                onClick={handleCloseDrawer}
-                className={({ isActive }) =>
-                  isActive ? "text-green-500" : "text-white"
-                }
-              >
-                <FaUserPlus className="inline mr-2" size={15} /> My Products
-              </NavLink>
-            </li>
-            {/* seller actions end */}
-           {/* rider actions start*/}
-            {/* rider actions end*/}
-            {/* Admin actions start*/}
-            <li>
-              <NavLink
-                to="/dashboard/make-admin"
-                onClick={handleCloseDrawer}
-                className={({ isActive }) =>
-                  isActive ? "text-green-500" : "text-white"
-                }
-              >
-                <FaUserShield className="inline mr-2" size={15} /> Make Admin
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/dashboard/pending-seller"
-                onClick={handleCloseDrawer}
-                className={({ isActive }) =>
-                  isActive ? "text-green-500" : "text-white"
-                }
-              >
-                <FaUserPlus className="inline mr-2" size={15} /> Pending Sellers
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/dashboard/active-seller"
-                onClick={handleCloseDrawer}
-                className={({ isActive }) =>
-                  isActive ? "text-green-500" : "text-white"
-                }
-              >
-                <FaStore className="inline mr-2" size={15} /> Active Sellers
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/dashboard/pending-rider"
-                onClick={handleCloseDrawer}
-                className={({ isActive }) =>
-                  isActive ? "text-green-500" : "text-white"
-                }
-              >
-                <FaMotorcycle className="inline mr-2" size={15} /> Pending Rider
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/dashboard/active-rider"
-                onClick={handleCloseDrawer}
-                className={({ isActive }) =>
-                  isActive ? "text-green-500" : "text-white"
-                }
-              >
-                <GiDeliveryDrone className="inline mr-2" size={15} /> Active Riders
-              </NavLink>
-            </li>
-           {/* admin actions end */}
           </div>
         </ul>
       </div>
