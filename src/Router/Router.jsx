@@ -21,6 +21,12 @@ import MakeAdmin from "../Pages/Dashboard/MakeAdmin/MakeAdmin";
 import AdminRoutes from "../Routes/AdminRoutes";
 import SellerRoutes from "../Routes/SellerRoutes";
 import SellerAssignRider from "../Pages/Dashboard/SellerAssignRider/SellerAssignRider";
+import AboutUs from "../Pages/AboutUs/AboutUs";
+import Contact from "../Pages/Contact/Contact";
+import Products from "../Pages/Products/Products";
+import MyCart from "../Pages/MyCart/MyCart";
+import Favorite from "../Pages/Favorite/Favorite";
+
 
 const router = createBrowserRouter([
     {
@@ -35,6 +41,18 @@ const router = createBrowserRouter([
             {
                 path:'/covrage',
                 Component: Covrage
+            },
+            {
+                path:'/products',
+                Component: Products
+            },
+            {
+                path:'/aboutUs',
+                Component: AboutUs
+            },
+            {
+                path:'/contact',
+                Component: Contact
             },
             {
                 path:'/forbidden',
@@ -71,6 +89,22 @@ const router = createBrowserRouter([
             {
                 index: true,
                 element: <DashboardHome></DashboardHome>
+            },
+            // user access 
+            {
+                path:'myCart',
+                Component: MyCart
+
+            },
+            {
+                path:'favorite',
+                Component: Favorite
+
+            },
+            {
+                path:'myCart',
+                Component: MyCart
+
             },
             // admin access
             {
