@@ -65,19 +65,19 @@ const SellerApplication = () => {
     });
   };
   return (
-    <div className="bg-indigo-50 p-4">
+    <div className="bg-indigo-200 p-4">
       <SectionTitle
         sectionTitle={"Apply Now"}
         sectionSubTitle={"Apply to creat a Selling Account!"}
       ></SectionTitle>
-      <div className="p-8 rounded-2xl max-w-4xl mx-auto">
+      <div className="p-8 rounded-2xl max-w-4xl mx-auto bg-indigo-950">
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="grid grid-cols-1 md:grid-cols-2 gap-5"
         >
           {/* Shop Name */}
           <div>
-            <label className="font-semibold">Shop Name</label>
+            <label className="text-gray-400">Shop Name</label>
             <input
               {...register("shopName", { required: "Shop Name is required" })}
               type="text"
@@ -91,7 +91,7 @@ const SellerApplication = () => {
 
           {/* Owner Name */}
           <div>
-            <label className="font-semibold">Owner Name</label>
+            <label className="text-gray-400">Owner Name</label>
             <input
               {...register("ownerName", { required: true })}
               type="text"
@@ -106,7 +106,7 @@ const SellerApplication = () => {
 
           {/* Email */}
           <div>
-            <label className="font-semibold">Email</label>
+            <label className="text-gray-400">Email</label>
             <input
               {...register("email", { required: true })}
               type="email"
@@ -121,7 +121,7 @@ const SellerApplication = () => {
 
           {/* Phone Number */}
           <div>
-            <label className="font-semibold">Phone Number</label>
+            <label className="text-gray-400">Phone Number</label>
             <input
               {...register("phone", { required: true })}
               type="number"
@@ -135,7 +135,7 @@ const SellerApplication = () => {
 
           {/* Shop Category */}
           <div>
-            <label className="font-semibold">Shop Category</label>
+            <label className="text-gray-400">Shop Category</label>
             <select
               {...register("category", { required: "Category is required" })}
               className="select select-bordered w-full"
@@ -157,7 +157,7 @@ const SellerApplication = () => {
           </div>
           {/* nid no Number */}
           <div>
-            <label className="font-semibold">
+            <label className="text-gray-400">
               National ID / Passport Number
             </label>
             <input
@@ -172,7 +172,7 @@ const SellerApplication = () => {
           </div>
           {/* Bank Account */}
           <div>
-            <label className="font-semibold">Bank Account Number</label>
+            <label className="text-gray-400">Bank Account Number</label>
             <input
               {...register("bankAccount", {
                 required: "Bank account is required",
@@ -187,7 +187,7 @@ const SellerApplication = () => {
           </div>
           {/* Shop Address */}
           <div className="md:col-span-2">
-            <label className="font-semibold">Shop Address</label>
+            <label className="text-gray-400">Shop Address</label>
             <input
               {...register("address", { required: "Address is required" })}
               type="text"
@@ -200,7 +200,7 @@ const SellerApplication = () => {
           </div>
           {/* Shop Logo */}
           <div className="md:col-span-2">
-            <label className="font-semibold mr-4 block">Shop Logo</label>
+            <label className="text-gray-400 mr-4 block">Shop Logo</label>
             <input
               onChange={handleImageUploade}
               type="file"
@@ -221,13 +221,13 @@ const SellerApplication = () => {
           </div>
           {/* Terms */}
           <div className="md:col-span-2">
-            <label className="flex items-center gap-2">
+            <label className="flex items-center text-gray-400 gap-2">
               <input
                 {...register("terms", {
                   required: "You must accept the terms",
                 })}
                 type="checkbox"
-                className="checkbox"
+                className="checkbox checkbox-primary"
               />{" "}
               I agree to the Terms & Conditions
             </label>

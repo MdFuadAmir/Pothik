@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Swal from "sweetalert2";
 import { FiMail, FiPhone, FiMapPin } from "react-icons/fi";
+import SectionTitle from "../../Shared/Sectiontitle/SectionTitle";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -22,15 +23,14 @@ const Contact = () => {
   };
 
   return (
-    <div className="bg-gray-50 py-16 px-4 md:px-20">
+    <div className="bg-indigo-200 p-4">
       <div className="max-w-5xl mx-auto">
-        <h2 className="text-4xl font-bold text-indigo-900 mb-4 text-center">
-          Contact <span className="text-indigo-600">Us</span>
-        </h2>
-        <p className="text-gray-700 mb-12 text-center">
-          Have questions or want to reach out? Fill out the form below or find our contact info.
-        </p>
-
+        <SectionTitle
+          sectionTitle={"Contact Us"}
+          sectionSubTitle={
+            "Have questions or want to reach out? Fill out the form below or find our contact info."
+          }
+        ></SectionTitle>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           {/* Contact Info */}
           <div className="space-y-6">
@@ -51,7 +51,7 @@ const Contact = () => {
           {/* Contact Form */}
           <form
             onSubmit={handleSubmit}
-            className="bg-white p-6 rounded-xl shadow space-y-4"
+            className="bg-indigo-950 text-white p-6 rounded-xl shadow space-y-4"
           >
             <input
               type="text"

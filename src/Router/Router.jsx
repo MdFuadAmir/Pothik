@@ -26,6 +26,12 @@ import Contact from "../Pages/Contact/Contact";
 import Products from "../Pages/Products/Products";
 import MyCart from "../Pages/MyCart/MyCart";
 import Favorite from "../Pages/Favorite/Favorite";
+import Tracking from "../Pages/Tracking/Tracking";
+import OrderHistory from "../Pages/OrderHistory/OrderHistory";
+import PaymentHistory from "../Pages/PaymentHistory/PaymentHistory";
+import AssignedOrders from "../Pages/Dashboard/AssignedOrders/AssignedOrders";
+import RiderRoutes from "../Routes/RiderRoutes";
+import DeliveryHistory from "../Pages/Dashboard/DeliveryHistory/DeliveryHistory";
 
 
 const router = createBrowserRouter([
@@ -102,8 +108,23 @@ const router = createBrowserRouter([
 
             },
             {
+                path:'tracking',
+                Component: Tracking
+
+            },
+            {
+                path:'orderHistory',
+                Component: OrderHistory
+
+            },
+            {
                 path:'myCart',
                 Component: MyCart
+
+            },
+            {
+                path:'paymentHistory',
+                Component: PaymentHistory
 
             },
             // admin access
@@ -142,6 +163,14 @@ const router = createBrowserRouter([
                 element: <SellerRoutes><SellerAssignRider></SellerAssignRider></SellerRoutes>
             },
             // rider access
+            {
+                path:'assign-orders',
+                element: <RiderRoutes><AssignedOrders></AssignedOrders></RiderRoutes> 
+            },
+            {
+                path:'delevery-history',
+                element: <RiderRoutes><DeliveryHistory></DeliveryHistory></RiderRoutes> 
+            },
             
         ]
     }

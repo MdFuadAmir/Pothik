@@ -96,8 +96,8 @@ const MyCart = () => {
   const grandTotal = subtotal - discountTotal + deliveryCharge;
 
   return (
-    <div className="p-4 bg-indigo-100 h-full">
-      <h2 className="text-2xl font-bold text-indigo-900 flex gap-2">
+    <div className="p-4 bg-indigo-200 h-full">
+      <h2 className="text-2xl md:text-3xl font-bold text-indigo-900 flex gap-2">
         <FaShoppingCart />{" "}
         {user?.displayName ? `${user.displayName}’s Cart` : "My Cart"}
       </h2>

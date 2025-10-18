@@ -44,8 +44,8 @@ const Covrage = () => {
     }
   };
   return (
-     <section className="py-12 bg-indigo-50">
-      <div className="max-w-7xl mx-auto px-4">
+     <section className="py-12 px-6 bg-indigo-200">
+      <div className="max-w-7xl mx-auto ">
         <SectionTitle sectionTitle={'Covrage'} sectionSubTitle={'Our services centers all over in bangladesh'}></SectionTitle>
          {/* search bar */}
         <div className="mb-6">

@@ -79,16 +79,16 @@ const Categories = () => {
 ];
 
     return (
-        <section className="py-16 px-6 bg-gray-50">
+        <section className="py-8 p-4">
       <SectionTitle sectionTitle={'Categories'} sectionSubTitle={'Discover a variety of categories tailored for every need.'}></SectionTitle>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {categories.map((cat, index) => (
           <div
             key={index}
-            className="flex flex-col items-center bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition transform hover:scale-105"
+            className="flex flex-col items-center bg-indigo-950 p-6 rounded-xl shadow-md hover:shadow-lg transition transform hover:scale-105"
           >
             <div className="mb-4">{cat.icon}</div>
-            <h3 className="text-xl font-semibold mb-2">{cat.name}</h3>
+            <h3 className="text-xl font-semibold mb-2 text-white">{cat.name}</h3>
             <p className="text-gray-500 text-center text-sm">{cat.description}</p>
           </div>
         ))}

@@ -3,7 +3,7 @@ import Pothik from "../../Shared/Pothik/Pothik";
 const Footer = () => {
   return (
     <div>
-      <footer className="footer sm:footer-horizontal text-white bg-gray-800 p-10">
+      <footer className="footer sm:footer-horizontal text-white bg-indigo-950 p-10">
         <aside>
          <Pothik></Pothik>
           <p>
@@ -33,7 +33,7 @@ const Footer = () => {
           <a className="link link-hover">Cookie policy</a>
         </nav>
       </footer>
-      <div className="footer sm:footer-horizontal footer-center p-4 text-white bg-gray-800">
+      <div className="footer sm:footer-horizontal footer-center p-4 text-white bg-indigo-950">
         <aside>
           <p>
             Copyright © {new Date().getFullYear()} - All right reserved by

@@ -186,18 +186,49 @@ const DashboardLayout = () => {
                       isActive ? "text-green-500" : "text-white"
                     }
                   >
-                    <FaUserPlus className="inline mr-2" size={15} /> Assign Rider
+                    <FaUserPlus className="inline mr-2" size={15} /> Assign
+                    Rider
                   </NavLink>
                 </li>
               </>
             )}
             {/* seller actions end */}
             {/* rider actions start*/}
+            <li>
+              <NavLink
+                to="/dashboard/assign-orders"
+                onClick={handleCloseDrawer}
+                className={({ isActive }) =>
+                  isActive ? "text-green-500" : "text-white"
+                }
+              >
+                <FaUserPlus className="inline mr-2" size={15} />
+                My Assign Orders
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/dashboard/delevery-history"
+                onClick={handleCloseDrawer}
+                className={({ isActive }) =>
+                  isActive ? "text-green-500" : "text-white"
+                }
+              >
+                <FaUserPlus className="inline mr-2" size={15} />
+                Delevery history
+              </NavLink>
+            </li>
             {/* rider actions end*/}
             {/* user actions start */}
-            {
-              role === 'admin' ? <div className="divider divider-accent"></div> : role === 'seller' ? <div className="divider divider-primary"></div> : role === 'rider' ? <div className="divider divider-primary"></div> : ''
-            }
+            {role === "admin" ? (
+              <div className="divider divider-accent"></div>
+            ) : role === "seller" ? (
+              <div className="divider divider-primary"></div>
+            ) : role === "rider" ? (
+              <div className="divider divider-primary"></div>
+            ) : (
+              ""
+            )}
             <li>
               <NavLink
                 to="/dashboard/myCart"
@@ -223,7 +254,7 @@ const DashboardLayout = () => {
             </li>
             <li>
               <NavLink
-                to="/dashboard/trackMyProduct"
+                to="/dashboard/tracking"
                 onClick={handleCloseDrawer}
                 className={({ isActive }) =>
                   isActive ? "text-green-500" : "text-white"

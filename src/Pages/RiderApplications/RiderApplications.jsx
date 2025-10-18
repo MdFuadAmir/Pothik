@@ -54,17 +54,17 @@ const RiderApplications = () => {
     });
   };
   return (
-    <div className="max-w-7xl bg-indigo-50 mx-auto flex flex-col-reverse md:flex-row">
-      <div className="mx-auto w-full md:w-1/2 p-6 my-10">
+    <div className="p-4">
         <SectionTitle
           sectionTitle={"Apply to Work With Us"}
           sectionSubTitle={"Fill out the form to join as a warehouse worker"}
         ></SectionTitle>
+      <div className="p-8 rounded-2xl max-w-4xl mx-auto bg-indigo-950">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Name */}
             <div>
-              <label className="block mb-1 font-medium">Name</label>
+              <label className="block mb-1 font-medium text-gray-400">Name</label>
               <input
                 type="text"
                 value={user?.displayName || ""}
@@ -76,7 +76,7 @@ const RiderApplications = () => {
 
             {/* Email */}
             <div>
-              <label className="block mb-1 font-medium">Email</label>
+              <label className="block mb-1 font-medium text-gray-400">Email</label>
               <input
                 type="email"
                 value={user?.email || ""}
@@ -88,7 +88,7 @@ const RiderApplications = () => {
 
             {/* Age */}
             <div>
-              <label className="block mb-1 font-medium">Age</label>
+              <label className="block mb-1 font-medium text-gray-400">Age</label>
               <input
                 type="number"
                 {...register("age", { required: true })}
@@ -102,7 +102,7 @@ const RiderApplications = () => {
 
             {/* Contact */}
             <div>
-              <label className="block mb-1 font-medium">Contact Number</label>
+              <label className="block mb-1 font-medium text-gray-400">Contact Number</label>
               <input
                 type="tel"
                 {...register("contact", { required: true })}
@@ -116,7 +116,7 @@ const RiderApplications = () => {
 
             {/* NID Number */}
             <div>
-              <label className="block mb-1 font-medium">NID Number</label>
+              <label className="block mb-1 font-medium text-gray-400">NID Number</label>
               <input
                 type="text"
                 {...register("nid", { required: true })}
@@ -130,7 +130,7 @@ const RiderApplications = () => {
 
             {/* region Selection */}
             <div>
-              <label className="block mb-1 font-medium">Region</label>
+              <label className="block mb-1 font-medium text-gray-400">Region</label>
               <select
                 {...register("region", { required: true })}
                 className="select select-bordered w-full"
@@ -148,7 +148,7 @@ const RiderApplications = () => {
             </div>
             {/* region Selection */}
             <div>
-              <label className="block mb-1 font-medium">Vehicle</label>
+              <label className="block mb-1 font-medium text-gray-400">Vehicle</label>
               <select
                 {...register("vehicle", { required: true })}
                 className="select select-bordered w-full"
@@ -165,7 +165,7 @@ const RiderApplications = () => {
           </div>
           {/* work-house Selection */}
           <div>
-            <label className="block mb-1 font-medium">Your Location</label>
+            <label className="block mb-1 font-medium text-gray-400">Your Location</label>
             <select
               {...register("workLocation", { required: true })}
               className="select select-bordered w-full"
@@ -188,13 +188,13 @@ const RiderApplications = () => {
               {...register("agree", { required: true })}
               className="checkbox checkbox-primary"
             />
-            <label>I agree to all terms & conditions</label>
+            <label className="text-gray-400">I agree to all terms & conditions</label>
           </div>
           {errors.agree && (
             <span className="text-red-500">Aggrument are Required</span>
           )}
           {/* Submit Button */}
-          <button type="submit" className="btn bg-indigo-950 text-white w-full">
+          <button type="submit" className="btn btn-primary w-full">
             Submit Application
           </button>
         </form>

@@ -80,7 +80,7 @@ const ActiveSellers = () => {
   if (isError) return <ErrorePage></ErrorePage>;
 
   return (
-    <div className="p-6">
+    <div className="p-6 bg-indigo-200 h-full">
       <SectionTitle
         sectionTitle={"Active Sellers"}
         sectionSubTitle={
@@ -91,7 +91,7 @@ const ActiveSellers = () => {
       {/* 🧾 Table */}
       <div className="overflow-x-auto">
         <table className="table table-zebra w-full">
-          <thead className="bg-indigo-950 text-white">
+          <thead className="bg-gray-900 text-white">
             <tr>
               <th>#</th>
               <th>Shop Name</th>
@@ -101,10 +101,10 @@ const ActiveSellers = () => {
               <th>Actions</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="bg-indigo-950 text-white">
             {sellers.length > 0 ? (
               sellers.map((seller, index) => (
-                <tr key={seller._id} className="hover:bg-indigo-50">
+                <tr key={seller._id} className="hover:bg-indigo-900">
                   <td>{index + 1}</td>
                   <td>{seller.shopName}</td>
                   <td>{seller.email}</td>

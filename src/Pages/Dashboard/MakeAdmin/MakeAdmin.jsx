@@ -50,7 +50,7 @@ const MakeAdmin = () => {
   };
   
   return (
-    <div className="p-6">
+    <div className="p-6 bg-indigo-200 h-full">
       <SectionTitle
         sectionTitle={"Make Admin"}
         sectionSubTitle={
@@ -67,8 +67,8 @@ const MakeAdmin = () => {
         />
       </div>
       <div className="overflow-x-auto">
-        <table className="table w-full text-center border border-gray-200">
-          <thead className="bg-indigo-950 text-white">
+        <table className="table w-full text-center">
+          <thead className="bg-gray-900 text-white">
             <tr>
               <th>#</th>
               <th>Email</th>
@@ -77,10 +77,10 @@ const MakeAdmin = () => {
               <th>Actions</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="bg-indigo-950 text-white">
             {users.length > 0 ? (
               users.map((user, index) => (
-                <tr key={user._id} className=" hover:bg-indigo-50">
+                <tr key={user._id} className="hover:bg-indigo-900">
                   <td>{index + 1}</td>
                   <td>{user.email}</td>
                   <td>
@@ -124,9 +124,8 @@ const MakeAdmin = () => {
               ))
             ) : (
               <tr>
-                <td colSpan="4" className="text-center py-4 text-red-500">
-                  No user found 😥
-                </td>
+                <td colSpan="5" className="text-center w-full py-4 text-red-500">
+                  No user found , Please Search User</td>
               </tr>
             )}
 

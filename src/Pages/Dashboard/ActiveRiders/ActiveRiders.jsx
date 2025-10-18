@@ -81,7 +81,7 @@ const ActiveRiders = () => {
   if (isError) return <ErrorePage></ErrorePage>;
 
   return (
-    <div className="overflow-x-auto p-6">
+    <div className="p-6 bg-indigo-200 h-full">
       <SectionTitle
         sectionTitle={"Active Riders"}
         sectionSubTitle={
@@ -89,7 +89,7 @@ const ActiveRiders = () => {
         }
       ></SectionTitle>
       <table className="table w-full">
-        <thead className="bg-indigo-950 text-white">
+        <thead className="bg-gray-900 text-white">
           <tr>
             <th>#</th>
             <th>Name</th>
@@ -99,9 +99,9 @@ const ActiveRiders = () => {
             <th>Actions</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="bg-indigo-950 text-white">
           {riders.map((rider, index) => (
-            <tr key={rider._id} className="hover:bg-indigo-50">
+            <tr key={rider._id} className="hover:bg-indigo-900">
               <td>{index + 1}</td>
               <td>{rider.name}</td>
               <td>{rider.email}</td>

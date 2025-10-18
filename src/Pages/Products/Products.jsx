@@ -2,31 +2,37 @@ import { useQuery } from "@tanstack/react-query";
 import { FaHeart, FaShoppingCart, FaStar } from "react-icons/fa";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useAuth from "../../Hooks/useAuth";
-
-
+import SectionTitle from "../../Shared/Sectiontitle/SectionTitle";
+import Loading from "../../Shared/Loading/Loading";
 
 const Products = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
 
-  const { data: products = [] } = useQuery({
+  const { data: products = [],isLoading } = useQuery({
     queryKey: ["products"],
     queryFn: async () => {
       const res = await axiosSecure.get(`/products?email=${user.email}`);
       return res.data;
     },
   });
+  if(isLoading){
+    return <Loading></Loading>
+  }
   return (
-    <div className="bg-gray-50 py-12 px-6 md:px-16">
-      <h2 className="text-3xl md:text-4xl font-bold text-center text-indigo-900 mb-10">
-        Featured <span className="text-indigo-600">Products</span>
-      </h2>
+    <div className="bg-indigo-200 p-4">
+      <SectionTitle
+        sectionTitle={'Available Products'}
+        sectionSubTitle={
+          "Discover trending products from verified sellers — ready to be delivered anywhere."
+        }
+      ></SectionTitle>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {products?.map((product) => (
           <div
             key={product?._id}
-            className="bg-white rounded-xl shadow-md hover:shadow-xl transition duration-300 overflow-hidden group"
+            className="rounded shadow-md hover:shadow-xl transition duration-300 overflow-hidden group bg-indigo-950"
           >
             {/* Image */}
             <div className="relative">
@@ -42,7 +48,7 @@ const Products = () => {
 
             {/* Info */}
             <div className="p-4">
-              <h3 className="text-lg font-semibold text-gray-800 line-clamp-1">
+              <h3 className="text-lg font-semibold text-white line-clamp-1">
                 {product?.name}
               </h3>
               <p className="text-sm text-gray-500">{product?.brand}</p>
@@ -75,7 +81,7 @@ const Products = () => {
               </div>
 
               <div className="flex justify-between items-center mt-4">
-               <button className="text-sm font-semibold text-indigo-600 hover:underline">
+                <button className="text-sm font-semibold text-indigo-600 hover:underline">
                   View Details
                 </button>
                 <button className="text-gray-500 hover:text-red-600 transition">

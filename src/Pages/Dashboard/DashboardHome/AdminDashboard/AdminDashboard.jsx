@@ -4,7 +4,7 @@ import SectionTitle from "../../../../Shared/Sectiontitle/SectionTitle";
 
 const AdminDashboard = () => {
   return (
-    <div className="p-4">
+    <div className="p-4 bg-indigo-200 h-full">
       {/* Title */}
       <SectionTitle
         sectionTitle="Dashboard Overview"

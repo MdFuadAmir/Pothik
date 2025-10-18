@@ -5,7 +5,7 @@ import useAuth from "../../../Hooks/useAuth";
 const JoinUs = () => {
   const {user} = useAuth();
   return (
-    <div className="p-8 bg-blue-50 text-center">
+    <div className="px-4 py-8">
       <SectionTitle
         sectionTitle={"Join Us Today!"}
         sectionSubTitle={

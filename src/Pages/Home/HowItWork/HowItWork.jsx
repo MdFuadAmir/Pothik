@@ -1,4 +1,4 @@
-import React from 'react';
+
 
 const HowItWork = () => {
     const steps = [
@@ -8,7 +8,7 @@ const HowItWork = () => {
     { role: "Admin", action: "Manage Everything", icon: "⚙️" },
   ];
     return (
-        <section className="py-12 bg-gray-50">
+        <section className="px-4 py-8">
       <div className="max-w-6xl mx-auto px-4 text-center">
         <h2 className="text-3xl font-bold mb-4">How It Works</h2>
         <p className="text-gray-600 mb-10">
@@ -19,10 +19,10 @@ const HowItWork = () => {
           {steps.map((step, idx) => (
             <div
               key={idx}
-              className="bg-white p-6 rounded-xl shadow hover:shadow-lg transition"
+              className="bg-indigo-950 p-6 rounded-xl shadow hover:shadow-lg transition"
             >
               <div className="text-5xl mb-4">{step.icon}</div>
-              <h3 className="text-xl font-semibold">{step.role}</h3>
+              <h3 className="text-xl font-semibold text-white">{step.role}</h3>
               <p className="text-gray-500">{step.action}</p>
             </div>
           ))}

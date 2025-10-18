@@ -75,14 +75,14 @@ const PendingRider = () => {
   };
 
   return (
-    <div className="p-6">
+    <div className="p-6 bg-indigo-200 h-full">
       <SectionTitle
         sectionTitle="Pending Rider Applications"
         sectionSubTitle="Review rider applications and approve or reject them."
       ></SectionTitle>
       <div className="overflow-x-auto">
         <table className="table w-full text-center">
-          <thead className="bg-indigo-950 text-white">
+          <thead className="bg-gray-900 text-white">
             <tr>
               <th>#</th>
               <th>Name</th>
@@ -94,9 +94,9 @@ const PendingRider = () => {
             </tr>
           </thead>
 
-          <tbody>
+          <tbody className="bg-indigo-950 text-white">
             {riders.map((rider, index) => (
-              <tr key={rider._id} className="hover:bg-indigo-50">
+              <tr key={rider._id} className="hover:bg-indigo-900">
                 <td>{index + 1}</td>
                 <td>{rider.name}</td>
                 <td>{rider.email}</td>
