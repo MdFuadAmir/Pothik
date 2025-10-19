@@ -71,7 +71,7 @@ const AddProducts = () => {
   };
 
   return (
-    <div className="bg-indigo-50 p-8 rounded-2xl shadow-lg">
+    <div className="bg-indigo-200 p-4">
       <SectionTitle
         sectionTitle={"Add New Product"}
         sectionSubTitle={
@@ -81,11 +81,11 @@ const AddProducts = () => {
 
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="grid grid-cols-1 md:grid-cols-2 gap-5"
+        className="grid grid-cols-1 md:grid-cols-2 gap-5 bg-indigo-950 p-4 md:p-6 rounded-lg"
       >
         {/* Product Name */}
         <div>
-          <label className="font-semibold">Product Name</label>
+          <label className="text-gray-400 font-semibold text-sm">Product Name</label>
           <input
             {...register("name", { required: true })}
             type="text"
@@ -99,7 +99,7 @@ const AddProducts = () => {
         {/* todo */}
         {/* Category */}
         <div>
-          <label className="font-semibold">Category</label>
+          <label className="text-gray-400 font-semibold text-sm">Category</label>
           <select
             {...register("category", { required: true })}
             className="select select-bordered w-full"
@@ -123,7 +123,7 @@ const AddProducts = () => {
         </div>
         {/* Sub Category */}
         <div>
-          <label className="font-semibold">Sub Category</label>
+          <label className="text-gray-400 font-semibold text-sm">Sub Category</label>
           <input
             {...register("subCategory", { required: true })}
             type="text"
@@ -136,7 +136,7 @@ const AddProducts = () => {
         </div>
         {/* Brand */}
         <div>
-          <label className="font-semibold">Brand</label>
+          <label className="text-gray-400 font-semibold text-sm">Brand</label>
           <input
             {...register("brand", { required: true })}
             type="text"
@@ -149,7 +149,7 @@ const AddProducts = () => {
         </div>
         {/* Product Condition */}
         <div>
-          <label className="font-semibold">Product Condition</label>
+          <label className="text-gray-400 font-semibold text-sm">Product Condition</label>
           <select
             {...register("condition", { required: true })}
             className="select select-bordered w-full"
@@ -169,7 +169,7 @@ const AddProducts = () => {
         </div>
         {/* reguler price Price */}
         <div>
-          <label className="font-semibold">Reguler Price (৳)</label>
+          <label className="text-gray-400 font-semibold text-sm">Reguler Price (৳)</label>
           <input
             {...register("price", { required: true })}
             type="number"
@@ -182,7 +182,7 @@ const AddProducts = () => {
         </div>
         {/* Discount Price */}
         <div>
-          <label className="font-semibold">Discount(%)</label>
+          <label className="text-gray-400 font-semibold text-sm">Discount(%)</label>
           <input
             {...register("discount")}
             type="number"
@@ -192,7 +192,7 @@ const AddProducts = () => {
         </div>
         {/* Stock Quantity */}
         <div>
-          <label className="font-semibold">Stock Quantity</label>
+          <label className="text-gray-400 font-semibold text-sm">Stock Quantity</label>
           <input
             {...register("stock", { required: true })}
             type="number"
@@ -205,7 +205,7 @@ const AddProducts = () => {
         </div>
         {/* Color */}
         <div>
-          <label className="font-semibold">Color Options</label>
+          <label className="text-gray-400 font-semibold text-sm">Color Options</label>
           <input
             {...register("color", { required: true })}
             type="text"
@@ -218,7 +218,7 @@ const AddProducts = () => {
         </div>
         {/* Size */}
         <div>
-          <label className="font-semibold">Size Options</label>
+          <label className="text-gray-400 font-semibold text-sm">Size Options</label>
           <input
             {...register("size", { required: true })}
             type="text"
@@ -231,7 +231,7 @@ const AddProducts = () => {
         </div>
         {/* Weight */}
         <div>
-          <label className="font-semibold">Product Weight</label>
+          <label className="text-gray-400 font-semibold text-sm">Product Weight</label>
           <input
             {...register("weight", { required: true })}
             type="number"
@@ -245,7 +245,7 @@ const AddProducts = () => {
         </div>
         {/* Warranty */}
         <div>
-          <label className="font-semibold">Warranty</label>
+          <label className="text-gray-400 font-semibold text-sm">Warranty</label>
           <input
             {...register("warranty", { required: true })}
             type="number"
@@ -258,7 +258,7 @@ const AddProducts = () => {
         </div>
         {/* Delivery Charge */}
         <div>
-          <label className="font-semibold">Delivery Charge (৳)</label>
+          <label className="text-gray-400 font-semibold text-sm">Delivery Charge (৳)</label>
           <input
             {...register("deliveryCharge", { required: true })}
             type="number"
@@ -271,7 +271,7 @@ const AddProducts = () => {
         </div>
         {/* Shipping Location */}
         <div>
-          <label className="font-semibold">Shop Location</label>
+          <label className="text-gray-400 font-semibold text-sm">Shop Location</label>
           <input
             {...register("location", { required: true })}
             type="text"
@@ -284,7 +284,7 @@ const AddProducts = () => {
         </div>
         {/* Estimated Delivery */}
         <div>
-          <label className="font-semibold">Delivery Time Estimate</label>
+          <label className="text-gray-400 font-semibold text-sm">Delivery Time Estimate</label>
           <input
             {...register("deliveryTime", { required: true })}
             type="text"
@@ -297,7 +297,7 @@ const AddProducts = () => {
         </div>
         {/* Return Policy */}
         <div>
-          <label className="font-semibold">Return Policy</label>
+          <label className="text-gray-400 font-semibold text-sm">Return Policy</label>
           <input
             {...register("returnPolicy", { required: true })}
             type="number"
@@ -310,7 +310,7 @@ const AddProducts = () => {
         </div>
         {/* email */}
         <div>
-          <label className="font-semibold">Your Email</label>
+          <label className="text-gray-400 font-semibold text-sm">Your Email</label>
           <input
             {...register("email", { required: true })}
             type="email"
@@ -324,7 +324,7 @@ const AddProducts = () => {
         </div>
         {/* Image URL */}
         <div className="md:col-span-2">
-          <label className="font-semibold mr-4 block">Product Image URL</label>
+          <label className="text-gray-400 font-semibold text-sm mr-4 block">Product Image URL</label>
           <input
             onChange={handleImageUploade}
             type="file"
@@ -343,7 +343,7 @@ const AddProducts = () => {
         </div>
         {/* Description */}
         <div className="md:col-span-2">
-          <label className="font-semibold">Product Description</label>
+          <label className="text-gray-400 font-semibold text-sm">Product Description</label>
           <textarea
             {...register("description", { required: true })}
             placeholder="Write product details here..."
@@ -362,7 +362,7 @@ const AddProducts = () => {
           ) : (
             <button
               type="submit"
-              className="btn bg-indigo-950 text-white w-full"
+              className="btn border-none bg-indigo-900 text-white w-full"
             >
               <FaPlusSquare /> Add Product
             </button>

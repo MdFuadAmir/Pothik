@@ -10,70 +10,36 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import useAuth from "../../../../Hooks/useAuth";
+import useUserRole from "../../../../Hooks/useUserRole";
 
 const overview = [
   {
     title: "Total Products",
     value: 400,
     icon: <FaBoxOpen className="text-indigo-600 text-2xl" />,
-    color: "bg-indigo-100",
   },
   {
     title: "Total Parcels",
     value: 400,
     icon: <FaBox className="text-indigo-600 text-2xl" />,
-    color: "bg-indigo-100",
   },
   {
     title: "Pending Deliveries",
     value: 32,
     icon: <FaClock className="text-yellow-600 text-2xl" />,
-    color: "bg-yellow-100",
   },
   {
     title: "Completed Deliveries",
     value: 190,
     icon: <FaCheckCircle className="text-green-600 text-2xl" />,
-    color: "bg-green-100",
   },
   {
     title: "Total Earnings",
     value: "৳52,430",
     icon: <FaMoneyBillWave className="text-emerald-600 text-2xl" />,
-    color: "bg-emerald-100",
   },
 ];
 
-const recentOrders = [
-  {
-    id: "PCL-1123",
-    customer: "Rahim Uddin",
-    amount: "৳320",
-    status: "Delivered",
-    date: "2025-10-15",
-  },
-  {
-    id: "PCL-1124",
-    customer: "Amina Akter",
-    amount: "৳250",
-    status: "Pending",
-    date: "2025-10-16",
-  },
-  {
-    id: "PCL-1125",
-    customer: "Sabbir Khan",
-    amount: "৳500",
-    status: "Delivered",
-    date: "2025-10-14",
-  },
-  {
-    id: "PCL-1126",
-    customer: "Rina Begum",
-    amount: "৳400",
-    status: "Cancelled",
-    date: "2025-10-13",
-  },
-];
 
 const deliveryData = [
   { month: "Jan", deliveries: 30 },
@@ -92,30 +58,60 @@ const deliveryData = [
 
 const SellerDashboard = () => {
     const {user} = useAuth();
+    const {role} = useUserRole();
   return (
-    <div className="p-6 bg-white rounded-xl shadow space-y-8">
-      <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-        <span className="text-indigo-700">{user.displayName}</span> Dashboard 
-      </h2>
+    <div className="p-4 bg-indigo-200 space-y-8 h-full">
+      {/* Header */}
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 md:gap-0">
+        <div>
+          <h1 className="text-2xl md:text-3xl font-bold text-indigo-900">
+            Dashboard Overview
+          </h1>
+          <p className="text-sm text-gray-600 mt-1">
+            Welcome back,{" "}
+            <span className=" font-bold text-amber-500">
+              {user?.displayName}
+            </span>
+          </p>
+        </div>
+
+        {/* Short profile card */}
+        <div className="flex items-center gap-4 bg-indigo-950 p-3 rounded-lg shadow">
+          <img
+            src={user?.photoURL}
+            alt="avatar"
+            className="w-12 h-12 rounded-full border-2 object-cover"
+          />
+          <div className="text-left">
+            <div className="font-semibold text-amber-500">
+              {user?.displayName || "No name"}
+            </div>
+            <div className="text-xs text-gray-400">{user?.email}</div>
+            <div className="text-xs text-green-500 capitalize">
+              {role}
+            </div>
+          </div>
+        </div>
+      </div>
 
       {/* Overview Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
         {overview.map((card, i) => (
           <div
             key={i}
-            className={`p-5 rounded-xl shadow-sm border hover:shadow-md transition flex items-center gap-4 ${card.color}`}
+            className="p-5 rounded-xl shadow-sm border hover:shadow-md transition flex items-center gap-4 bg-indigo-950"
           >
-            <div className="p-3 bg-white rounded-full shadow">{card.icon}</div>
+            <div className="p-3 bg-indigo-900 rounded-full shadow">{card.icon}</div>
             <div>
-              <p className="text-gray-600 text-sm">{card.title}</p>
-              <h3 className="text-xl font-semibold">{card.value}</h3>
+              <p className="text-gray-300 text-sm">{card.title}</p>
+              <h3 className="text-xl font-semibold text-white">{card.value}</h3>
             </div>
           </div>
         ))}
       </div>
 
       {/* Performance Chart */}
-      <div className="bg-gray-50 border rounded-xl p-5">
+      <div className="bg-indigo-950 text-white border rounded-xl p-5">
         <h3 className="text-lg font-semibold mb-3">Monthly Deliveries</h3>
         <div className="h-64 w-full">
           <ResponsiveContainer>
@@ -133,52 +129,6 @@ const SellerDashboard = () => {
               />
             </LineChart>
           </ResponsiveContainer>
-        </div>
-      </div>
-
-      {/* Recent Orders */}
-      <div>
-        <h3 className="text-lg font-semibold mb-3">Recent Orders</h3>
-        <div className="overflow-x-auto">
-          <table className="table-auto w-full text-sm border">
-            <thead className="bg-gray-100 text-gray-700">
-              <tr>
-                <th className="px-4 py-2 text-left">Parcel ID</th>
-                <th className="px-4 py-2 text-left">Customer</th>
-                <th className="px-4 py-2 text-left">Amount</th>
-                <th className="px-4 py-2 text-left">Status</th>
-                <th className="px-4 py-2 text-left">Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              {recentOrders.map((order, i) => (
-                <tr
-                  key={i}
-                  className="border-b hover:bg-gray-50 transition duration-150"
-                >
-                  <td className="px-4 py-2 font-medium">{order.id}</td>
-                  <td className="px-4 py-2">{order.customer}</td>
-                  <td className="px-4 py-2">{order.amount}</td>
-                  <td className="px-4 py-2">
-                    <span
-                      className={`px-2 py-1 text-xs font-semibold rounded-full ${
-                        order.status === "Delivered"
-                          ? "bg-green-100 text-green-700"
-                          : order.status === "Pending"
-                          ? "bg-yellow-100 text-yellow-700"
-                          : order.status === "Cancelled"
-                          ? "bg-red-100 text-red-700"
-                          : "bg-gray-100 text-gray-700"
-                      }`}
-                    >
-                      {order.status}
-                    </span>
-                  </td>
-                  <td className="px-4 py-2">{order.date}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
         </div>
       </div>
     </div>

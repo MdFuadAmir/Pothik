@@ -69,7 +69,7 @@ const AssignedOrders = () => {
   });
 
   return (
-    <div className="p-6 bg-indigo-200 min-h-screen">
+    <div className="p-6 bg-indigo-200 h-full">
       <SectionTitle
         sectionTitle="Assigned Orders"
         sectionSubTitle="Here are the parcels assigned to you."

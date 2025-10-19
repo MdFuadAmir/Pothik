@@ -1,6 +1,8 @@
 import { NavLink, Outlet } from "react-router";
 import Pothik from "../../Shared/Pothik/Pothik";
 import {
+  FaBox,
+  FaCalendarAlt,
   FaHeart,
   FaHistory,
   FaHome,
@@ -186,7 +188,7 @@ const DashboardLayout = () => {
                       isActive ? "text-green-500" : "text-white"
                     }
                   >
-                    <FaUserPlus className="inline mr-2" size={15} /> Assign
+                    <FaMotorcycle className="inline mr-2" size={15} /> Assign
                     Rider
                   </NavLink>
                 </li>
@@ -194,7 +196,10 @@ const DashboardLayout = () => {
             )}
             {/* seller actions end */}
             {/* rider actions start*/}
-            <li>
+            {
+              roleLoading && role === 'rider' && (
+                <>
+                <li>
               <NavLink
                 to="/dashboard/assign-orders"
                 onClick={handleCloseDrawer}
@@ -202,7 +207,7 @@ const DashboardLayout = () => {
                   isActive ? "text-green-500" : "text-white"
                 }
               >
-                <FaUserPlus className="inline mr-2" size={15} />
+                <FaBox className="inline mr-2" size={15} />
                 My Assign Orders
               </NavLink>
             </li>
@@ -214,10 +219,14 @@ const DashboardLayout = () => {
                   isActive ? "text-green-500" : "text-white"
                 }
               >
-                <FaUserPlus className="inline mr-2" size={15} />
+                <FaCalendarAlt className="inline mr-2" size={15} />
                 Delevery history
               </NavLink>
             </li>
+                </>
+              )
+            }
+            
             {/* rider actions end*/}
             {/* user actions start */}
             {role === "admin" ? (

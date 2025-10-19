@@ -97,7 +97,7 @@ const UserDashboard = () => {
   return (
     <div className="space-y-6 p-4 bg-indigo-200">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 md:gap-0">
         <div>
           <h1 className="text-2xl md:text-3xl font-bold text-indigo-900">
             Dashboard Overview

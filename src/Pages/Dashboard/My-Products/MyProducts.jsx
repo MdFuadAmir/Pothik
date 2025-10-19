@@ -75,7 +75,7 @@ const MyProducts = () => {
   }
 
   return (
-    <div className="p-4 md:p-8">
+    <div className="p-4 md:p-8 bg-indigo-200 h-full">
       <SectionTitle
         sectionTitle={"My Products"}
         sectionSubTitle={"Hear is my products"}
@@ -84,7 +84,7 @@ const MyProducts = () => {
       {products?.map((product) => (
         <div
           key={product._id}
-          className="rounded-xl shadow-lg overflow-hidden border border-gray-700 ">
+          className="rounded-xl shadow-lg overflow-hidden bg-indigo-950 text-gray-300 ">
           <div className="relative">
             <img src={product.image} className="w-full h-40 object-cover" />
             <span className="absolute top-2 left-2 bg-blue-600 text-white  text-xs font-semibold px-3 py-1 rounded-full">
@@ -95,7 +95,7 @@ const MyProducts = () => {
             </span>
           </div>
 
-          <div className="p-2 space-y-1">
+          <div className="p-4 space-y-1">
             <h3 className="text-lg font-semibold line-clamp-1">{product.name}</h3>
               <p className="text-sm"><b>Category:</b> {product.category}</p>
             <p className="text-sm"><b>Brand:</b> {product.brand}</p>

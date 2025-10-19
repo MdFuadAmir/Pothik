@@ -32,6 +32,7 @@ import PaymentHistory from "../Pages/PaymentHistory/PaymentHistory";
 import AssignedOrders from "../Pages/Dashboard/AssignedOrders/AssignedOrders";
 import RiderRoutes from "../Routes/RiderRoutes";
 import DeliveryHistory from "../Pages/Dashboard/DeliveryHistory/DeliveryHistory";
+import ProductDetails from "../Pages/ProductDetails/ProductDetails";
 
 
 const router = createBrowserRouter([
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
             {
                 path:'/products',
                 Component: Products
+            },
+            {
+                path:'/products/:id',
+                Component: ProductDetails
             },
             {
                 path:'/aboutUs',

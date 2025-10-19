@@ -1,18 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
 import { FaHeart, FaShoppingCart, FaStar } from "react-icons/fa";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
-import useAuth from "../../Hooks/useAuth";
 import SectionTitle from "../../Shared/Sectiontitle/SectionTitle";
 import Loading from "../../Shared/Loading/Loading";
+import { useNavigate } from "react-router";
 
 const Products = () => {
   const axiosSecure = useAxiosSecure();
-  const { user } = useAuth();
-
+  const navigate = useNavigate();
   const { data: products = [],isLoading } = useQuery({
     queryKey: ["products"],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/products?email=${user.email}`);
+      const res = await axiosSecure.get("/products");
       return res.data;
     },
   });
@@ -28,7 +27,7 @@ const Products = () => {
         }
       ></SectionTitle>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
         {products?.map((product) => (
           <div
             key={product?._id}
@@ -75,17 +74,10 @@ const Products = () => {
                     ৳{product.price}
                   </p>
                 </div>
-                <button className="bg-indigo-600 text-white p-2 rounded-full hover:bg-indigo-700 transition">
-                  <FaShoppingCart />
-                </button>
               </div>
-
               <div className="flex justify-between items-center mt-4">
-                <button className="text-sm font-semibold text-indigo-600 hover:underline">
+                <button onClick={()=> navigate(`/products/${product._id}`)} className="text-sm font-semibold text-indigo-600 hover:underline">
                   View Details
-                </button>
-                <button className="text-gray-500 hover:text-red-600 transition">
-                  <FaHeart />
                 </button>
               </div>
             </div>

@@ -1,20 +1,19 @@
 import { useQuery } from "@tanstack/react-query";
-import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { FaHeart, FaShoppingCart, FaStar } from "react-icons/fa";
 import Loading from "../../Shared/Loading/Loading";
 const Favorite = () => {
   const axiosSecure = useAxiosSecure();
-  const { user ,loading} = useAuth();
 
-  const { data: products = [] } = useQuery({
+
+  const { data: products = [],isLoading } = useQuery({
     queryKey: ["products"],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/products?email=${user.email}`);
+      const res = await axiosSecure.get(`/products`);
       return res.data;
     },
   });
-  if(loading){
+  if(isLoading){
     return <Loading></Loading>
   }
   return (

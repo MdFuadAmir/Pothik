@@ -45,7 +45,7 @@ const DeliveryHistory = () => {
   );
 
   return (
-    <div className="p-6 bg-indigo-200 min-h-screen">
+    <div className="p-6 bg-indigo-200 h-full">
       <SectionTitle
         sectionTitle="Delivery History"
         sectionSubTitle="Track your past deliveries and earnings."
