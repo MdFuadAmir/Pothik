@@ -3,6 +3,7 @@ import Pothik from "../../Shared/Pothik/Pothik";
 import {
   FaBox,
   FaCalendarAlt,
+  FaCogs,
   FaHeart,
   FaHistory,
   FaHome,
@@ -18,6 +19,7 @@ import {
 import { GiDeliveryDrone } from "react-icons/gi";
 import useUserRole from "../../Hooks/useUserRole";
 import Loading from "../../Shared/Loading/Loading";
+import { FaLocationDot } from "react-icons/fa6";
 const DashboardLayout = () => {
   const { role, roleLoading } = useUserRole();
   // close drawer when clicking link
@@ -182,6 +184,17 @@ const DashboardLayout = () => {
                 </li>
                 <li>
                   <NavLink
+                    to="/dashboard/manage-orders"
+                    onClick={handleCloseDrawer}
+                    className={({ isActive }) =>
+                      isActive ? "text-green-500" : "text-white"
+                    }
+                  >
+                    <FaCogs className="inline mr-2" size={15} /> Manage Orders
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
                     to="/dashboard/seller-assign-rider"
                     onClick={handleCloseDrawer}
                     className={({ isActive }) =>
@@ -251,16 +264,16 @@ const DashboardLayout = () => {
             </li>
             <li>
               <NavLink
-                to="/dashboard/favorite"
+                to="/dashboard/address-book"
                 onClick={handleCloseDrawer}
                 className={({ isActive }) =>
                   isActive ? "text-green-500" : "text-white"
                 }
               >
-                <FaHeart className="inline mr-2" size={15} /> My Favorite
-                Products
+                <FaLocationDot className="inline mr-2" size={15} /> AddressBook
               </NavLink>
             </li>
+            
             <li>
               <NavLink
                 to="/dashboard/tracking"

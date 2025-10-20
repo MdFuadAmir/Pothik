@@ -25,7 +25,6 @@ import AboutUs from "../Pages/AboutUs/AboutUs";
 import Contact from "../Pages/Contact/Contact";
 import Products from "../Pages/Products/Products";
 import MyCart from "../Pages/MyCart/MyCart";
-import Favorite from "../Pages/Favorite/Favorite";
 import Tracking from "../Pages/Tracking/Tracking";
 import OrderHistory from "../Pages/OrderHistory/OrderHistory";
 import PaymentHistory from "../Pages/PaymentHistory/PaymentHistory";
@@ -33,6 +32,9 @@ import AssignedOrders from "../Pages/Dashboard/AssignedOrders/AssignedOrders";
 import RiderRoutes from "../Routes/RiderRoutes";
 import DeliveryHistory from "../Pages/Dashboard/DeliveryHistory/DeliveryHistory";
 import ProductDetails from "../Pages/ProductDetails/ProductDetails";
+import ManageOrders from "../Pages/ManageOrders/ManageOrders";
+import ProceedToCheckOut from "../Pages/ProceedToCheckOut/ProceedToCheckOut";
+import AddressBook from "../Pages/AddressBook/AddressBook";
 
 
 const router = createBrowserRouter([
@@ -108,11 +110,6 @@ const router = createBrowserRouter([
 
             },
             {
-                path:'favorite',
-                Component: Favorite
-
-            },
-            {
                 path:'tracking',
                 Component: Tracking
 
@@ -130,6 +127,16 @@ const router = createBrowserRouter([
             {
                 path:'paymentHistory',
                 Component: PaymentHistory
+
+            },
+            {
+                path:'checkout',
+                Component: ProceedToCheckOut
+
+            },
+            {
+                path:'address-book',
+                Component: AddressBook
 
             },
             // admin access
@@ -158,6 +165,10 @@ const router = createBrowserRouter([
             {
                 path:'addProduct',
                 element: <SellerRoutes><AddProducts></AddProducts></SellerRoutes>
+            },
+            {
+                path:'manage-orders',
+                element: <SellerRoutes><ManageOrders></ManageOrders></SellerRoutes>
             },
             {
                 path:'my-products',

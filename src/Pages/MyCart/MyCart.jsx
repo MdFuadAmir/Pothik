@@ -4,48 +4,60 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import Loading from "../../Shared/Loading/Loading";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router";
 
 const MyCart = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const { data: cartItems = [], isLoading } = useQuery({
     queryKey: ["cart", user?.email],
     enabled: !!user?.email,
     queryFn: async () => {
       const res = await axiosSecure.get(`/carts/${user.email}`);
-      console.log(res.data);
       return res.data;
     },
   });
+  const totalItems = cartItems.reduce((sum, item) => sum + (item.quantity || 1), 0);
 
   const subtotal = cartItems.reduce(
     (sum, item) => sum + item.discountPrice * (item.quantity || 1),
     0
   );
   const totalDeliveryCharge = cartItems.reduce((sum, item) => {
-  return sum + (parseFloat(item.deliveryCharge) || 0);
-}, 0);
+    return sum + (parseFloat(item.deliveryCharge) || 0);
+  }, 0);
   const total = subtotal + totalDeliveryCharge;
-
-  // const deliveryChargeNumber = parseFloat(cartItems.deliveryCharge);
-  // quantity update handler
   const handleQuantityChange = async (item, increment) => {
     const newQuantity = (item.quantity || 1) + increment;
-    if (newQuantity < 1) return; // 1 এর নিচে না নামতে দেবে না
+    if (newQuantity < 1) return;
 
     try {
-      // Optimistic UI update (optional, এখানে আমরা re-fetch দিয়ে সিঙ্ক করি)
       await axiosSecure.patch(`/carts/${item._id}`, { quantity: newQuantity });
-
-      // React Query কে invalidate করে নতুন data fetch করা
       queryClient.invalidateQueries(["cart", user?.email]);
     } catch (error) {
       console.error("Quantity update failed:", error);
       Swal.fire("Error", "Quantity update failed!", "error");
     }
   };
+  const handleRemoveItem = async (_id) => {
+    try {
+      const res = await axiosSecure.delete(`/carts/${_id}`);
+      if (res.data.deletedCount > 0) {
+        Swal.fire("Removed!", "Item removed from your cart.", "success");
+        queryClient.invalidateQueries(["cart", user?.email]);
+      }
+    } catch (error) {
+      console.error(error);
+      Swal.fire("Error", "Failed to remove item.", "error");
+    }
+  };
+const handleCheckout = () =>{
+  navigate("/dashboard/checkout", { state: { cartItems } });
+}
+
   if (isLoading) {
     return <Loading></Loading>;
   }
@@ -59,8 +71,6 @@ const MyCart = () => {
         📦 Estimated Delivery:{" "}
         <span className="text-amber-500 font-semibold">2–4 Business Days</span>
       </p>
-
-      {/*  ///////////////////////////////////////////*/}
       <div className="">
         {cartItems.length === 0 ? (
           <div className="text-center py-20 text-gray-500 text-lg">
@@ -134,7 +144,10 @@ const MyCart = () => {
                           ৳{item.deliveryCharge}
                         </td>
                         <td>
-                          <button className="p-2 rounded bg-red-600 hover:bg-red-700 text-white">
+                          <button
+                            onClick={() => handleRemoveItem(item._id)}
+                            className="p-2 rounded bg-red-600 hover:bg-red-700 text-white"
+                          >
                             <FaTrashAlt />
                           </button>
                         </td>
@@ -149,9 +162,14 @@ const MyCart = () => {
                   <h3 className="text-xl font-semibold text-white mb-2">
                     Cart Summary
                   </h3>
-                  <hr className="text-white mb-2"/>
+                  <hr className="text-white mb-2" />
+                  <p className="flex justify-between text-white text-sm mb-2">
+                    <span>Total items:</span>
+                    <span>{totalItems}</span>
+                  </p>
                   <p className="flex justify-between text-white mb-2">
-                    <span>SubTotal:</span><span>{subtotal}</span>
+                    <span>SubTotal:</span>
+                    <span>{subtotal}</span>
                   </p>
                   <p className="flex justify-between text-white mb-2">
                     <span>Delivery Charge:</span>{" "}
@@ -159,9 +177,10 @@ const MyCart = () => {
                   </p>
                   <hr className="my-3 text-white" />
                   <p className="flex justify-between font-semibold text-amber-500 text-lg">
-                    <span>Total:</span><span>৳{total}</span>
+                    <span>Total:</span>
+                    <span>৳{total}</span>
                   </p>
-                  <button className="mt-4 py-2 rounded w-full bg-indigo-600 text-white hover:bg-indigo-700">
+                  <button onClick={handleCheckout} className="mt-4 py-2 rounded w-full bg-indigo-600 text-white hover:bg-indigo-700">
                     Proceed to Checkout
                   </button>
                 </div>

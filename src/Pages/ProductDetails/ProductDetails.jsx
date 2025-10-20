@@ -14,7 +14,7 @@ const ProductDetails = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
 
-  const { data: product = [], isLoading } = useQuery({
+  const { data: product = {}, isLoading } = useQuery({
     queryKey: ["product", id],
     enabled: !!id, // id থাকলেই query চালু হবে
     queryFn: async () => {
@@ -24,40 +24,36 @@ const ProductDetails = () => {
   });
 
   // add to cart functionality
-  const handleAddToCart = async () => {
-    if (!user) {
-      Swal.fire(
-        "Error",
-        "You must be logged in to add items to cart!",
-        "error"
-      );
-      navigate("/login");
-    }
-    const cartItem = {
-      email: user?.email,
-      productId: product._id,
-      name: product.name,
-      price: product.price,
-      discount: product.discount,
-      discountPrice: product.discountPrice,
-      quantity: 1,
-      image: product.image,
-      deliveryCharge: product.deliveryCharge,
-      size: product.size,
-      stock: product.stock,
-      color: product.color,
-    };
-    try {
-      const res = await axiosSecure.post("/carts", cartItem);
-      if (res.data.insertedId) {
-        Swal.fire("Added!", "Product added to your cart.", "success");
-      }
-    } catch (error) {
-      console.error(error);
-      Swal.fire("Error", "Failed to add product to cart.", "error");
-    }
+  // ProductDetails.jsx
+const handleAddToCart = async () => {
+  if (!user) {
+    Swal.fire("Error", "You must login first!", "error");
+    navigate("/login");
+    return;
+  }
+
+  const cartItem = {
+    name: product.name,
+    price: product.price,
+    discountPrice: product.discountPrice,
+    image: product.image,
+    deliveryCharge: product.deliveryCharge,
+    quantity: 1,
+    UserEmail: user?.email,
+    shopName: product?.shopName,
+    sellerEmail: product?.sellerEmail,
   };
 
+  try {
+    const res = await axiosSecure.post("/carts", cartItem);
+    if (res.data.insertedId) {
+      Swal.fire("Added!", "Product added to your cart.", "success");
+    }
+  } catch (error) {
+    console.error(error);
+    Swal.fire("Error", "Failed to add to cart.", "error");
+  }
+};
   if (isLoading) return <Loading />;
   if (!product) {
     return (
@@ -75,7 +71,7 @@ const ProductDetails = () => {
           <img
             src={product.image}
             alt={product.name}
-            className="w-full object-cover rounded-lg shadow-md"
+            className="w-full max-h-96 object-cover rounded-lg shadow-md"
           />
         </div>
 
@@ -84,8 +80,9 @@ const ProductDetails = () => {
           <h1 className="text-3xl font-bold text-indigo-900 mb-2">
             {product.name}
           </h1>
-          <p className="text-gray-600 text-sm mb-4">{product.brand}</p>
-
+          {
+           product.brand ?  <p className="text-gray-600 text-sm mb-4">{product.brand}</p> : ''
+          }
           {/* Rating & Category */}
           <div className="flex items-center gap-2 mb-3">
             {Array.from({ length: 5 }).map((_, i) => (
@@ -109,20 +106,20 @@ const ProductDetails = () => {
             </span>
             <span className="text-gray-400 line-through">৳{product.price}</span>
             <span className="bg-red-600 text-white text-xs px-3 py-1 rounded-full">
-              -{product.discount}%
+              -{product?.discount ? product?.discount : 0}%
             </span>
           </div>
 
           {/* Stock & Color */}
           <div className="text-gray-700 mb-3">
             <p>
-              <span className="font-semibold">Stock:</span> {product.stock} pcs
+              <span className="font-semibold">Stock:</span> {product.stock ? product.stock : 0 } pcs
             </p>
             <p>
-              <span className="font-semibold">Colors:</span> {product.color}
+              <span className="font-semibold">Colors:</span> {product.color ? product.color : 'color not availabal'}
             </p>
             <p>
-              <span className="font-semibold">Sizes:</span> {product.size}
+              <span className="font-semibold">Sizes:</span> {product.size ? product.size : 'not availabal'}
             </p>
           </div>
 
@@ -146,7 +143,7 @@ const ProductDetails = () => {
           <div className="mt-4 text-gray-700">
             <p>
               <span className="font-semibold">Seller Email:</span>{" "}
-              {product.email}
+              {product.sellerEmail}
             </p>
             <p>
               <span className="font-semibold">Location:</span>{" "}
@@ -161,9 +158,6 @@ const ProductDetails = () => {
               className="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition"
             >
               Add to Cart
-            </button>
-            <button className="border border-indigo-600 text-indigo-700 px-6 py-2 rounded-lg hover:bg-indigo-100 transition">
-              Add to Wishlist
             </button>
           </div>
         </div>
