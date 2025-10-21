@@ -35,6 +35,7 @@ import ProductDetails from "../Pages/ProductDetails/ProductDetails";
 import ManageOrders from "../Pages/ManageOrders/ManageOrders";
 import ProceedToCheckOut from "../Pages/ProceedToCheckOut/ProceedToCheckOut";
 import AddressBook from "../Pages/AddressBook/AddressBook";
+import Payments from "../Pages/Payments/Payments";
 
 
 const router = createBrowserRouter([
@@ -137,6 +138,11 @@ const router = createBrowserRouter([
             {
                 path:'address-book',
                 Component: AddressBook
+
+            },
+            {
+                path:'payments',
+                Component: Payments
 
             },
             // admin access
