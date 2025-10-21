@@ -1,7 +1,7 @@
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../Hooks/useAuth";
-import { FaShop } from "react-icons/fa6";
+import { FaEye, FaShop } from "react-icons/fa6";
 import Loading from "../../Shared/Loading/Loading";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { useNavigate } from "react-router";
@@ -45,12 +45,11 @@ const ProceedToCheckOut = () => {
     0
   );
   const handlePayment = () =>{
-  navigate("/dashboard/payments", { state: { cartItems, address } });
+  navigate("/dashboard/payments");
 }
   return (
     <div className="p-6 bg-indigo-200 min-h-screen">
-      <h2 className="text-3xl font-bold text-indigo-900 mb-6">
-        🧾 Review Your Order
+      <h2 className="text-3xl font-bold text-indigo-900 mb-6 flex item-center gap-2"><FaEye/> Review Your Order
       </h2>
       {/* Address Details */}
       <div onClick={() => navigate("/dashboard/address-book")} className=" cursor-pointer">

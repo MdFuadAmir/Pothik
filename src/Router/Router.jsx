@@ -36,6 +36,11 @@ import ManageOrders from "../Pages/ManageOrders/ManageOrders";
 import ProceedToCheckOut from "../Pages/ProceedToCheckOut/ProceedToCheckOut";
 import AddressBook from "../Pages/AddressBook/AddressBook";
 import Payments from "../Pages/Payments/Payments";
+import BankPayment from "../Pages/Payments/BankPayment";
+import RocketPayment from "../Pages/Payments/RocketPayment";
+import NagadPayment from "../Pages/Payments/NagadPayment";
+import BkashPayment from "../Pages/Payments/BkashPayment";
+import CashOnPayment from "../Pages/Payments/CashOnPayment";
 
 
 const router = createBrowserRouter([
@@ -142,7 +147,29 @@ const router = createBrowserRouter([
             },
             {
                 path:'payments',
-                Component: Payments
+                Component: Payments,
+                children:[
+                    {
+                        path:'payments/bank-payment',
+                        Component: BankPayment
+                    },
+                    {
+                        path:'payments/bkash-payment',
+                        Component: BkashPayment
+                    },
+                    {
+                        path:'payments/nagad-payment',
+                        Component: NagadPayment
+                    },
+                    {
+                        path:'payments/rocket-payment',
+                        Component: RocketPayment
+                    },
+                    {
+                        path:'payments/cashOn-payment',
+                        Component: CashOnPayment
+                    },
+                ]
 
             },
             // admin access
