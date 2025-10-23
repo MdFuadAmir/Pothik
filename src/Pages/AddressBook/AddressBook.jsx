@@ -42,7 +42,7 @@ const AddressBook = () => {
       if (result.isConfirmed) {
         const newAddress = {
           ...data,
-          userEmail: user?.email,
+          buyerEmail: user?.email,
           createdAt: new Date().toISOString(),
         };
         console.log(newAddress);

@@ -1,69 +1,27 @@
-import React, { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import {
   FaBox,
-  FaCheckCircle,
-  FaTimesCircle,
-  FaTruck,
-  FaSearch,
 } from "react-icons/fa";
+import useAuth from "../../Hooks/useAuth";
+import Loading from "../../Shared/Loading/Loading";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const OrderHistory = () => {
-  const [orders] = useState([
-    {
-      id: "ORD-1001",
-      date: "2025-10-12",
-      items: 3,
-      amount: 2850,
-      status: "Delivered",
-      payment: "Paid",
-      trackingId: "TRK-458769",
-    },
-    {
-      id: "ORD-1002",
-      date: "2025-10-14",
-      items: 1,
-      amount: 1200,
-      status: "Pending",
-      payment: "Unpaid",
-      trackingId: "TRK-458799",
-    },
-    {
-      id: "ORD-1003",
-      date: "2025-10-15",
-      items: 2,
-      amount: 1750,
-      status: "On the Way",
-      payment: "Paid",
-      trackingId: "TRK-458805",
-    },
-    {
-      id: "ORD-1004",
-      date: "2025-10-10",
-      items: 2,
-      amount: 2100,
-      status: "Cancelled",
-      payment: "Refunded",
-      trackingId: "TRK-458700",
-    },
-  ]);
+  const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
 
-  // optional modal for details (just concept)
-  const [selectedOrder, setSelectedOrder] = useState(null);
-
-  const getStatusColor = (status) => {
-    switch (status) {
-      case "Delivered":
-        return "text-green-600 bg-green-100";
-      case "Pending":
-        return "text-yellow-600 bg-yellow-100";
-      case "On the Way":
-        return "text-blue-600 bg-blue-100";
-      case "Cancelled":
-        return "text-red-600 bg-red-100";
-      default:
-        return "text-gray-600 bg-gray-100";
-    }
-  };
+  const { data: orders = [], isLoading } = useQuery({
+    queryKey: ["orders", user?.email],
+    enabled: !!user?.email,
+    // refetchOnWindowFocus: true,
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/orders/${user.email}`);
+      return res.data;
+    },
+  });
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
 
   return (
     <div className="p-6 bg-indigo-200 min-h-screen">
@@ -86,79 +44,42 @@ const OrderHistory = () => {
 
       {/* Orders Table */}
       <div className="bg-indigo-950 rounded-xl shadow-lg overflow-hidden">
-        <table className="w-full text-left text-white">
+        <table className="w-full text-center text-white">
           <thead className="bg-indigo-900 text-sm uppercase text-gray-300">
             <tr>
-              <th className="p-4">Order ID</th>
-              <th className="p-4">Date</th>
+              <th>#</th>
+              <th className="p-4">Tracking</th>
               <th className="p-4">Items</th>
               <th className="p-4">Amount</th>
               <th className="p-4">Status</th>
-              <th className="p-4">Payment</th>
-              <th className="p-4">Tracking</th>
+              <th className="p-4">Date</th>
             </tr>
           </thead>
           <tbody>
-            {orders.map((order) => (
+            {orders.map((order, index) => (
               <tr
                 key={order.id}
                 className="border-t border-indigo-800 hover:bg-indigo-900 transition-all"
               >
-                <td className="p-4 font-semibold">{order.id}</td>
-                <td className="p-4">{order.date}</td>
-                <td className="p-4">{order.items}</td>
-                <td className="p-4">৳{order.amount.toLocaleString()}</td>
-                <td className="p-4">
-                  <span
-                    className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(
-                      order.status
-                    )}`}
-                  >
-                    {order.status}
-                  </span>
-                </td>
-                <td className="p-4">{order.payment}</td>
+                <td className="p-4">{index + 1}</td>
                 <td className="p-4">{order.trackingId}</td>
+                <td className="p-4">{order.items.length}</td>
+                <td className="p-4">৳{order.grandTotal}</td>
+                <td className="p-4">
+                  {
+                    order.orderStatus === 'Pending' ? <span className="text-amber-900 bg-amber-100 px-2 py-1 rounded">Pending</span> : order.orderStatus === 'Cancelled' ? <span className="text-red-900 bg-red-100 px-2 py-1 rounded">Cancled</span> :
+                  <span className="text-green-900 bg-green-100 px-2 py-1 rounded">Recived</span>
+                  }
+                  
+                 
+                </td>
+
+                <td className="p-4">{order.date}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-
-      {/* Modal */}
-      {selectedOrder && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white rounded-xl shadow-xl p-6 w-96 relative">
-            <button
-              onClick={() => setSelectedOrder(null)}
-              className="absolute top-3 right-3 text-gray-400 hover:text-gray-600"
-            >
-              ✕
-            </button>
-            <h3 className="text-xl font-semibold mb-4 text-indigo-900">
-              Order Details - {selectedOrder.id}
-            </h3>
-            <p>
-              <strong>Date:</strong> {selectedOrder.date}
-            </p>
-            <p>
-              <strong>Status:</strong> {selectedOrder.status}
-            </p>
-            <p>
-              <strong>Payment:</strong> {selectedOrder.payment}
-            </p>
-            <p>
-              <strong>Tracking ID:</strong> {selectedOrder.trackingId}
-            </p>
-            <p>
-              <strong>Total Amount:</strong> ৳{selectedOrder.amount}
-            </p>
-            <button className="mt-4 bg-indigo-900 text-white w-full py-2 rounded-lg hover:bg-indigo-800">
-              View Full Tracking
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   );
 };

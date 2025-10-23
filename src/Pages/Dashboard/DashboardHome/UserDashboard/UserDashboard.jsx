@@ -1,101 +1,69 @@
-import {
-  FaBell,
-  FaBox,
-  FaCheckCircle,
-  FaClock,
-  FaTimesCircle,
-  FaUser,
-} from "react-icons/fa";
+import { FaBox, FaCheckCircle, FaClock, FaTimesCircle } from "react-icons/fa";
 import useAuth from "../../../../Hooks/useAuth";
 import useUserRole from "../../../../Hooks/useUserRole";
-
-const recentNotifications = [
-  {
-    _id: "NTF001",
-    title: "Order Delivered",
-    message:
-      "Your order TRK-1001 has been successfully delivered. Thanks for shopping!",
-    createdAt: "2025-10-10T12:15:00Z",
-  },
-  {
-    _id: "NTF002",
-    title: "Rider Assigned",
-    message:
-      "Rider Hasan Ali has been assigned to your parcel TRK-1005. Expected delivery tomorrow.",
-    createdAt: "2025-10-17T12:45:00Z",
-  },
-  {
-    _id: "NTF003",
-    title: "Order Confirmed",
-    message: "Your order TRK-1003 has been confirmed by the seller.",
-    createdAt: "2025-10-15T09:30:00Z",
-  },
-  {
-    _id: "NTF004",
-    title: "Parcel Picked Up",
-    message: "Your parcel TRK-1002 is on the way with rider Sufian Rahman.",
-    createdAt: "2025-10-16T14:50:00Z",
-  },
-  {
-    _id: "NTF005",
-    title: "Order Cancelled",
-    message:
-      "Your order TRK-1004 has been cancelled. Refund will be processed soon.",
-    createdAt: "2025-10-16T19:10:00Z",
-  },
-];
-
-const recentOrders = [
-  {
-    _id: "ORD001",
-    trackingId: "TRK-1001",
-    items: [
-      { name: "Wireless Bluetooth Headphones" },
-      { name: "USB-C Charging Cable" },
-    ],
-    totalAmount: 1850,
-    status: "Delivered",
-    createdAt: "2025-10-10T10:45:00Z",
-  },
-  {
-    _id: "ORD002",
-    trackingId: "TRK-1002",
-    items: [{ name: "Smart Fitness Band" }],
-    totalAmount: 1250,
-    status: "Pending",
-    createdAt: "2025-10-12T14:30:00Z",
-  },
-  {
-    _id: "ORD003",
-    trackingId: "TRK-1003",
-    items: [{ name: "Laptop Backpack" }, { name: "Mouse Pad" }],
-    totalAmount: 2200,
-    status: "Delivered",
-    createdAt: "2025-10-15T09:10:00Z",
-  },
-  {
-    _id: "ORD004",
-    trackingId: "TRK-1004",
-    items: [{ name: "Gaming Mouse" }],
-    totalAmount: 950,
-    status: "Cancelled",
-    createdAt: "2025-10-16T18:45:00Z",
-  },
-  {
-    _id: "ORD005",
-    trackingId: "TRK-1005",
-    items: [{ name: "Wireless Keyboard" }],
-    totalAmount: 1600,
-    status: "Pending",
-    createdAt: "2025-10-17T11:20:00Z",
-  },
-];
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import Loading from "../../../../Shared/Loading/Loading";
+import Swal from "sweetalert2";
 
 const UserDashboard = () => {
   const { user } = useAuth();
   const { role } = useUserRole();
+  const axiosSecure = useAxiosSecure();
+  const queryClient = useQueryClient();
+
+  const { data: orders = [], isLoading } = useQuery({
+    queryKey: ["orders", user?.email],
+    enabled: !!user?.email,
+    refetchOnWindowFocus: true,
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/orders/${user.email}`);
+      return res.data;
+    },
+  });
+
+  if (isLoading) return <Loading />;
+
+  // Dynamic summary counts
+  const totalOrders = orders.length;
+  const deliveredOrders = orders.filter(
+    (o) => o.orderStatus === "Delivered"
+  ).length;
+  const pendingOrders = orders.filter(
+    (o) => o.orderStatus === "Pending"
+  ).length;
+  const cancelledOrders = orders.filter(
+    (o) => o.orderStatus === "Cancelled"
+  ).length;
+
+  const handleOrderCancel = async (id) => {
+  Swal.fire({
+    title: "Are you sure?",
+    text: "Do you really want to cancel this order?",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#d33",
+    cancelButtonColor: "#3085d6",
+    confirmButtonText: "Yes, cancel it!",
+  }).then(async (result) => {
+    if (result.isConfirmed) {
+      try {
+        const res = await axiosSecure.patch(`/orders/cancel/${id}`);
+        if (res.data.modifiedCount > 0) {
+          Swal.fire("!", "Your order has been cancelled.", "success");
+          queryClient.invalidateQueries(["orders", user?.email]);
+          queryClient.invalidateQueries(["sellerOrders"]); 
+          queryClient.invalidateQueries(["notifications", user?.email]);
+        }
+      } catch (error) {
+        console.error(error);
+        Swal.fire("Error", "Failed to cancel the order.", "error");
+      }
+    }
+  });
+};
   return (
-    <div className="space-y-6 p-4 bg-indigo-200">
+    <div className="space-y-6 p-4 bg-indigo-200 h-full">
       {/* Header */}
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 md:gap-0">
         <div>
@@ -104,7 +72,7 @@ const UserDashboard = () => {
           </h1>
           <p className="text-sm text-gray-600 mt-1">
             Welcome back,{" "}
-            <span className=" font-bold text-amber-500">
+            <span className="font-bold text-amber-500">
               {user?.displayName}
             </span>
           </p>
@@ -122,9 +90,7 @@ const UserDashboard = () => {
               {user?.displayName || "No name"}
             </div>
             <div className="text-xs text-gray-400">{user?.email}</div>
-            <div className="text-xs text-green-500 capitalize">
-              {role}
-            </div>
+            <div className="text-xs text-green-500 capitalize">{role}</div>
           </div>
         </div>
       </div>
@@ -136,8 +102,8 @@ const UserDashboard = () => {
             <FaBox />
           </div>
           <div>
-            <div className="text-sm ">Total Orders</div>
-            <div className="text-2xl font-bold">12</div>
+            <div className="text-sm">Total Orders</div>
+            <div className="text-2xl font-bold">{totalOrders}</div>
           </div>
         </div>
 
@@ -147,7 +113,7 @@ const UserDashboard = () => {
           </div>
           <div>
             <div className="text-sm">Delivered</div>
-            <div className="text-2xl font-bold ">8</div>
+            <div className="text-2xl font-bold">{deliveredOrders}</div>
           </div>
         </div>
 
@@ -156,8 +122,8 @@ const UserDashboard = () => {
             <FaClock />
           </div>
           <div>
-            <div className="text-sm ">Pending</div>
-            <div className="text-2xl font-bold">2</div>
+            <div className="text-sm">Pending</div>
+            <div className="text-2xl font-bold">{pendingOrders}</div>
           </div>
         </div>
 
@@ -166,136 +132,100 @@ const UserDashboard = () => {
             <FaTimesCircle />
           </div>
           <div>
-            <div className="text-sm ">Cancelled</div>
-            <div className="text-2xl font-bold">1</div>
+            <div className="text-sm">Cancelled</div>
+            <div className="text-2xl font-bold">{cancelledOrders}</div>
           </div>
         </div>
       </div>
 
-      {/* Recent orders & notifications */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Recent 5 Orders */}
+      {/* Recent Orders */}
+      <div className="">
         <div className="rounded-lg shadow p-4 bg-indigo-100">
           <div className="flex items-center justify-between mb-3">
-            <h3 className="text-lg font-semibold text-gray-800">
-              Recent Orders
-            </h3>
-            <span className="text-sm text-gray-500">Last 5</span>
+            <h3 className="text-lg font-semibold text-gray-800">My Orders</h3>
           </div>
 
           <div className="overflow-x-auto">
             <table className="min-w-full text-left">
               <thead className="text-xs text-gray-500 uppercase">
                 <tr>
-                  <th className="py-2 px-3">Order ID</th>
+                  <th className="py-2 px-3">Tracking ID</th>
                   <th className="py-2 px-3">Items</th>
                   <th className="py-2 px-3">Amount</th>
                   <th className="py-2 px-3">Status</th>
                   <th className="py-2 px-3">Date</th>
+                  <th className="py-2 px-3">Actions</th>
                 </tr>
               </thead>
               <tbody>
-                {recentOrders.length === 0 ? (
+                {orders.length === 0 ? (
                   <tr>
-                    <td
-                      colSpan="5"
-                      className="py-4 px-3 text-center text-gray-500"
-                    >
+                    <td className="py-4 px-3 text-center text-gray-500">
                       No recent orders
                     </td>
                   </tr>
                 ) : (
-                  recentOrders.map((order) => (
-                    <tr
-                      key={order._id}
-                      className="border-b last:border-0 hover:bg-indigo-200"
-                    >
-                      <td className="py-3 px-3 font-mono text-sm">
-                        {order.trackingId || order._id}
-                      </td>
-                      <td className="py-3 px-3 text-sm">
-                        {Array.isArray(order.items) ? (
-                          order.items.slice(0, 2).map((it, idx) => (
-                            <div key={idx} className="text-gray-700">
-                              {it.name || it}
-                            </div>
-                          ))
-                        ) : (
-                          <div className="text-gray-700">—</div>
-                        )}
-                      </td>
-                      <td className="py-3 px-3 text-sm">
-                        ৳{order.totalAmount || "0"}
-                      </td>
-                      <td className="py-3 px-3 text-sm">
-                        <span
-                          className={`px-2 py-1 rounded text-xs font-semibold ${
-                            order.status === "Delivered"
-                              ? "bg-green-100 text-green-700"
-                              : order.status === "Pending"
-                              ? "bg-yellow-100 text-yellow-700"
-                              : order.status === "Cancelled"
-                              ? "bg-red-100 text-red-700"
-                              : "bg-gray-100 text-gray-700"
-                          }`}
-                        >
-                          {order.status}
-                        </span>
-                      </td>
-                      <td className="py-3 px-3 text-sm text-gray-500">
-                        {order.createdAt
-                          ? new Date(order.createdAt).toLocaleString()
-                          : "-"}
-                      </td>
-                    </tr>
-                  ))
+                  orders.map((order) => {
+                    const grandTotal = order.items.reduce(
+                      (sum, item) =>
+                        sum + (item.total || item.price * (item.quantity || 1)),
+                      0
+                    );
+                    return (
+                      <tr
+                        key={order._id}
+                        className="border-b last:border-0 hover:bg-indigo-200"
+                      >
+                        <td className="py-3 px-3 font-mono text-sm">
+                          {order.trackingId}
+                        </td>
+                        <td className="py-3 px-3 text-sm">
+                          {Array.isArray(order.items) ? (
+                            order.items.slice(0, 2).map((it, idx) => (
+                              <div key={idx} className="text-gray-700">
+                                {it.name || it}
+                              </div>
+                            ))
+                          ) : (
+                            <div className="text-gray-700">—</div>
+                          )}
+                        </td>
+                        <td className="py-3 px-3 text-sm">৳{grandTotal}</td>
+                        <td className="py-3 px-3 text-sm">
+                          <span
+                            className={`px-2 py-1 rounded text-xs font-semibold ${
+                              order.orderStatus === "Delivered"
+                                ? "bg-green-100 text-green-700"
+                                : order.orderStatus === "Pending"
+                                ? "bg-yellow-100 text-yellow-700"
+                                : order.orderStatus === "Cancelled"
+                                ? "bg-red-100 text-red-700"
+                                : "bg-gray-100 text-gray-700"
+                            }`}
+                          >
+                            {order.orderStatus}
+                          </span>
+                        </td>
+                        <td className="py-3 px-3 text-sm text-gray-500">
+                          {order.date
+                            ? new Date(order.date).toLocaleString()
+                            : "-"}
+                        </td>
+                        <td>
+                          <button
+                            onClick={() => handleOrderCancel(order._id)}
+                            className="btn btn-sm bg-red-500 text-white"
+                          >
+                            <FaTimesCircle />
+                            Cancel
+                          </button>
+                        </td>
+                      </tr>
+                    );
+                  })
                 )}
               </tbody>
             </table>
-          </div>
-        </div>
-
-        {/* Recent Notifications */}
-        <div className="bg-indigo-100 rounded-lg shadow p-4">
-          <div className="flex items-center justify-between mb-3">
-            <h3 className="text-lg font-semibold text-gray-800">
-              Recent Notifications
-            </h3>
-            <span className="text-sm text-gray-500">
-              <FaBell />
-            </span>
-          </div>
-
-          <div className="space-y-3">
-            {recentNotifications.length === 0 ? (
-              <div className="text-gray-500">No notifications yet</div>
-            ) : (
-              recentNotifications.map((n) => (
-                <div
-                  key={n._id}
-                  className="flex gap-3 items-start border-b pb-3"
-                >
-                  <div className="w-10 h-10 rounded-md bg-indigo-50 text-indigo-600 flex items-center justify-center">
-                    <FaUser />
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex items-center justify-between">
-                      <div className="font-medium text-gray-800">
-                        {n.title || "Notification"}
-                      </div>
-                      <div className="text-xs text-gray-400">
-                        {n.createdAt
-                          ? new Date(n.createdAt).toLocaleString()
-                          : ""}
-                      </div>
-                    </div>
-                    <div className="text-sm text-gray-600 mt-1">
-                      {n.message}
-                    </div>
-                  </div>
-                </div>
-              ))
-            )}
           </div>
         </div>
       </div>

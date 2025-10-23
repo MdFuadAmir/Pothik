@@ -1,12 +1,13 @@
 import Swal from "sweetalert2";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import Loading from "../../Shared/Loading/Loading";
 
 const CashOnPayment = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
+  const queryClient = useQueryClient();
   const { data: cartItems = [], isLoading } = useQuery({
     queryKey: ["cart", user?.email],
     enabled: !!user?.email,
@@ -23,7 +24,32 @@ const CashOnPayment = () => {
       return res.data;
     },
   });
+
+  const generateTrackingId = (email) => {
+    if (!email) {
+      const prefix = "TRK";
+      const randomNum = Math.floor(100000 + Math.random() * 900000);
+      return `${prefix}-${randomNum}`;
+    }
+
+    const prefix = "TRK";
+    const userCode = email.split("@")[0].slice(0, 3).toUpperCase();
+    const timestamp = Date.now().toString().slice(-5);
+    const randomNum = Math.floor(Math.random() * 100);
+    return `${prefix}-${userCode}-${timestamp}${randomNum}`;
+  };
+  const trackingId = generateTrackingId(user?.email);
+
   const defaultAddress = address.find((addr) => addr.isDefault === true);
+  const subtotal = cartItems.reduce(
+    (sum, item) => sum + item.discountPrice * (item.quantity || 1),
+    0
+  );
+  const totalDeliveryCharge = cartItems.reduce(
+    (sum, item) => sum + (parseFloat(item.deliveryCharge) || 0),
+    0
+  );
+  const grandTotal = subtotal + totalDeliveryCharge;
   const handleConfirm = async () => {
     if (!address || !cartItems?.length) {
       Swal.fire("Error", "Missing address or cart items", "error");
@@ -36,6 +62,8 @@ const CashOnPayment = () => {
       paymentMethod: "Cash on Delivery",
       orderStatus: "Pending",
       date: new Date(),
+      orderConfirmMsg: `You have a new order from ${user.displayName}`,
+      orderCancelMsg: `${user.displayName} canceled the order.`,
       items: cartItems.map((item) => ({
         productId: item._id,
         name: item.name,
@@ -46,6 +74,10 @@ const CashOnPayment = () => {
         deliveryCharge: item.deliveryCharge,
         total: item.discountPrice * (item.quantity || 1),
       })),
+      subtotal,
+      totalDeliveryCharge,
+      grandTotal,
+      trackingId,
     };
 
     try {
@@ -57,13 +89,8 @@ const CashOnPayment = () => {
           "success"
         );
         await axiosSecure.delete(`/carts/clear/${user.email}`);
-        if (res.data.deletedCount > 0) {
-          Swal.fire(
-            "✅ Cart Cleared!",
-            "All items removed from cart.",
-            "success"
-          );
-        }
+        queryClient.invalidateQueries(["cart", user.email]);
+        queryClient.invalidateQueries(["orders", user.email]);
       }
     } catch (error) {
       console.error(error);
