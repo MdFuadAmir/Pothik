@@ -2,14 +2,14 @@ import Pothik from "../../Shared/Pothik/Pothik";
 
 const Footer = () => {
   return (
-    <div>
-      <footer className="footer sm:footer-horizontal text-white bg-indigo-950 p-10">
+    <div className="bg-linear-to-b from-indigo-950 via-violet-900 to-indigo-950">
+      <footer className="footer sm:footer-horizontal text-white md:px-10 lg:px-20 py-8">
         <aside>
          <Pothik></Pothik>
           <p>
             Pothik Industries Ltd.
             <br />
-            Providing reliable tech since 2020
+            Providing reliable tech since 2025
           </p>
         </aside>
         <nav>
@@ -33,7 +33,7 @@ const Footer = () => {
           <a className="link link-hover">Cookie policy</a>
         </nav>
       </footer>
-      <div className="footer sm:footer-horizontal footer-center p-4 text-white bg-indigo-950">
+      <div className="footer sm:footer-horizontal footer-center p-4 text-white">
         <aside>
           <p>
             Copyright © {new Date().getFullYear()} - All right reserved by

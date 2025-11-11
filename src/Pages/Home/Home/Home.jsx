@@ -1,5 +1,4 @@
 import Banner from "../Banner/Banner";
-import BestDeals from "../BestDeals/BestDeals";
 import Categories from "../Categories/Categories";
 import HowItWork from "../HowItWork/HowItWork";
 import JoinUs from "../JoinUs/JoinUs";
@@ -12,7 +11,6 @@ const Home = () => {
     return (
         <div>
              <Banner></Banner>
-             <BestDeals></BestDeals>
              <Categories></Categories>
              <WhyChooseUs></WhyChooseUs>
              <HowItWork></HowItWork>

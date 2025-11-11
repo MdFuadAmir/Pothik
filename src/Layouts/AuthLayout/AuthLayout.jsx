@@ -3,9 +3,11 @@ import Pothik from "../../Shared/Pothik/Pothik";
 
 const AuthLayout = () => {
     return (
-        <div className="max-w-7xl mx-auto bg-blue-950 h-full p-4">
-            <Pothik></Pothik>
-            <Outlet></Outlet>
+         <div className="h-full p-4 bg-linear-to-br from-indigo-950 via-violet-800 to-indigo-950 max-w-[2520px] mx-auto px-4 md:px-10 lg:px-20">
+            <div className="w-fit bg-indigo-300 rounded">
+            <Pothik/>
+            </div>
+            <Outlet/>
         </div>
     );
 };

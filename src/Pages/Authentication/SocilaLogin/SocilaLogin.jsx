@@ -1,14 +1,15 @@
 import { FaFacebook, FaGithub, FaGoogle } from "react-icons/fa";
 import useAuth from "../../../Hooks/useAuth";
-import {  useNavigate } from "react-router";
+import {  useLocation, useNavigate } from "react-router";
 import useAxios from "../../../Hooks/useAxios";
 
 
 const SocilaLogin = () => {
     const {loginWithGoogle} = useAuth();
-    const navigate = useNavigate();
-    const from = location?.state?.from || '/';
     const axiosInstance = useAxios();
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location?.state?.from || '/';
 
     const haldleGoogleSignIn = () =>{
         loginWithGoogle()
@@ -16,8 +17,9 @@ const SocilaLogin = () => {
           const user = result.user;
           // update user profile info in database
         const userInfo = {
-          email: user.email,
+          email: user?.email,
           role: "user", //default role
+          status: "verified",
           created_at: new Date().toISOString(),
           last_log_in: new Date().toISOString(),
         };
@@ -31,9 +33,9 @@ const SocilaLogin = () => {
     }
     return (
         <div className=" space-y-3">
-            <button onClick={haldleGoogleSignIn} className="btn rounded-full w-full flex justify-center"><FaGoogle size={20}/> Login With Google</button>
-            <button className="btn rounded-full w-full flex justify-center"><FaGithub size={20}/> Login With Github</button>
-            <button className="btn rounded-full w-full flex justify-center"><FaFacebook size={20}/> Login With Facebook</button>
+            <button onClick={haldleGoogleSignIn} className="btn rounded w-full flex justify-center"><FaGoogle size={20}/> Login With Google</button>
+            <button className="btn rounded w-full flex justify-center"><FaGithub size={20}/> Login With Github</button>
+            <button className="btn rounded w-full flex justify-center"><FaFacebook size={20}/> Login With Facebook</button>
         </div>
     );
 };

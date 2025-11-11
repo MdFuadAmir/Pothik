@@ -1,43 +1,53 @@
+import { FaShippingFast, FaShoppingCart, FaLock, FaHeadset } from "react-icons/fa";
 import SectionTitle from "../../../Shared/Sectiontitle/SectionTitle";
+
+// 🔹 JSON data (array of objects)
+const serviceData = [
+  {
+    id: 1,
+    icon: <FaShippingFast className="text-5xl text-yellow-400 mb-4" />,
+    title: "Fast Delivery",
+    description: "Quick and reliable parcel delivery services.",
+  },
+  {
+    id: 2,
+    icon: <FaShoppingCart className="text-5xl text-pink-400 mb-4" />,
+    title: "Easy Shopping",
+    description: "Shop conveniently with a smooth experience.",
+  },
+  {
+    id: 3,
+    icon: <FaLock className="text-5xl text-green-400 mb-4" />,
+    title: "Secure Payment",
+    description: "Safe and encrypted payment methods.",
+  },
+  {
+    id: 4,
+    icon: <FaHeadset className="text-5xl text-blue-400 mb-4" />,
+    title: "24/7 Support",
+    description: "Always here to help you anytime, anywhere.",
+  },
+];
 
 const WhyChooseUs = () => {
   return (
-    <section class="py-8">
-      <div class="max-w-7xl mx-auto px-4 text-center">
-        <SectionTitle sectionTitle={'Why Choose Us'} sectionSubTitle={'Our services are designed to provide the best experience for you.'}></SectionTitle>
-
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div class="flex flex-col items-center p-4 bg-indigo-950 rounded-lg shadow hover:shadow-lg transition">
-            <span class="text-4xl">🚚</span>
-            <h3 class="text-xl font-semibold mt-4 text-white">Fast Delivery</h3>
-            <p class="text-gray-500 mt-2 text-sm">
-              Quick and reliable parcel delivery services.
-            </p>
-          </div>
-
-          <div class="flex flex-col items-center p-4 bg-indigo-950  rounded-lg shadow hover:shadow-lg transition">
-            <span class="text-4xl">🛒</span>
-            <h3 class="text-xl font-semibold mt-4 text-white">Easy Shopping</h3>
-            <p class="text-gray-500 mt-2 text-sm">
-              Shop conveniently with a smooth experience.
-            </p>
-          </div>
-
-          <div class="flex flex-col items-center p-4 bg-indigo-950 rounded-lg shadow hover:shadow-lg transition">
-            <span class="text-4xl">🔒</span>
-            <h3 class="text-xl font-semibold mt-4 text-white">Secure Payment</h3>
-            <p class="text-gray-500 mt-2 text-sm">
-              Safe and encrypted payment methods.
-            </p>
-          </div>
-
-          <div class="flex flex-col items-center p-4 bg-indigo-950 rounded-lg shadow hover:shadow-lg transition">
-            <span class="text-4xl">💬</span>
-            <h3 class="text-xl font-semibold mt-4 text-white">24/7 Support</h3>
-            <p class="text-gray-500 mt-2 text-sm">
-              Always here to help you anytime, anywhere.
-            </p>
-          </div>
+    <section className="py-12">
+      <div className="max-w-7xl mx-auto px-4 text-center">
+        <SectionTitle
+          sectionTitle="Why Choose Us"
+          sectionSubTitle="Our services are designed to provide the best experience for you."
+        />
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mt-10">
+          {serviceData.map((item) => (
+            <div
+              key={item.id}
+              className="flex flex-col items-center p-6 rounded-2xl shadow-lg hover:scale-105 hover:shadow-indigo-500/30 transition-all duration-300 bg-linear-to-br from-gray-200  to-gray-100"
+            >
+              {item.icon}
+              <h3 className="text-xl font-semibold">{item.title}</h3>
+              <p className=" mt-2 text-sm">{item.description}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -45,15 +55,3 @@ const WhyChooseUs = () => {
 };
 
 export default WhyChooseUs;
-
-// 3. Why Choose Us / Service Highlights
-
-// আইকন + ছোট টেক্সট আকারে ৩–৪টা সুবিধা দেখাও।
-
-// 🚚 Fast Delivery
-
-// 🛒 Easy Shopping
-
-// 🔒 Secure Payment
-
-// 💬 24/7 Support

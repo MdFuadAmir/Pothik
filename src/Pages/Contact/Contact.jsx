@@ -23,7 +23,7 @@ const Contact = () => {
   };
 
   return (
-    <div className="bg-indigo-200 p-4">
+    <div className="p-4">
       <div className="max-w-5xl mx-auto">
         <SectionTitle
           sectionTitle={"Contact Us"}
@@ -36,15 +36,15 @@ const Contact = () => {
           <div className="space-y-6">
             <div className="flex items-center gap-4">
               <FiMapPin className="text-indigo-600 text-2xl" />
-              <p>123 Main Street, Dhaka, Bangladesh</p>
+              <p>Kataikhana mor, Kushtia, Bangladesh</p>
             </div>
             <div className="flex items-center gap-4">
               <FiPhone className="text-indigo-600 text-2xl" />
-              <p>+880 1234 567890</p>
+              <p>+880 1705470131</p>
             </div>
             <div className="flex items-center gap-4">
               <FiMail className="text-indigo-600 text-2xl" />
-              <p>support@shopparcel.com</p>
+              <p>mdfuadamir@gmail.com</p>
             </div>
           </div>
 

@@ -3,7 +3,6 @@ import useAuth from "../Hooks/useAuth";
 import useUserRole from "../Hooks/useUserRole";
 import Loading from "../Shared/Loading/Loading";
 
-
 const RiderRoutes = ({children}) => {
     const {user,loading} = useAuth();
     const {role,roleLoading} = useUserRole();

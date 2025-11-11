@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import SocilaLogin from "../SocilaLogin/SocilaLogin";
 import { IoIosCloudUpload } from "react-icons/io";
 import axios from "axios";
@@ -7,6 +7,7 @@ import { useState } from "react";
 import useAuth from "../../../Hooks/useAuth";
 import useAxios from "../../../Hooks/useAxios";
 import Swal from "sweetalert2";
+import toast from "react-hot-toast";
 
 const SignUp = () => {
   const {
@@ -15,14 +16,16 @@ const SignUp = () => {
     formState: { errors },
   } = useForm();
   const { creatUser, updateUserProfile } = useAuth();
+  const location = useLocation();
   const navigate = useNavigate();
   const from = location?.state?.from || "/";
   const axiosInstance = useAxios();
-  const [upLoading, setUploading] = useState(false);
   const [profileImage, setProfileImage] = useState();
+  const [upLoading, setUploading] = useState(false);
 
   const handleImageUploade = async (e) => {
     const image = e.target.files[0];
+    if (!image) return;
     setUploading(true);
     const formData = new FormData();
     formData.append("image", image);
@@ -38,33 +41,19 @@ const SignUp = () => {
     creatUser(data.email, data.password)
       .then(async (result) => {
         const user = result.user;
-        console.log(user);
         // update user info in database
         const userInfo = {
           email: user.email,
           role: "user", //default role
+          status: "verified",
           created_at: new Date().toISOString(),
           last_log_in: new Date().toISOString(),
         };
         const userRes = await axiosInstance.post("/users", userInfo);
         if (userRes.data.success && userRes.data.insertedId) {
-          console.log("New user added to database");
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Your Account Created Successfully",
-            showConfirmButton: false,
-            timer: 1500,
-          });
+          toast.success('Your Account has been created')
         } else {
-          console.log("User already exists");
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "User already exists",
-            showConfirmButton: false,
-            timer: 1500,
-          });
+          toast.success('User already exists')
         }
         // update user profile in firebase
         const userProfile = {
@@ -73,21 +62,20 @@ const SignUp = () => {
         };
         updateUserProfile(userProfile)
           .then(() => {
-            console.log("Profile name and image updated");
             navigate(from);
           })
           .catch((error) => {
-            console.log(error);
+            toast.error(error.message);
           });
       })
       .catch((error) => {
-        console.log(error);
+        toast.error(error.message);
       });
   };
 
   return (
     <div className="w-full my-12">
-      <div className="max-w-lg mx-auto shadow-lg shadow-black p-4 rounded-xl">
+      <div className="max-w-lg mx-auto shadow-lg shadow-black px-8 py-12 rounded-xl">
         <form onSubmit={handleSubmit(onSubmit)}>
           <fieldset className="fieldset">
             <h1 className="text-white text-center font-bold font-serif mb-6 text-2xl">
@@ -131,7 +119,7 @@ const SignUp = () => {
                 placeholder="Name"
               />
               {errors.name?.type === "required" && (
-                <span className="text-red-500">This field is required</span>
+                <span className="text-red-500">This Field is Required</span>
               )}
             </div>
             {/* email */}
@@ -144,7 +132,7 @@ const SignUp = () => {
                 placeholder="Email"
               />
               {errors.email?.type === "required" && (
-                <span className="text-red-500">This field is required</span>
+                <span className="text-red-500">This Field is Required</span>
               )}
             </div>
             {/* password */}
@@ -157,11 +145,11 @@ const SignUp = () => {
                 placeholder="Password"
               />
               {errors.password?.type === "required" && (
-                <span className="text-red-500">This field is required</span>
+                <span className="text-red-500">This Field is Required</span>
               )}
               {errors.password?.type === "minLength" && (
                 <span className="text-red-500">
-                  Password must be 6 charecters
+                  {errors.message}
                 </span>
               )}
             </div>
@@ -175,7 +163,7 @@ const SignUp = () => {
                 Sign Up
               </button>
             ) : (
-              <button className="border-none btn bg-indigo-900 text-white mt-4">
+              <button className="border-none btn bg-violet-600 text-white mt-4">
                 Sign Up
               </button>
             )}
@@ -198,10 +186,3 @@ const SignUp = () => {
 };
 
 export default SignUp;
-// Swal.fire({
-//   position: "top-end",
-//   icon: "success",
-//   title: "Your work has been saved",
-//   showConfirmButton: false,
-//   timer: 1500
-// });

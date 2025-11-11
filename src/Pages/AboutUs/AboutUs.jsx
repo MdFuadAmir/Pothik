@@ -8,7 +8,7 @@ import SectionTitle from "../../Shared/Sectiontitle/SectionTitle";
 
 const AboutUs = () => {
   return (
-    <div className="p-4 bg-indigo-200">
+    <div className="p-4">
       <div className="text-center">
         {/* Hero Section */}
         <SectionTitle sectionTitle={'About Shop & Parcel'} sectionSubTitle={`Your one-stop solution for seamless. online shopping and reliable

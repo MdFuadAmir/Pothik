@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import SocilaLogin from "../SocilaLogin/SocilaLogin";
 import { Link, useLocation, useNavigate } from "react-router";
 import useAuth from "../../../Hooks/useAuth";
+import toast from "react-hot-toast";
 
 
 const Login = () => {
@@ -12,23 +13,23 @@ const Login = () => {
   } = useForm();
   const {signIn} = useAuth();
   const location = useLocation();
-  const navigate = useNavigate();
   const from =  location?.state?.from || "/";
+  const navigate = useNavigate();
   
   const onSubmit = (data) =>{
     signIn(data.email,data.password)
-    .then(result =>{
-      console.log(result.user);
+    .then(() =>{
+      toast.success("Login Successfull")
       navigate(from);
     })
     .catch(error=>{
-      console.log(error);
+      toast.error(error.message);
     })
 
   }
   return (
    <div className="w-full my-12">
-     <div className="max-w-lg mx-auto shadow-lg shadow-black p-4 rounded-xl">
+     <div className="max-w-lg mx-auto shadow-lg shadow-black px-8 py-12 rounded-xl bg-transparent">
       <form onSubmit={handleSubmit(onSubmit)}>
         <fieldset className="fieldset">
         <h1 className="text-white text-center font-bold font-serif mb-6 text-2xl">
@@ -53,12 +54,12 @@ const Login = () => {
               className="input w-full"
               placeholder="Password"
             />
-            {errors.password?.type === 'required' && <span className="text-red-500">This field is required</span>}
-            {errors.password?.type === 'minLength' && <span className="text-red-500">Password must be 6 charecters</span>}
+            {errors.password?.type === 'required' && <span className="text-red-500">{errors.message}</span>}
+            {errors.password?.type === 'minLength' && <span className="text-red-500">{errors.message}</span>}
           </div>
           
           {/* submit button */}
-          <button className="border-none btn bg-indigo-900 text-white mt-4">Login</button>
+          <button className="border-none btn bg-violet-600 text-white mt-4">Login</button>
           {/* troggl to sign up page */}
           <p className="text-amber-400 mt-4 text-center">
             New Hare ?{" "}
