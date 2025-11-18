@@ -1,0 +1,1427 @@
+[
+  {
+    "id": "1",
+    "title": "Apex Running Shoes X1",
+    "price": 79,
+    "offerPrice": 69,
+    "brand": "Apex",
+    "category": "Shoes",
+    "description": "Lightweight running shoes for daily use.",
+    "stock": 120,
+    "rating": 4.4,
+    "tags": ["running","shoes"],
+    "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+  },
+  {
+    "id": "2",
+    "title": "Sony WH-1000XM4 Headphones",
+    "price": 349,
+    "offerPrice": 299,
+    "brand": "Sony",
+    "category": "Electronics",
+    "description": "Noise-cancelling premium wireless headphones.",
+    "stock": 80,
+    "rating": 4.8,
+    "tags": ["headphone","audio"],
+    "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+  },
+  {
+    "id": "3",
+    "title": "Apple iPhone 14 Pro",
+    "price": 1299,
+    "offerPrice": 1199,
+    "brand": "Apple",
+    "category": "Mobiles",
+    "description": "Flagship smartphone with advanced camera system.",
+    "stock": 65,
+    "rating": 4.9,
+    "tags": ["iphone","mobile"],
+    "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+  },
+  {
+    "id": "4",
+    "title": "Samsung 55-inch 4K Smart TV",
+    "price": 699,
+    "offerPrice": 599,
+    "brand": "Samsung",
+    "category": "Electronics",
+    "description": "Smart 4K UHD television with HDR support.",
+    "stock": 90,
+    "rating": 4.6,
+    "tags": ["tv","electronics"],
+    "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+  },
+  {
+    "id": "5",
+    "title": "DenimCo Jeans Fit 501",
+    "price": 55,
+    "offerPrice": 49,
+    "brand": "DenimCo",
+    "category": "Clothing",
+    "description": "Regular fit denim jeans.",
+    "stock": 140,
+    "rating": 4.5,
+    "tags": ["jeans","clothing"],
+    "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+  },
+{
+  "id": "6",
+  "title": "Nike AirMax 2023",
+  "price": 149,
+  "offerPrice": 129,
+  "brand": "Nike",
+  "category": "Shoes",
+  "description": "Comfortable AirMax running sneakers.",
+  "stock": 110,
+  "rating": 4.7,
+  "tags": ["sneakers","running"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "7",
+  "title": "HP Pavilion 15 Laptop",
+  "price": 899,
+  "offerPrice": 829,
+  "brand": "HP",
+  "category": "Computers",
+  "description": "Powerful laptop for work and gaming.",
+  "stock": 45,
+  "rating": 4.4,
+  "tags": ["laptop","hp"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "8",
+  "title": "Logitech MX Master 3",
+  "price": 119,
+  "offerPrice": 99,
+  "brand": "Logitech",
+  "category": "Accessories",
+  "description": "Advanced ergonomic wireless mouse.",
+  "stock": 70,
+  "rating": 4.8,
+  "tags": ["mouse","accessory"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "9",
+  "title": "Canon EOS 250D Camera",
+  "price": 699,
+  "offerPrice": 640,
+  "brand": "Canon",
+  "category": "Electronics",
+  "description": "Beginner-friendly DSLR camera.",
+  "stock": 55,
+  "rating": 4.6,
+  "tags": ["camera","dslr"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "10",
+  "title": "Adidas Sports T-Shirt",
+  "price": 35,
+  "offerPrice": 29,
+  "brand": "Adidas",
+  "category": "Clothing",
+  "description": "Breathable cotton sports t-shirt.",
+  "stock": 160,
+  "rating": 4.3,
+  "tags": ["tshirt","sports"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "11",
+  "title": "Dell Ultrasharp 27 Monitor",
+  "price": 499,
+  "offerPrice": 455,
+  "brand": "Dell",
+  "category": "Electronics",
+  "description": "Professional-grade 27-inch IPS display.",
+  "stock": 35,
+  "rating": 4.7,
+  "tags": ["monitor","dell"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "12",
+  "title": "Puma Running Shorts",
+  "price": 28,
+  "offerPrice": 22,
+  "brand": "Puma",
+  "category": "Clothing",
+  "description": "Lightweight breathable fabric shorts.",
+  "stock": 150,
+  "rating": 4.4,
+  "tags": ["shorts","sportswear"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "13",
+  "title": "Samsung Galaxy Watch 5",
+  "price": 299,
+  "offerPrice": 259,
+  "brand": "Samsung",
+  "category": "Wearables",
+  "description": "Advanced fitness tracking smartwatch.",
+  "stock": 90,
+  "rating": 4.7,
+  "tags": ["smartwatch","wearable"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "14",
+  "title": "Xiaomi Air Purifier 4",
+  "price": 159,
+  "offerPrice": 139,
+  "brand": "Xiaomi",
+  "category": "Home Appliances",
+  "description": "High-efficiency air purifier with HEPA filter.",
+  "stock": 75,
+  "rating": 4.5,
+  "tags": ["air purifier","home"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "15",
+  "title": "Philips Blender Pro 750W",
+  "price": 85,
+  "offerPrice": 69,
+  "brand": "Philips",
+  "category": "Kitchen",
+  "description": "High power blender with stainless steel blades.",
+  "stock": 95,
+  "rating": 4.6,
+  "tags": ["blender","kitchen"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "16",
+  "title": "Lenovo ThinkPad X1 Carbon",
+  "price": 1499,
+  "offerPrice": 1399,
+  "brand": "Lenovo",
+  "category": "Computers",
+  "description": "Premium ultrabook for professionals.",
+  "stock": 30,
+  "rating": 4.8,
+  "tags": ["laptop","thinkpad"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "17",
+  "title": "Under Armour Hoodie",
+  "price": 60,
+  "offerPrice": 52,
+  "brand": "Under Armour",
+  "category": "Clothing",
+  "description": "Warm fleece performance hoodie.",
+  "stock": 120,
+  "rating": 4.5,
+  "tags": ["hoodie","menswear"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "18",
+  "title": "Sony PlayStation 5",
+  "price": 599,
+  "offerPrice": 549,
+  "brand": "Sony",
+  "category": "Gaming",
+  "description": "Next-gen gaming console.",
+  "stock": 50,
+  "rating": 4.9,
+  "tags": ["ps5","gaming"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "19",
+  "title": "JBL Flip 6 Speaker",
+  "price": 129,
+  "offerPrice": 115,
+  "brand": "JBL",
+  "category": "Audio",
+  "description": "Portable waterproof Bluetooth speaker.",
+  "stock": 140,
+  "rating": 4.7,
+  "tags": ["speaker","bluetooth"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "20",
+  "title": "Casio Digital Watch",
+  "price": 49,
+  "offerPrice": 39,
+  "brand": "Casio",
+  "category": "Accessories",
+  "description": "Classic waterproof digital wristwatch.",
+  "stock": 200,
+  "rating": 4.5,
+  "tags": ["watch","digital"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "21",
+  "title": "Acer Predator Gaming Chair",
+  "price": 249,
+  "offerPrice": 219,
+  "brand": "Acer",
+  "category": "Furniture",
+  "description": "Ergonomic gaming chair with adjustable arms.",
+  "stock": 80,
+  "rating": 4.6,
+  "tags": ["chair","gaming"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "22",
+  "title": "Fossil Leather Wallet",
+  "price": 65,
+  "offerPrice": 55,
+  "brand": "Fossil",
+  "category": "Accessories",
+  "description": "Premium quality leather men's wallet.",
+  "stock": 140,
+  "rating": 4.4,
+  "tags": ["wallet","leather"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "23",
+  "title": "Anker PowerBank 20,000mAh",
+  "price": 49,
+  "offerPrice": 39,
+  "brand": "Anker",
+  "category": "Accessories",
+  "description": "Fast charging portable powerbank.",
+  "stock": 180,
+  "rating": 4.8,
+  "tags": ["powerbank","charging"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "24",
+  "title": "New Balance 574 Sneakers",
+  "price": 89,
+  "offerPrice": 79,
+  "brand": "New Balance",
+  "category": "Shoes",
+  "description": "Classic lifestyle sneakers.",
+  "stock": 130,
+  "rating": 4.6,
+  "tags": ["sneakers","casual"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "25",
+  "title": "ASUS ROG Strix GPU",
+  "price": 699,
+  "offerPrice": 649,
+  "brand": "ASUS",
+  "category": "Computers",
+  "description": "High performance gaming graphics card.",
+  "stock": 40,
+  "rating": 4.9,
+  "tags": ["gpu","gaming"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "26",
+  "title": "KitchenPro Nonstick Pan",
+  "price": 35,
+  "offerPrice": 29,
+  "brand": "KitchenPro",
+  "category": "Kitchen",
+  "description": "Durable nonstick frying pan.",
+  "stock": 160,
+  "rating": 4.5,
+  "tags": ["pan","kitchen"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "27",
+  "title": "IKEA Study Desk",
+  "price": 129,
+  "offerPrice": 115,
+  "brand": "IKEA",
+  "category": "Furniture",
+  "description": "Minimal wooden study desk.",
+  "stock": 50,
+  "rating": 4.6,
+  "tags": ["desk","table"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "28",
+  "title": "RayBan Aviator Sunglasses",
+  "price": 159,
+  "offerPrice": 139,
+  "brand": "RayBan",
+  "category": "Accessories",
+  "description": "Premium UV-protected aviator sunglasses.",
+  "stock": 70,
+  "rating": 4.7,
+  "tags": ["sunglasses","aviator"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "29",
+  "title": "Tefal Electric Kettle",
+  "price": 45,
+  "offerPrice": 39,
+  "brand": "Tefal",
+  "category": "Home Appliances",
+  "description": "Auto shutoff stainless steel electric kettle.",
+  "stock": 140,
+  "rating": 4.4,
+  "tags": ["kettle","electric"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "30",
+  "title": "Beats Studio3 Wireless",
+  "price": 349,
+  "offerPrice": 299,
+  "brand": "Beats",
+  "category": "Audio",
+  "description": "Premium noise-cancelling wireless headphones.",
+  "stock": 60,
+  "rating": 4.7,
+  "tags": ["headphones","beats"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "31",
+  "title": "Logitech G502 Gaming Mouse",
+  "price": 79,
+  "offerPrice": 69,
+  "brand": "Logitech",
+  "category": "Accessories",
+  "description": "High-precision gaming mouse with customizable buttons.",
+  "stock": 90,
+  "rating": 4.7,
+  "tags": ["mouse","gaming"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "32",
+  "title": "Apple MacBook Air M2",
+  "price": 1199,
+  "offerPrice": 1099,
+  "brand": "Apple",
+  "category": "Computers",
+  "description": "Lightweight ultrabook with M2 chip and long battery life.",
+  "stock": 35,
+  "rating": 4.8,
+  "tags": ["macbook","laptop"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "33",
+  "title": "Adidas Predator Soccer Shoes",
+  "price": 120,
+  "offerPrice": 105,
+  "brand": "Adidas",
+  "category": "Shoes",
+  "description": "High-performance soccer cleats for professionals.",
+  "stock": 75,
+  "rating": 4.6,
+  "tags": ["soccer","shoes"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "34",
+  "title": "Sony Alpha a6400 Camera",
+  "price": 899,
+  "offerPrice": 849,
+  "brand": "Sony",
+  "category": "Electronics",
+  "description": "Compact mirrorless camera with fast autofocus.",
+  "stock": 40,
+  "rating": 4.7,
+  "tags": ["camera","mirrorless"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "35",
+  "title": "Under Armour Running Shorts",
+  "price": 30,
+  "offerPrice": 25,
+  "brand": "Under Armour",
+  "category": "Clothing",
+  "description": "Lightweight breathable shorts for training.",
+  "stock": 140,
+  "rating": 4.5,
+  "tags": ["shorts","sportswear"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "36",
+  "title": "HP Envy 13 Laptop",
+  "price": 999,
+  "offerPrice": 899,
+  "brand": "HP",
+  "category": "Computers",
+  "description": "Compact ultrabook for work and study.",
+  "stock": 50,
+  "rating": 4.6,
+  "tags": ["laptop","hp"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "37",
+  "title": "Bose QuietComfort 45",
+  "price": 329,
+  "offerPrice": 299,
+  "brand": "Bose",
+  "category": "Audio",
+  "description": "Premium noise-cancelling wireless headphones.",
+  "stock": 60,
+  "rating": 4.8,
+  "tags": ["headphones","bose"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "38",
+  "title": "Nike Sports T-Shirt",
+  "price": 28,
+  "offerPrice": 22,
+  "brand": "Nike",
+  "category": "Clothing",
+  "description": "Breathable cotton t-shirt for workouts.",
+  "stock": 150,
+  "rating": 4.4,
+  "tags": ["tshirt","sportswear"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "39",
+  "title": "Canon PowerShot G7X",
+  "price": 699,
+  "offerPrice": 649,
+  "brand": "Canon",
+  "category": "Electronics",
+  "description": "Compact camera for travel and vlogging.",
+  "stock": 50,
+  "rating": 4.6,
+  "tags": ["camera","canon"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "40",
+  "title": "Samsung Galaxy Buds 2",
+  "price": 149,
+  "offerPrice": 129,
+  "brand": "Samsung",
+  "category": "Audio",
+  "description": "True wireless earbuds with ANC.",
+  "stock": 90,
+  "rating": 4.5,
+  "tags": ["earbuds","samsung"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "41",
+  "title": "Adidas Sports Jacket",
+  "price": 85,
+  "offerPrice": 75,
+  "brand": "Adidas",
+  "category": "Clothing",
+  "description": "Water-resistant sports jacket.",
+  "stock": 120,
+  "rating": 4.6,
+  "tags": ["jacket","sportswear"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "42",
+  "title": "Dell XPS 13 Laptop",
+  "price": 1199,
+  "offerPrice": 1099,
+  "brand": "Dell",
+  "category": "Computers",
+  "description": "Compact ultrabook with high performance.",
+  "stock": 40,
+  "rating": 4.7,
+  "tags": ["laptop","dell"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "43",
+  "title": "Fitbit Charge 5",
+  "price": 149,
+  "offerPrice": 129,
+  "brand": "Fitbit",
+  "category": "Wearables",
+  "description": "Advanced fitness tracker with heart rate monitor.",
+  "stock": 95,
+  "rating": 4.5,
+  "tags": ["fitness","wearable"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "44",
+  "title": "Sony WF-1000XM4",
+  "price": 279,
+  "offerPrice": 249,
+  "brand": "Sony",
+  "category": "Audio",
+  "description": "Wireless noise-cancelling earbuds.",
+  "stock": 80,
+  "rating": 4.8,
+  "tags": ["earbuds","sony"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "45",
+  "title": "ASUS ROG Zephyrus G15",
+  "price": 1599,
+  "offerPrice": 1499,
+  "brand": "ASUS",
+  "category": "Computers",
+  "description": "High-end gaming laptop with RTX graphics.",
+  "stock": 25,
+  "rating": 4.9,
+  "tags": ["laptop","gaming"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "46",
+  "title": "Nike Sports Cap",
+  "price": 25,
+  "offerPrice": 20,
+  "brand": "Nike",
+  "category": "Accessories",
+  "description": "Lightweight breathable sports cap.",
+  "stock": 160,
+  "rating": 4.4,
+  "tags": ["cap","sports"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "47",
+  "title": "Apple AirPods Pro 2",
+  "price": 249,
+  "offerPrice": 219,
+  "brand": "Apple",
+  "category": "Audio",
+  "description": "Noise-cancelling true wireless earbuds.",
+  "stock": 70,
+  "rating": 4.8,
+  "tags": ["airpods","apple"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "48",
+  "title": "Adidas Yoga Pants",
+  "price": 45,
+  "offerPrice": 39,
+  "brand": "Adidas",
+  "category": "Clothing",
+  "description": "Comfortable and stretchy yoga pants.",
+  "stock": 130,
+  "rating": 4.5,
+  "tags": ["pants","yoga"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "49",
+  "title": "Samsung 32-inch Curved Monitor",
+  "price": 299,
+  "offerPrice": 259,
+  "brand": "Samsung",
+  "category": "Electronics",
+  "description": "Curved full HD monitor for gaming and work.",
+  "stock": 60,
+  "rating": 4.6,
+  "tags": ["monitor","samsung"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "50",
+  "title": "GoPro HERO10 Black",
+  "price": 499,
+  "offerPrice": 459,
+  "brand": "GoPro",
+  "category": "Electronics",
+  "description": "Action camera with 5.3K video and stabilization.",
+  "stock": 55,
+  "rating": 4.7,
+  "tags": ["gopro","camera"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "51",
+  "title": "Fitbit Versa 4",
+  "price": 229,
+  "offerPrice": 199,
+  "brand": "Fitbit",
+  "category": "Wearables",
+  "description": "Smartwatch with health tracking features.",
+  "stock": 85,
+  "rating": 4.6,
+  "tags": ["fitbit","wearable"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "52",
+  "title": "Canon EF 50mm f/1.8 Lens",
+  "price": 125,
+  "offerPrice": 109,
+  "brand": "Canon",
+  "category": "Camera Accessories",
+  "description": "Compact prime lens for sharp portraits.",
+  "stock": 60,
+  "rating": 4.7,
+  "tags": ["lens","canon"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "53",
+  "title": "Adidas Football Jersey",
+  "price": 65,
+  "offerPrice": 55,
+  "brand": "Adidas",
+  "category": "Clothing",
+  "description": "Official football jersey made from breathable fabric.",
+  "stock": 90,
+  "rating": 4.5,
+  "tags": ["jersey","football"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "54",
+  "title": "Samsung Galaxy Tab S8",
+  "price": 699,
+  "offerPrice": 649,
+  "brand": "Samsung",
+  "category": "Electronics",
+  "description": "High-end tablet for work and entertainment.",
+  "stock": 45,
+  "rating": 4.6,
+  "tags": ["tablet","samsung"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "55",
+  "title": "Apple Watch Series 8",
+  "price": 399,
+  "offerPrice": 369,
+  "brand": "Apple",
+  "category": "Wearables",
+  "description": "Smartwatch with fitness and health tracking.",
+  "stock": 70,
+  "rating": 4.8,
+  "tags": ["smartwatch","apple"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "56",
+  "title": "GoPro HERO9 Black",
+  "price": 399,
+  "offerPrice": 359,
+  "brand": "GoPro",
+  "category": "Electronics",
+  "description": "Action camera with 5K video and stabilization.",
+  "stock": 50,
+  "rating": 4.7,
+  "tags": ["gopro","camera"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "57",
+  "title": "Nike Air Zoom Pegasus 40",
+  "price": 130,
+  "offerPrice": 115,
+  "brand": "Nike",
+  "category": "Shoes",
+  "description": "Lightweight running shoes for daily training.",
+  "stock": 110,
+  "rating": 4.6,
+  "tags": ["running","shoes"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "58",
+  "title": "Bose SoundLink Revolve+",
+  "price": 249,
+  "offerPrice": 219,
+  "brand": "Bose",
+  "category": "Audio",
+  "description": "Portable Bluetooth speaker with 360° sound.",
+  "stock": 85,
+  "rating": 4.7,
+  "tags": ["speaker","bose"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "59",
+  "title": "Under Armour Training Jacket",
+  "price": 70,
+  "offerPrice": 59,
+  "brand": "Under Armour",
+  "category": "Clothing",
+  "description": "Water-resistant jacket for workouts and outdoor training.",
+  "stock": 120,
+  "rating": 4.5,
+  "tags": ["jacket","sportswear"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "60",
+  "title": "Lenovo Legion 5 Gaming Laptop",
+  "price": 1299,
+  "offerPrice": 1199,
+  "brand": "Lenovo",
+  "category": "Computers",
+  "description": "High-performance gaming laptop with RTX graphics.",
+  "stock": 35,
+  "rating": 4.8,
+  "tags": ["laptop","gaming"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "61",
+  "title": "Samsung Galaxy S23",
+  "price": 999,
+  "offerPrice": 949,
+  "brand": "Samsung",
+  "category": "Mobile",
+  "description": "Latest flagship smartphone with high-end features.",
+  "stock": 55,
+  "rating": 4.8,
+  "tags": ["smartphone","samsung"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "62",
+  "title": "Apple iPhone 14 Pro",
+  "price": 1099,
+  "offerPrice": 1049,
+  "brand": "Apple",
+  "category": "Mobile",
+  "description": "Premium smartphone with advanced camera system.",
+  "stock": 60,
+  "rating": 4.9,
+  "tags": ["iphone","apple"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "63",
+  "title": "Dell Inspiron 16 Laptop",
+  "price": 899,
+  "offerPrice": 849,
+  "brand": "Dell",
+  "category": "Computers",
+  "description": "High-performance laptop for work and study.",
+  "stock": 40,
+  "rating": 4.6,
+  "tags": ["laptop","dell"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "64",
+  "title": "Logitech C920 HD Webcam",
+  "price": 79,
+  "offerPrice": 69,
+  "brand": "Logitech",
+  "category": "Accessories",
+  "description": "Full HD webcam for streaming and meetings.",
+  "stock": 80,
+  "rating": 4.7,
+  "tags": ["webcam","logitech"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "65",
+  "title": "Sony WH-1000XM5",
+  "price": 399,
+  "offerPrice": 369,
+  "brand": "Sony",
+  "category": "Audio",
+  "description": "Wireless noise-cancelling headphones.",
+  "stock": 50,
+  "rating": 4.8,
+  "tags": ["headphones","sony"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "66",
+  "title": "Adidas Ultraboost Shoes",
+  "price": 180,
+  "offerPrice": 159,
+  "brand": "Adidas",
+  "category": "Shoes",
+  "description": "Comfortable running shoes with Boost technology.",
+  "stock": 95,
+  "rating": 4.7,
+  "tags": ["running","shoes"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "67",
+  "title": "Apple iPad Pro 12.9",
+  "price": 1099,
+  "offerPrice": 1049,
+  "brand": "Apple",
+  "category": "Electronics",
+  "description": "High-end tablet with M2 chip and ProMotion display.",
+  "stock": 30,
+  "rating": 4.9,
+  "tags": ["ipad","apple"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "68",
+  "title": "GoPro HERO11 Black",
+  "price": 499,
+  "offerPrice": 459,
+  "brand": "GoPro",
+  "category": "Electronics",
+  "description": "Action camera with HyperSmooth stabilization.",
+  "stock": 45,
+  "rating": 4.8,
+  "tags": ["gopro","camera"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "69",
+  "title": "Samsung Galaxy Watch 6",
+  "price": 349,
+  "offerPrice": 319,
+  "brand": "Samsung",
+  "category": "Wearables",
+  "description": "Smartwatch with health and fitness tracking.",
+  "stock": 60,
+  "rating": 4.7,
+  "tags": ["smartwatch","samsung"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "70",
+  "title": "Logitech G Pro X Keyboard",
+  "price": 129,
+  "offerPrice": 109,
+  "brand": "Logitech",
+  "category": "Accessories",
+  "description": "Mechanical keyboard with customizable RGB lighting.",
+  "stock": 75,
+  "rating": 4.7,
+  "tags": ["keyboard","gaming"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "71",
+  "title": "Nike Sports Shorts",
+  "price": 32,
+  "offerPrice": 28,
+  "brand": "Nike",
+  "category": "Clothing",
+  "description": "Breathable shorts for running and workouts.",
+  "stock": 140,
+  "rating": 4.5,
+  "tags": ["shorts","sportswear"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "72",
+  "title": "Bose Portable Home Speaker",
+  "price": 299,
+  "offerPrice": 269,
+  "brand": "Bose",
+  "category": "Audio",
+  "description": "Wireless home speaker with deep bass and voice control.",
+  "stock": 60,
+  "rating": 4.7,
+  "tags": ["speaker","home"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "73",
+  "title": "Adidas Running Tank Top",
+  "price": 30,
+  "offerPrice": 25,
+  "brand": "Adidas",
+  "category": "Clothing",
+  "description": "Lightweight sleeveless top for running.",
+  "stock": 150,
+  "rating": 4.4,
+  "tags": ["tanktop","sportswear"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "74",
+  "title": "Canon EOS R6 Camera",
+  "price": 2499,
+  "offerPrice": 2399,
+  "brand": "Canon",
+  "category": "Electronics",
+  "description": "Full-frame mirrorless camera with advanced autofocus.",
+  "stock": 25,
+  "rating": 4.9,
+  "tags": ["camera","canon"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+},
+{
+  "id": "75",
+  "title": "Apple MacBook Pro 16",
+  "price": 2499,
+  "offerPrice": 2399,
+  "brand": "Apple",
+  "category": "Computers",
+  "description": "High-end laptop with M2 Max chip for professionals.",
+  "stock": 20,
+  "rating": 4.9,
+  "tags": ["macbook","apple"],
+  "images": [
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png",
+    "https://i.ibb.co.com/BH7J0jGk/asf.png"
+  ]
+}
+]
