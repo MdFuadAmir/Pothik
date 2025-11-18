@@ -1,21 +1,10 @@
-import Banner from "../Banner/Banner";
-import Categories from "../Categories/Categories";
-import HowItWork from "../HowItWork/HowItWork";
-import JoinUs from "../JoinUs/JoinUs";
-import Testimonials from "../Testimonials/Testimonials";
-import WhyChooseUs from "../WhyChooseUs/WhyChooseUs";
-
 
 
 const Home = () => {
     return (
         <div>
-             <Banner></Banner>
-             <Categories></Categories>
-             <WhyChooseUs></WhyChooseUs>
-             <HowItWork></HowItWork>
-             <Testimonials></Testimonials>
-             <JoinUs></JoinUs>
+            home
+            
         </div>
     );
 };
