@@ -1,7 +1,22 @@
 import { Link, NavLink } from "react-router";
-import { FaCartPlus } from "react-icons/fa";
 import Pothik from "../../Shared/Pothik/Pothik";
+import useAuth from "../../Hooks/useAuth";
+import { FaSignInAlt, FaSignOutAlt, FaUser } from "react-icons/fa";
+import toast from "react-hot-toast";
 const Navbar = () => {
+  const { user, logOut } = useAuth();
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {
+        console.log("logout");
+        toast.success("LogOut Successfully !");
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error(error.message);
+      });
+  };
+
   const navLinks = (
     <>
       <li>
@@ -98,11 +113,33 @@ const Navbar = () => {
       <div className="navbar-end">
         <div className="flex items-center gap-6">
           <div>
-            <Link to={'/login'} className="btn btn-outline border-2 border-green-500">
-              Login
-            </Link>
+            {user ? (
+              <Link
+                onClick={handleLogOut}
+                className="btn btn-outline border-2 border-red-300 text-red-500"
+              >
+               <FaSignOutAlt/> LogOut
+              </Link>
+            ) : (
+              <Link
+                to={"/login"}
+                className="btn btn-outline border-2 border-green-500 text-green-500"
+              >
+                <FaSignInAlt/> Login
+              </Link>
+            )}
           </div>
-          <div>profile</div>
+          <div className="border rounded-full">
+            {user ? (
+              <img
+                src={user?.photoURL}
+                alt="photo"
+                className="w-10 h-10 rounded-full"
+              />
+            ) : (
+              <FaUser className="w-10 h-10 p-2" />
+            )}
+          </div>
         </div>
       </div>
     </div>

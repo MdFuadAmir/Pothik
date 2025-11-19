@@ -1,21 +1,101 @@
 import { useForm } from "react-hook-form";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import SocialLogin from "../SocialLogin/SocialLogin";
-
+import useAuth from "../../Hooks/useAuth";
+import useAxios from "../../Hooks/useAxios";
+import { useState } from "react";
+import { FaRegUser } from "react-icons/fa";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const SignUp = () => {
-      const {
-        register,
-        handleSubmit,
-        formState: { errors },
-      } = useForm();
-      const onSubmit = (data) => {
-        console.log(data);
-      };
-    return (
-         <div className="max-w-sm mx-auto p-4 border rounded">
+  const { signUp, updateUserProfile } = useAuth();
+  const [profilePic, setProfilePic] = useState();
+  const [isUploading, setIsUploading] = useState(false);
+  const axiosInstance = useAxios();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location?.state?.from || "/";
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const handleUploadeImage = async (e) => {
+    const image = e.target.files[0];
+    if (!image) return;
+    setIsUploading(true);
+    const formData = new FormData();
+    formData.append("image", image);
+    const imageUploadUrl = `https://api.imgbb.com/1/upload?key=${
+      import.meta.env.VITE_image_upload_key
+    }`;
+    const res = await axios.post(imageUploadUrl, formData);
+    setProfilePic(res?.data?.data?.display_url);
+    setIsUploading(false);
+  };
+  const onSubmit = (data) => {
+    signUp(data?.email, data?.password)
+      .then(async (result) => {
+        const user = result.user;
+        console.log("Current-user:", user);
+        const userInfo = {
+          email: user?.email,
+          role: "user",
+          status: "verified",
+          createdAt: new Date().toISOString(),
+          lastLogin: new Date().toISOString(),
+        };
+        const userRes = await axiosInstance.post("/users", userInfo);
+        if (userRes.data.success && userRes.data.insertedId) {
+          toast.success("Your Account has been created");
+        } else {
+          toast.success("User already exists");
+        }
+        // update user
+        const updateProfile = {
+          displayName: data?.name,
+          photoURL: profilePic,
+        };
+        updateUserProfile(updateProfile)
+          .then(() => {
+            toast.success("update user info");
+            navigate(from);
+          })
+          .catch((error) => {
+            toast.error(error.message);
+          });
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error(error.message);
+      });
+  };
+  return (
+    <div className="max-w-sm mx-auto p-4 border rounded">
       <h1 className="text-center text-xl font-bold mb-6">SIGN UP !</h1>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        {/* photo */}
+        <div className=" items-center flex flex-col  gap-2 px-4">
+          {profilePic ? (
+            <img
+              src={profilePic}
+              alt="profile"
+              className="rounded-full w-16 h-16 object-cover border p-1"
+            />
+          ) : (
+            <FaRegUser className="rounded-full w-16 h-16 border p-1" />
+          )}
+          <input
+            onChange={handleUploadeImage}
+            type="file"
+            className="rounded-full w-12 h-12 text-transparent absolute border-red-600 cursor-pointer"
+            placeholder="photo"
+          />
+          <p className="text-xs">Sellect Photo</p>
+        </div>
+
         {/* name */}
         <div className="flex flex-col space-y-1">
           <label className="text-sm">Name</label>
@@ -65,7 +145,13 @@ const SignUp = () => {
             Forgot password?
           </Link>
         </div>
-        <button className="btn btn-outline border-2 w-full border-green-500">Sign Up</button>
+        <button
+          type="submit"
+          disabled={isUploading}
+          className="btn btn-outline border-2 w-full border-green-500"
+        >
+          {isUploading ? "Uploading Image..." : "Sign Up"}
+        </button>
       </form>
       <p className="text-sm text-center mt-4">
         Already have an account?{" "}
@@ -78,9 +164,9 @@ const SignUp = () => {
         <div>Or</div>
         <div className="border w-full"></div>
       </div>
-      <SocialLogin/>
+      <SocialLogin />
     </div>
-    );
+  );
 };
 
 export default SignUp;

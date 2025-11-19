@@ -1,6 +1,8 @@
 import { useForm } from "react-hook-form";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import SocialLogin from "../SocialLogin/SocialLogin";
+import useAuth from "../../Hooks/useAuth";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const {
@@ -8,8 +10,20 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const { login } = useAuth();
+  const location = useLocation();
+  const from = location?.state?.from || "/";
+  const navigate = useNavigate();
+
   const onSubmit = (data) => {
-    console.log(data);
+    login(data.email, data.password)
+      .then(() => {
+        toast.success("Login Successfully");
+        navigate(from);
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
   };
   return (
     <div className="max-w-sm mx-auto p-4 border rounded">

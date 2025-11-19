@@ -1,45 +1,17 @@
 const bestDeals = [
   {
     title: "Wireless Earbuds",
-    img: "https://i.ibb.co/0F2F5BR/earbuds.png",
+    img: "https://i.ibb.co.com/BH7J0jGk/asf.png",
     price: 1200,
     oldPrice: 2200,
     discount: 45,
   },
   {
     title: "Smart Watch",
-    img: "https://i.ibb.co/vHv7zTt/watch.png",
+    img: "https://i.ibb.co.com/BH7J0jGk/asf.png",
     price: 1800,
     oldPrice: 3500,
     discount: 48,
-  },
-  {
-    title: "Bluetooth Speaker",
-    img: "https://i.ibb.co/0VtmJgP/speaker.png",
-    price: 950,
-    oldPrice: 1500,
-    discount: 35,
-  },
-  {
-    title: "Gaming Keyboard",
-    img: "https://i.ibb.co/GsWmQjJ/keyboard.png",
-    price: 2200,
-    oldPrice: 3800,
-    discount: 42,
-  },
-  {
-    title: "LED Light Strip",
-    img: "https://i.ibb.co/YyBcxLS/light.png",
-    price: 350,
-    oldPrice: 550,
-    discount: 30,
-  },
-  {
-    title: "USB Hub 3.0",
-    img: "https://i.ibb.co/Kb2H2ZS/hub.png",
-    price: 499,
-    oldPrice: 850,
-    discount: 41,
   },
 ];
 const BestDeals = () => {
