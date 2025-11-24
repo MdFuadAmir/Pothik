@@ -1,0 +1,76 @@
+import queryString from "query-string";
+import { useLocation, useNavigate, useSearchParams } from "react-router";
+import { useState } from "react";
+import { FaChevronDown, FaChevronUp } from "react-icons/fa";
+
+const categories = [
+  { title: "Electronics" },
+  { title: "Mobiles" },
+  { title: "Fashion" },
+  { title: "Home Appliances" },
+  { title: "Grocery" },
+  { title: "Beauty" },
+  { title: "Baby Products" },
+  { title: "Men's Wear" },
+  { title: "Women's Wear" },
+  { title: "Computers" },
+  { title: "Kitchen" },
+  { title: "Sports" },
+  { title: "Shoes" },
+  { title: "Watches" },
+  { title: "Bags" },
+  { title: "Gaming" },
+];
+
+const ProCategory = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [params] = useSearchParams();
+  const category = params.get("category");
+  const isMobile = window.innerWidth < 768;
+  const [showCategories, setShowCategories] = useState(!isMobile);
+
+  const handleClick = (categoryTitle) => {
+    const currentQuery = queryString.parse(location.search);
+    const updatedQuery = {
+      ...currentQuery,
+      category: categoryTitle,
+    };
+    const url = queryString.stringifyUrl({
+      url: "/products",
+      query: updatedQuery,
+    });
+
+    navigate(url);
+  };
+  return (
+    <div className="border p-4 rounded w-full">
+      <button
+        onClick={() => setShowCategories(!showCategories)}
+        className="px-4 py-2 text-sm border overflow-hidden rounded flex items-center gap-2"
+      >
+        All Categories
+        {showCategories ? <FaChevronUp /> : <FaChevronDown />}
+      </button>
+
+      {showCategories && (
+        <div className="mt-2">
+          {categories.map((cat) => (
+            <div
+              key={cat.title}
+              onClick={() => handleClick(cat.title)}
+              role="button"
+              className={`flex flex-col p-2 rounded-lg cursor-pointer transition
+                ${category === cat.title ? "bg-gray-300" : "hover:bg-gray-100"}
+              `}
+            >
+              <span className="text-sm">{cat.title}</span>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default ProCategory;

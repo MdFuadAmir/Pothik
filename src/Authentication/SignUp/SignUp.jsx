@@ -73,9 +73,9 @@ const SignUp = () => {
       });
   };
   return (
-    <div className="max-w-sm mx-auto p-4 border rounded">
+    <div className="max-w-sm mx-auto p-4 border rounded mb-12">
       <h1 className="text-center text-xl font-bold mb-6">SIGN UP !</h1>
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
         {/* photo */}
         <div className=" items-center flex flex-col  gap-2 px-4">
           {profilePic ? (
@@ -170,3 +170,5 @@ const SignUp = () => {
 };
 
 export default SignUp;
+
+// phoneNumber

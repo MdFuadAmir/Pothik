@@ -1,7 +1,7 @@
 import { Link, NavLink } from "react-router";
 import Pothik from "../../Shared/Pothik/Pothik";
 import useAuth from "../../Hooks/useAuth";
-import { FaSignInAlt, FaSignOutAlt, FaUser } from "react-icons/fa";
+import { FaCartPlus, FaSignInAlt, FaSignOutAlt, FaUser } from "react-icons/fa";
 import toast from "react-hot-toast";
 const Navbar = () => {
   const { user, logOut } = useAuth();
@@ -78,7 +78,7 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className="navbar md:px-10 lg:px-20 mx-auto bg-teal-100">
+    <div className="navbar px-4 md:px-10 lg:px-20 mx-auto bg-gray-200">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -111,21 +111,29 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">{navLinks}</ul>
       </div>
       <div className="navbar-end">
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-2 md:gap-6">
+          <div>
+            <Link to={"/cart"} className="flex relative">
+              <FaCartPlus size={25} className="text-gray-600"/>
+              <p className="absolute mt-4 ml-4 px-[2px] py-[2px] rounded-full text-white bg-red-500 text-[9px]">
+                10
+              </p>
+            </Link>
+          </div>
           <div>
             {user ? (
               <Link
                 onClick={handleLogOut}
-                className="btn btn-outline border-2 border-red-300 text-red-500"
+                className="flex items-center text-xs px-2 py-1 rounded gap-1 border border-red-300 text-red-500"
               >
-               <FaSignOutAlt/> LogOut
+                <FaSignOutAlt /> LogOut
               </Link>
             ) : (
               <Link
                 to={"/login"}
-                className="btn btn-outline border-2 border-green-500 text-green-500"
+                className="flex items-center text-xs px-2 py-1 rounded gap-1 border border-green-500 text-green-500"
               >
-                <FaSignInAlt/> Login
+                <FaSignInAlt /> Login
               </Link>
             )}
           </div>

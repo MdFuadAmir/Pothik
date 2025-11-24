@@ -1,54 +1,47 @@
-const products = [
-  {
-    title: "Wireless Earbuds",
-    img: "https://i.ibb.co.com/BH7J0jGk/asf.png",
-    price: 1200,
-  },
-  {
-    title: "Smart Watch",
-    img: "https://i.ibb.co.com/BH7J0jGk/asf.png",
-    price: 1800,
-  },
-  
-];
+/* eslint-disable no-unused-vars */
+import { useSearchParams } from "react-router";
+import useAxios from "../../Hooks/useAxios";
+import ProCategory from "../Category/proCategory";
+import { useQuery } from "@tanstack/react-query";
+import Loading from "../../Components/Loading/Loading";
+import Product from "./Product";
 
 
 const Products = () => {
-    return (
-         <div className="max-w-7xl mx-auto px-4 py-10">
+  const axiosInstance = useAxios();
+  const [params, setParams] = useSearchParams();
+  const category = params.get("category");
 
-      {/* Page Title */}
-      <h2 className="text-2xl font-semibold mb-6">For You</h2>
 
-      {/* Product Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-        {products.map((item, index) => (
-          <div
-            key={index}
-            className="bg-white p-3 rounded-lg shadow hover:shadow-lg cursor-pointer transition"
-          >
-            <img
-              src={item.img}
-              alt={item.title}
-              className="w-full h-32 object-contain mb-3"
-            />
+  const { data: products =[],isLoading} = useQuery({
+    queryKey: ["products", category],
+    queryFn: async () => {
+      const res = await axiosInstance.get(`/products?category=${category}`);
+      return res.data;
+    },
+  });
+  if(isLoading){
+    return <Loading/>
+  }
 
-            <p className="font-medium text-sm h-10">{item.title}</p>
-
-            <p className="text-orange-600 font-bold mt-2">৳{item.price}</p>
-          </div>
-        ))}
+  return (
+    <div className="py-4 md:py-10 grid grid-cols-1 md:grid-cols-5 gap-4 md:gap-8">
+      <div className="col-span-1 w-full">
+        <ProCategory />
       </div>
-
-      {/* All Products Button */}
-      <div className="flex justify-center mt-10">
-        <button className="px-8 btn btn-outline border-2 border-green-500 text-lg font-semibold rounded-md cursor-pointer">
-          All Products
-        </button>
+      <div className="col-span-4">
+        <div>
+          <h2 className="text-xl font-bold mb-6">All Collections</h2>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          {
+            products.map((pro)=> <Product key={pro._id} pro={pro}/>)
+          }
+        </div>
       </div>
-
     </div>
-    );
+  );
 };
 
 export default Products;
+
