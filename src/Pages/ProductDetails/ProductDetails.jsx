@@ -6,14 +6,16 @@ import { FaStar } from "react-icons/fa";
 import { useState } from "react";
 import useAuth from "../../Hooks/useAuth";
 import toast from "react-hot-toast";
-
+import useCart from "../../Hooks/useCart";
 
 const ProductDetails = () => {
   const { id } = useParams();
   const axiosInstance = useAxios();
-  const {user} = useAuth();
+  const { user } = useAuth();
   const [mainImage, setMainImage] = useState(0);
   const navigate = useNavigate();
+
+  const { cartRefetch } = useCart();
 
   const { data: product, isLoading } = useQuery({
     queryKey: ["product", id],
@@ -21,42 +23,45 @@ const ProductDetails = () => {
       const res = await axiosInstance.get(`/products/${id}`);
       return res.data;
     },
+    enabled: !!id,
   });
 
-const handleAddToCart = async () => {
-  if (!user) {
-    navigate("/login");
-    return;
-  }
-  // Add to Cart Data
-  const cartItem = {
-    productId: product._id,
-    title: product.title,
-    price: product.offerPrice,
-    image: product.images[0],
-    email: user.email,
-    quantity: 1,
-  };
-
-  try {
-    const res = await axiosInstance.post("/cart", cartItem);
-    if (res?.data?.insertedId) {
-      toast.success("Add to cart successfully!")
-      console.log(res.data);
+  const handleAddToCart = async () => {
+    if (!user) {
+      navigate("/login");
+      return;
     }
-  } catch (error) {
-    console.log(error);
-  }
-};
+    if (!product) return;
+    // Add to Cart Data
+    const cartItem = {
+      productId: product._id,
+      title: product.title,
+      price: product.offerPrice,
+      image: product.images[0],
+      email: user.email,
+      quantity: 1,
+    };
+
+    try {
+      const res = await axiosInstance.post("/cart", cartItem);
+      if (res?.data?.insertedId) {
+        toast.success("Add to cart successfully!");
+        console.log(res.data);
+        cartRefetch();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   if (isLoading) {
     return <Loading />;
   }
+
   return (
     <div className="my-6 max-w-4xl mx-auto">
-      {/* Top Section */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Left: Big Image + Thumbnails */}
+    
         <div>
           <div className="w-full h-72 p-2 rounded-lg overflow-hidden border">
             <img
@@ -83,8 +88,6 @@ const handleAddToCart = async () => {
             ))}
           </div>
         </div>
-
-        {/* Right: Details */}
         <div className="space-y-3">
           <h1 className="text-2xl font-bold">{product?.title}</h1>
           <div className="flex items-center gap-2">
@@ -116,8 +119,10 @@ const handleAddToCart = async () => {
               </span>
             ))}
           </div>
-          {/* Add to Cart Button */}
-          <button onClick={handleAddToCart} className="px-6 py-2 w-full cursor-pointer md:w-1/2 mx-auto border-2 mt-4 rounded hover:bg-gray-400 hover:text-white">
+          <button
+            onClick={handleAddToCart}
+            className="px-6 py-2 w-full cursor-pointer md:w-1/2 mx-auto border-2 mt-4 rounded hover:bg-gray-400 hover:text-white"
+          >
             Add to Cart
           </button>
         </div>
@@ -134,3 +139,5 @@ const handleAddToCart = async () => {
 };
 
 export default ProductDetails;
+
+

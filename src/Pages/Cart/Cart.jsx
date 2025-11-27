@@ -1,27 +1,15 @@
-import { useQuery } from "@tanstack/react-query";
-import useAuth from "../../Hooks/useAuth";
 import useAxios from "../../Hooks/useAxios";
 import Loading from "../../Components/Loading/Loading";
+import useCart from "../../Hooks/useCart";
+import { Link } from "react-router";
 
 const Cart = () => {
-  const { user } = useAuth();
   const axiosInstance = useAxios();
-  const {
-    data: cart = [],
-    isLoading,
-    refetch,
-  } = useQuery({
-    queryKey: ["cart", user?.email],
-    enabled: !!user?.email,
-    queryFn: async () => {
-      const res = await axiosInstance.get(`/cart?email=${user.email}`);
-      console.log(res.data);
-      return res.data;
-    },
-  });
+  const { cart, isLoading, cartRefetch } = useCart();
+
   const handleRrmove = async (id) => {
     await axiosInstance.delete(`/cart/${id}`);
-    refetch();
+    cartRefetch();
   };
   const handleUpdateQuentity = async (id, newQuantity) => {
     if (newQuantity < 1) {
@@ -30,7 +18,7 @@ const Cart = () => {
     await axiosInstance.patch(`/cart/${id}`, {
       quantity: newQuantity,
     });
-    refetch();
+    cartRefetch();
   };
   const subTotal = cart.reduce(
     (acc, item) => acc + item.price * (item.quantity ?? 1),
@@ -100,22 +88,22 @@ const Cart = () => {
           </div>
         )}
         {/* Total Section */}
-        <div className=" border h-fit p-4 rounded bg-white">
-          <h1 className=" font-semibold text-gray-600">CART TOTALS ----</h1>
+        <div className="border h-fit p-4 rounded bg-white">
+          <h1 className="font-semibold text-gray-600">CART TOTALS ----</h1>
           <div className="">
-            <h2 className="text-sm font-bold border-b p-2 flex justify-between">
+            <h2 className="text-sm border-b p-2 flex justify-between">
               Subtotal <span>$ {subTotal.toFixed(2)}</span>
             </h2>
-            <h2 className="text-sm font-bold border-b p-2 flex justify-between">
+            <h2 className="text-sm border-b p-2 flex justify-between">
               Shipping Fee <span>$ {shipping.toFixed(2)}</span>
             </h2>
-            <h2 className="text-sm font-bold p-2 flex justify-between">
-              Total <span>$ {grandTotal.toFixed(2)}</span>
+            <h2 className="text-sm p-2 flex justify-between">
+              Total <span className="font-bold">$ {grandTotal.toFixed(2)}</span>
             </h2>
           </div>
-          <button className="w-full mt-4 bg-blue-600 text-white py-2 rounded">
-            Checkout
-          </button>
+          <Link to={'/checkout'}  className="flex justify-center w-full mt-4 bg-black text-white py-2 rounded text-sm">
+            Proceed To Checkout
+          </Link>
         </div>
       </div>
     </div>
@@ -123,3 +111,4 @@ const Cart = () => {
 };
 
 export default Cart;
+

@@ -1,18 +1,18 @@
 import queryString from "query-string";
 import { useLocation, useNavigate, useSearchParams } from "react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 
 const categories = [
   { title: "Electronics" },
   { title: "Mobiles" },
   { title: "Fashion" },
-  { title: "Home Appliances" },
+  { title: "Home" },
   { title: "Grocery" },
   { title: "Beauty" },
-  { title: "Baby Products" },
-  { title: "Men's Wear" },
-  { title: "Women's Wear" },
+  { title: "Baby" },
+  { title: "Men's" },
+  { title: "Women's" },
   { title: "Computers" },
   { title: "Kitchen" },
   { title: "Sports" },
@@ -30,6 +30,16 @@ const ProCategory = () => {
   const isMobile = window.innerWidth < 768;
   const [showCategories, setShowCategories] = useState(!isMobile);
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setShowCategories(true);
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const handleClick = (categoryTitle) => {
     const currentQuery = queryString.parse(location.search);
     const updatedQuery = {
@@ -42,6 +52,9 @@ const ProCategory = () => {
     });
 
     navigate(url);
+    if (window.innerWidth < 768) {
+      setShowCategories(false);
+    }
   };
   return (
     <div className="border p-4 rounded w-full">

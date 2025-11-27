@@ -9,6 +9,11 @@ import SignUp from "../Authentication/SignUp/SignUp";
 import Products from "../Pages/Products/Products";
 import ProductDetails from "../Pages/ProductDetails/ProductDetails";
 import Cart from "../Pages/Cart/Cart";
+import CheckOut from "../Pages/CheckOut/CheckOut";
+import DashboardLayout from "../Layouts/DashboardLayout/DashboardLayout";
+import Statistic from "../Pages/Dashboard/Common/Statistic/Statistic";
+import MyOrders from "../Pages/Dashboard/Common/MyOrders/MyOrders";
+
 
 
 const router = createBrowserRouter([
@@ -40,6 +45,10 @@ const router = createBrowserRouter([
             path:"/product/:id",
             Component: ProductDetails
         },
+        {
+          path:'/checkout',
+          Component: CheckOut
+        }
         
     ]
 
@@ -55,6 +64,20 @@ const router = createBrowserRouter([
       {
         path:'/signUp',
         Component: SignUp
+      },
+    ]
+  },
+  {
+    path:'/dashboard',
+    element: <DashboardLayout/>,
+    children:[
+      {
+        path:'statistic',
+        Component: Statistic,
+      },
+      {
+        path:'my-orders',
+        Component: MyOrders,
       },
     ]
   }

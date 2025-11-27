@@ -20,15 +20,13 @@ const Products = () => {
       return res.data;
     },
   });
-  if(isLoading){
-    return <Loading/>
-  }
-
   return (
-    <div className="py-4 md:py-10 grid grid-cols-1 md:grid-cols-5 gap-4 md:gap-8">
+    <div className="py-4  md:py-10 grid grid-cols-1 md:grid-cols-5 gap-4 md:gap-8">
       <div className="col-span-1 w-full">
         <ProCategory />
       </div>
+      {
+        isLoading ? <Loading/> :
       <div className="col-span-4">
         <div>
           <h2 className="text-xl font-bold mb-6">All Collections</h2>
@@ -39,6 +37,7 @@ const Products = () => {
           }
         </div>
       </div>
+      }
     </div>
   );
 };

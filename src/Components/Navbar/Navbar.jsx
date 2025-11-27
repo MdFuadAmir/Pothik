@@ -3,8 +3,10 @@ import Pothik from "../../Shared/Pothik/Pothik";
 import useAuth from "../../Hooks/useAuth";
 import { FaCartPlus, FaSignInAlt, FaSignOutAlt, FaUser } from "react-icons/fa";
 import toast from "react-hot-toast";
+import useCart from "../../Hooks/useCart";
 const Navbar = () => {
   const { user, logOut } = useAuth();
+  const { cart } = useCart();
   const handleLogOut = () => {
     logOut()
       .then(() => {
@@ -16,7 +18,6 @@ const Navbar = () => {
         toast.error(error.message);
       });
   };
-
   const navLinks = (
     <>
       <li>
@@ -114,9 +115,9 @@ const Navbar = () => {
         <div className="flex items-center gap-2 md:gap-6">
           <div>
             <Link to={"/cart"} className="flex relative">
-              <FaCartPlus size={25} className="text-gray-600"/>
-              <p className="absolute mt-4 ml-4 px-[2px] py-[2px] rounded-full text-white bg-red-500 text-[9px]">
-                10
+              <FaCartPlus size={25} className="text-gray-600" />
+              <p className="absolute mt-4 ml-4 px-[2px] py-[1px] h-[16px] w-[16px] rounded-full  text-white bg-red-500 text-[10px] text-center">
+                {cart?.length}
               </p>
             </Link>
           </div>
@@ -139,11 +140,13 @@ const Navbar = () => {
           </div>
           <div className="border rounded-full">
             {user ? (
+              <Link to={'/dashboard'}>
               <img
                 src={user?.photoURL}
                 alt="photo"
                 className="w-10 h-10 rounded-full"
               />
+              </Link>
             ) : (
               <FaUser className="w-10 h-10 p-2" />
             )}
