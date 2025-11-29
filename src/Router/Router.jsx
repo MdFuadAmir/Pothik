@@ -13,6 +13,7 @@ import CheckOut from "../Pages/CheckOut/CheckOut";
 import DashboardLayout from "../Layouts/DashboardLayout/DashboardLayout";
 import Statistic from "../Pages/Dashboard/Common/Statistic/Statistic";
 import MyOrders from "../Pages/Dashboard/Common/MyOrders/MyOrders";
+import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers/ManageUsers";
 
 
 
@@ -78,6 +79,10 @@ const router = createBrowserRouter([
       {
         path:'my-orders',
         Component: MyOrders,
+      },
+      {
+        path:'manage-users',
+        Component: ManageUsers,
       },
     ]
   }

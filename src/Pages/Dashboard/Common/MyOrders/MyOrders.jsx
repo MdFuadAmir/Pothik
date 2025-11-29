@@ -30,6 +30,13 @@ const MyOrders = () => {
     },
   });
 
+  if(orderData.length <= 0){
+    return <>
+        <p className="text-gray-500 text-lg mt-4">No orders found</p>
+        <p className="text-gray-400 text-sm">Place your first order to see it here.</p>
+    </>
+    
+  }
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error loading orders</p>;

@@ -26,7 +26,7 @@ const DashboardLayout = () => {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <ul className="menu bg-gray-500 min-h-full w-80 p-4 flex flex-col justify-between">
+        <ul className="menu bg-gray-700 min-h-full w-80 p-4 flex flex-col justify-between">
           <div>
             <Pothik />
             <div className="mt-4 space-y-2">
@@ -52,6 +52,18 @@ const DashboardLayout = () => {
                   }
                 >
                   My Orders
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to={"/dashboard/manage-users"}
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-gray-500 font-semibold bg-gray-50"
+                      : "text-white font-bold"
+                  }
+                >
+                  Manage Users
                 </NavLink>
               </li>
             </div>
