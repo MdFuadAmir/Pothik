@@ -14,78 +14,108 @@ import DashboardLayout from "../Layouts/DashboardLayout/DashboardLayout";
 import Statistic from "../Pages/Dashboard/Common/Statistic/Statistic";
 import MyOrders from "../Pages/Dashboard/Common/MyOrders/MyOrders";
 import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers/ManageUsers";
-
-
+import AddProduct from "../Pages/Dashboard/Seller/AddProduct/AddProduct";
+import PrivateRoutes from "../Routes/PrivateRoutes";
+import ForbiddenPage from "../Components/ForbiddenPage/ForbiddenPage";
+import TrackOrder from "../Pages/Dashboard/Common/TrackOrder/TrackOrder";
+import ManageOrders from "../Pages/Dashboard/Seller/ManageOrders/ManageOrders";
+import MyShop from "../Pages/Dashboard/Seller/MyShop/MyShop";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    Component:RootLayout,
-    children:[
-        {
-            path:"/",
-            Component: Home
-        },
-        {
-            path:"/products",
-            Component: Products
-        },
-        {
-            path:"/about",
-            Component: About
-        },
-        {
-            path:"/contact",
-            Component: Contact
-        },
-        {
-            path:"/cart",
-            Component: Cart
-        },
-        {
-            path:"/product/:id",
-            Component: ProductDetails
-        },
-        {
-          path:'/checkout',
-          Component: CheckOut
-        }
-        
-    ]
-
+    Component: RootLayout,
+    children: [
+      {
+        path: "/",
+        Component: Home,
+      },
+      {
+        path: "/products",
+        Component: Products,
+      },
+      {
+        path: "/about",
+        Component: About,
+      },
+      {
+        path: "/contact",
+        Component: Contact,
+      },
+      {
+        path: "/cart",
+        Component: Cart,
+      },
+      {
+        path: "/product/:id",
+        Component: ProductDetails,
+      },
+      {
+        path: "/checkout",
+        element: (
+          <PrivateRoutes>
+            <CheckOut />
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "/forbidden",
+        element: <ForbiddenPage />,
+      },
+    ],
   },
   {
-    path:'/',
+    path: "/",
     Component: AuthLayout,
-    children:[
+    children: [
       {
-        path:'/login',
-        Component: Login
+        path: "/login",
+        Component: Login,
       },
       {
-        path:'/signUp',
-        Component: SignUp
+        path: "/signUp",
+        Component: SignUp,
       },
-    ]
+    ],
   },
   {
-    path:'/dashboard',
-    element: <DashboardLayout/>,
-    children:[
+    path: "/dashboard",
+    element: (
+      <PrivateRoutes>
+        <DashboardLayout />
+      </PrivateRoutes>
+    ),
+    children: [
       {
-        path:'statistic',
+        path: "statistic",
         Component: Statistic,
       },
       {
-        path:'my-orders',
+        path: "my-orders",
         Component: MyOrders,
       },
       {
-        path:'manage-users',
-        Component: ManageUsers,
+        path: "track-order",
+        Component: TrackOrder,
       },
-    ]
-  }
+      {
+        path: "manage-orders",
+        Component: ManageOrders,
+      },
+      {
+        path: "my-shop",
+        Component: MyShop,
+      },
+      {
+        path: "manage-users",
+        element: <ManageUsers />,
+      },
+      {
+        path: "add-product",
+        element: <AddProduct />,
+      },
+    ],
+  },
 ]);
 
 export default router;

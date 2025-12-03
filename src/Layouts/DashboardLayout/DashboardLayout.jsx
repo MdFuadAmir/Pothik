@@ -2,6 +2,7 @@ import { Link, NavLink, Outlet } from "react-router";
 import Pothik from "../../Shared/Pothik/Pothik";
 
 const DashboardLayout = () => {
+  
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
@@ -64,6 +65,54 @@ const DashboardLayout = () => {
                   }
                 >
                   Manage Users
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to={"/dashboard/add-product"}
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-gray-500 font-semibold bg-gray-50"
+                      : "text-white font-bold"
+                  }
+                >
+                  Add Product
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to={"/dashboard/track-order"}
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-gray-500 font-semibold bg-gray-50"
+                      : "text-white font-bold"
+                  }
+                >
+                  Tracking Orders
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to={"/dashboard/manage-orders"}
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-gray-500 font-semibold bg-gray-50"
+                      : "text-white font-bold"
+                  }
+                >
+                  Manage Orders
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to={"/dashboard/my-shop"}
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-gray-500 font-semibold bg-gray-50"
+                      : "text-white font-bold"
+                  }
+                >
+                  My Shop
                 </NavLink>
               </li>
             </div>

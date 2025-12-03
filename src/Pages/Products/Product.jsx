@@ -1,27 +1,40 @@
 import { Link } from "react-router";
 
-
 const Product = ({ pro }) => {
   return (
-    <Link to={`/product/${pro._id}`}  className="border p-2 rounded hover:shadow-xl bg-white ">
+    <Link
+      to={`/product/${pro._id}`}
+      className="border p-2 rounded hover:shadow-xl bg-white "
+    >
       {/* Image */}
       <img
         src={pro.images?.[0]}
-        alt={pro.title}
+        alt={pro?.productName}
         className="w-full h-28 object-cover rounded"
       />
 
       {/* Content */}
       <div className="flex flex-col flex-1 mt-2">
-        {/* Title → fixed height (2 lines max) */}
-        <h2 className="text-sm font-medium line-clamp-2 overflow-hidden min-h-[44px]">
-          {pro?.title}
+        <h2 className="text-sm font-bold line-clamp-2 overflow-hidden ">
+          {pro?.productName}
         </h2>
-        {/* Spacer pushes price to bottom */}
+        <p className="text-xs mt-1 text-gray-600 text-left">{pro?.shortDescription}</p>
         <div className="flex-grow"></div>
-        {/* Price → always bottom aligned */}
-        <div className="flex gap-4">
-          <p className="text-green-500 font-bold text-sm">${pro?.offerPrice}</p>
+        <div className="flex gap-4 mt-2">
+          {pro?.discountPrice ? (
+            <div className="flex items-center gap-2">
+              <p className="text-red-500 line-through text-sm font-semibold">
+                ${pro?.regularPrice}
+              </p>
+              <p className="text-green-600 font-bold text-sm">
+                ${pro?.discountPrice}
+              </p>
+            </div>
+          ) : (
+            <p className="text-green-600 font-bold text-sm">
+              ${pro?.regularPrice}
+            </p>
+          )}
         </div>
       </div>
     </Link>

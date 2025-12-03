@@ -31,7 +31,7 @@ const Products = () => {
         <div>
           <h2 className="text-xl font-bold mb-6">All Collections</h2>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
           {
             products.map((pro)=> <Product key={pro._id} pro={pro}/>)
           }

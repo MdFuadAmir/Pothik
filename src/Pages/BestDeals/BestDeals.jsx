@@ -1,59 +1,40 @@
-const bestDeals = [
-  {
-    title: "Wireless Earbuds",
-    img: "https://i.ibb.co.com/BH7J0jGk/asf.png",
-    price: 1200,
-    oldPrice: 2200,
-    discount: 45,
-  },
-  {
-    title: "Smart Watch",
-    img: "https://i.ibb.co.com/BH7J0jGk/asf.png",
-    price: 1800,
-    oldPrice: 3500,
-    discount: 48,
-  },
-];
+import { Link } from "react-router";
+import useAxios from "../../Hooks/useAxios";
+import { useQuery } from "@tanstack/react-query";
+import Loading from "../../Components/Loading/Loading";
+import Product from "../Products/Product";
+
 const BestDeals = () => {
+  const axiosInstance = useAxios();
+
+  const { data: products = [], isLoading } = useQuery({
+    queryKey: ["simple-products"],
+    queryFn: async () => {
+      const res = await axiosInstance.get(`/products?limit=20`);
+      return res.data;
+    },
+  });
+
+  if (isLoading) return <Loading />;
+
   return (
     <div className="mx-auto py-8">
-      {/* Title */}
+      {/* Header */}
       <div className="flex justify-between items-center px-4 mb-6">
-      <h2 className="text-2xl font-semibold">Best Deals</h2>
-        <button className=" btn btn-outline border-green-500 border-2 px-6">All Deals</button>
+        <h2 className="text-2xl font-semibold">For You</h2>
+
+        <Link
+          to="/products"
+          className="btn btn-outline border-green-500 border-2 px-6"
+        >
+          All Deals
+        </Link>
       </div>
-      {/* Card Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-5">
-        {bestDeals.map((item, index) => (
-          <div
-            key={index}
-            className="bg-white rounded-lg shadow hover:shadow-lg p-3 cursor-pointer transition"
-          >
-            {/* Product Image */}
-            <img
-              src={item.img}
-              alt={item.title}
-              className="w-full h-32 object-contain mb-3"
-            />
 
-            {/* Title */}
-            <p className="text-sm font-medium h-10">{item.title}</p>
-
-            {/* Price Section */}
-            <div className="mt-2">
-              <span className="text-lg font-bold text-orange-600">
-                ৳{item.price}
-              </span>
-
-              <div className="text-xs text-gray-500 line-through">
-                ৳{item.oldPrice}
-              </div>
-
-              <div className="text-xs font-semibold text-green-600">
-                {item.discount}% OFF
-              </div>
-            </div>
-          </div>
+      {/* Products Grid */}
+      <div className="p-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+        {products.slice(0, 20).map((pro) => (
+          <Product key={pro._id} pro={pro} />
         ))}
       </div>
     </div>

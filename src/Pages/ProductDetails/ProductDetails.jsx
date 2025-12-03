@@ -33,12 +33,16 @@ const ProductDetails = () => {
     }
     if (!product) return;
     // Add to Cart Data
+    const price = product?.discountPrice
+      ? Number(product.discountPrice)
+      : Number(product.regularPrice);
+
     const cartItem = {
       productId: product._id,
-      title: product.title,
-      price: product.offerPrice,
+      productName: product?.productName,
+      price: price,
       image: product.images[0],
-      email: user.email,
+      email: user?.email,
       quantity: 1,
     };
 
@@ -61,7 +65,6 @@ const ProductDetails = () => {
   return (
     <div className="my-6 max-w-4xl mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-    
         <div>
           <div className="w-full h-72 p-2 rounded-lg overflow-hidden border">
             <img
@@ -89,35 +92,75 @@ const ProductDetails = () => {
           </div>
         </div>
         <div className="space-y-3">
-          <h1 className="text-2xl font-bold">{product?.title}</h1>
-          <div className="flex items-center gap-2">
-            <FaStar className="text-yellow-500" />
-            <p className="font-medium">{product?.rating}</p>
-          </div>
-          <div className="flex items-center gap-4">
-            <p className="text-green-600 font-bold text-2xl">
-              ${product?.offerPrice}
-            </p>
-            <p className="line-through text-gray-500">${product?.price}</p>
+          <h1 className="text-xl font-bold">{product?.productName}</h1>
+          <div className="flex gap-4 mt-2">
+            {product?.discountPrice ? (
+              <div className="flex items-center gap-2">
+                <p className="text-red-500 line-through text-sm font-semibold">
+                  ${product?.regularPrice}
+                </p>
+                <p className="text-green-600 font-bold text-md">
+                  ${product?.discountPrice}
+                </p>
+              </div>
+            ) : (
+              <p className="text-green-600 font-bold text-sm">
+                ${product?.regularPrice}
+              </p>
+            )}
           </div>
           <p className="text-sm text-gray-600">
-            In Stock: <span className="font-semibold">{product?.stock}</span>
+            In Stock: <span className="font-semibold">{product?.stockQua}</span>
           </p>
           <p className="text-sm text-gray-700">
             Brand: <span className="font-semibold">{product?.brand}</span>
           </p>
+          {product?.size && (
+            <p className="text-sm text-gray-700">
+              Size: <span className="font-semibold">{product?.size}</span>
+            </p>
+          )}
+          {product?.color && (
+            <p className="text-sm text-gray-700">
+              Color: <span className="font-semibold">{product?.color}</span>
+            </p>
+          )}
+          {product?.fabric && (
+            <p className="text-sm text-gray-700">
+              Fabric: <span className="font-semibold">{product?.fabric}</span>
+            </p>
+          )}
+          {product?.weightQty && (
+            <p className="text-sm text-gray-700">
+              Weight:{" "}
+              <span className="font-semibold">{product?.weightQty}</span>
+            </p>
+          )}
+          {product?.ingredients && (
+            <p className="text-sm text-gray-700">
+              Ingredients:{" "}
+              <span className="font-semibold">{product?.ingredients}</span>
+            </p>
+          )}
+          {product?.packagingType && (
+            <p className="text-sm text-gray-700">
+              Packaging Type:{" "}
+              <span className="font-semibold">{product?.packagingType}</span>
+            </p>
+          )}
+          {product?.condition && (
+            <p className="text-sm text-gray-700">
+              condition:{" "}
+              <span className="font-semibold">{product?.condition}</span>
+            </p>
+          )}
           <p className="text-sm text-gray-700">
-            Category: <span className="font-semibold">{product?.category}</span>
+            Return Policy:{" "}
+            <span className="font-semibold">{product?.returnPolicy}</span>
           </p>
-          <div className="flex gap-2 mt-2 flex-wrap">
-            {product?.tags?.map((t, i) => (
-              <span
-                key={i}
-                className="px-3 py-1 bg-gray-200 rounded-full text-xs font-medium"
-              >
-                #{t}
-              </span>
-            ))}
+          <div className="flex items-center gap-2">
+            <FaStar className="text-yellow-500" />
+            <p className="font-medium">{product?.rating}</p>
           </div>
           <button
             onClick={handleAddToCart}
@@ -129,7 +172,7 @@ const ProductDetails = () => {
       </div>
       <div className="mt-12">
         <h2 className="text-lg font-bold">Description</h2>
-        <p className="text-sm">{product?.description}</p>
+        <p className="text-sm">{product?.longDescription}</p>
       </div>
       <div className="my-12 p-4 border rounded">
         <h2>Reviews</h2>
@@ -139,5 +182,3 @@ const ProductDetails = () => {
 };
 
 export default ProductDetails;
-
-
