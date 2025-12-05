@@ -4,8 +4,8 @@ import useAuth from "../../../../Hooks/useAuth";
 
 const MyOrders = () => {
   const axiosSecure = useAxiosSecure();
-  const { user } = useAuth();
-   const queryClient = useQueryClient();
+  const { user, loading } = useAuth();
+  const queryClient = useQueryClient();
 
   const {
     data: orderData = [],
@@ -15,12 +15,12 @@ const MyOrders = () => {
     queryKey: ["orders", user?.email],
     enabled: !!user?.email,
     queryFn: async () => {
-      const res = await axiosSecure.get(`/orders/${user.email}`);
+      const res = await axiosSecure.get(`/orders/${user?.email}`);
       return res.data.orders;
     },
   });
 
-   const deleteOrder = useMutation({
+  const deleteOrder = useMutation({
     mutationFn: async (orderId) => {
       const res = await axiosSecure.delete(`/orders/${orderId}`);
       return res.data;
@@ -30,20 +30,28 @@ const MyOrders = () => {
     },
   });
 
-  if(orderData.length <= 0){
-    return <>
+  if (orderData.length <= 0) {
+    return (
+      <>
         <p className="text-gray-500 text-lg mt-4">No orders found</p>
-        <p className="text-gray-400 text-sm">Place your first order to see it here.</p>
-    </>
-    
+        <p className="text-gray-400 text-sm">
+          Place your first order to see it here.
+        </p>
+      </>
+    );
   }
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading || loading) return <p>Loading...</p>;
   if (error) return <p>Error loading orders</p>;
 
   return (
     <div className="space-y-6">
-      <h2 className="text-xl font-bold mb-4">My Orders</h2>
+      <div>
+        <h2 className="text-xl font-bold">Orders by {user?.displayName}</h2>
+        <p className="text-sm text-gray-500">
+          this is your order history and recent order list
+        </p>
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {orderData.map((order) => (
@@ -94,7 +102,8 @@ const MyOrders = () => {
             {/* Order Info */}
             <div className="text-sm space-y-1 pt-1">
               <p>
-                <span className="font-semibold">Total:</span> ${order.grandTotal}
+                <span className="font-semibold">Total:</span> $
+                {order.grandTotal}
               </p>
               <p>
                 <span className="font-semibold">Payment Method:</span>{" "}
@@ -111,7 +120,10 @@ const MyOrders = () => {
             </div>
 
             {/* Action */}
-            <button  onClick={() => deleteOrder.mutate(order._id)} className="btn btn-sm bg-red-500 text-white w-full">
+            <button
+              onClick={() => deleteOrder.mutate(order._id)}
+              className="btn btn-sm bg-red-500 text-white w-full"
+            >
               Cancel Order
             </button>
           </div>

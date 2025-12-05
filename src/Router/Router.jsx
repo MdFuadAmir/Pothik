@@ -20,6 +20,9 @@ import ForbiddenPage from "../Components/ForbiddenPage/ForbiddenPage";
 import TrackOrder from "../Pages/Dashboard/Common/TrackOrder/TrackOrder";
 import ManageOrders from "../Pages/Dashboard/Seller/ManageOrders/ManageOrders";
 import MyShop from "../Pages/Dashboard/Seller/MyShop/MyShop";
+import SellerRoute from "../Routes/SellerRoutes";
+import AdminRoute from "../Routes/AdminRoute";
+import Profile from "../Pages/Dashboard/Common/Profile/Profile";
 
 const router = createBrowserRouter([
   {
@@ -87,8 +90,12 @@ const router = createBrowserRouter([
     ),
     children: [
       {
-        path: "statistic",
+        index:true,
         Component: Statistic,
+      },
+      {
+        path: "profile",
+        Component: Profile,
       },
       {
         path: "my-orders",
@@ -100,20 +107,21 @@ const router = createBrowserRouter([
       },
       {
         path: "manage-orders",
-        Component: ManageOrders,
+        element: <SellerRoute><ManageOrders/></SellerRoute>
       },
       {
         path: "my-shop",
-        Component: MyShop,
-      },
-      {
-        path: "manage-users",
-        element: <ManageUsers />,
+        element:<SellerRoute><MyShop/></SellerRoute>
       },
       {
         path: "add-product",
-        element: <AddProduct />,
+        element: <SellerRoute><AddProduct /></SellerRoute>,
       },
+      {
+        path: "manage-users",
+        element: <AdminRoute><ManageUsers /></AdminRoute>,
+      },
+      
     ],
   },
 ]);
