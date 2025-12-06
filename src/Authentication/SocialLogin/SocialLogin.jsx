@@ -26,6 +26,7 @@ const SocialLogin = () => {
         };
         await axiosInstance.post("/users", userInfo);
         toast.success("Login Success !!");
+        console.log("Current_user",userInfo);
         navigate(from);
       })
       .catch((error) => {

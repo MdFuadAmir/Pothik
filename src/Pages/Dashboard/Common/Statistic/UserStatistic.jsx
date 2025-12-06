@@ -1,12 +1,21 @@
-import { FaCompressAlt, FaFacebookMessenger, FaShoppingBag, FaSolarPanel, FaTruck } from "react-icons/fa";
+import {
+  FaCompressAlt,
+  FaFacebookMessenger,
+  FaShoppingBag,
+  FaSolarPanel,
+  FaTruck,
+} from "react-icons/fa";
+import useAuth from "../../../../Hooks/useAuth";
 
 const UserStatistic = () => {
+  const { user } = useAuth();
   return (
-    <div className="w-full p-4 md:p-8 space-y-6">
-      
+    <div className="w-full space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-semibold">User Dashboard</h1>
+        <h1 className="text-2xl font-semibold">
+          <span className="text-green-500">{user?.displayName}</span> Dashboard
+        </h1>
         <div className="flex items-center gap-2 text-sm text-gray-500">
           <span>Welcome Back!</span>
         </div>
@@ -14,7 +23,6 @@ const UserStatistic = () => {
 
       {/* Stats Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        
         {/* Total Orders */}
         <div className="bg-white rounded-2xl shadow-md p-5 hover:shadow-lg transition">
           <div className="flex items-center justify-between">
@@ -50,7 +58,6 @@ const UserStatistic = () => {
           </div>
           <p className="text-3xl font-bold mt-3">2</p>
         </div>
-
       </div>
 
       {/* Recent Orders */}
@@ -73,7 +80,6 @@ const UserStatistic = () => {
           </div>
         </div>
       </div>
-
     </div>
   );
 };

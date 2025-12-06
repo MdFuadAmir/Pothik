@@ -1,4 +1,4 @@
-import { NavLink, Outlet } from "react-router";
+import { Link, Outlet } from "react-router";
 import Pothik from "../../Shared/Pothik/Pothik";
 import useAuth from "../../Hooks/useAuth";
 import useRole from "../../Hooks/useRole";
@@ -6,17 +6,29 @@ import Loading from "../../Components/Loading/Loading";
 import DashboardMenu from "./DashboardMenu/DashboardMenu";
 import AdminMenu from "./DashboardMenu/AdminMenu";
 import SellerMenu from "./DashboardMenu/SellerMenu";
-import { FaUserSecret } from "react-icons/fa";
+import { FaSignInAlt, FaSignOutAlt, FaUserSecret } from "react-icons/fa";
 import { IoIosStats } from "react-icons/io";
 import { FiLogOut } from "react-icons/fi";
 import UserMenu from "./DashboardMenu/UserMenu";
+import toast from "react-hot-toast";
 
 const DashboardLayout = () => {
-  const { user } = useAuth();
+  const { user, logOut } = useAuth();
   const [role, roleLoading] = useRole();
   const closeSidebar = () => {
     const drawer = document.getElementById("my-drawer-2");
     if (drawer) drawer.checked = false;
+  };
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {
+        console.log("logout");
+        toast.success("LogOut Successfully !");
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error(error.message);
+      });
   };
   if (roleLoading) {
     return <Loading />;
@@ -48,10 +60,7 @@ const DashboardLayout = () => {
         ></label>
         <ul className="menu bg-gray-700 min-h-full w-80 p-4 flex flex-col justify-between">
           <div>
-            <div className="flex justify-between items-center">
-              <Pothik />
-              <p className="text-white">{role}</p>
-            </div>
+            <Pothik />
             <div className="mt-4 space-y-2">
               <DashboardMenu
                 labal={"My Statistic"}
@@ -72,9 +81,12 @@ const DashboardLayout = () => {
               onClick={closeSidebar}
             />
             <li>
-              <NavLink className="text-red-500">
-                <FiLogOut /> Log Out
-              </NavLink>
+              <Link
+                onClick={handleLogOut}
+                className="flex font-bold items-center rounded gap-1 text-red-500"
+              >
+                <FaSignOutAlt className="text-lg" /> LogOut
+              </Link>
             </li>
           </div>
         </ul>
