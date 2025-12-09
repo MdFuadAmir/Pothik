@@ -2,9 +2,20 @@
 import { useForm } from "react-hook-form";
 import useAuth from "../../Hooks/useAuth";
 import { useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const CheckOutForm = ({ setMethods }) => {
   const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
+
+  const { data: dbUser } = useQuery({
+  queryKey: ["dbUser"],
+  queryFn: async () => {
+    const { data } = await axiosSecure.get(`/users/${user.email}`);
+    return data;
+  },
+});
 
   const methods = useForm({
     mode: "onChange",
@@ -91,13 +102,10 @@ const CheckOutForm = ({ setMethods }) => {
           <label className="text-sm font-md">Phone Number</label>
           <input
             type="tel"
-            placeholder="phone.."
-            {...register("phone", { required: true })}
+            defaultValue={dbUser?.phone}
+            {...register("phone")}
             className="input"
           />
-          {errors.phone && (
-            <p className="text-red-500 text-sm">Phone number is required</p>
-          )}
         </div>
       </div>
 
@@ -106,13 +114,10 @@ const CheckOutForm = ({ setMethods }) => {
         <label className="text-sm font-md">Full Address</label>
         <input
           type="text"
-          placeholder="full address..."
-          {...register("fullAddress", { required: true })}
+          defaultValue={dbUser?.address}
+          {...register("fullAddress")}
           className="input w-full"
         ></input>
-        {errors.fullAddress && (
-          <p className="text-red-500 text-sm">Full address is required</p>
-        )}
       </div>
     </div>
   );

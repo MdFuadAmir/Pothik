@@ -39,7 +39,6 @@ const CheckOut = () => {
         shipping,
         grandTotal,
         status: "pending",
-        delivery_status:"processing",
         paymentStatus:"pending",
         createdAt: new Date(),
       };

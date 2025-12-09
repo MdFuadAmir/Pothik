@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import useAuth from "../../../../Hooks/useAuth";
+import toast from "react-hot-toast";
 
 const MyOrders = () => {
   const axiosSecure = useAxiosSecure();
@@ -20,13 +21,19 @@ const MyOrders = () => {
     },
   });
 
-  const deleteOrder = useMutation({
+  const cancelOrder = useMutation({
     mutationFn: async (orderId) => {
-      const res = await axiosSecure.delete(`/orders/${orderId}`);
+      const res = await axiosSecure.patch(`/orders/cancel/${orderId}`);
       return res.data;
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries(["orders"]);
+    onSuccess: (_, orderId) => {
+      toast.success("Order cancel Successfully!");
+
+      // Remove from UI instantly
+      queryClient.setQueryData(["orders", user?.email], (oldData) => {
+        if (!oldData) return [];
+        return oldData.filter((order) => order._id !== orderId);
+      });
     },
   });
 
@@ -121,7 +128,7 @@ const MyOrders = () => {
 
             {/* Action */}
             <button
-              onClick={() => deleteOrder.mutate(order._id)}
+              onClick={() => cancelOrder.mutate(order._id)}
               className="btn btn-sm bg-red-500 text-white w-full"
             >
               Cancel Order

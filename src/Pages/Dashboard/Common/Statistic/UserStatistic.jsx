@@ -1,23 +1,57 @@
-import {
-  FaCompressAlt,
-  FaFacebookMessenger,
-  FaShoppingBag,
-  FaSolarPanel,
-  FaTruck,
-} from "react-icons/fa";
+import { FaClock, FaShoppingBag, FaTimesCircle, FaTruck } from "react-icons/fa";
 import useAuth from "../../../../Hooks/useAuth";
-
+import "react-date-range/dist/styles.css"; // main css file
+import "react-date-range/dist/theme/default.css"; // theme css file
+import { DateRange } from "react-date-range";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+import Loading from "../../../../Components/Loading/Loading";
+import { useQuery } from "@tanstack/react-query";
 const UserStatistic = () => {
   const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
+
+  const { data: statData = {}, isLoading } = useQuery({
+    queryKey: ["order-stats", user?.email],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/users/stats/${user?.email}`);
+      return res.data;
+    },
+  });
+  const { data: recentOrders = [], isLoading: loading } = useQuery({
+    queryKey: ["recent-orders", user?.email],
+    queryFn: async () => {
+      const respons = await axiosSecure.get(`/orders/recent/${user?.email}`);
+      return respons.data;
+    },
+  });
+
+  if (isLoading) {
+    return <Loading />;
+  }
   return (
     <div className="w-full space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-semibold">
-          <span className="text-green-500">{user?.displayName}</span> Dashboard
-        </h1>
-        <div className="flex items-center gap-2 text-sm text-gray-500">
-          <span>Welcome Back!</span>
+      <div className="flex flex-col md:flex-row justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-semibold">Dashboard</h1>
+          <p className="text-sm text-gray-500 max-w-2xl">
+            hare is your dashboard. this page you can see your total
+            orders,total delivered,total pending and total cancelled orders
+            status and recent orders
+          </p>
+        </div>
+        <div className="flex gap-4 items-center border p-4 rounded hover:shadow-xl">
+          <div className="border-r pr-4">
+            <img
+              src={user?.photoURL}
+              alt="/photo"
+              className="w-12 h-12 rounded-full"
+            />
+          </div>
+          <div className="space-y-1">
+            <p className="font-bold text-md">{user.displayName}</p>
+            <p className="text-xs text-gray-500">{user.email}</p>
+          </div>
         </div>
       </div>
 
@@ -27,57 +61,85 @@ const UserStatistic = () => {
         <div className="bg-white rounded-2xl shadow-md p-5 hover:shadow-lg transition">
           <div className="flex items-center justify-between">
             <h2 className="text-lg font-medium">Total Orders</h2>
-            <FaShoppingBag className="w-6 h-6" />
+            <FaShoppingBag className="w-6 h-6 text-orange-500" />
           </div>
-          <p className="text-3xl font-bold mt-3">12</p>
+          <p className="text-3xl font-bold mt-3">{statData?.total}</p>
         </div>
 
         {/* Delivered */}
         <div className="bg-white rounded-2xl shadow-md p-5 hover:shadow-lg transition">
           <div className="flex items-center justify-between">
             <h2 className="text-lg font-medium">Delivered</h2>
-            <FaTruck className="w-6 h-6" />
+            <FaTruck className="w-6 h-6 text-green-500" />
           </div>
-          <p className="text-3xl font-bold mt-3">7</p>
+          <p className="text-3xl font-bold mt-3">{statData?.delivered}</p>
         </div>
 
         {/* Pending */}
         <div className="bg-white rounded-2xl shadow-md p-5 hover:shadow-lg transition">
           <div className="flex items-center justify-between">
             <h2 className="text-lg font-medium">Pending</h2>
-            <FaCompressAlt className="w-6 h-6" />
+            <FaClock className="w-6 h-6 text-indigo-500" />
           </div>
-          <p className="text-3xl font-bold mt-3">3</p>
+          <p className="text-3xl font-bold mt-3">{statData?.pending}</p>
         </div>
 
         {/* Cancelled */}
         <div className="bg-white rounded-2xl shadow-md p-5 hover:shadow-lg transition">
           <div className="flex items-center justify-between">
             <h2 className="text-lg font-medium">Cancelled</h2>
-            <FaFacebookMessenger className="w-6 h-6" />
+            <FaTimesCircle className="w-6 h-6 text-red-500" />
           </div>
-          <p className="text-3xl font-bold mt-3">2</p>
+          <p className="text-3xl font-bold mt-3">{statData?.cancelled}</p>
         </div>
       </div>
+      {/* recent orders and claender */}
 
-      {/* Recent Orders */}
-      <div className="bg-white rounded-2xl shadow-md p-6">
-        <h2 className="text-xl font-semibold mb-4">Recent Orders</h2>
-        <div className="space-y-3">
-          <div className="p-4 border rounded-xl flex justify-between items-center">
-            <span>Order #12345</span>
-            <span className="text-green-600 font-semibold">Delivered</span>
-          </div>
-
-          <div className="p-4 border rounded-xl flex justify-between items-center">
-            <span>Order #12346</span>
-            <span className="text-yellow-600 font-semibold">Pending</span>
-          </div>
-
-          <div className="p-4 border rounded-xl flex justify-between items-center">
-            <span>Order #12347</span>
-            <span className="text-red-600 font-semibold">Cancelled</span>
-          </div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+        <div className=" col-span-2 border rounded p-2">
+          <h2 className="text-lg font-bold mb-3">
+            Recent Orders (Last 7 Days)
+          </h2>
+          {loading ? (
+            <span className="loading loading-ring loading-xl"></span>
+          ) : recentOrders.length === 0 ? (
+            <p className="text-sm text-gray-500 mt-6 flex items-center justify-center">
+              <FaTimesCircle className="text-red-500 mr-1" /> No recent orders
+              found.
+            </p>
+          ) : (
+            <div className="overflow-x-auto">
+              <table className="table">
+                <thead className="bg-gray-100">
+                  <tr>
+                    <th className="p-2 text-left">Tracking ID</th>
+                    <th className="p-2 text-left">Amount</th>
+                    <th className="p-2 text-left">Order Date</th>
+                    <th className="p-2 text-left">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {recentOrders.map((order) => (
+                    <tr key={order._id}>
+                      <td className="p-2">{order?.trackingId}</td>
+                      <td className="p-2">${order?.grandTotal}</td>
+                      <td className="p-2">
+                        {new Date(order?.createdAt).toLocaleDateString()}
+                      </td>
+                      <td className="p-2 capitalize">{order?.status}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </div>
+        <div className="col-span-1 flex">
+          <DateRange
+            editableDateInputs={true}
+            moveRangeOnFirstSelection={false}
+            className="rounded border"
+          />
         </div>
       </div>
     </div>

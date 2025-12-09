@@ -6,12 +6,10 @@ import Loading from "../../Components/Loading/Loading";
 import DashboardMenu from "./DashboardMenu/DashboardMenu";
 import AdminMenu from "./DashboardMenu/AdminMenu";
 import SellerMenu from "./DashboardMenu/SellerMenu";
-import { FaSignInAlt, FaSignOutAlt, FaUserSecret } from "react-icons/fa";
+import { FaSignOutAlt, FaUserSecret } from "react-icons/fa";
 import { IoIosStats } from "react-icons/io";
-import { FiLogOut } from "react-icons/fi";
 import UserMenu from "./DashboardMenu/UserMenu";
 import toast from "react-hot-toast";
-
 const DashboardLayout = () => {
   const { user, logOut } = useAuth();
   const [role, roleLoading] = useRole();
@@ -48,7 +46,8 @@ const DashboardLayout = () => {
             {user.displayName}
           </span>
         </div>
-        <div className="bg-gray-200 min-h-screen p-4 md:p-8">
+
+        <div className="bg-gray-200 min-h-screen flex-grow  p-4 md:p-8">
           <Outlet />
         </div>
       </div>

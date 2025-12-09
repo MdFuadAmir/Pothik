@@ -17,6 +17,7 @@
     "leaflet": "^1.9.4",
     "query-string": "^9.3.1",
     "react": "^19.2.0",
+    "react-date-range": "^2.0.1",
     "react-dom": "^19.2.0",
     "react-hook-form": "^7.64.0",
     "react-hot-toast": "^2.6.0",
