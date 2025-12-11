@@ -6,17 +6,17 @@ import { useQuery } from "@tanstack/react-query";
 import Loading from "../../Components/Loading/Loading";
 import Product from "./Product";
 
-
 const Products = () => {
   const axiosInstance = useAxios();
   const [params, setParams] = useSearchParams();
   const category = params.get("category");
 
-
-  const { data: products =[],isLoading} = useQuery({
+  const { data: products = [], isLoading } = useQuery({
     queryKey: ["products", category],
     queryFn: async () => {
-      const res = await axiosInstance.get(`/products?category=${category}`);
+      // const res = await axiosInstance.get(`/products?category=${category}`);
+      const url = category ? `/products?category=${category}` : `/products`;
+      const res = await axiosInstance.get(url);
       return res.data;
     },
   });
@@ -25,22 +25,22 @@ const Products = () => {
       <div className="col-span-1 w-full">
         <ProCategory />
       </div>
-      {
-        isLoading ? <Loading/> :
-      <div className="col-span-4">
-        <div>
-          <h2 className="text-xl font-bold mb-6">All Collections</h2>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <div className="col-span-4">
+          <div>
+            <h2 className="text-xl font-bold mb-6">All Collections</h2>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+            {products.map((pro) => (
+              <Product key={pro._id} pro={pro} />
+            ))}
+          </div>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-          {
-            products.map((pro)=> <Product key={pro._id} pro={pro}/>)
-          }
-        </div>
-      </div>
-      }
+      )}
     </div>
   );
 };
 
 export default Products;
-

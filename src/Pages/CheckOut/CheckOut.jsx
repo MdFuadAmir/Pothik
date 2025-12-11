@@ -14,9 +14,8 @@ const CheckOut = () => {
   const navigate = useNavigate();
 
   const generateTrackingId = () => {
-  return "TRK-" + Math.random().toString(36).substring(2, 10).toUpperCase();
-};
-
+    return "TRK-" + Math.random().toString(36).substring(2, 10).toUpperCase();
+  };
   const subTotal = cart.reduce(
     (acc, item) => acc + item.price * (item.quantity ?? 1),
     0
@@ -31,7 +30,7 @@ const CheckOut = () => {
         return toast.error("Payment method required!");
       }
       const orderData = {
-         trackingId: generateTrackingId(), 
+        trackingId: generateTrackingId(),
         userInfo: data,
         paymentMethod,
         items: cart,
@@ -39,7 +38,7 @@ const CheckOut = () => {
         shipping,
         grandTotal,
         status: "pending",
-        paymentStatus:"pending",
+        paymentStatus: "pending",
         createdAt: new Date(),
       };
       try {
@@ -74,6 +73,8 @@ const CheckOut = () => {
     !methods.formState ||
     !methods.formState.isValid ||
     !paymentMethod;
+
+  console.log(cart);
 
   return (
     <div className="flex flex-col md:flex-row justify-between gap-6 my-12">

@@ -23,6 +23,7 @@ import MyShop from "../Pages/Dashboard/Seller/MyShop/MyShop";
 import SellerRoute from "../Routes/SellerRoutes";
 import AdminRoute from "../Routes/AdminRoute";
 import Profile from "../Pages/Dashboard/Common/Profile/Profile";
+import UpdateProduct from "../Pages/Dashboard/Seller/UpdateProduct/UpdateProduct";
 
 const router = createBrowserRouter([
   {
@@ -116,6 +117,10 @@ const router = createBrowserRouter([
       {
         path: "add-product",
         element: <SellerRoute><AddProduct /></SellerRoute>,
+      },
+      {
+        path: "update-product/:id",
+        element: <SellerRoute><UpdateProduct /></SellerRoute>,
       },
       {
         path: "manage-users",

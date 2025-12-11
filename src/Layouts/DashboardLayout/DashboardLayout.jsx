@@ -69,7 +69,9 @@ const DashboardLayout = () => {
               />
               {role === "admin" && <AdminMenu closeSidebar={closeSidebar} />}
               {role === "seller" && <SellerMenu closeSidebar={closeSidebar} />}
+              {/* {role === "user" && } */}
               <UserMenu closeSidebar={closeSidebar} />
+              
             </div>
           </div>
           <div className="bg-gray-600 p-4 rounded space-y-2">

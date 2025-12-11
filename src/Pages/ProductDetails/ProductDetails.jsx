@@ -42,7 +42,7 @@ const ProductDetails = () => {
       productName: product?.productName,
       price: price,
       image: product.images[0],
-      email: user?.email,
+      email:user?.email,
       quantity: 1,
     };
 

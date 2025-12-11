@@ -1,6 +1,7 @@
-import { Link } from "react-router";
+import { NavLink } from "react-router";
 
-const Card = ({ product, onDelete }) => {
+
+const Card = ({ product, onDelete,onUpdate }) => {
   return (
     <div className="border rounded-lg shadow-sm p-4 bg-white">
       {/* Product Image */}
@@ -33,12 +34,12 @@ const Card = ({ product, onDelete }) => {
       {/* Buttons */}
       <div className="flex items-center justify-between mt-4">
         {/* Update Button */}
-        <Link
-          to={`/dashboard/update-product/${product._id}`}
+        <button
+          onClick={() => onUpdate(product)}
           className="px-3 py-1 cursor-pointer bg-blue-600 text-white rounded-md text-sm"
         >
           Update
-        </Link>
+        </button>
         {/* Delete Button */}
         <button
           onClick={() => onDelete(product._id)}

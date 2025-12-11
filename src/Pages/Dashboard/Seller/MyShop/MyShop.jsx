@@ -1,14 +1,16 @@
-import { useMutation, useQuery, useQueryClient, } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import useAuth from "../../../../Hooks/useAuth";
 import Loading from "../../../../Components/Loading/Loading";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import Card from "../Card/Card";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router";
 
 const MyShop = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const { data: products = [], isLoading } = useQuery({
     queryKey: ["product", user?.email],
@@ -16,9 +18,13 @@ const MyShop = () => {
       const res = await axiosSecure.get(`/products?email=${user.email}`);
       return res.data;
     },
+    enabled: !!user?.email,
   });
 
-  // DELETE MUTATION
+  const handleUpdate = (product) => {
+    navigate(`/dashboard/update-product/${product._id}`);
+  };
+
   const deleteMutation = useMutation({
     mutationFn: async (id) => {
       const res = await axiosSecure.delete(`/products/${id}`);
@@ -35,8 +41,6 @@ const MyShop = () => {
   const handleDelete = (id) => {
     deleteMutation.mutate(id);
   };
-
-
   if (isLoading) {
     return <Loading />;
   }
@@ -56,6 +60,7 @@ const MyShop = () => {
             key={product._id}
             product={product}
             onDelete={handleDelete}
+            onUpdate={handleUpdate}
           ></Card>
         ))}
       </div>
