@@ -23,6 +23,12 @@ const SellerMenu = ({ closeSidebar }) => {
         icon={MdAssignmentAdd}
         onClick={closeSidebar}
       />
+      <DashboardMenu
+        labal={"My Complete Orders"}
+        to={"/dashboard/my-complete-orders"}
+        icon={MdAssignmentAdd}
+        onClick={closeSidebar}
+      />
     </div>
   );
 };

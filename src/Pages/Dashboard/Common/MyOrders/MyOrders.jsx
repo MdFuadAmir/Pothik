@@ -127,12 +127,22 @@ const MyOrders = () => {
             </div>
 
             {/* Action */}
-            <button
-              onClick={() => cancelOrder.mutate(order._id)}
-              className="btn btn-sm bg-red-500 text-white w-full"
-            >
-              Cancel Order
-            </button>
+            {order.status === "delivered" ? (
+              <button
+              disabled
+                onClick={() => cancelOrder.mutate(order._id)}
+                className="btn btn-sm bg-red-500 text-white w-full"
+              >
+                Cancel Order
+              </button>
+            ) : (
+              <button
+                onClick={() => cancelOrder.mutate(order._id)}
+                className="btn btn-sm bg-red-500 text-white w-full"
+              >
+                Cancel Order
+              </button>
+            )}
           </div>
         ))}
       </div>

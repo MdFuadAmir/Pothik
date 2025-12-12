@@ -24,6 +24,7 @@ import SellerRoute from "../Routes/SellerRoutes";
 import AdminRoute from "../Routes/AdminRoute";
 import Profile from "../Pages/Dashboard/Common/Profile/Profile";
 import UpdateProduct from "../Pages/Dashboard/Seller/UpdateProduct/UpdateProduct";
+import MyDeleveredOrders from "../Pages/Dashboard/Seller/MyDeleveredOrders/MyDeleveredOrders";
 
 const router = createBrowserRouter([
   {
@@ -121,6 +122,10 @@ const router = createBrowserRouter([
       {
         path: "update-product/:id",
         element: <SellerRoute><UpdateProduct /></SellerRoute>,
+      },
+      {
+        path: "my-complete-orders",
+        element: <SellerRoute><MyDeleveredOrders /></SellerRoute>,
       },
       {
         path: "manage-users",
