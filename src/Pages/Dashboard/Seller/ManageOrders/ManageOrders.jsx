@@ -1,11 +1,9 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import useAuth from "../../../../Hooks/useAuth";
 import Loading from "../../../../Components/Loading/Loading";
 import { FaEye } from "react-icons/fa";
 import { useState } from "react";
-
-import { useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 
 const statusFlow = [
@@ -15,51 +13,47 @@ const statusFlow = [
   "in_transit",
   "out_for_delivery",
   "delivered",
+  "cancelled",
 ];
+
+const getNextStatus = (current) => {
+  const idx = statusFlow.indexOf(current);
+  if (idx === -1 || idx === statusFlow.length - 1) return current;
+  return statusFlow[idx + 1];
+};
 
 const ManageOrders = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const queryClient = useQueryClient();
   const [selectedItem, setSelectedItem] = useState(null);
 
-  const queryClient = useQueryClient();
-
-  const getNextStatus = (currentStatus) => {
-    const index = statusFlow.indexOf(currentStatus);
-    if (index === -1 || index === statusFlow.length - 1) return currentStatus;
-    return statusFlow[index + 1];
-  };
-  const getPaymentStatus = (order) => {
-    if (order.paymentMethod !== "CASH_ON_DELIVERY") {
-      return "paid";
-    }
-
-    // COD হলে:
-    return order.status === "delivered" ? "paid" : "pending";
-  };
-
-  const handleStatusUpdate = async (orderId, currentStatus) => {
-    const nextStatus = getNextStatus(currentStatus);
-
-    try {
-      await axiosSecure.patch(`/order/status/${orderId}`, {
-        status: nextStatus,
-      });
-
-      toast.success(`Status changed to: ${nextStatus}`);
-
-      queryClient.invalidateQueries(["seller-orders", user.email]);
-    } catch (error) {
-      toast.error("Failed to update status", error.message);
-    }
-  };
-
-  const { data, isLoading } = useQuery({
-    queryKey: ["seller-orders", user.email],
+  const { data: orders = [], isLoading } = useQuery({
+    queryKey: ["seller-orders", user?.email],
     queryFn: async () =>
       (await axiosSecure.get(`/seller/orders/${user.email}`)).data.orders,
     enabled: !!user?.email,
+    staleTime: 1000 * 30, // 30s
   });
+
+  const handleItemStatusUpdate = async (orderId, itemId, currentStatus) => {
+    const next = getNextStatus(currentStatus);
+    if (next === currentStatus) return;
+
+    try {
+      await axiosSecure.patch(`/order/item-status/${orderId}/${itemId}`, {
+        status: next,
+      });
+
+      toast.success(`Item status updated to ${next}`);
+      // keep UI fresh
+      queryClient.invalidateQueries(["seller-orders", user.email]);
+      queryClient.invalidateQueries(["seller-delivered-orders", user.email]);
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to update item status");
+    }
+  };
 
   if (isLoading) return <Loading />;
 
@@ -71,7 +65,7 @@ const ManageOrders = () => {
       </p>
 
       <div className="overflow-x-auto border rounded p-4">
-        <table className="table">
+        <table className="table w-full">
           <thead>
             <tr className="bg-gray-100">
               <th>Order ID</th>
@@ -79,46 +73,67 @@ const ManageOrders = () => {
               <th>Qty</th>
               <th>Price</th>
               <th>Order Date</th>
+              <th>Item Status</th>
               <th>Action</th>
             </tr>
           </thead>
 
           <tbody>
-            {data?.filter((order) => order.status !== "delivered").map((order) =>
+            {orders.length === 0 && (
+              <tr>
+                <td colSpan="7" className="text-center py-6 text-gray-500">
+                  No orders found
+                </td>
+              </tr>
+            )}
+
+            {orders.map((order) =>
               order.items.map((item) => (
                 <tr key={item._id}>
-                  <td>{order._id}</td>
-                  <td>{item.productName}</td>
+                  <td className="whitespace-nowrap">{order._id}</td>
+                  <td className="max-w-xs">{item.productName}</td>
                   <td>{item.quantity}</td>
-                  <td>{item.price * item.quantity}</td>
+                  <td>${item.price * item.quantity}</td>
                   <td>{new Date(order.createdAt).toLocaleDateString()}</td>
-                  <td className="flex gap-3 items-center">
-                    {/* view */}
+                  <td>
+                    <span
+                      className={`inline-block px-2 py-1 text-xs rounded-full ${
+                        item.status === "delivered"
+                          ? "bg-green-100 text-green-800"
+                          : item.status === "cancelled"
+                          ? "bg-red-100 text-red-800"
+                          : "bg-yellow-100 text-yellow-800"
+                      }`}
+                    >
+                      {item.status}
+                    </span>
+                  </td>
+
+                  <td className="flex gap-2">
                     <button
                       onClick={() => setSelectedItem({ order, item })}
                       className="btn btn-sm bg-green-100 border border-green-500"
                     >
                       <FaEye className="text-green-500" />
                     </button>
-                    {/* accept */}
+
                     <button
-                      onClick={() => {
-                        if (
-                          order.status !== "delivered" &&
-                          order.status !== "cancelled"
-                        ) {
-                          handleStatusUpdate(order._id, order.status);
-                        }
-                      }}
+                      onClick={() =>
+                        handleItemStatusUpdate(order._id, item._id, item.status)
+                      }
+                      disabled={
+                        item.status === "delivered" ||
+                        item.status === "cancelled"
+                      }
                       className={`btn btn-sm ${
-                        order.status === "delivered"
-                          ? "bg-green-200 border border-green-600"
-                          : order.status === "cancelled"
-                          ? "bg-red-200 border border-red-600"
-                          : "bg-blue-100 border border-blue-500"
+                        item.status === "delivered"
+                          ? "bg-green-200 border-green-600"
+                          : item.status === "cancelled"
+                          ? "bg-red-200 border-red-600"
+                          : "bg-blue-100 border-blue-500"
                       }`}
                     >
-                      {order.status}
+                      {getNextStatus(item.status)}
                     </button>
                   </td>
                 </tr>
@@ -127,10 +142,10 @@ const ManageOrders = () => {
           </tbody>
         </table>
 
+        {/* modal */}
         {selectedItem && (
-          <div className="fixed inset-0 bg-amber-50 bg-opacity-500 flex items-center justify-center z-50">
+          <div className="fixed inset-0 flex items-center justify-center z-50">
             <div className="bg-white rounded-lg shadow-xl p-6 w-[90%] max-w-lg relative overflow-y-auto max-h-[90vh]">
-              {/* Close Button */}
               <button
                 onClick={() => setSelectedItem(null)}
                 className="absolute top-3 right-3 text-gray-500 hover:text-black text-xl"
@@ -140,7 +155,6 @@ const ManageOrders = () => {
 
               <h2 className="text-2xl font-bold mb-4">Order Details</h2>
 
-              {/* Order Info */}
               <div className="space-y-2 text-sm">
                 <p>
                   <b>Order ID:</b> {selectedItem.order._id}
@@ -149,21 +163,48 @@ const ManageOrders = () => {
                   <b>Tracking ID:</b> {selectedItem.order.trackingId}
                 </p>
                 <p>
-                  <b>Status:</b> {selectedItem.order.status}
+                  <b>Payment Methode:</b> {selectedItem.order.paymentMethod}
                 </p>
                 <p>
-                  <b>Payment Method:</b> {selectedItem.order.paymentMethod}
+                  <b>Payment Status:</b> {selectedItem.order.paymentStatus}
+                </p>
+                <hr />
+                <p className="text-lg font-bold pl-4">Buyer info</p>
+                <p>
+                  <b>Name:</b> {selectedItem.order.buyerInfo.fullName}
                 </p>
                 <p>
-                  <b>Payment Status:</b>{" "}
-                  <span
-                    className={
-                      getPaymentStatus(selectedItem.order) === "paid"
-                        ? "text-green-600 font-semibold"
-                        : "text-red-600 font-semibold"
-                    }
-                  >
-                    {getPaymentStatus(selectedItem.order)}
+                  <b>Email:</b> {selectedItem.order.buyerInfo.email}
+                </p>
+                <p>
+                  <b>Phone:</b> {selectedItem.order.buyerInfo.phone}
+                </p>
+                <p>
+                  <b>City:</b> {selectedItem.order.buyerInfo.city}
+                </p>
+                <p>
+                  <b>Zip Code:</b> {selectedItem.order.buyerInfo.zipCode}
+                </p>
+                <p>
+                  <b>Full Address:</b> {selectedItem.order.buyerInfo.fullAddress}
+                </p>
+
+                <hr />
+                <p className="text-lg font-bold pl-4">Product Details</p>
+                <p>
+                  <b>Product Name:</b> {selectedItem.item.productName}
+                </p>
+                <p>
+                  <b>Quantity:</b> {selectedItem.item.quantity}
+                </p>
+                <p>
+                  <b>Total Price:</b>{" "}
+                  {selectedItem.item.price * selectedItem.item.quantity}$
+                </p>
+                <p>
+                  <b>Item Status:</b>{" "}
+                  <span className="font-semibold">
+                    {selectedItem.item.status}
                   </span>
                 </p>
                 <p>
@@ -171,49 +212,6 @@ const ManageOrders = () => {
                   {new Date(selectedItem.order.createdAt).toLocaleString()}
                 </p>
               </div>
-
-              <hr className="my-4" />
-
-              {/* Buyer Info */}
-              <h3 className="font-semibold mb-2 text-lg">Buyer Information</h3>
-              <div className="space-y-1 text-sm">
-                <p>
-                  <b>Name:</b> {selectedItem.order.buyerInfo?.fullName}
-                </p>
-                <p>
-                  <b>Email:</b> {selectedItem.order.buyerInfo?.email}
-                </p>
-                <p>
-                  <b>Phone:</b> {selectedItem.order.buyerInfo?.phone}
-                </p>
-                <p>
-                  <b>Address:</b> {selectedItem.order.buyerInfo?.fullAddress}
-                </p>
-                <p>
-                  <b>City:</b> {selectedItem.order.buyerInfo?.city}
-                </p>
-                <p>
-                  <b>Zip Code:</b> {selectedItem.order.buyerInfo?.zipCode}
-                </p>
-              </div>
-
-              <hr className="my-4" />
-
-              {/* Product Item Info */}
-              <h3 className="font-semibold mb-2 text-lg">Product Details</h3>
-              <div className="space-y-2 text-sm">
-                <p>
-                  <b>Product:</b> {selectedItem.item.productName}
-                </p>
-                <p>
-                  <b>Quantity:</b> {selectedItem.item.quantity}
-                </p>
-                <p>
-                  <b>price:</b> {selectedItem.item.price * selectedItem.item.quantity}
-                </p>
-              </div>
-
-              <hr className="my-4" />
             </div>
           </div>
         )}

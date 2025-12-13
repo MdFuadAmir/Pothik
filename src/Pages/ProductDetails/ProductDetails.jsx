@@ -42,7 +42,9 @@ const ProductDetails = () => {
       productName: product?.productName,
       price: price,
       image: product.images[0],
-      email:user?.email,
+      email:user?.email, //user er email ba buyer email
+      sellerEmail:product.email,
+      status:"pending",
       quantity: 1,
     };
 
@@ -61,7 +63,7 @@ const ProductDetails = () => {
   if (isLoading) {
     return <Loading />;
   }
-
+console.log(product);
   return (
     <div className="my-6 max-w-4xl mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -111,6 +113,9 @@ const ProductDetails = () => {
           </div>
           <p className="text-sm text-gray-600">
             In Stock: <span className="font-semibold">{product?.stockQua}</span>
+          </p>
+          <p className="text-sm text-gray-600">
+            seller email: <span className="font-semibold">{product?.email}</span>
           </p>
           <p className="text-sm text-gray-700">
             Brand: <span className="font-semibold">{product?.brand}</span>

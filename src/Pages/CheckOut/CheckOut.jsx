@@ -41,6 +41,7 @@ const CheckOut = () => {
         paymentStatus: "pending",
         createdAt: new Date(),
       };
+      console.log(orderData);
       try {
         const res = await axiosInstance.post("/orders", orderData);
         if (res.data.insertedId) {
@@ -65,6 +66,7 @@ const CheckOut = () => {
       </div>
     );
   }
+console.log("seller",cart);
 
   if (isLoading) return <Loading />;
 
