@@ -88,7 +88,9 @@ const ManageOrders = () => {
             )}
 
             {orders.map((order) =>
-              order.items.map((item) => (
+              order.items.filter(
+      (item) => item.status !== "delivered" && item.status !== "cancelled"
+    ).map((item) => (
                 <tr key={item._id}>
                   <td className="whitespace-nowrap">{order._id}</td>
                   <td className="max-w-xs">{item.productName}</td>

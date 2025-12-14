@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router";
 import SocialLogin from "../SocialLogin/SocialLogin";
 import useAuth from "../../Hooks/useAuth";
 import toast from "react-hot-toast";
+import useAxios from "../../Hooks/useAxios";
 
 const Login = () => {
   const {
@@ -14,10 +15,14 @@ const Login = () => {
   const location = useLocation();
   const from = location?.state?.from || "/";
   const navigate = useNavigate();
+  const axiosInstance = useAxios();
 
   const onSubmit = (data) => {
     login(data.email, data.password)
-      .then(() => {
+      .then(async () => {
+        await axiosInstance.patch("/users/last-login", {
+          email: data.email,
+        });
         toast.success("Login Successfully");
         navigate(from);
       })

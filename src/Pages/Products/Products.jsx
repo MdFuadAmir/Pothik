@@ -14,7 +14,6 @@ const Products = () => {
   const { data: products = [], isLoading } = useQuery({
     queryKey: ["products", category],
     queryFn: async () => {
-      // const res = await axiosInstance.get(`/products?category=${category}`);
       const url = category ? `/products?category=${category}` : `/products`;
       const res = await axiosInstance.get(url);
       return res.data;

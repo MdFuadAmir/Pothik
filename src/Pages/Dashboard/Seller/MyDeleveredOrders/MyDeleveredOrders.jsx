@@ -1,71 +1,3 @@
-// import { useQuery } from "@tanstack/react-query";
-// import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
-// import useAuth from "../../../../Hooks/useAuth";
-// import Loading from "../../../../Components/Loading/Loading";
-
-// const MyDeliveredOrders = () => {
-//   const axiosSecure = useAxiosSecure();
-//   const { user } = useAuth();
-
-//   const { data: orders = [], isLoading } = useQuery({
-//     queryKey: ["seller-delivered-orders", user?.email],
-//     queryFn: async () =>
-//       (await axiosSecure.get(`/seller/delivered-orders/${user.email}`)).data
-//         .orders,
-//     enabled: !!user?.email,
-//   });
-
-//   if (isLoading) return <Loading />;
-
-//   return (
-//     <div>
-//       <h2 className="text-2xl font-bold mb-3">My Delivered Items</h2>
-
-//       <div className="overflow-x-auto border rounded p-4">
-//         <table className="table w-full">
-//           <thead>
-//             <tr className="bg-gray-100">
-//               <th>Order ID</th>
-//               <th>Product</th>
-//               <th>Qty</th>
-//               <th>Price</th>
-//               <th>Delivered Date</th>
-//             </tr>
-//           </thead>
-
-//           <tbody>
-//             {orders.length === 0 && (
-//               <tr>
-//                 <td colSpan="5" className="text-center py-6 text-gray-500">
-//                   No delivered items yet
-//                 </td>
-//               </tr>
-//             )}
-
-//             {orders.map((order) =>
-//               order.items.map((item) => (
-//                 <tr key={item._id}>
-//                   <td>{order._id}</td>
-//                   <td>{item.productName}</td>
-//                   <td>{item.quantity}</td>
-//                   <td>${item.price * item.quantity}</td>
-//                   <td>
-//                     {new Date(order.updatedAt || order.createdAt).toLocaleDateString()}
-//                   </td>
-//                 </tr>
-//               ))
-//             )}
-//           </tbody>
-//         </table>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default MyDeliveredOrders;
-
-
-// MyDeliveredOrders.jsx
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import useAuth from "../../../../Hooks/useAuth";
@@ -96,7 +28,8 @@ const MyDeliveredOrders = () => {
 
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-3">My Delivered Items</h2>
+      <h2 className="text-2xl font-bold">My Delivered Items</h2>
+      <p className="text-sm text-gray-500 mb-6">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Itaque, a.</p>
 
       <div className="overflow-x-auto border rounded p-4">
         <table className="table w-full">

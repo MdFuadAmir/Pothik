@@ -21,8 +21,6 @@ const SocialLogin = () => {
           email: user?.email,
           role: "user",
           status:"verified",
-          createdAt: new Date().toISOString(),
-          lastLogin: new Date().toISOString(),
         };
         await axiosInstance.post("/users", userInfo);
         toast.success("Login Success !!");

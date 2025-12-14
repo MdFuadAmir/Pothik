@@ -33,14 +33,14 @@ const UserStatistic = () => {
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-semibold">Dashboard</h1>
+          <h1 className="text-2xl font-semibold">My Dashboard</h1>
           <p className="text-sm text-gray-500 max-w-2xl">
             hare is your dashboard. this page you can see your total
             orders,total delivered,total pending and total cancelled orders
             status and recent orders
           </p>
         </div>
-        <div className="flex gap-4 items-center border p-4 rounded hover:shadow-xl">
+        <div className="flex gap-4 items-center bg-gray-100 p-4 rounded shadow-xl">
           <div className="border-r pr-4">
             <img
               src={user?.photoURL}

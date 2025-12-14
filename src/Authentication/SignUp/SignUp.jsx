@@ -44,8 +44,6 @@ const SignUp = () => {
           email: user?.email,
           role: "user",
           status: "verified",
-          createdAt: new Date().toISOString(),
-          lastLogin: new Date().toISOString(),
         };
         const userRes = await axiosInstance.post("/users", userInfo);
         if (userRes.data.success && userRes.data.insertedId) {

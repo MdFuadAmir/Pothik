@@ -4,7 +4,7 @@ const BarChart = ({ data }) => {
   const { recentOrders = [] } = data || {};
 
   const now = new Date();
-  const currentMonth = now.getMonth(); 
+  const currentMonth = now.getMonth();
   const currentYear = now.getFullYear();
 
   const currentMonthOrders = recentOrders.filter((order) => {
@@ -25,29 +25,30 @@ const BarChart = ({ data }) => {
     });
 
     if (!dayMap[dayKey]) {
-      dayMap[dayKey] = { ordersReceived: 0 };
+      dayMap[dayKey] = { ordersReceived: 0, ordersDelivered: 0 };
     }
 
     dayMap[dayKey].ordersReceived += 1;
     if (order.status === "delivered") {
-      dayMap[dayKey].totalEarnings +=
-        Number(order.price || 0) * Number(order.quantity || 0);
-    }
+    dayMap[dayKey].ordersDelivered += 1;
+  }
   });
-  const chartData = [["Date", "Orders Received", ]];
+  const chartData = [["Date", "Orders Received", "Order Delevered"]];
+
   Object.keys(dayMap)
-    .sort((a, b) => new Date(a) - new Date(b))
+    .sort((a, b) => new Date(`${a} ${currentYear}`) - new Date(`${b} ${currentYear}`))
     .forEach((day) => {
       chartData.push([
         day,
         dayMap[day].ordersReceived,
+        dayMap[day].ordersDelivered,
       ]);
     });
 
   const options = {
     chart: { title: "Daily Sales & Orders (Current Month)" },
     hAxis: { title: "Date" },
-    vAxis: { title: "Count / Earnings" },
+    vAxis: { title: "recived / delevered" },
     seriesType: "bars",
     series: {},
     legend: { position: "bottom" },
