@@ -25,6 +25,7 @@ import AdminRoute from "../Routes/AdminRoute";
 import Profile from "../Pages/Dashboard/Common/Profile/Profile";
 import UpdateProduct from "../Pages/Dashboard/Seller/UpdateProduct/UpdateProduct";
 import MyDeleveredOrders from "../Pages/Dashboard/Seller/MyDeleveredOrders/MyDeleveredOrders";
+import PendingSeller from "../Pages/Dashboard/Admin/PendingSeller/PendingSeller";
 
 const router = createBrowserRouter([
   {
@@ -130,6 +131,10 @@ const router = createBrowserRouter([
       {
         path: "manage-users",
         element: <AdminRoute><ManageUsers /></AdminRoute>,
+      },
+      {
+        path: "pending-seller",
+        element: <AdminRoute><PendingSeller/></AdminRoute>,
       },
       
     ],

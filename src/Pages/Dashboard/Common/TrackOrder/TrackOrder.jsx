@@ -65,7 +65,7 @@ const TrackOrder = () => {
           </p>
           {/* status */}
 
-          <div className="space-y-3 mt-6">
+          <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Pending */}
             <div
               className={`flex items-center gap-4 border rounded p-4

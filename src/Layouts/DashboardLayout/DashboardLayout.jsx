@@ -10,6 +10,8 @@ import { FaSignOutAlt, FaUserSecret } from "react-icons/fa";
 import { IoIosStats } from "react-icons/io";
 import UserMenu from "./DashboardMenu/UserMenu";
 import toast from "react-hot-toast";
+import ApplySellerButton from "../../Pages/Dashboard/Common/ApplySellerButton/ApplySellerButton";
+import DashboardFooter from "../../Components/DashboardFooter/DashboardFooter";
 const DashboardLayout = () => {
   const { user, logOut } = useAuth();
   const [role, roleLoading] = useRole();
@@ -47,8 +49,11 @@ const DashboardLayout = () => {
           </span>
         </div>
 
-        <div className="bg-gray-200 min-h-screen flex-grow  p-4 md:p-8">
+        <div className="flex flex-col justify-between">
+          <div className="bg-gray-200 min-h-screen p-4 md:p-8">
           <Outlet />
+          </div>
+          <DashboardFooter/>
         </div>
       </div>
       <div className="drawer-side">
@@ -57,7 +62,7 @@ const DashboardLayout = () => {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <ul className="menu bg-gray-700 min-h-full w-80 p-4 flex flex-col justify-between">
+        <ul className="menu bg-gray-700 min-h-full w-64 p-4 flex flex-col justify-between">
           <div>
             <Pothik />
             <div className="mt-4 space-y-2">
@@ -71,7 +76,6 @@ const DashboardLayout = () => {
               {role === "seller" && <SellerMenu closeSidebar={closeSidebar} />}
               {/* {role === "user" && } */}
               <UserMenu closeSidebar={closeSidebar} />
-              
             </div>
           </div>
           <div className="bg-gray-600 p-4 rounded space-y-2">
@@ -81,6 +85,9 @@ const DashboardLayout = () => {
               icon={FaUserSecret}
               onClick={closeSidebar}
             />
+
+            {role === "user" && <ApplySellerButton />}
+
             <li>
               <Link
                 onClick={handleLogOut}
