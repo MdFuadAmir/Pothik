@@ -18,8 +18,8 @@ const PendingSeller = () => {
     <div className="">
       <h2 className="text-2xl font-bold">Pending Seller Requests</h2>
       <p className="mb-6 text-sm text-gray-500">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro,
-        delectus?
+        When you accept the seller request to coppy this emai. and go to manage
+        users page and search the email and update to seller.
       </p>
 
       <div className="overflow-x-auto bg-white p-4 rounded-xl">
@@ -30,8 +30,8 @@ const PendingSeller = () => {
               <th>Email</th>
               <th>Phone</th>
               <th>Address</th>
+              <th>Requested Date</th>
               <th>Status</th>
-              <th>Requested At</th>
             </tr>
           </thead>
           <tbody>
@@ -55,7 +55,7 @@ const PendingSeller = () => {
                   </td>
                   <td>
                     {user.sellerRequestedAt
-                      ? new Date(user.sellerRequestedAt).toLocaleDateString()
+                      ? new Date(user.sellerRequestedAt).toLocaleString()
                       : "N/A"}
                   </td>
                 </tr>

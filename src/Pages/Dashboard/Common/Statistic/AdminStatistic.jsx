@@ -5,6 +5,7 @@ import {
   FaUserCheck,
   FaUserClock,
 } from "react-icons/fa";
+import { DateRange } from "react-date-range";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import Loading from "../../../../Components/Loading/Loading";
@@ -29,7 +30,6 @@ const StatCard = ({ icon, title, value, color }) => (
 const AdminStatistic = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
-
   const { data, isLoading } = useQuery({
     queryKey: ["admin-stat"],
     queryFn: async () => {
@@ -115,49 +115,54 @@ const AdminStatistic = () => {
         </div>
         {/* Users Growth Placeholder */}
         <div className="bg-white rounded-xl shadow h-[350px] flex justify-center items-center">
-          <GrothChart userGrowth={userGrowth}/>
+          <GrothChart userGrowth={userGrowth} />
         </div>
       </div>
 
       {/* Recent Seller Requests */}
-      <div className="bg-white rounded-xl shadow p-6">
-        <h3 className="text-lg font-bold mb-4">Recent Seller Requests</h3>
-        <div className="overflow-x-auto">
-          <table className="table">
-            <thead>
-              <tr className="bg-gray-100">
-                <th>#</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Status</th>
-                <th>Request Date</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {recentSellerRequests.length === 0 && (
-                <tr>
-                  <td colSpan="5" className="text-center py-6 text-gray-500">
-                    No seller requests found
-                  </td>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="p-4 rounded-xl bg-white">
+          <h3 className="text-lg font-bold mb-4">Recent Seller Requests</h3>
+          <div className="overflow-x-auto">
+            <table className="table">
+              <thead>
+                <tr className="bg-gray-100">
+                  <th>#</th>
+                  <th>Email</th>
+                  <th>Status</th>
+                  <th>Date</th>
                 </tr>
-              )}
-
-              {recentSellerRequests.map((req) => (
-                <tr key={req.id}>
-                  <td>{req.id}</td>
-                  <td>{req.name}</td>
-                  <td>{req.email}</td>
-                  <td>
-                    <span className="px-2 py-1 rounded text-xs bg-yellow-100 text-yellow-700">
-                      {req.status}
-                    </span>
-                  </td>
-                  <td>{new Date(req.date).toLocaleDateString()}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {recentSellerRequests.length === 0 && (
+                  <tr>
+                    <td colSpan="5" className="text-center py-6 text-gray-500">
+                      No seller requests found
+                    </td>
+                  </tr>
+                )}
+                {recentSellerRequests.map((req,index) => (
+                  <tr key={req.id} >
+                    <td>{index + 1}</td>
+                    <td>{req.email}</td>
+                    <td>
+                      <span className="px-2 py-1 rounded text-xs bg-yellow-100 text-yellow-700">
+                        {req.status}
+                      </span>
+                    </td>
+                    <td>{new Date(req.sellerRequestedAt).toLocaleDateString()}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div className="p-4 rounded-xl flex justify-center">
+          <DateRange
+            editableDateInputs={true}
+            moveRangeOnFirstSelection={false}
+            className="rounded"
+          />
         </div>
       </div>
     </div>

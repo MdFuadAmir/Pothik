@@ -1,21 +1,39 @@
+import { useEffect, useState } from "react";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
-import { useMutation, useQuery } from "@tanstack/react-query";
 import Loading from "../../../../Components/Loading/Loading";
+
 const ManageUsers = () => {
   const axiosSecure = useAxiosSecure();
+  const [search, setSearch] = useState(""); // live search input
+  const [debouncedSearch, setDebouncedSearch] = useState("");
+
+  // 🔹 Debounce setup (500ms)
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearch(search.trim());
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [search]);
+
+  // 🔹 Fetch users with live search
   const {
     data: users = [],
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["users"],
+    queryKey: ["users", debouncedSearch],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/users`);
+      const res = await axiosSecure.get(
+        `/users${debouncedSearch ? `?search=${debouncedSearch}` : ""}`
+      );
       return res.data;
     },
   });
 
+  // 🔹 Update user role mutation
   const { mutateAsync } = useMutation({
     mutationFn: async ({ email, role }) => {
       const { data } = await axiosSecure.patch(`/users/update/${email}`, {
@@ -25,7 +43,7 @@ const ManageUsers = () => {
     },
     onSuccess: () => {
       refetch();
-      toast.success("user update successfully");
+      toast.success("User role updated successfully");
     },
   });
 
@@ -33,15 +51,14 @@ const ManageUsers = () => {
     try {
       await mutateAsync({ email, role });
     } catch (error) {
+      toast.error("Failed to update role");
       console.log(error);
     }
   };
-  if (isLoading) {
-    return <Loading />;
-  }
 
   return (
-    <div>
+    <div className="">
+      {/* Header */}
       <div>
         <h2 className="text-2xl font-bold">Manage Your Users</h2>
         <p className="text-sm text-gray-500">
@@ -49,13 +66,25 @@ const ManageUsers = () => {
           Navigate, discover, and manage everything with ease.
         </p>
       </div>
-      <div className="overflow-x-auto mt-6  mx-auto bg-gray-100 rounded">
-        <table className="table">
-          {/* head */}
+
+      {/* Search input */}
+      <div className="my-4">
+        <input
+          type="text"
+          placeholder="Search by email"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="input input-bordered w-full md:w-1/2"
+        />
+      </div>
+
+      {/* Users Table */}
+      <div className="overflow-x-auto mt-6 mx-auto bg-gray-100 rounded">
+        <table className="table w-full">
           <thead className="bg-gray-700 text-white">
             <tr>
               <th>#</th>
-              <th>User Id</th>
+              <th>User ID</th>
               <th>Email</th>
               <th>Role</th>
               <th>Status</th>
@@ -63,55 +92,68 @@ const ManageUsers = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map((user, index) => (
-              <tr key={user._id}>
-                <th>{index + 1}</th>
-                <td>{user?._id}</td>
-                <td>{user?.email}</td>
-                <td>
-                  {user?.role === "user" ? (
-                    <span className="text-amber-700 bg-amber-200 px-2 py-1 rounded-full">
-                      {user?.role}
-                    </span>
-                  ) : user?.role === "seller" ? (
-                    <span className="text-red-700 bg-red-200 px-2 py-1 rounded-full">
-                      {user?.role}
-                    </span>
-                  ) : user?.role === "admin" ? (
-                    <span className="text-purple-700 bg-purple-200 px-2 py-1 rounded-full">
-                      {user?.role}
-                    </span>
-                  ) : (
-                    ""
-                  )}
-                </td>
-                <td>
-                  {user.status === "verified" ? (
-                    <span className="px-2 py-1 rounded-full bg-green-200 text-green-700">
-                      Verified
-                    </span>
-                  ) : (
-                    <span className="px-2 py-1 rounded-full bg-red-200 text-red-700">
-                      Requested
-                    </span>
-                  )}
-                </td>
-                <td>
-                  <select
-                    onChange={(sellected) =>
-                      handleRoleChange(user.email, sellected.target.value)
-                    }
-                    defaultValue="Update Role"
-                    className="select bg-gray-100 text-gray-600 text-xs"
-                  >
-                    <option disabled={true}>Update Role</option>
-                    <option value="user">User</option>
-                    <option value="seller">Seller</option>
-                    <option value="admin">Admin</option>
-                  </select>
+            {isLoading ? (
+              <tr>
+                <td
+                  colSpan={6}
+                  className="text-center py-6 text-gray-500 font-bold text-xl"
+                >
+                  <Loading />
                 </td>
               </tr>
-            ))}
+            ) : users.length === 0 ? (
+              <tr>
+                <td colSpan={6} className="text-center py-6 text-gray-500">
+                  No users found
+                </td>
+              </tr>
+            ) : (
+              users.map((user, index) => (
+                <tr key={user._id}>
+                  <th>{index + 1}</th>
+                  <td>{user._id}</td>
+                  <td>{user.email}</td>
+                  <td>
+                    <span
+                      className={`px-2 py-1 rounded-full text-xs ${
+                        user.role === "user"
+                          ? "bg-amber-200 text-amber-700"
+                          : user.role === "seller"
+                          ? "bg-red-200 text-red-700"
+                          : "bg-purple-200 text-purple-700"
+                      }`}
+                    >
+                      {user.role}
+                    </span>
+                  </td>
+                  <td>
+                    <span
+                      className={`px-2 py-1 rounded-full text-xs ${
+                        user.status === "verified"
+                          ? "bg-green-200 text-green-700"
+                          : "bg-red-200 text-red-700"
+                      }`}
+                    >
+                      {user.status === "verified" ? "Verified" : "Requested"}
+                    </span>
+                  </td>
+                  <td>
+                    <select
+                      onChange={(e) =>
+                        handleRoleChange(user.email, e.target.value)
+                      }
+                      defaultValue="Update Role"
+                      className="select bg-gray-100 text-gray-600 text-xs"
+                    >
+                      <option disabled>Update Role</option>
+                      <option value="user">User</option>
+                      <option value="seller">Seller</option>
+                      <option value="admin">Admin</option>
+                    </select>
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </div>
