@@ -25,7 +25,7 @@ const Products = () => {
         <ProCategory />
       </div>
       {isLoading ? (
-        <Loading />
+        <div className=" col-span-4"><Loading /></div>
       ) : (
         <div className="col-span-4">
           <div>

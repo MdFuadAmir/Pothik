@@ -2,11 +2,14 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import useAuth from "../../../../Hooks/useAuth";
 import toast from "react-hot-toast";
+import { useState } from "react";
+import ReviewModal from "../ReviewModal/ReviewModal";
 
 const MyOrders = () => {
   const axiosSecure = useAxiosSecure();
   const { user, loading } = useAuth();
   const queryClient = useQueryClient();
+  const [reviewData, setReviewData] = useState(null);
 
   const {
     data: orderData = [],
@@ -48,6 +51,14 @@ const MyOrders = () => {
     );
   }
 
+  const openReviewModal = (orderId, item) => {
+    setReviewData({
+      orderId,
+      productId: item.productId,
+      title: item.title,
+    });
+  };
+
   if (isLoading || loading) return <p>Loading...</p>;
   if (error) return <p>Error loading orders</p>;
 
@@ -59,7 +70,6 @@ const MyOrders = () => {
           this is your order history and recent order list
         </p>
       </div>
-
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {orderData.map((order) => (
           <div
@@ -89,19 +99,29 @@ const MyOrders = () => {
               {order.items.map((item) => (
                 <div
                   key={item._id}
-                  className="flex items-center gap-3 border-b pb-2"
+                  className="flex justify-between items-center gap-3 border-b pb-2"
                 >
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="w-14 h-14 object-cover rounded"
-                  />
-                  <div className="text-sm">
-                    <p className="font-medium">{item.title}</p>
-                    <p className="text-gray-500 text-xs">
-                      Qty: {item.quantity}
-                    </p>
+                  <div className="flex gap-2 items-center">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="w-14 h-14 object-cover rounded"
+                    />
+                    <div className="text-sm ">
+                      <p className="font-medium">{item.title}</p>
+                      <p className="text-gray-500 text-xs">
+                        Qty: {item.quantity}
+                      </p>
+                    </div>
                   </div>
+                  {order.status === "delivered" && (
+                    <button
+                      onClick={() => openReviewModal(order._id, item)}
+                      className="text-xs px-3 py-1 bg-green-500 text-white rounded"
+                    >
+                      Review
+                    </button>
+                  )}
                 </div>
               ))}
             </div>
@@ -128,13 +148,7 @@ const MyOrders = () => {
 
             {/* Action */}
             {order.status === "delivered" ? (
-              <button
-              disabled
-                onClick={() => cancelOrder.mutate(order._id)}
-                className="btn btn-sm bg-red-500 text-white w-full"
-              >
-                Cancel Order
-              </button>
+              ""
             ) : (
               <button
                 onClick={() => cancelOrder.mutate(order._id)}
@@ -146,6 +160,12 @@ const MyOrders = () => {
           </div>
         ))}
       </div>
+      {reviewData && (
+        <ReviewModal
+          reviewData={reviewData}
+          closeModal={() => setReviewData(null)}
+        />
+      )}
     </div>
   );
 };

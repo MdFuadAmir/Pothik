@@ -47,6 +47,7 @@ const AddProduct = () => {
     setUploading(false);
   };
   
+  
   const onSubmit = async (data) => {
     const finalData = {
       ...data,

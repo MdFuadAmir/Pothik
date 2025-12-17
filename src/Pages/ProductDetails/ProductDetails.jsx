@@ -7,6 +7,7 @@ import { useState } from "react";
 import useAuth from "../../Hooks/useAuth";
 import toast from "react-hot-toast";
 import useCart from "../../Hooks/useCart";
+import Reviews from "../Reviews/Reviews";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -14,7 +15,6 @@ const ProductDetails = () => {
   const { user } = useAuth();
   const [mainImage, setMainImage] = useState(0);
   const navigate = useNavigate();
-
   const { cartRefetch } = useCart();
 
   const { data: product, isLoading } = useQuery({
@@ -25,7 +25,6 @@ const ProductDetails = () => {
     },
     enabled: !!id,
   });
-
   const handleAddToCart = async () => {
     if (!user) {
       navigate("/login");
@@ -42,9 +41,9 @@ const ProductDetails = () => {
       productName: product?.productName,
       price: price,
       image: product.images[0],
-      email:user?.email, //user er email ba buyer email
-      sellerEmail:product.email,
-      status:"pending",
+      email: user?.email,
+      sellerEmail: product.email,
+      status: "pending",
       quantity: 1,
     };
 
@@ -52,18 +51,17 @@ const ProductDetails = () => {
       const res = await axiosInstance.post("/cart", cartItem);
       if (res?.data?.insertedId) {
         toast.success("Add to cart successfully!");
-        console.log(res.data);
+
         cartRefetch();
       }
     } catch (error) {
-      console.log(error);
+      toast.error(error.message);
     }
   };
 
   if (isLoading) {
     return <Loading />;
   }
-console.log(product);
   return (
     <div className="my-6 max-w-4xl mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -115,7 +113,8 @@ console.log(product);
             In Stock: <span className="font-semibold">{product?.stockQua}</span>
           </p>
           <p className="text-sm text-gray-600">
-            seller email: <span className="font-semibold">{product?.email}</span>
+            seller email:{" "}
+            <span className="font-semibold">{product?.email}</span>
           </p>
           <p className="text-sm text-gray-700">
             Brand: <span className="font-semibold">{product?.brand}</span>
@@ -180,8 +179,9 @@ console.log(product);
         <p className="text-sm">{product?.longDescription}</p>
       </div>
       <div className="my-12 p-4 border rounded">
-        <h2>Reviews</h2>
+        <Reviews productId={product._id}/>
       </div>
+      
     </div>
   );
 };
