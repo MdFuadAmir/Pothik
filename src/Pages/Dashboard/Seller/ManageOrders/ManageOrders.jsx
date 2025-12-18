@@ -5,6 +5,7 @@ import Loading from "../../../../Components/Loading/Loading";
 import { FaEye } from "react-icons/fa";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import CompoLoading from "../../../../Components/CompoLoading/CompoLoading";
 
 const statusFlow = [
   "pending",
@@ -55,7 +56,7 @@ const ManageOrders = () => {
     }
   };
 
-  if (isLoading) return <Loading />;
+  if (isLoading) return <CompoLoading />;
 
   return (
     <div>

@@ -8,6 +8,7 @@ import useAuth from "../../Hooks/useAuth";
 import toast from "react-hot-toast";
 import useCart from "../../Hooks/useCart";
 import Reviews from "../Reviews/Reviews";
+import CompoLoading from "../../Components/CompoLoading/CompoLoading";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -60,7 +61,7 @@ const ProductDetails = () => {
   };
 
   if (isLoading) {
-    return <Loading />;
+    return <CompoLoading />;
   }
   return (
     <div className="my-6 max-w-4xl mx-auto">
@@ -110,15 +111,22 @@ const ProductDetails = () => {
             )}
           </div>
           <p className="text-sm text-gray-600">
-            In Stock: <span className="font-semibold">{product?.stockQua}</span>
-          </p>
-          <p className="text-sm text-gray-600">
-            seller email:{" "}
-            <span className="font-semibold">{product?.email}</span>
+            In Stock:{" "}
+            <span
+              className={`font-semibold ${
+                product?.stockQua > 0 ? "text-green-600" : "text-red-600"
+              }`}
+            >
+              {product?.stockQua > 0 ? product.stockQua : "Out of Stock"}
+            </span>
           </p>
           <p className="text-sm text-gray-700">
             Brand: <span className="font-semibold">{product?.brand}</span>
           </p>
+          {product?.model && <p className="text-sm text-gray-700">
+            Model: <span className="font-semibold">{product?.model}</span>
+          </p>}
+          
           {product?.size && (
             <p className="text-sm text-gray-700">
               Size: <span className="font-semibold">{product?.size}</span>
@@ -168,7 +176,13 @@ const ProductDetails = () => {
           </div>
           <button
             onClick={handleAddToCart}
-            className="px-6 py-2 w-full cursor-pointer md:w-1/2 mx-auto border-2 mt-4 rounded hover:bg-gray-400 hover:text-white"
+            disabled={Number(product?.stockQua) === 0} 
+            className={`px-6 py-2 w-full md:w-1/2 mx-auto mt-4 rounded border-2
+    ${
+      Number(product?.stockQua) === 0
+        ? "bg-gray-300 cursor-not-allowed text-gray-500"
+        : "hover:bg-gray-400 hover:text-white cursor-pointer"
+    }`}
           >
             Add to Cart
           </button>
@@ -179,9 +193,8 @@ const ProductDetails = () => {
         <p className="text-sm">{product?.longDescription}</p>
       </div>
       <div className="my-12 p-4 border rounded">
-        <Reviews productId={product._id}/>
+        <Reviews productId={product._id} />
       </div>
-      
     </div>
   );
 };

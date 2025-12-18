@@ -4,8 +4,8 @@ import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { DateRange } from "react-date-range";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
-import Loading from "../../../../Components/Loading/Loading";
 import { useQuery } from "@tanstack/react-query";
+import CompoLoading from "../../../../Components/CompoLoading/CompoLoading";
 const UserStatistic = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
@@ -26,12 +26,12 @@ const UserStatistic = () => {
   });
 
   if (isLoading) {
-    return <Loading />;
+    return <CompoLoading />;
   }
   return (
     <div className="w-full space-y-6">
       {/* Header */}
-      <div className="flex flex-col md:flex-row justify-between gap-4">
+      <div className="flex flex-col md:flex-row justify-between md:items-center gap-4">
         <div>
           <h1 className="text-2xl font-semibold">My Dashboard</h1>
           <p className="text-sm text-gray-500 max-w-2xl">

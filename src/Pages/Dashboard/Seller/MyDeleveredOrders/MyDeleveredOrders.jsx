@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import useAuth from "../../../../Hooks/useAuth";
 import Loading from "../../../../Components/Loading/Loading";
+import CompoLoading from "../../../../Components/CompoLoading/CompoLoading";
 
 const MyDeliveredOrders = () => {
   const axiosSecure = useAxiosSecure();
@@ -15,7 +16,7 @@ const MyDeliveredOrders = () => {
     enabled: !!user?.email,
   });
 
-  if (isLoading) return <Loading />;
+  if (isLoading) return <CompoLoading />;
 
   // Flatten safe rows (only delivered items)
   const rows = orders.flatMap((order) =>

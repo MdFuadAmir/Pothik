@@ -10,17 +10,13 @@ const ApplySellerButton = () => {
       const res = await axiosSecure.patch("/users/apply-seller");
       if (res.data.success) {
         toast.success(res.data.message || "Request sent!");
-
       }
     } catch (error) {
       toast.error(
-        error?.response?.data?.message ||
-        "Failed to send seller request"
+        error?.response?.data?.message || "Failed to send seller request"
       );
     }
   };
-
-
   return (
     <li>
       <button

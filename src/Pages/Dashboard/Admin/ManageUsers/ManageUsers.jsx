@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
-import Loading from "../../../../Components/Loading/Loading";
+import CompoLoading from "../../../../Components/CompoLoading/CompoLoading";
 
 const ManageUsers = () => {
   const axiosSecure = useAxiosSecure();
@@ -98,7 +98,7 @@ const ManageUsers = () => {
                   colSpan={6}
                   className="text-center py-6 text-gray-500 font-bold text-xl"
                 >
-                  <Loading />
+                  <CompoLoading />
                 </td>
               </tr>
             ) : users.length === 0 ? (

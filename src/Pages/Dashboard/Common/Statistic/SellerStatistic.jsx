@@ -9,11 +9,11 @@ import {
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import useAuth from "../../../../Hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
-import Loading from "../../../../Components/Loading/Loading";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { DateRange } from "react-date-range";
 import BarChart from "../BarChart/BarChart";
+import CompoLoading from "../../../../Components/CompoLoading/CompoLoading";
 
 const SellerStatistic = () => {
   const axiosSecure = useAxiosSecure();
@@ -26,7 +26,7 @@ const SellerStatistic = () => {
       (await axiosSecure.get(`/seller/stat/${user.email}`)).data,
   });
 
-  if (isLoading) return <Loading />;
+  if (isLoading) return <CompoLoading />;
   if (error) return <p className="text-red-500">Failed to load data</p>;
 
   // ✅ SAFE destructuring
@@ -45,7 +45,7 @@ const SellerStatistic = () => {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col md:flex-row gap-4 justify-between items-center">
+      <div className="flex flex-col md:flex-row gap-4 justify-between md:items-center">
         <div>
           <h1 className="text-2xl md:text-3xl font-bold">Seller Dashboard</h1>
           <p className="text-gray-600 mt-1">
@@ -148,7 +148,6 @@ const SellerStatistic = () => {
           />
         </div>
       </div>
-      {/* chart and calender end*/}
 
       {/* Recent Orders */}
       <div className="bg-white rounded-xl shadow p-6 overflow-x-auto">

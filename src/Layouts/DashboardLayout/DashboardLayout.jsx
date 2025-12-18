@@ -6,7 +6,7 @@ import Loading from "../../Components/Loading/Loading";
 import DashboardMenu from "./DashboardMenu/DashboardMenu";
 import AdminMenu from "./DashboardMenu/AdminMenu";
 import SellerMenu from "./DashboardMenu/SellerMenu";
-import { FaSignOutAlt, FaUserSecret } from "react-icons/fa";
+import { FaAlignJustify, FaSignOutAlt, FaUserSecret } from "react-icons/fa";
 import { IoIosStats } from "react-icons/io";
 import UserMenu from "./DashboardMenu/UserMenu";
 import toast from "react-hot-toast";
@@ -17,12 +17,13 @@ import DashboardFooter from "../../Components/DashboardFooter/DashboardFooter";
 
 
 const DashboardLayout = () => {
-  const { user, logOut } = useAuth();
+  const { logOut } = useAuth();
   const [role, roleLoading] = useRole();
   const closeSidebar = () => {
     const drawer = document.getElementById("my-drawer-2");
     if (drawer) drawer.checked = false;
   };
+
   const handleLogOut = () => {
     logOut()
       .then(() => {
@@ -43,13 +44,12 @@ const DashboardLayout = () => {
       {/* Main content */}
       <div className="drawer-content flex flex-col">
         {/* Mobile Navbar */}
-
-        <div className="navbar bg-base-300 sticky top-0 z-50 lg:hidden">
+        <div className="navbar bg-gray-400 sticky top-0 z-50 lg:hidden flex flex-row-reverse">
           <label htmlFor="my-drawer-2" className="btn btn-square btn-ghost">
-            ☰
+            <FaAlignJustify size={20}/>
           </label>
           <span className="mx-2 flex-1 text-green-600 font-semibold">
-            {user.displayName}
+           <Pothik/>
           </span>
         </div>
 
@@ -78,7 +78,6 @@ const DashboardLayout = () => {
               />
               {role === "admin" && <AdminMenu closeSidebar={closeSidebar} />}
               {role === "seller" && <SellerMenu closeSidebar={closeSidebar} />}
-              {/* {role === "user" && } */}
               <UserMenu closeSidebar={closeSidebar} />
             </div>
           </div>

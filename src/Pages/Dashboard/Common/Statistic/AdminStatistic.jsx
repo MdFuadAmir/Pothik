@@ -8,10 +8,10 @@ import {
 import { DateRange } from "react-date-range";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
-import Loading from "../../../../Components/Loading/Loading";
 import useAuth from "../../../../Hooks/useAuth";
 import GrothChart from "../../Admin/GrothChart/GrothChart";
 import RevenueChart from "../../Admin/RevenueChart/RevenueChart";
+import CompoLoading from "../../../../Components/CompoLoading/CompoLoading";
 
 const StatCard = ({ icon, title, value, color }) => (
   <div className="bg-white rounded-xl shadow p-5 flex items-center gap-4">
@@ -38,7 +38,7 @@ const AdminStatistic = () => {
     },
   });
 
-  if (isLoading) return <Loading />;
+  if (isLoading) return <CompoLoading />;
 
   const {
     totalUsers,
@@ -54,7 +54,7 @@ const AdminStatistic = () => {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex justify-between items-center gap-4 flex-col md:flex-row">
+      <div className="flex justify-between md:items-center gap-4 flex-col md:flex-row">
         <div>
           <h1 className="text-2xl md:text-3xl font-bold">Admin Dashboard</h1>
           <p className="text-gray-600 mt-1 text-sm">

@@ -1,10 +1,10 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import useAuth from "../../../../Hooks/useAuth";
-import Loading from "../../../../Components/Loading/Loading";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import Card from "../Card/Card";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
+import CompoLoading from "../../../../Components/CompoLoading/CompoLoading";
 
 const MyShop = () => {
   const { user } = useAuth();
@@ -12,7 +12,7 @@ const MyShop = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const { data: products = [], isLoading } = useQuery({
+  const { data: products = [], isLoading,refetch } = useQuery({
     queryKey: ["product", user?.email],
     queryFn: async () => {
       const res = await axiosSecure.get(`/products?email=${user.email}`);
@@ -23,6 +23,7 @@ const MyShop = () => {
 
   const handleUpdate = (product) => {
     navigate(`/dashboard/update-product/${product._id}`);
+    refetch();
   };
 
   const deleteMutation = useMutation({
@@ -33,6 +34,7 @@ const MyShop = () => {
     onSuccess: () => {
       queryClient.invalidateQueries(["product", user?.email]);
       toast.success("Product deleted successfully!");
+      refetch()
     },
     onError: () => {
       toast.error("Failed to delete product");
@@ -40,9 +42,10 @@ const MyShop = () => {
   });
   const handleDelete = (id) => {
     deleteMutation.mutate(id);
+    refetch()
   };
   if (isLoading) {
-    return <Loading />;
+    return <CompoLoading />;
   }
   return (
     <div>

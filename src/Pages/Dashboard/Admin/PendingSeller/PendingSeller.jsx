@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
-import Loading from "../../../../Components/Loading/Loading";
+import CompoLoading from "../../../../Components/CompoLoading/CompoLoading";
 
 const PendingSeller = () => {
   const axiosSecure = useAxiosSecure();
@@ -13,7 +13,7 @@ const PendingSeller = () => {
     },
   });
 
-  if (isLoading) return <Loading />;
+  if (isLoading) return <CompoLoading />;
   return (
     <div className="">
       <h2 className="text-2xl font-bold">Pending Seller Requests</h2>

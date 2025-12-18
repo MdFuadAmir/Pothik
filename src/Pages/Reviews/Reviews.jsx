@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
-import Loading from "../../Components/Loading/Loading";
+import CompoLoading from "../../Components/CompoLoading/CompoLoading";
 
 const Reviews = ({ productId }) => {
   const axiosSecure = useAxiosSecure();
@@ -19,7 +19,7 @@ const Reviews = ({ productId }) => {
     enabled: !!productId,
   });
 
-  if (isLoading) return <Loading />;
+  if (isLoading) return <CompoLoading />;
 
   if (error) return <p className="text-red-500">Failed to load reviews</p>;
 

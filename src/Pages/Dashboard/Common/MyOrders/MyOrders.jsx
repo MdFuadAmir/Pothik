@@ -4,6 +4,7 @@ import useAuth from "../../../../Hooks/useAuth";
 import toast from "react-hot-toast";
 import { useState } from "react";
 import ReviewModal from "../ReviewModal/ReviewModal";
+import CompoLoading from "../../../../Components/CompoLoading/CompoLoading";
 
 const MyOrders = () => {
   const axiosSecure = useAxiosSecure();
@@ -59,7 +60,7 @@ const MyOrders = () => {
     });
   };
 
-  if (isLoading || loading) return <p>Loading...</p>;
+  if (isLoading || loading) return <CompoLoading/>;
   if (error) return <p>Error loading orders</p>;
 
   return (

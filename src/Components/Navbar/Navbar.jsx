@@ -1,12 +1,21 @@
 import { Link, NavLink } from "react-router";
 import Pothik from "../../Shared/Pothik/Pothik";
 import useAuth from "../../Hooks/useAuth";
-import { FaCartPlus, FaSignInAlt, FaSignOutAlt, FaUser } from "react-icons/fa";
+import {
+  FaAlignJustify,
+  FaCartPlus,
+  FaSignInAlt,
+  FaSignOutAlt,
+  FaTimes,
+  FaUser,
+} from "react-icons/fa";
 import toast from "react-hot-toast";
 import useCart from "../../Hooks/useCart";
+
 const Navbar = () => {
   const { user, logOut } = useAuth();
   const { cart } = useCart();
+
   const handleLogOut = () => {
     logOut()
       .then(() => {
@@ -24,7 +33,7 @@ const Navbar = () => {
         <NavLink
           to={"/"}
           className={({ isActive }) =>
-            `pb-1 border-b-2 transition-all duration-300 ${
+            `pb-1 border-b-2 transition-all duration-300 rounded-none ${
               isActive
                 ? "border-blue-500 text-blue-500"
                 : "border-transparent text-gray-700"
@@ -38,7 +47,7 @@ const Navbar = () => {
         <NavLink
           to={"/products"}
           className={({ isActive }) =>
-            `pb-1 border-b-2 transition-all duration-300 ${
+            `pb-1 border-b-2 transition-all duration-300 rounded-none ${
               isActive
                 ? "border-blue-500 text-blue-500"
                 : "border-transparent text-gray-700"
@@ -52,7 +61,7 @@ const Navbar = () => {
         <NavLink
           to={"/about"}
           className={({ isActive }) =>
-            `pb-1 border-b-2 transition-all duration-300 ${
+            `pb-1 border-b-2 transition-all duration-300 rounded-none ${
               isActive
                 ? "border-blue-500 text-blue-500"
                 : "border-transparent text-gray-700"
@@ -66,7 +75,7 @@ const Navbar = () => {
         <NavLink
           to={"/contact"}
           className={({ isActive }) =>
-            `pb-1 border-b-2 transition-all duration-300 ${
+            `pb-1 border-b-2 transition-all duration-300 rounded-none ${
               isActive
                 ? "border-blue-500 text-blue-500"
                 : "border-transparent text-gray-700"
@@ -80,37 +89,27 @@ const Navbar = () => {
   );
   return (
     <div className="fixed top-0 left-0 z-50 navbar px-4 md:px-10 lg:px-20 mx-auto bg-gray-200">
+      {/* nav start */}
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              {" "}
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h8m-8 6h16"
-              />{" "}
-            </svg>
+            <FaAlignJustify size={20} />
           </div>
+
           <ul
             tabIndex="-1"
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+            className="menu menu-lg dropdown-content bg-base-100 rounded-box z-1 mt-3 min-w-64 p-2 shadow"
           >
             {navLinks}
           </ul>
         </div>
         <Pothik />
       </div>
+      {/* nav center */}
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{navLinks}</ul>
       </div>
+      {/* nav end */}
       <div className="navbar-end">
         <div className="flex items-center gap-2 md:gap-6">
           <div>
@@ -125,14 +124,14 @@ const Navbar = () => {
             {user ? (
               <Link
                 onClick={handleLogOut}
-                className="flex items-center text-xs px-2 py-1 rounded gap-1 border border-red-300 text-red-500"
+                className="flex items-center text-xs px-2 py-1 rounded gap-1 border border-red-500 text-red-500 hover:bg-red-200 "
               >
                 <FaSignOutAlt /> LogOut
               </Link>
             ) : (
               <Link
                 to={"/login"}
-                className="flex items-center text-xs px-2 py-1 rounded gap-1 border border-green-500 text-green-500"
+                className="flex items-center text-xs px-2 py-1 rounded gap-1 border border-green-500 text-green-500 hover:bg-green-200"
               >
                 <FaSignInAlt /> Login
               </Link>
@@ -140,12 +139,12 @@ const Navbar = () => {
           </div>
           <div className="border rounded-full">
             {user ? (
-              <Link to={'/dashboard'}>
-              <img
-                src={user?.photoURL}
-                alt="photo"
-                className="w-10 h-10 rounded-full"
-              />
+              <Link to={"/dashboard"}>
+                <img
+                  src={user?.photoURL}
+                  alt="photo"
+                  className="w-10 h-10 rounded-full"
+                />
               </Link>
             ) : (
               <FaUser className="w-10 h-10 p-2" />
