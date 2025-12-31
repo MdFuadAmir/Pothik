@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 const CompoLoading = () => {
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center text-white">
+    <div className="min-h-screen flex flex-col justify-center items-center text-white dark:bg-gray-800">
       <motion.h1
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}

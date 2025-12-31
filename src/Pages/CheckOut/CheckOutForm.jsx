@@ -35,7 +35,7 @@ const CheckOutForm = ({ setMethods }) => {
     <div className="space-y-2 p-4 md:p-6 rounded">
       {/* First Name */}
       <div className="flex flex-col space-y-1">
-        <label className="text-sm font-md">First Name</label>
+        <label className="text-sm font-md dark:text-white">First Name</label>
         <input
           type="text"
           placeholder="full name.."
@@ -49,7 +49,7 @@ const CheckOutForm = ({ setMethods }) => {
 
       {/* Email */}
       <div>
-        <label className="text-sm font-md">Email</label>
+        <label className="text-sm font-md dark:text-white">Email</label>
         <input
           type="email"
           {...register("email")}
@@ -60,7 +60,7 @@ const CheckOutForm = ({ setMethods }) => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2">
         {/* Street */}
         <div>
-          <label className="text-sm font-md">Street</label>
+          <label className="text-sm font-md dark:text-white">Street</label>
           <input
             type="text"
             placeholder="street.."
@@ -73,7 +73,7 @@ const CheckOutForm = ({ setMethods }) => {
         </div>
         {/* City */}
         <div>
-          <label className="text-sm font-md">City</label>
+          <label className="text-sm font-md dark:text-white">City</label>
           <input
             type="text"
             placeholder="city.."
@@ -86,7 +86,7 @@ const CheckOutForm = ({ setMethods }) => {
         </div>
         {/* Zip Code */}
         <div>
-          <label className="text-sm font-md">Zip Code</label>
+          <label className="text-sm font-md dark:text-white">Zip Code</label>
           <input
             type="number"
             placeholder="zip code.."
@@ -99,7 +99,7 @@ const CheckOutForm = ({ setMethods }) => {
         </div>
         {/* Phone */}
         <div>
-          <label className="text-sm font-md">Phone Number</label>
+          <label className="text-sm font-md dark:text-white">Phone Number</label>
           <input
             type="tel"
             defaultValue={dbUser?.phone}
@@ -111,7 +111,7 @@ const CheckOutForm = ({ setMethods }) => {
 
       {/* Full Address */}
       <div className="flex flex-col">
-        <label className="text-sm font-md">Full Address</label>
+        <label className="text-sm font-md dark:text-white">Full Address</label>
         <input
           type="text"
           defaultValue={dbUser?.address}

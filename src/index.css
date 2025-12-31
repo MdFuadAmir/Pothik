@@ -2,6 +2,8 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 .arvo-regular {
   font-family: "Arvo", serif;
   font-weight: 400;

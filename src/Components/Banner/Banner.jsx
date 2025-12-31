@@ -1,78 +1,15 @@
-// import { Carousel } from "react-responsive-carousel";
-// import "react-responsive-carousel/lib/styles/carousel.min.css";
-
-// const Banner = () => {
-//   return (
-//     <div className="rounded-lg overflow-hidden mt-6">
-//       <Carousel
-//         showThumbs={false}
-//         autoPlay
-//         infiniteLoop
-//         showStatus={false}
-//         interval={4000}
-//         transitionTime={1000}
-//       >
-//         {/* Slide - 3 */}
-//         <div className="h-[300px] rounded-xl bg-blue-500 px-4 md:px-8 flex flex-col justify-center text-white overflow-hidden">
-//           <h1 className="text-2xl md:text-4xl font-bold mb-2">
-//             Mega Electronics Sale
-//           </h1>
-//           <p className="text-sm md:text-lg max-w-md opacity-90 mb-4 mx-auto">
-//             Up to 60% off on mobiles, laptops, cameras & more. Grab the best
-//             deals today!
-//           </p>
-
-//           <button className="border border-white px-5 py-1.5 md:py-2 rounded-md text-sm md:text-base hover:bg-white hover:text-blue-600 transition font-semibold w-fit mx-auto">
-//             Shop Now
-//           </button>
-//         </div>
-//         {/* Slide - 2 */}
-//         <div className="h-[300px]  rounded-xl bg-indigo-500 px-6 md:px-10 flex flex-col justify-center text-white">
-//           <h1 className="text-2xl md:text-4xl font-bold mb-2">
-//             Fashion Fest 2025
-//           </h1>
-//           <p className="text-sm md:text-lg max-w-md mx-auto opacity-90 mb-4">
-//             New collections for men & women. Premium styles at the best prices.
-//           </p>
-//           <button className="border border-white px-5 py-1.5 md:py-2 rounded-md hover:bg-white hover:text-indigo-600 transition mx-auto font-semibold w-fit">
-//             Explore Fashion
-//           </button>
-//         </div>
-//         {/* Slide - 3 */}
-//         <div className="h-[300px] rounded-xl bg-teal-500 px-6 md:px-10 flex flex-col justify-center text-white">
-//           <h1 className="text-2xl md:text-4xl font-bold mb-2">
-//             Home Appliance Deals
-//           </h1>
-//           <p className="text-sm md:text-lg mx-auto max-w-md opacity-90 mb-4">
-//             Save big on refrigerators, ACs, kitchen appliances & more.
-//           </p>
-//           <button className="border border-white px-5 py-1.5 md:py-2 rounded-md hover:bg-white hover:text-teal-600 mx-auto transition font-semibold w-fit">
-//             View Offers
-//           </button>
-//         </div>
-
-//         {/* Slide - 4 */}
-//         <div className="h-[300px] rounded-xl  bg-cyan-500 px-6 md:px-10 flex flex-col justify-center text-white">
-//           <h1 className="text-2xl md:text-4xl font-bold mb-2">
-//             Super Deals on Accessories
-//           </h1>
-//           <p className="text-sm md:text-lg mx-auto max-w-md opacity-90 mb-4">
-//             Headphones, smartwatches, speakers & more at the lowest prices.
-//           </p>
-//           <button className="border border-white mx-auto px-5 py-1.5 md:py-2 rounded-md hover:bg-white hover:text-cyan-600 transition font-semibold w-fit">
-//             Check Accessories
-//           </button>
-//         </div>
-//       </Carousel>
-//     </div>
-//   );
-// };
-
-// export default Banner;
-
-
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+
+import img1 from "../../assets/HomeBanner/img1.jpg";
+import img2 from "../../assets/HomeBanner/img2.jpg";
+import img3 from "../../assets/HomeBanner/img3.jpg";
+import img4 from "../../assets/HomeBanner/img5.jpg";
+import img5 from "../../assets/HomeBanner/img6.jpg";
+import img6 from "../../assets/HomeBanner/img7.jpg";
+import img7 from "../../assets/HomeBanner/img8.png";
+import img8 from "../../assets/HomeBanner/img9.png";
+import { Link } from "react-router";
 
 const Banner = () => {
   return (
@@ -85,67 +22,97 @@ const Banner = () => {
         interval={3500}
         transitionTime={900}
       >
-        {/* Slide 1 */}
-        <div className="h-[300px] md:h-[420px] flex items-center justify-center bg-gradient-to-r from-blue-600 to-indigo-500 text-white px-5">
-          <div className="max-w-xl mx-auto text-center">
-            <h1 className="text-3xl md:text-5xl font-extrabold mb-3">
-              Mega Electronics Sale
-            </h1>
-            <p className="text-sm md:text-lg opacity-90 mb-5">
-              Up to 60% off on mobiles, laptops, TVs & cameras.  
-              Upgrade your gadgets today!
-            </p>
-            <button className="bg-white text-blue-600 px-6 py-2 rounded-lg font-semibold hover:bg-gray-200 transition">
-              Shop Now
-            </button>
+        {/* Slide Template */}
+        {[
+          {
+            img: img1,
+            title: "Upgrade Your Tech",
+            desc: "Latest smartphones, laptops & gadgets at best deals.",
+            link: "/products?category=Electronics",
+            btnText: "Shop Electronics",
+            btnColor: "text-blue-600",
+          },
+          {
+            img: img2,
+            title: "Style That Defines You",
+            desc: "Discover modern fashion for everyday lifestyle.",
+            link: "/products?category=Fashion",
+            btnText: "Browse Fashion",
+            btnColor: "text-purple-600",
+          },
+          {
+            img: img3,
+            title: "Smart Home Essentials",
+            desc: "Appliances that make your home more comfortable.",
+            link: "/products",
+            btnText: "View Appliances",
+            btnColor: "text-teal-600",
+          },
+          {
+            img: img4,
+            title: "Everyday Accessories",
+            desc: "Essential items designed for daily convenience.",
+            link: "/products",
+            btnText: "Shop Accessories",
+            btnColor: "text-sky-600",
+          },
+          {
+            img: img5,
+            title: "Gaming & Entertainment",
+            desc: "Experience high-quality gaming & sound gear.",
+            link: "/products",
+            btnText: "Explore Now",
+            btnColor: "text-sky-600",
+          },
+          {
+            img: img6,
+            title: "Work & Productivity",
+            desc: "Tools that help you work smarter every day.",
+            link: "/products",
+            btnText: "View Collection",
+            btnColor: "text-sky-600",
+          },
+          {
+            img: img7,
+            title: "Mobile Must-Haves",
+            desc: "Power, protect & personalize your device.",
+            link: "/products?category=Mobiles",
+            btnText: "Shop Mobile Gear",
+            btnColor: "text-sky-600",
+          },
+          {
+            img: img8,
+            title: "Essentials for Everyone",
+            desc: "Quality products that fit your daily needs.",
+            link: "/products",
+            btnText: "Start Shopping",
+            btnColor: "text-sky-600",
+          },
+        ].map((slide, index) => (
+          <div
+            key={index}
+            className="h-[300px] md:h-[420px] bg-cover bg-center flex items-center justify-center"
+            style={{ backgroundImage: `url(${slide.img})` }}
+          >
+            {/* Overlay with dark/light support */}
+            <div className="bg-black/40 dark:bg-black/70 w-full h-full flex items-center justify-center px-5 transition-colors duration-500">
+              <div className="max-w-xl text-center text-white">
+                <h1 className="text-3xl md:text-5xl font-extrabold mb-3">
+                  {slide.title}
+                </h1>
+                <p className="text-sm md:text-lg opacity-90 mb-5">
+                  {slide.desc}
+                </p>
+                <Link
+                  to={slide.link}
+                  className={`bg-white dark:bg-gray-200 ${slide.btnColor} dark:text-gray-800 px-6 py-2 rounded-lg font-semibold hover:bg-gray-200 dark:hover:bg-gray-300 transition`}
+                >
+                  {slide.btnText}
+                </Link>
+              </div>
+            </div>
           </div>
-        </div>
-
-        {/* Slide 2 */}
-        <div className="h-[300px] md:h-[420px] flex items-center justify-center bg-gradient-to-r from-pink-500 to-purple-600 text-white px-5">
-          <div className="max-w-xl mx-auto text-center">
-            <h1 className="text-3xl md:text-5xl font-extrabold mb-3">
-              Fashion Fest 2025
-            </h1>
-            <p className="text-sm md:text-lg opacity-90 mb-5">
-              Trendy outfits for men & women.  
-              Premium designs at unbeatable prices.
-            </p>
-            <button className="bg-white text-purple-600 px-6 py-2 rounded-lg font-semibold hover:bg-gray-200 transition">
-              Explore Fashion
-            </button>
-          </div>
-        </div>
-
-        {/* Slide 3 */}
-        <div className="h-[300px] md:h-[420px] flex items-center justify-center bg-gradient-to-r from-teal-400 to-emerald-600 text-white px-5">
-          <div className="max-w-xl mx-auto text-center">
-            <h1 className="text-3xl md:text-5xl font-extrabold mb-3">
-              Home Appliance Deals
-            </h1>
-            <p className="text-sm md:text-lg opacity-90 mb-5">
-              Huge discounts on ACs, Refrigerators & Kitchen appliances!
-            </p>
-            <button className="bg-white text-teal-700 px-6 py-2 rounded-lg font-semibold hover:bg-gray-200 transition">
-              View Offers
-            </button>
-          </div>
-        </div>
-
-        {/* Slide 4 */}
-        <div className="h-[300px] md:h-[420px] flex items-center justify-center bg-gradient-to-r from-cyan-400 to-sky-600 text-white px-5">
-          <div className="max-w-xl mx-auto text-center">
-            <h1 className="text-3xl md:text-5xl font-extrabold mb-3">
-              Accessories Super Deals
-            </h1>
-            <p className="text-sm md:text-lg opacity-90 mb-5">
-              Best prices on headphones, watches, speakers & gaming gear.
-            </p>
-            <button className="bg-white text-sky-700 px-6 py-2 rounded-lg font-semibold hover:bg-gray-200 transition">
-              Check Now
-            </button>
-          </div>
-        </div>
+        ))}
       </Carousel>
     </div>
   );

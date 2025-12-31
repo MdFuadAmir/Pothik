@@ -1,7 +1,6 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import useAuth from "../../../../Hooks/useAuth";
-import Loading from "../../../../Components/Loading/Loading";
 import { FaEye } from "react-icons/fa";
 import { useState } from "react";
 import toast from "react-hot-toast";
@@ -29,7 +28,7 @@ const ManageOrders = () => {
   const queryClient = useQueryClient();
   const [selectedItem, setSelectedItem] = useState(null);
 
-  const { data: orders = [], isLoading } = useQuery({
+  const { data: orders = [], isLoading ,refetch } = useQuery({
     queryKey: ["seller-orders", user?.email],
     queryFn: async () =>
       (await axiosSecure.get(`/seller/orders/${user.email}`)).data.orders,
@@ -51,24 +50,24 @@ const ManageOrders = () => {
       queryClient.invalidateQueries(["seller-orders", user.email]);
       queryClient.invalidateQueries(["seller-delivered-orders", user.email]);
     } catch (err) {
-      console.error(err);
-      toast.error("Failed to update item status");
+      toast.error("Failed to update item status",err.message);
     }
   };
+  refetch();
 
   if (isLoading) return <CompoLoading />;
 
   return (
     <div>
-      <h2 className="text-2xl font-bold">Manage Orders</h2>
+      <h2 className="text-2xl font-bold dark:text-white">Manage Orders</h2>
       <p className="text-gray-600 mb-4">
         Here you can see which customers ordered your products.
       </p>
 
-      <div className="overflow-x-auto border rounded p-4">
+      <div className="overflow-x-auto border dark:bg-gray-800 rounded p-4">
         <table className="table w-full">
           <thead>
-            <tr className="bg-gray-100">
+            <tr className="bg-gray-100 dark:bg-gray-700 dark:text-white">
               <th>Order ID</th>
               <th>Product</th>
               <th>Qty</th>
@@ -92,7 +91,7 @@ const ManageOrders = () => {
               order.items.filter(
       (item) => item.status !== "delivered" && item.status !== "cancelled"
     ).map((item) => (
-                <tr key={item._id}>
+                <tr key={item._id} className="dark:text-gray-300">
                   <td className="whitespace-nowrap">{order._id}</td>
                   <td className="max-w-xs">{item.productName}</td>
                   <td>{item.quantity}</td>

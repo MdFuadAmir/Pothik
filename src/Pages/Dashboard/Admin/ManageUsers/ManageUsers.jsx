@@ -60,7 +60,7 @@ const ManageUsers = () => {
     <div className="">
       {/* Header */}
       <div>
-        <h2 className="text-2xl font-bold">Manage Your Users</h2>
+        <h2 className="text-2xl font-bold dark:text-white">Manage Your Users</h2>
         <p className="text-sm text-gray-500">
           A smart, lightweight platform crafted for travelers and explorers.
           Navigate, discover, and manage everything with ease.
@@ -81,7 +81,7 @@ const ManageUsers = () => {
       {/* Users Table */}
       <div className="overflow-x-auto mt-6 mx-auto bg-gray-100 rounded">
         <table className="table w-full">
-          <thead className="bg-gray-700 text-white">
+          <thead className="bg-gray-700 dark:bg-gray-950 text-white">
             <tr>
               <th>#</th>
               <th>User ID</th>
@@ -91,7 +91,7 @@ const ManageUsers = () => {
               <th>Actions</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="dark:bg-gray-800 dark:text-gray-300">
             {isLoading ? (
               <tr>
                 <td

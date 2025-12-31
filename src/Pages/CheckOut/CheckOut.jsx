@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import Loading from "../../Components/Loading/Loading";
 import useCart from "../../Hooks/useCart";
 import CheckOutForm from "./CheckOutForm";
@@ -13,27 +13,60 @@ const CheckOut = () => {
   const [paymentMethod, setPaymentMethod] = useState(null);
   const navigate = useNavigate();
 
-  const generateTrackingId = () => {
-    return "TRK-" + Math.random().toString(36).substring(2, 10).toUpperCase();
-  };
-  const subTotal = cart.reduce(
-    (acc, item) => acc + item.price * (item.quantity ?? 1),
-    0
-  );
-  const shipping = subTotal >= 500 ? 80 : 120;
+  const generateTrackingId = () =>
+    "TRK-" + Math.random().toString(36).substring(2, 10).toUpperCase();
+
+  // 🧮 Subtotal
+  const subTotal = useMemo(() => {
+    return cart.reduce(
+      (acc, item) => acc + item.price * (item.quantity ?? 1),
+      0
+    );
+  }, [cart]);
+
+  // 🧠 Group cart by sellerEmail
+  const sellerGroups = useMemo(() => {
+    const map = {};
+    cart.forEach((item) => {
+      if (!map[item.sellerEmail]) {
+        map[item.sellerEmail] = [];
+      }
+      map[item.sellerEmail].push(item);
+    });
+    return map;
+  }, [cart]);
+
+  // 🚚 Shipping calculation (seller-wise)
+  // const SHIPPING_PER_SELLER = 80;
+  const SHIPPING_PER_SELLER =
+    paymentMethod === "CASH_ON_DELIVERY"
+      ? 120
+      : paymentMethod === "STRIPE"
+      ? 80
+      : 120;
+
+  const shipping = useMemo(() => {
+    const sellerCount = Object.keys(sellerGroups).length;
+    return sellerCount * SHIPPING_PER_SELLER;
+  }, [sellerGroups, SHIPPING_PER_SELLER]);
+
+  // 💰 Grand Total
   const grandTotal = subTotal + shipping;
 
   const handleOrderSubmit = () => {
     if (!methods) return;
+
     methods.handleSubmit(async (data) => {
       if (!paymentMethod) {
         return toast.error("Payment method required!");
       }
+
       const orderData = {
         trackingId: generateTrackingId(),
         userInfo: data,
         paymentMethod,
         items: cart,
+        sellerWiseItems: sellerGroups, // 🔥 IMPORTANT
         subTotal,
         shipping,
         grandTotal,
@@ -41,11 +74,12 @@ const CheckOut = () => {
         paymentStatus: "pending",
         createdAt: new Date(),
       };
-      console.log(orderData);
+
       try {
         const res = await axiosInstance.post("/orders", orderData);
+
         if (res.data.insertedId) {
-          toast.success("Order Confirmf!");
+          toast.success("Order Confirmed!");
           await axiosInstance.delete(`/cart?email=${data?.email}`);
           cartRefetch();
           methods.reset();
@@ -59,105 +93,79 @@ const CheckOut = () => {
     })();
   };
 
+  if (isLoading) return <Loading />;
+
   if (cart.length === 0) {
     return (
       <div className="my-10 text-center text-gray-500 text-lg">
-        Your cart is empty. Add items before checking out.
+        Your cart is empty.
       </div>
     );
   }
-console.log("seller",cart);
-
-  if (isLoading) return <Loading />;
 
   const isButtonDisabled =
-    !methods ||
-    !methods.formState ||
-    !methods.formState.isValid ||
-    !paymentMethod;
-
-  console.log(cart);
+    !methods || !methods.formState?.isValid || !paymentMethod;
 
   return (
-    <div className="flex flex-col md:flex-row justify-between gap-6 my-12">
+    <div className="flex flex-col md:flex-row items-center gap-6 my-12">
+      {/* Form */}
       <div className="w-full md:w-1/2">
-        <h2 className="text-xl font-medium text-gray-600 mb-6">
-          DELIVERY INFORMATION --
-        </h2>
-        <div className="border rounded">
+        <h2 className="text-xl font-medium mb-6 dark:text-white">DELIVERY INFORMATION --</h2>
+        <div className="border rounded dark:border-white">
           <CheckOutForm setMethods={setMethods} />
         </div>
       </div>
 
-      {/* Totals */}
-      <div className="w-full mt-0 md:mt-12 md:w-1/2 border p-4 rounded h-fit">
-        <div>
-          <h2 className="text-lg font-bold mb-3">Order Summary</h2>
+      {/* Summary */}
+      <div className="w-full md:w-1/2 border p-4 rounded h-fit dark:border-white">
+        <h2 className="text-lg font-bold mb-3 dark:text-white">Order Summary</h2>
 
-          <div className="flex justify-between mb-2 text-sm">
-            <span>Subtotal:</span>
-            <span>${subTotal.toFixed(2)}</span>
-          </div>
-
-          <div className="flex justify-between mb-2 text-sm">
-            <span>Shipping Fee:</span>
-            <span>${shipping.toFixed(2)}</span>
-          </div>
-
-          <div className="flex justify-between text-sm border-t pt-3">
-            <span>Total:</span>
-            <span className="font-bold">${grandTotal.toFixed(2)}</span>
-          </div>
+        <div className="flex justify-between text-sm mb-2 dark:text-white">
+          <span>Subtotal</span>
+          <span>৳{subTotal}</span>
         </div>
-        <div className="mt-6">
-          <h3 className="text-gray-600">PAYMENT METHOD --</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-            {/* BKASH */}
-            <button
-              // onClick={() => handleBkash()}
-              onClick={() => setPaymentMethod("BKASH")}
-              className={`border rounded text-center p-1 text-sm ${
-                paymentMethod === "BKASH" ? "bg-blue-500 text-white" : ""
-              }`}
-            >
-              BKASH
-            </button>
 
-            {/* STRIPE */}
+        <div className="flex justify-between text-sm mb-2 dark:text-white">
+          <span>Shipping ({Object.keys(sellerGroups).length} seller)</span>
+          <span>৳{shipping}</span>
+        </div>
+
+        <div className="flex justify-between text-sm border-t dark:border-white dark:text-white pt-3">
+          <span>Total</span>
+          <span className="font-bold">৳{grandTotal}</span>
+        </div>
+
+        {/* Payment */}
+        <div className="mt-6">
+          <h3 className="text-gray-600 dark:text-gray-300">PAYMENT METHOD --</h3>
+          <div className="grid grid-cols-3 gap-4 mt-4">
+            {/* stripe */}
             <button
-              // onClick={() => handleStripe()}
               onClick={() => setPaymentMethod("STRIPE")}
-              className={`border rounded text-center p-1 text-sm ${
+              disabled
+              className={`border rounded p-1 text-sm disabled:bg-gray-300 dark:disabled:bg-gray-800 ${
                 paymentMethod === "STRIPE" ? "bg-blue-500 text-white" : ""
               }`}
             >
               STRIPE
             </button>
 
-            {/* CASH ON DELIVERY */}
             <button
-              // onClick={() => handleCOD()}
               onClick={() => setPaymentMethod("CASH_ON_DELIVERY")}
-              className={`border rounded text-center p-1 text-sm ${
-                paymentMethod === "CASH_ON_DELIVERY"
-                  ? "bg-blue-500 text-white"
-                  : ""
+              className={`border rounded p-1 text-sm dark:text-white ${
+                paymentMethod === "CASH_ON_DELIVERY" ? "bg-blue-500 text-white" : ""
               }`}
             >
-              CASH ON DELIVERY
+              CASH_ON_DELIVERY
             </button>
           </div>
         </div>
-
         <button
           onClick={handleOrderSubmit}
           disabled={isButtonDisabled}
-          className={`mt-6 text-sm w-full py-2 rounded 
-            ${
-              isButtonDisabled
-                ? "bg-gray-400 cursor-not-allowed"
-                : "bg-blue-500 text-white"
-            }`}
+          className={`mt-6 w-full py-2 rounded ${
+            isButtonDisabled ? "bg-gray-400" : "bg-blue-500 text-white"
+          }`}
         >
           Confirm Order
         </button>

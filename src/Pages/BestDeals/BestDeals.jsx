@@ -19,11 +19,10 @@ const BestDeals = () => {
     <div className="my-12">
       {/* Header */}
       <div className="flex justify-between items-center px-4 mb-6 mt-12">
-        <h2 className="text-2xl font-semibold">For You</h2>
-
+        <h2 className="text-2xl font-semibold dark:text-white">For You</h2>
         <Link
           to="/products"
-          className="btn btn-outline border-green-500 border-2 px-6"
+          className="btn btn-outline border-green-500 border-2 px-6 dark:text-white"
         >
           All Deals
         </Link>
@@ -31,6 +30,14 @@ const BestDeals = () => {
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
         {Array.isArray(products) &&
           products.map((pro) => <Product key={pro._id} pro={pro} />)}
+      </div>
+      <div className="flex justify-center">
+      <Link
+        to="/products"
+        className="btn btn-outline border-green-500 border-2 px-6 mt-12 dark:text-white"
+      >
+        All Deals
+      </Link>
       </div>
     </div>
   );

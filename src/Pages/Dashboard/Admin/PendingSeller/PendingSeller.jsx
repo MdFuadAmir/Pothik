@@ -16,16 +16,16 @@ const PendingSeller = () => {
   if (isLoading) return <CompoLoading />;
   return (
     <div className="">
-      <h2 className="text-2xl font-bold">Pending Seller Requests</h2>
+      <h2 className="text-2xl font-bold dark:text-white">Pending Seller Requests</h2>
       <p className="mb-6 text-sm text-gray-500">
         When you accept the seller request to coppy this emai. and go to manage
         users page and search the email and update to seller.
       </p>
-
-      <div className="overflow-x-auto bg-white p-4 rounded-xl">
+ 
+      <div className="overflow-x-auto bg-white dark:bg-gray-800 p-4 rounded-xl">
         <table className="table">
           <thead>
-            <tr className="bg-gray-100">
+            <tr className="bg-gray-100 dark:bg-gray-950 dark:text-white">
               <th>#</th>
               <th>Email</th>
               <th>Phone</th>
@@ -34,7 +34,7 @@ const PendingSeller = () => {
               <th>Status</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="dark:text-gray-300">
             {data.length === 0 ? (
               <tr>
                 <td colSpan="6" className="text-center py-8 text-gray-500">

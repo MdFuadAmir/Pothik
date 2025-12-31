@@ -60,27 +60,29 @@ const MyOrders = () => {
     });
   };
 
-  if (isLoading || loading) return <CompoLoading/>;
+  if (isLoading || loading) return <CompoLoading />;
   if (error) return <p>Error loading orders</p>;
 
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-xl font-bold">Orders by {user?.displayName}</h2>
+        <h2 className="text-xl font-bold dark:text-white">
+          Orders by {user?.displayName}
+        </h2>
         <p className="text-sm text-gray-500">
           this is your order history and recent order list
         </p>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {orderData.map((order) => (
           <div
             key={order._id}
-            className="border rounded-xl p-5 shadow-sm bg-white space-y-3"
+            className="border rounded-xl p-5 shadow-sm bg-white dark:bg-gray-800 space-y-3"
           >
             {/* Header */}
             <div className="flex justify-between items-center">
-              <p className="text-sm text-gray-600">
-                <span className="font-semibold">Order ID:</span> {order._id}
+              <p className="text-sm text-gray-600 dark:text-gray-300">
+                <span className="font-semibold ">Order ID:</span> {order._id}
               </p>
               <span
                 className={`px-3 py-1 text-xs rounded-full ${
@@ -94,8 +96,10 @@ const MyOrders = () => {
             </div>
 
             {/* Items List */}
-            <div className="bg-gray-50 p-3 rounded-lg space-y-2">
-              <p className="text-sm font-semibold text-gray-700">Items:</p>
+            <div className="bg-gray-50 dark:bg-gray-700 p-3 rounded-lg space-y-2">
+              <p className="text-sm font-semibold text-gray-700 dark:text-gray-300">
+                Items:
+              </p>
 
               {order.items.map((item) => (
                 <div
@@ -105,12 +109,14 @@ const MyOrders = () => {
                   <div className="flex gap-2 items-center">
                     <img
                       src={item.image}
-                      alt={item.title}
+                      alt={item.productName}
                       className="w-14 h-14 object-cover rounded"
                     />
-                    <div className="text-sm ">
-                      <p className="font-medium">{item.title}</p>
-                      <p className="text-gray-500 text-xs">
+                    <div className="text-sm">
+                      <p className="font-medium dark:text-gray-300">
+                        {item.productName}
+                      </p>
+                      <p className="text-gray-500 text-xs dark:text-gray-300">
                         Qty: {item.quantity}
                       </p>
                     </div>
@@ -128,7 +134,7 @@ const MyOrders = () => {
             </div>
 
             {/* Order Info */}
-            <div className="text-sm space-y-1 pt-1">
+            <div className="text-sm space-y-1 pt-1 dark:text-gray-300">
               <p>
                 <span className="font-semibold">Total:</span> $
                 {order.grandTotal}

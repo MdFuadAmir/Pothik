@@ -12,9 +12,7 @@ import UserMenu from "./DashboardMenu/UserMenu";
 import toast from "react-hot-toast";
 import ApplySellerButton from "../../Pages/Dashboard/Common/ApplySellerButton/ApplySellerButton";
 import DashboardFooter from "../../Components/DashboardFooter/DashboardFooter";
-
-
-
+import DarkMood from "../../Components/DarkMood/DarkMood";
 
 const DashboardLayout = () => {
   const { logOut } = useAuth();
@@ -44,20 +42,20 @@ const DashboardLayout = () => {
       {/* Main content */}
       <div className="drawer-content flex flex-col">
         {/* Mobile Navbar */}
-        <div className="navbar bg-gray-400 sticky top-0 z-50 lg:hidden flex flex-row-reverse">
+        <div className="navbar bg-gray-800 sticky top-0 z-50 lg:hidden flex flex-row-reverse">
           <label htmlFor="my-drawer-2" className="btn btn-square btn-ghost">
-            <FaAlignJustify size={20}/>
+            <FaAlignJustify size={20} className="text-white" />
           </label>
           <span className="mx-2 flex-1 text-green-600 font-semibold">
-           <Pothik/>
+            <Pothik />
           </span>
         </div>
 
         <div className="flex flex-col justify-between">
-          <div className="bg-gray-200 min-h-screen p-4 md:p-8">
-          <Outlet />
+          <div className="bg-gray-200 dark:bg-gray-900 min-h-screen p-4 md:p-8">
+            <Outlet />
           </div>
-          <DashboardFooter/>
+          <DashboardFooter />
         </div>
       </div>
       <div className="drawer-side">
@@ -66,7 +64,7 @@ const DashboardLayout = () => {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <ul className="menu bg-gray-700 min-h-full w-64 p-4 flex flex-col justify-between">
+        <ul className="menu bg-gray-800 min-h-full w-64 p-4 flex flex-col justify-between">
           <div>
             <Pothik />
             <div className="mt-4 space-y-2">
@@ -99,6 +97,7 @@ const DashboardLayout = () => {
                 <FaSignOutAlt className="text-lg" /> LogOut
               </Link>
             </li>
+            <DarkMood />
           </div>
         </ul>
       </div>

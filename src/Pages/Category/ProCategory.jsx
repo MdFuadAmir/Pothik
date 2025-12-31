@@ -57,7 +57,7 @@ const ProCategory = () => {
     }
   };
   return (
-    <div className="md:border-r p-4 w-full">
+    <div className="md:border-r p-4 w-full dark:text-white">
       <button
         onClick={() => setShowCategories(!showCategories)}
         className="px-4 py-2 w-full justify-between text-sm border overflow-hidden rounded flex items-center gap-2"

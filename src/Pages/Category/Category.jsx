@@ -31,14 +31,13 @@ const Category = () => {
   };
   return (
     <div className="mx-auto py-8">
-      <h2 className="text-2xl font-semibold mb-6">Categories</h2>
-
+      <h2 className="text-2xl font-semibold mb-6 dark:text-white">Categories</h2>
       <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4 md:gap-6">
         {categories.map((cat, index) => (
           <div
           onClick={()=>handleClick(cat.title)}
             key={index}
-            className="flex flex-col items-center p-3 bg-white shadow rounded-lg hover:shadow-lg transition cursor-pointer"
+            className="flex flex-col items-center p-3 bg-white dark:bg-gray-800 dark:text-white shadow rounded-lg hover:shadow-lg transition cursor-pointer"
           >
             <img
               src={cat.img}

@@ -71,11 +71,11 @@ const SignUp = () => {
       });
   };
   return (
-    <div className="max-w-sm mx-auto p-4 border rounded mb-12">
-      <h1 className="text-center text-xl font-bold mb-6">SIGN UP !</h1>
+    <div className="max-w-sm mx-auto p-4 border dark:border-white rounded mb-12">
+      <h1 className="text-center text-xl font-bold mb-6 dark:text-white">SIGN UP !</h1>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
         {/* photo */}
-        <div className=" items-center flex flex-col  gap-2 px-4">
+        <div className="items-center flex flex-col  gap-2 px-4">
           {profilePic ? (
             <img
               src={profilePic}
@@ -83,7 +83,7 @@ const SignUp = () => {
               className="rounded-full w-16 h-16 object-cover border p-1"
             />
           ) : (
-            <FaRegUser className="rounded-full w-16 h-16 border p-1" />
+            <FaRegUser className="rounded-full w-16 h-16 border p-1 dark:text-white" />
           )}
           <input
             onChange={handleUploadeImage}
@@ -91,12 +91,12 @@ const SignUp = () => {
             className="rounded-full w-12 h-12 text-transparent absolute border-red-600 cursor-pointer"
             placeholder="photo"
           />
-          <p className="text-xs">Sellect Photo</p>
+          <p className="text-xs dark:text-gray-300">Sellect Photo</p>
         </div>
 
         {/* name */}
         <div className="flex flex-col space-y-1">
-          <label className="text-sm">Name</label>
+          <label className="text-sm dark:text-gray-300">Name</label>
           <input
             {...register("name", { required: true })}
             type="text"
@@ -109,7 +109,7 @@ const SignUp = () => {
         </div>
         {/* email */}
         <div className="flex flex-col space-y-1">
-          <label className="text-sm">Email</label>
+          <label className="text-sm dark:text-gray-300">Email</label>
           <input
             {...register("email", { required: true })}
             type="email"
@@ -122,7 +122,7 @@ const SignUp = () => {
         </div>
         {/* password */}
         <div className="flex flex-col space-y-1">
-          <label className="text-sm">Password</label>
+          <label className="text-sm dark:text-gray-300">Password</label>
           <input
             {...register("password", { required: true, minLength: 6 })}
             type="password"
@@ -139,28 +139,28 @@ const SignUp = () => {
           )}
         </div>
         <div className="">
-          <Link to={"/signUp"} className="text-sm">
+          <Link to={"/signUp"} className="text-sm dark:text-gray-300">
             Forgot password?
           </Link>
         </div>
         <button
           type="submit"
           disabled={isUploading}
-          className="btn btn-outline border-2 w-full border-green-500"
+          className="btn btn-outline border-2 w-full border-green-500 dark:text-gray-300"
         >
           {isUploading ? "Uploading Image..." : "Sign Up"}
         </button>
       </form>
-      <p className="text-sm text-center mt-4">
+      <p className="text-sm text-center mt-4 dark:text-gray-300">
         Already have an account?{" "}
         <Link to={"/login"} className="text-green-500 text-md">
           Login
         </Link>
       </p>
       <div className="flex justify-center items-center gap-4 mt-6 mb-4">
-        <div className="border w-full"></div>
-        <div>Or</div>
-        <div className="border w-full"></div>
+        <div className="border w-full dark:text-gray-300"></div>
+        <div className="dark:text-gray-300">Or</div>
+        <div className="border w-full dark:text-gray-300"></div>
       </div>
       <SocialLogin />
     </div>

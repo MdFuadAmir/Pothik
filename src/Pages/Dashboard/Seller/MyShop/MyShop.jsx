@@ -5,6 +5,7 @@ import Card from "../Card/Card";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
 import CompoLoading from "../../../../Components/CompoLoading/CompoLoading";
+import { useState } from "react";
 
 const MyShop = () => {
   const { user } = useAuth();
@@ -12,18 +13,32 @@ const MyShop = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const { data: products = [], isLoading,refetch } = useQuery({
-    queryKey: ["product", user?.email],
+  // 🔥 pagination state
+  const [currentPage, setCurrentPage] = useState(0);
+  const [itemsPerPage, setItemsPerPage] = useState(20);
+
+  const { data, isLoading } = useQuery({
+    queryKey: ["myProducts", user?.email, currentPage, itemsPerPage],
+    enabled: !!user?.email,
     queryFn: async () => {
-      const res = await axiosSecure.get(`/products?email=${user.email}`);
+      const res = await axiosSecure.get(
+        `/products?email=${user.email}&page=${currentPage}&size=${itemsPerPage}`
+      );
       return res.data;
     },
-    enabled: !!user?.email,
+    keepPreviousData: true,
   });
+
+  // ✅ SAFE DATA
+  const products = Array.isArray(data?.products) ? data.products : [];
+  const totalProducts = data?.total || 0;
+
+  // 🔥 pagination calc
+  const totalPages = Math.ceil(totalProducts / itemsPerPage);
+  const pages = [...Array(totalPages).keys()];
 
   const handleUpdate = (product) => {
     navigate(`/dashboard/update-product/${product._id}`);
-    refetch();
   };
 
   const deleteMutation = useMutation({
@@ -32,41 +47,100 @@ const MyShop = () => {
       return res.data;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(["product", user?.email]);
+      queryClient.invalidateQueries(["myProducts", user?.email]);
       toast.success("Product deleted successfully!");
-      refetch()
     },
-    onError: () => {
-      toast.error("Failed to delete product");
-    },
+    onError: () => toast.error("Failed to delete product"),
   });
+
   const handleDelete = (id) => {
     deleteMutation.mutate(id);
-    refetch()
   };
-  if (isLoading) {
-    return <CompoLoading />;
-  }
+
+  if (isLoading) return <CompoLoading />;
+
   return (
     <div>
+      {/* Header */}
       <div className="mb-6">
-        <h2 className="text-xl font-bold mb-1">My Shop ({products.length})</h2>
+        <h2 className="text-xl font-bold mb-1 dark:text-white">
+          My Shop ({totalProducts})
+        </h2>
         <p className="text-sm text-gray-600">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae,
-          necessitatibus tempore saepe.
+          Manage all your uploaded products here
         </p>
       </div>
 
+      {/* Products */}
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-        {products.map((product) => (
-          <Card
-            key={product._id}
-            product={product}
-            onDelete={handleDelete}
-            onUpdate={handleUpdate}
-          ></Card>
-        ))}
+        {products.length === 0 ? (
+          <p className="col-span-full text-center text-gray-500 dark:text-gray-200">
+            No products found
+          </p>
+        ) : (
+          products.map((product) => (
+            <Card
+              key={product._id}
+              product={product}
+              onDelete={handleDelete}
+              onUpdate={handleUpdate}
+            />
+          ))
+        )}
       </div>
+
+      {/* 🔥 PAGINATION */}
+      {totalPages > 1 && (
+        <div className="flex flex-wrap justify-center items-center gap-3 mt-10">
+          {/* Previous */}
+          <button
+            onClick={() => setCurrentPage((p) => Math.max(p - 1, 0))}
+            disabled={currentPage === 0}
+            className="btn"
+          >
+            Previous
+          </button>
+
+          {/* Page numbers */}
+          {pages.map((page) => (
+            <button
+              key={page}
+              onClick={() => setCurrentPage(page)}
+              className={`btn ${
+                currentPage === page ? "bg-amber-500 text-white" : ""
+              }`}
+            >
+              {page + 1}
+            </button>
+          ))}
+
+          {/* Next */}
+          <button
+            onClick={() =>
+              setCurrentPage((p) => Math.min(p + 1, totalPages - 1))
+            }
+            disabled={currentPage === totalPages - 1}
+            className="btn"
+          >
+            Next
+          </button>
+
+          {/* Items per page */}
+          <select
+            value={itemsPerPage}
+            onChange={(e) => {
+              setItemsPerPage(Number(e.target.value));
+              setCurrentPage(0);
+            }}
+            className="border rounded px-2 py-1"
+          >
+            <option value={10}>10</option>
+            <option value={20}>20</option>
+            <option value={30}>30</option>
+            <option value={50}>50</option>
+          </select>
+        </div>
+      )}
     </div>
   );
 };

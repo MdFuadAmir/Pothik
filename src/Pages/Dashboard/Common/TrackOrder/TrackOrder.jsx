@@ -29,9 +29,9 @@ const TrackOrder = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto px-4 py-8 rounded border">
+    <div className="max-w-3xl mx-auto px-4 py-8 rounded border dark:border-white">
       <div className="text-center">
-        <h1 className="text-2xl font-bold">Track Your Order</h1>
+        <h1 className="text-2xl font-bold dark:text-white">Track Your Order</h1>
         <p className="text-sm text-gray-500">
           Enter your order tracking id and see your order status
         </p>
@@ -41,11 +41,14 @@ const TrackOrder = () => {
         <input
           type="text"
           placeholder="Enter Tracking ID (e.g. TRK-18A8XKT2)"
-          className="input w-full"
+          className="input w-full dark:bg-gray-700 dark:placeholder-gray-300 dark:text-white shadow"
           value={trackId}
           onChange={(e) => setTrackId(e.target.value)}
         />
-        <button className="btn bg-black text-white" onClick={handleSearch}>
+        <button
+          className="btn bg-black dark:bg-gray-700 text-white"
+          onClick={handleSearch}
+        >
           <FaRoute /> Track
         </button>
       </div>
@@ -54,7 +57,7 @@ const TrackOrder = () => {
         <p className="text-red-500 mt-3 text-sm text-center">{error}</p>
       )}
       {/*  */}
-      <div className="mt-6 p-4 bg-white rounded shadow">
+      <div className="mt-6 p-4 bg-white dark:bg-gray-800 dark:text-gray-300 rounded shadow">
         <h2 className="text-xl font-bold mb-2">Order Status</h2>
         <div className="mb-6 space-y-1">
           <p>
@@ -88,7 +91,7 @@ const TrackOrder = () => {
                   className={`font-bold ${
                     order?.status === "pending"
                       ? "text-blue-700"
-                      : "text-gray-700"
+                      : "text-gray-700 dark:text-gray-200"
                   }`}
                 >
                   Pending
@@ -120,7 +123,7 @@ const TrackOrder = () => {
                   className={`font-bold ${
                     order?.status === "processing"
                       ? "text-blue-700"
-                      : "text-gray-700"
+                      : "text-gray-700 dark:text-gray-200"
                   }`}
                 >
                   Processing
@@ -153,7 +156,7 @@ const TrackOrder = () => {
                   className={`font-bold ${
                     order?.status === "shipped"
                       ? "text-blue-700"
-                      : "text-gray-700"
+                      : "text-gray-700 dark:text-gray-200"
                   }`}
                 >
                   Shipped
@@ -186,7 +189,7 @@ const TrackOrder = () => {
                   className={`font-bold ${
                     order?.status === "in_transit"
                       ? "text-blue-700"
-                      : "text-gray-700"
+                      : "text-gray-700 dark:text-gray-200"
                   }`}
                 >
                   In Transit
@@ -219,7 +222,7 @@ const TrackOrder = () => {
                   className={`font-bold ${
                     order?.status === "out_for_delivery"
                       ? "text-blue-700"
-                      : "text-gray-700"
+                      : "text-gray-700 dark:text-gray-200"
                   }`}
                 >
                   Out for delivery
@@ -252,7 +255,7 @@ const TrackOrder = () => {
                   className={`font-bold ${
                     order?.status === "delivered"
                       ? "text-green-700"
-                      : "text-gray-700"
+                      : "text-gray-700 dark:text-gray-200"
                   }`}
                 >
                   Delivered
@@ -285,7 +288,7 @@ const TrackOrder = () => {
                   className={`font-bold ${
                     order?.status === "cancelled"
                       ? "text-red-700"
-                      : "text-gray-700"
+                      : "text-gray-700 dark:text-gray-200"
                   }`}
                 >
                   Cancelled

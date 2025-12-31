@@ -3,7 +3,7 @@ import { NavLink } from "react-router";
 
 const Card = ({ product, onDelete,onUpdate }) => {
   return (
-    <div className="border rounded-lg shadow-sm p-4 bg-white">
+    <div className="border rounded-lg shadow-sm p-4 bg-white dark:bg-gray-800 dark:shadow-lg shadow-gray-950">
       {/* Product Image */}
       <img
         src={product.images?.[0]}
@@ -13,12 +13,12 @@ const Card = ({ product, onDelete,onUpdate }) => {
 
       {/* Product Info */}
       <div className="mt-3">
-        <h3 className="text-lg font-bold">{product.productName}</h3>
-        <p className="text-sm text-gray-500">Category: {product.category}</p>
+        <h3 className="text-lg font-bold dark:text-white">{product.productName}</h3>
+        <p className="text-sm text-gray-500 dark:text-gray-200">Category: {product.category}</p>
 
         {/* Price */}
         <div className="mt-2">
-          <p className="text-sm text-gray-700">
+          <p className="text-sm text-gray-700 dark:text-gray-200">
             Regular Price:{" "}
             <span className="font-semibold">${product.regularPrice}</span>
           </p>
@@ -28,7 +28,7 @@ const Card = ({ product, onDelete,onUpdate }) => {
           </p>
         </div>
         {/* Stock */}
-        <p className="text-sm mt-2">Stock: {product.stockQua}</p>
+        <p className="text-sm mt-2 dark:text-gray-200">Stock: {product.stockQua}</p>
       </div>
 
       {/* Buttons */}

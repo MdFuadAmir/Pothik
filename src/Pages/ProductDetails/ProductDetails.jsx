@@ -110,7 +110,7 @@ const ProductDetails = () => {
               </p>
             )}
           </div>
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-gray-600 dark:text-gray-300">
             In Stock:{" "}
             <span
               className={`font-semibold ${
@@ -120,68 +120,70 @@ const ProductDetails = () => {
               {product?.stockQua > 0 ? product.stockQua : "Out of Stock"}
             </span>
           </p>
-          <p className="text-sm text-gray-700">
+          <p className="text-sm text-gray-700 dark:text-gray-300">
             Brand: <span className="font-semibold">{product?.brand}</span>
           </p>
-          {product?.model && <p className="text-sm text-gray-700">
-            Model: <span className="font-semibold">{product?.model}</span>
-          </p>}
-          
+          {product?.model && (
+            <p className="text-sm text-gray-700 dark:text-gray-300">
+              Model: <span className="font-semibold">{product?.model}</span>
+            </p>
+          )}
+
           {product?.size && (
-            <p className="text-sm text-gray-700">
+            <p className="text-sm text-gray-700 dark:text-gray-300">
               Size: <span className="font-semibold">{product?.size}</span>
             </p>
           )}
           {product?.color && (
-            <p className="text-sm text-gray-700">
+            <p className="text-sm text-gray-700 dark:text-gray-300">
               Color: <span className="font-semibold">{product?.color}</span>
             </p>
           )}
           {product?.fabric && (
-            <p className="text-sm text-gray-700">
+            <p className="text-sm text-gray-700 dark:text-gray-300">
               Fabric: <span className="font-semibold">{product?.fabric}</span>
             </p>
           )}
           {product?.weightQty && (
-            <p className="text-sm text-gray-700">
+            <p className="text-sm text-gray-700 dark:text-gray-300">
               Weight:{" "}
               <span className="font-semibold">{product?.weightQty}</span>
             </p>
           )}
           {product?.ingredients && (
-            <p className="text-sm text-gray-700">
+            <p className="text-sm text-gray-700 dark:text-gray-300">
               Ingredients:{" "}
               <span className="font-semibold">{product?.ingredients}</span>
             </p>
           )}
           {product?.packagingType && (
-            <p className="text-sm text-gray-700">
+            <p className="text-sm text-gray-700 dark:text-gray-300">
               Packaging Type:{" "}
               <span className="font-semibold">{product?.packagingType}</span>
             </p>
           )}
           {product?.condition && (
-            <p className="text-sm text-gray-700">
+            <p className="text-sm text-gray-700 dark:text-gray-300">
               condition:{" "}
               <span className="font-semibold">{product?.condition}</span>
             </p>
           )}
-          <p className="text-sm text-gray-700">
+          <p className="text-sm text-gray-700 dark:text-gray-300">
             Return Policy:{" "}
             <span className="font-semibold">{product?.returnPolicy}</span>
           </p>
           <div className="flex items-center gap-2">
             <FaStar className="text-yellow-500" />
-            <p className="font-medium">{product?.rating}</p>
+            <p className="font-medium dark:text-gray-300">{product?.rating}</p>
           </div>
           <button
             onClick={handleAddToCart}
-            disabled={Number(product?.stockQua) === 0} 
+            disabled={Number(product?.stockQua) === 0}
             className={`px-6 py-2 w-full md:w-1/2 mx-auto mt-4 rounded border-2
     ${
       Number(product?.stockQua) === 0
         ? "bg-gray-300 cursor-not-allowed text-gray-500"
-        : "hover:bg-gray-400 hover:text-white cursor-pointer"
+        : "hover:bg-gray-400 hover:text-white cursor-pointer dark:text-gray-300"
     }`}
           >
             Add to Cart
@@ -189,10 +191,10 @@ const ProductDetails = () => {
         </div>
       </div>
       <div className="mt-12">
-        <h2 className="text-lg font-bold">Description</h2>
-        <p className="text-sm">{product?.longDescription}</p>
+        <h2 className="text-lg font-bold dark:text-white">Description</h2>
+        <p className="text-sm dark:text-gray-300">{product?.longDescription}</p>
       </div>
-      <div className="my-12 p-4 border rounded">
+      <div className="my-12 p-4">
         <Reviews productId={product._id} />
       </div>
     </div>

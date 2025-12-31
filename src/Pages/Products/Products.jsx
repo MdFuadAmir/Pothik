@@ -73,7 +73,7 @@ const Products = () => {
             <button
               onClick={handlePreviousPage}
               disabled={currentPage === 0}
-              className="btn"
+              className="btn dark:bg-gray-800  border-none dark:text-white"
             >
               Previous
             </button>
@@ -82,7 +82,7 @@ const Products = () => {
               <button
                 key={page}
                 onClick={() => setCurrentPage(page)}
-                className={`btn ${currentPage === page ? "bg-amber-500" : ""}`}
+                className={`btn ${currentPage === page ? "bg-amber-500 border-none text-white" : "border-none"}`}
               >
                 {page + 1}
               </button>
@@ -91,7 +91,7 @@ const Products = () => {
             <button
               onClick={handleNextPage}
               disabled={currentPage === numOfPages - 1}
-              className="btn"
+              className="btn dark:bg-gray-800  border-none dark:text-white"
             >
               Next
             </button>
@@ -99,14 +99,14 @@ const Products = () => {
             <select
               value={itemsPerPage}
               onChange={handleItemsPerPage}
-              className="border rounded px-2 py-1"
+              className="border rounded px-2 py-1 dark:bg-gray-800 dark:text-white"
             >
-              <option value="5">5</option>
               <option value="10">10</option>
               <option value="15">15</option>
               <option value="20">20</option>
               <option value="30">30</option>
               <option value="50">50</option>
+              <option value="100">100</option>
             </select>
           </div>
         </div>

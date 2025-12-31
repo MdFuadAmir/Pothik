@@ -94,9 +94,8 @@ const UserStatistic = () => {
         </div>
       </div>
       {/* recent orders and claender */}
-
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
-        <div className=" col-span-2 border rounded p-2">
+        <div className="col-span-2 border rounded p-2">
           <h2 className="text-lg font-bold mb-3">
             Recent Orders (Last 7 Days)
           </h2>

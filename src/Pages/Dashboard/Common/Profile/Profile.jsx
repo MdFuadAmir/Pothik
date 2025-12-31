@@ -50,9 +50,9 @@ const Profile = () => {
 
   return (
     <div className="flex justify-center">
-      <div className="bg-white shadow-xl rounded-2xl w-full p-4 max-w-3xl">
+      <div className="bg-white dark:bg-gray-800 shadow-xl rounded-2xl w-full p-4 max-w-3xl">
         {/* Header */}
-        <div className="flex items-center gap-6 border-b pb-6">
+        <div className="flex items-center gap-6 border-b dark:border-b-gray-200 pb-6">
           {user.photoURL ? (
             <img
               src={user.photoURL}
@@ -63,7 +63,7 @@ const Profile = () => {
           )}
 
           <div>
-            <h1 className="text-2xl font-bold uppercase">{user.displayName}</h1>
+            <h1 className="text-2xl font-bold uppercase dark:text-white">{user.displayName}</h1>
             <button
               onClick={() => setEdit(!edit)}
               className="mt-2 px-4 py-1 bg-blue-600 text-white rounded-lg flex items-center gap-2"
@@ -74,19 +74,19 @@ const Profile = () => {
         </div>
         {/* Info Section */}
         <div className="mt-6 space-y-4">
-          <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-xl">
+          <div className="flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-xl">
             <FaEnvelope className="text-blue-600 text-xl" />
-            <p className="text-gray-700">{user.email}</p>
+            <p className="text-gray-700 dark:text-gray-200">{user.email}</p>
           </div>
-          <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-xl">
+          <div className="flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-xl">
             <FaPhone className="text-green-600 text-xl" />
-            <p className="text-gray-700">
+            <p className="text-gray-700 dark:text-gray-200">
               {dbUser?.phone ? dbUser?.phone : "01xxxxxxxxx"}
             </p>
           </div>
-          <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-xl">
+          <div className="flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-xl">
             <FaMapMarkerAlt className="text-red-600 text-xl" />
-            <p className="text-gray-700">
+            <p className="text-gray-700 dark:text-gray-200">
               {dbUser?.address ? dbUser?.address : "Update your address"}
             </p>
           </div>
@@ -94,15 +94,15 @@ const Profile = () => {
 
         {/* Edit Mode */}
         {edit && (
-          <div className="mt-8 p-6 bg-gray-100 rounded-xl shadow-inner">
-            <h2 className="font-bold text-xl mb-4">Edit Your Info</h2>
+          <div className="mt-8 p-6 bg-gray-100 dark:bg-gray-800 rounded-xl shadow-inner">
+            <h2 className="font-bold text-xl mb-4 dark:text-gray-200">Edit Your Info</h2>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
               <div className="flex flex-col space-y-1">
                 <input
                   {...register("phone", { required: true })}
                   type="tel"
                   placeholder="your phone no ...."
-                  className="input w-full"
+                  className="input w-full dark:bg-gray-700 dark:placeholder-gray-300 dark:text-white"
                 />
                 {errors?.phone?.type === "required" && (
                   <span className="text-red-500 text-sm">
@@ -115,7 +115,7 @@ const Profile = () => {
                   {...register("address", { required: true })}
                   type="text"
                   placeholder="your address ...."
-                  className="input w-full"
+                  className="input w-full dark:bg-gray-700 dark:placeholder-gray-300 dark:text-white"
                 />
                 {errors?.address?.type === "required" && (
                   <span className="text-red-500 text-sm">
