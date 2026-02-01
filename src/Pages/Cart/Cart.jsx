@@ -23,7 +23,7 @@ const Cart = () => {
   const subTotal = useMemo(() => {
     return cart.reduce(
       (acc, item) => acc + item.price * (item.quantity ?? 1),
-      0
+      0,
     );
   }, [cart]);
 
@@ -40,9 +40,9 @@ const Cart = () => {
   }, [cart]);
 
   // 🚚 Seller-wise shipping
-  
+
   const SHIPPING_PER_SELLER = 120;
-  
+
   const shipping = useMemo(() => {
     const sellerCount = Object.keys(sellerGroups).length;
     return sellerCount * SHIPPING_PER_SELLER;
@@ -70,7 +70,7 @@ const Cart = () => {
             {cart.map((item) => (
               <div
                 key={item._id}
-                className="flex items-center gap-4 border p-3 rounded bg-white dark:bg-gray-800"
+                className="flex items-center gap-4 p-3 rounded shadow-md bg-gray-500/10 dark:bg-gray-500/10"
               >
                 <img
                   src={item.image}
@@ -83,17 +83,12 @@ const Cart = () => {
                     {item.productName}
                   </h2>
 
-                  <p className="text-green-600 font-bold">
-                    ৳{item.price}
-                  </p>
+                  <p className="text-green-600 font-bold">৳{item.price}</p>
 
                   <div className="flex items-center gap-2 mt-2 dark:text-white ">
                     <button
                       onClick={() =>
-                        handleUpdateQuantity(
-                          item._id,
-                          (item.quantity ?? 1) - 1
-                        )
+                        handleUpdateQuantity(item._id, (item.quantity ?? 1) - 1)
                       }
                       className="px-2 border rounded"
                     >
@@ -104,10 +99,7 @@ const Cart = () => {
 
                     <button
                       onClick={() =>
-                        handleUpdateQuantity(
-                          item._id,
-                          (item.quantity ?? 1) + 1
-                        )
+                        handleUpdateQuantity(item._id, (item.quantity ?? 1) + 1)
                       }
                       className="px-2 border rounded"
                     >
@@ -132,7 +124,7 @@ const Cart = () => {
         )}
 
         {/* Totals */}
-        <div className="border h-fit p-4 rounded bg-white dark:bg-gray-800">
+        <div className="shadow-md h-fit p-4 rounded bg-gray-500/10 dark:bg-gray-500/10">
           <h1 className="font-semibold text-gray-600 mb-2 dark:text-gray-400">
             CART_TOTALS ----
           </h1>
@@ -149,14 +141,12 @@ const Cart = () => {
 
           <h2 className="text-sm p-2 flex justify-between dark:text-white">
             Total
-            <span className="font-bold">
-              ৳ {grandTotal.toFixed(2)}
-            </span>
+            <span className="font-bold">৳ {grandTotal.toFixed(2)}</span>
           </h2>
 
           <Link
             to="/checkout"
-            className="flex justify-center w-full mt-4 bg-black text-white py-2 rounded text-sm"
+            className="flex justify-center w-full mt-4 bg-sky-500 hover:bg-sky-600 text-white py-2 rounded text-sm"
           >
             Proceed To Checkout
           </Link>

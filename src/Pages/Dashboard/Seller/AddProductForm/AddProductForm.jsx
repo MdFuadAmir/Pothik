@@ -31,7 +31,7 @@ const AddProductForm = ({
     <div>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="space-y-2 border p-4 rounded mb-12 dark:border-white dark:bg-gray-800"
+        className="space-y-2  p-4 rounded mb-12 bg-gray-500/20 dark:bg-gray-500/10"
       >
         <p className="font-bold text-sm dark:text-gray-200">Basic Info</p>
         

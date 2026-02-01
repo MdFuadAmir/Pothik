@@ -3,7 +3,7 @@ import { NavLink } from "react-router";
 
 const Card = ({ product, onDelete,onUpdate }) => {
   return (
-    <div className="border rounded-lg shadow-sm p-4 bg-white dark:bg-gray-800 dark:shadow-lg shadow-gray-950">
+    <div className=" rounded-lg shadow-sm p-4 bg-gray-500/20 dark:bg-gray-500/10">
       {/* Product Image */}
       <img
         src={product.images?.[0]}

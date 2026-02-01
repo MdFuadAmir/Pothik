@@ -5,7 +5,7 @@ import CompoLoading from "../../Components/CompoLoading/CompoLoading";
 
 const Reviews = ({ productId }) => {
   const axiosSecure = useAxiosSecure();
-  
+
   // 🔥 pagination state
   const [currentPage, setCurrentPage] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(10);
@@ -14,7 +14,7 @@ const Reviews = ({ productId }) => {
     queryKey: ["reviews", productId, currentPage, itemsPerPage],
     queryFn: async () => {
       const res = await axiosSecure.get(
-        `/reviews/${productId}?page=${currentPage}&limit=${itemsPerPage}`
+        `/reviews/${productId}?page=${currentPage}&limit=${itemsPerPage}`,
       );
       return res.data;
     },
@@ -45,7 +45,11 @@ const Reviews = ({ productId }) => {
   };
 
   if (reviews.length === 0)
-    return <p className="text-gray-500 dark:text-gray-300">No reviews yet for this product.</p>;
+    return (
+      <p className="text-gray-500 dark:text-gray-300">
+        No reviews yet for this product.
+      </p>
+    );
 
   return (
     <div className="space-y-5">
@@ -95,16 +99,16 @@ const Reviews = ({ productId }) => {
         <button
           onClick={handlePrevious}
           disabled={currentPage === 0}
-          className="btn border-none dark:bg-gray-800 dark:text-white"
+          className="px-4 py-2 bg-white/30 dark:bg-gray-800/90 text-black dark:text-white rounded"
         >
-          Previous
+          Prev
         </button>
 
         {pages.map((page) => (
           <button
             key={page}
             onClick={() => setCurrentPage(page)}
-            className={`btn ${currentPage === page ? "bg-amber-500 border-none text-white" : ""}`}
+            className={`px-4 py-2 rounded-full ${currentPage === page ? "bg-indigo-500 border-none text-white" : ""}`}
           >
             {page + 1}
           </button>
@@ -113,7 +117,7 @@ const Reviews = ({ productId }) => {
         <button
           onClick={handleNext}
           disabled={currentPage === totalPages - 1}
-          className="btn border-none dark:bg-gray-800 dark:text-white"
+          className="px-4 py-2 bg-white/30 dark:bg-gray-800/90 text-black dark:text-white rounded"
         >
           Next
         </button>
@@ -121,7 +125,7 @@ const Reviews = ({ productId }) => {
         <select
           value={itemsPerPage}
           onChange={handleItemsPerPage}
-          className="border rounded px-2 py-1"
+          className="border rounded px-2 py-1 text-black dark:text-white"
         >
           <option value="10">10</option>
           <option value="20">20</option>

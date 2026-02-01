@@ -64,10 +64,10 @@ const ManageOrders = () => {
         Here you can see which customers ordered your products.
       </p>
 
-      <div className="overflow-x-auto border dark:bg-gray-800 rounded p-4">
+      <div className="overflow-x-auto  bg-gray-500/20 dark:bg-gray-500/10 rounded p-4">
         <table className="table w-full">
           <thead>
-            <tr className="bg-gray-100 dark:bg-gray-700 dark:text-white">
+            <tr className="bg-gray-500/20 dark:bg-gray-500/10 dark:text-white">
               <th>Order ID</th>
               <th>Product</th>
               <th>Qty</th>

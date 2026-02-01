@@ -14,7 +14,6 @@ const About = () => {
       <h1 className="text-3xl md:text-4xl font-bold text-center mb-10 dark:text-white">
         About Us
       </h1>
-
       {/* Who We Are */}
       <div className="grid md:grid-cols-2 gap-8 items-center">
         <img
@@ -22,8 +21,7 @@ const About = () => {
           alt="team"
           className="rounded-lg shadow-2xl"
         />
-
-        <div>
+        <div className="p-4 rounded-xl bg-gray-500/10 dark:bg-gray-500/10">
           <h2 className="text-2xl font-semibold mb-4 dark:text-white">
             Who We Are
           </h2>
@@ -44,7 +42,7 @@ const About = () => {
 
       {/* Mission & Vision */}
       <div className="grid md:grid-cols-2 gap-8 mt-14">
-        <div className="p-6 bg-base-100 shadow rounded dark:bg-gray-800">
+        <div className="p-6 bg-gray-500/10 dark:bg-gray-500/10 shadow-md rounded ">
           <FiTarget size={32} className="text-primary mb-3" />
           <h3 className="text-xl font-semibold mb-2 dark:text-white">
             Our Mission
@@ -56,7 +54,7 @@ const About = () => {
           </p>
         </div>
 
-        <div className="p-6 bg-base-100 shadow rounded dark:bg-gray-800">
+        <div className="p-6 bg-gray-500/10 dark:bg-gray-500/10  shadow-md rounded ">
           <FiAward size={32} className="text-primary mb-3" />
           <h3 className="text-xl font-semibold mb-2 dark:text-white">
             Our Vision
@@ -67,10 +65,9 @@ const About = () => {
           </p>
         </div>
       </div>
-
       {/* Features */}
       <div className="grid md:grid-cols-3 gap-6 mt-14">
-        <div className="p-6 bg-white dark:bg-gray-800 shadow rounded flex items-start gap-4">
+        <div className="p-6 bg-gray-500/10 dark:bg-gray-500/10 shadow rounded flex items-start gap-4">
           <FiTruck size={32} className="text-blue-600" />
           <div>
             <h3 className="text-xl font-semibold mb-1 dark:text-white">
@@ -82,7 +79,7 @@ const About = () => {
           </div>
         </div>
 
-        <div className="p-6 bg-white dark:bg-gray-800 shadow rounded flex items-start gap-4">
+        <div className="p-6 bg-gray-500/10 dark:bg-gray-500/10 shadow rounded flex items-start gap-4">
           <FiCheckCircle size={32} className="text-blue-600" />
           <div>
             <h3 className="text-xl font-semibold mb-1 dark:text-white">
@@ -94,7 +91,7 @@ const About = () => {
           </div>
         </div>
 
-        <div className="p-6 bg-white dark:bg-gray-800 shadow rounded flex items-start gap-4">
+        <div className="p-6 bg-gray-500/10 dark:bg-gray-500/10 shadow rounded flex items-start gap-4">
           <FiMessageCircle size={32} className="text-blue-600" />
           <div>
             <h3 className="text-xl font-semibold mb-1 dark:text-white">
@@ -106,18 +103,17 @@ const About = () => {
           </div>
         </div>
       </div>
-
       {/* Founder Section */}
       <div className="mt-16">
-        <h2 className="text-2xl font-bold text-center mb-8 dark:text-white">
+        <h2 className="text-3xl font-bold text-center mb-8 dark:text-white">
           Meet the Founder
         </h2>
 
-        <div className="flex flex-col md:flex-row items-center gap-8 bg-base-100 dark:bg-gray-800 shadow rounded p-6">
+        <div className="flex flex-col md:flex-row items-center gap-8 shadow-md rounded p-6 bg-gray-500/10 dark:bg-gray-500/10">
           <img
             src="https://i.ibb.co.com/sdnRqr8d/1665051423857-min-1.jpg"
             alt="Founder"
-            className="w-40 h-40 object-cove rounded-full"
+            className="w-40 h-40 object-cover  rounded-full"
           />
 
           <div>
@@ -127,7 +123,7 @@ const About = () => {
             <p className="text-sm text-gray-500 dark:text-gray-200 mb-3">
               Founder & MERN Stack Developer
             </p>
-            <p className="text-gray-600 dark:text-gray-400 leading-7">
+            <p className="text-gray-600 dark:text-gray-200 leading-7">
               Pothik was founded by a passionate developer with a vision to
               build a scalable and user-friendly e-commerce solution. The
               platform is built using modern technologies with performance,
@@ -136,11 +132,10 @@ const About = () => {
           </div>
         </div>
       </div>
-
       {/* Stats */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 text-center">
-        <div className="bg-white dark:bg-gray-800 shadow rounded p-6 transition-colors duration-500">
-          <h3 className="text-3xl font-bold text-primary dark:text-white">
+        <div className="bg-gray-500/10 dark:bg-gray-500/10 shadow-md rounded p-6 transition-colors duration-500">
+          <h3 className="text-3xl font-bold text-primary dark:text-white ">
             77 +
           </h3>
           <p className="text-gray-600 dark:text-gray-300 mt-1">
@@ -148,43 +143,42 @@ const About = () => {
           </p>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 shadow rounded p-6 transition-colors duration-500">
+        <div className="bg-gray-500/10 dark:bg-gray-500/10 shadow-md rounded p-6 transition-colors duration-500">
           <h3 className="text-3xl font-bold text-primary dark:text-white">
             65 +
           </h3>
           <p className="text-gray-600 dark:text-gray-300 mt-1">Products</p>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 shadow rounded p-6 transition-colors duration-500">
+        <div className="bg-gray-500/10 dark:bg-gray-500/10 shadow-md rounded p-6 transition-colors duration-500">
           <h3 className="text-3xl font-bold text-primary dark:text-white">
             24/7
           </h3>
           <p className="text-gray-600 dark:text-gray-300 mt-1">Support</p>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 shadow rounded p-6 transition-colors duration-500">
+        <div className="bg-gray-500/10 dark:bg-gray-500/10 shadow-md rounded p-6 transition-colors duration-500">
           <h3 className="text-3xl font-bold text-primary dark:text-white">
             99%
           </h3>
           <p className="text-gray-600 dark:text-gray-300 mt-1">Satisfaction</p>
         </div>
       </div>
-
       {/* Post Style Section */}
       <div className="mt-16 grid md:grid-cols-2 gap-8 items-center">
-        <img src={happy} alt="shopping" className="rounded-lg shadow" />
+        <img src={happy} alt="shopping" className="rounded-lg" />
 
-        <div>
+        <div className="bg-gray-500/10 dark:bg-gray-500/10 p-4 rounded-xl shadow-md">
           <h2 className="text-2xl font-semibold mb-4 dark:text-white">
             Why Customers Love Pothik
           </h2>
-          <p className="text-gray-600 leading-7 dark:text-gray-300">
+          <p className="leading-7 dark:text-gray-300">
             Customers choose Pothik because we prioritize trust, transparency,
             and convenience. Our platform is designed to ensure a smooth
             shopping experience from browsing to delivery.
           </p>
 
-          <p className="text-gray-600 mt-4 leading-7 dark:text-gray-300">
+          <p className="mt-4 leading-7 dark:text-gray-300">
             We continuously improve our services based on customer feedback to
             serve you better every day.
           </p>

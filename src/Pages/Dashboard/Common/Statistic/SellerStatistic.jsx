@@ -11,8 +11,6 @@ import useAuth from "../../../../Hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
-import { DateRange } from "react-date-range";
-import BarChart from "../BarChart/BarChart";
 import CompoLoading from "../../../../Components/CompoLoading/CompoLoading";
 
 const SellerStatistic = () => {
@@ -53,7 +51,7 @@ const SellerStatistic = () => {
             performance.
           </p>
         </div>
-        <div className="flex items-center gap-2 p-4 rounded bg-gray-100 dark:bg-gray-800  shadow-xl">
+        <div className="flex items-center gap-2 p-4 rounded bg-gray-500/20 dark:bg-gray-500/10 shadow-xl">
           <div>
             <img src={user.photoURL} alt="/photo" className="w-12 h-12 rounded-full"/>
           </div>
@@ -66,7 +64,7 @@ const SellerStatistic = () => {
 
       {/* Statistic Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow p-5 flex gap-4">
+        <div className="bg-gray-500/20 dark:bg-gray-500/10 rounded-xl shadow p-5 flex gap-4">
           <div className="p-4 bg-blue-100 text-blue-600 text-3xl rounded-xl">
             <FaBox />
           </div>
@@ -76,7 +74,7 @@ const SellerStatistic = () => {
           </div>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow p-5 flex gap-4">
+        <div className="bg-gray-500/20 dark:bg-gray-500/10 rounded-xl shadow p-5 flex gap-4">
           <div className="p-4 bg-green-100 text-green-600 text-3xl rounded-xl">
             <FaShoppingCart />
           </div>
@@ -85,7 +83,7 @@ const SellerStatistic = () => {
             <h2 className="text-xl font-bold dark:text-white">{ordersReceived}</h2>
           </div>
         </div>
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow p-5 flex gap-4">
+        <div className="bg-gray-500/20 dark:bg-gray-500/10 rounded-xl shadow p-5 flex gap-4">
           <div className="p-4 bg-orange-100 text-orange-600 text-3xl rounded-xl">
             <FaClock />
           </div>
@@ -94,7 +92,7 @@ const SellerStatistic = () => {
             <h2 className="text-xl font-bold dark:text-white">{ordersPending}</h2>
           </div>
         </div>
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow p-5 flex gap-4">
+        <div className="bg-gray-500/20 dark:bg-gray-500/10 rounded-xl shadow p-5 flex gap-4">
           <div className="p-4 bg-green-100 text-green-600 text-3xl rounded-xl">
             <FaCheckCircle />
           </div>
@@ -104,7 +102,7 @@ const SellerStatistic = () => {
           </div>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow p-5 flex gap-4">
+        <div className="bg-gray-500/20 dark:bg-gray-500/10 rounded-xl shadow p-5 flex gap-4">
           <div className="p-4 bg-yellow-100 text-yellow-600 text-3xl rounded-xl">
             <FaDollarSign />
           </div>
@@ -114,7 +112,7 @@ const SellerStatistic = () => {
           </div>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow p-5 flex gap-4">
+        <div className="bg-gray-500/20 dark:bg-gray-500/10 rounded-xl shadow p-5 flex gap-4">
           <div className="p-4 bg-purple-100 text-purple-600 text-3xl rounded-xl">
             <FaStar />
           </div>
@@ -123,7 +121,7 @@ const SellerStatistic = () => {
             <h2 className="text-xl font-bold dark:text-white">{totalRatings}</h2>
           </div>
         </div>
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow p-5 flex gap-4">
+        <div className="bg-gray-500/20 dark:bg-gray-500/10 rounded-xl shadow p-5 flex gap-4">
           <div className="p-4 bg-purple-100 text-purple-600 text-3xl rounded-xl">
             <FaStar />
           </div>
@@ -133,24 +131,10 @@ const SellerStatistic = () => {
           </div>
         </div>
       </div>
-      {/* chart and calender */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mx-auto">
-        {/* chart */}
-        <div className="col-span-2 flex justify-between flex-col bg-white p-4 rounded">
-          <BarChart data={data} />
-        </div>
-        {/* calender */}
-        <div className="col-span-1 rounded">
-          <DateRange
-            editableDateInputs={true}
-            moveRangeOnFirstSelection={false}
-            className="rounded"
-          />
-        </div>
-      </div>
+      
 
       {/* Recent Orders */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow p-6 overflow-x-auto">
+      <div className="bg-gray-500/20 dark:bg-gray-500/10 rounded-xl shadow p-6 overflow-x-auto">
         <h3 className="text-lg font-bold mb-4 dark:text-white">Recent Customer Orders</h3>
 
         {recentOrders.length === 0 ? (
@@ -158,7 +142,7 @@ const SellerStatistic = () => {
         ) : (
           <table className="table">
             <thead>
-              <tr className="bg-gray-100 dark:bg-gray-700 dark:text-white">
+              <tr className="bg-gray-500/20 dark:bg-gray-500/10 dark:text-white">
                 <th>#</th>
                 <th>Buyer</th>
                 <th>Product</th>
@@ -182,7 +166,7 @@ const SellerStatistic = () => {
       </div>
 
       {/* Recent Products */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow p-6 overflow-x-auto">
+      <div className="bg-gray-500/20 dark:bg-gray-500/10 rounded-xl shadow p-6 overflow-x-auto">
         <h3 className="text-lg font-bold mb-4 dark:text-white">Recently Added Products</h3>
 
         {recentProducts.length === 0 ? (
@@ -190,7 +174,7 @@ const SellerStatistic = () => {
         ) : (
           <table className="table">
             <thead>
-              <tr className="bg-gray-100 dark:bg-gray-700 dark:text-white">
+              <tr className="bg-gray-500/20 dark:bg-gray-500/10 dark:text-white">
                 <th>#</th>
                 <th>Product</th>
                 <th>Price</th>

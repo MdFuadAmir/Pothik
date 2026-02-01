@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 const Loading = () => {
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center bg-gray-900 text-white">
+    <div className="min-h-screen flex flex-col justify-center items-center text-white">
       <motion.h1
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}

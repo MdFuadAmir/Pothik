@@ -77,7 +77,7 @@ const MyOrders = () => {
         {orderData.map((order) => (
           <div
             key={order._id}
-            className="border rounded-xl p-5 shadow-sm bg-white dark:bg-gray-800 space-y-3"
+            className="rounded-xl p-5 shadow-sm bg-gray-500/20 dark:bg-gray-500/10 space-y-3"
           >
             {/* Header */}
             <div className="flex justify-between items-center">
@@ -96,7 +96,7 @@ const MyOrders = () => {
             </div>
 
             {/* Items List */}
-            <div className="bg-gray-50 dark:bg-gray-700 p-3 rounded-lg space-y-2">
+            <div className="bg-gray-500/20 dark:bg-gray-500/10 p-3 rounded-lg space-y-2">
               <p className="text-sm font-semibold text-gray-700 dark:text-gray-300">
                 Items:
               </p>

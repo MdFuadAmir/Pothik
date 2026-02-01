@@ -5,16 +5,13 @@ import {
   FaStore,
   FaMoneyBillWave,
 } from "react-icons/fa";
-import { DateRange } from "react-date-range";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import useAuth from "../../../../Hooks/useAuth";
-import GrothChart from "../../Admin/GrothChart/GrothChart";
-import RevenueChart from "../../Admin/RevenueChart/RevenueChart";
 import CompoLoading from "../../../../Components/CompoLoading/CompoLoading";
 
 const StatCard = ({ icon, title, value, color }) => (
-  <div className="bg-white dark:bg-gray-800 rounded-xl shadow p-5 flex items-center gap-4">
+  <div className="bg-gray-500/20 dark:bg-gray-500/10 rounded-xl shadow p-5 flex items-center gap-4">
     <div
       className={`p-4 bg-${color}-100 text-${color}-600 rounded-xl text-3xl`}
     >
@@ -47,8 +44,6 @@ const AdminStatistic = () => {
     totalSellers,
     recentSellerRequests,
     pendingSellerRequests,
-    dailyRevenue,
-    userGrowth,
   } = data;
 
   return (
@@ -63,7 +58,7 @@ const AdminStatistic = () => {
             Overview of your platform’s performance and activities.
           </p>
         </div>
-        <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded shadow-xl flex gap-2 items-center">
+        <div className="bg-gray-500/20 dark:bg-gray-500/10 p-4 rounded shadow-xl flex gap-2 items-center">
           <img
             src={user.photoURL}
             alt="/photo"
@@ -109,21 +104,9 @@ const AdminStatistic = () => {
           color="yellow"
         />
       </div>
-      {/* chart & calender*/}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Sales Chart Placeholder */}
-        <div className="bg-white rounded-xl shadow p-6 h-[350px] flex items-center justify-center text-gray-400">
-          <RevenueChart dailyRevenue={dailyRevenue} />
-        </div>
-        {/* Users Growth Placeholder */}
-        <div className="bg-white rounded-xl shadow h-[350px] flex justify-center items-center">
-          <GrothChart userGrowth={userGrowth} />
-        </div>
-      </div>
-
       {/* Recent Seller Requests */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="p-4 rounded-xl bg-white dark:bg-gray-800">
+        <div className="p-4 rounded-xl bg-gray-500/20 dark:bg-gray-500/10">
           <h3 className="text-lg font-bold mb-4 dark:text-white">
             Recent Seller Requests
           </h3>
@@ -165,13 +148,6 @@ const AdminStatistic = () => {
               </tbody>
             </table>
           </div>
-        </div>
-        <div className="p-4 rounded-xl flex justify-center ">
-          <DateRange
-            editableDateInputs={true}
-            moveRangeOnFirstSelection={false}
-            className="rounded"
-          />
         </div>
       </div>
     </div>

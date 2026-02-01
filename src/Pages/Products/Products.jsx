@@ -1,11 +1,11 @@
 /* eslint-disable no-unused-vars */
 import { useSearchParams } from "react-router";
 import useAxios from "../../Hooks/useAxios";
-import ProCategory from "../Category/proCategory";
 import { useQuery } from "@tanstack/react-query";
 import Product from "./Product";
 import CompoLoading from "../../Components/CompoLoading/CompoLoading";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
+import ProCategory from "../Category/ProCategory";
 
 const Products = () => {
   const axiosInstance = useAxios();
@@ -46,71 +46,74 @@ const Products = () => {
     if (currentPage < numOfPages - 1) setCurrentPage(currentPage + 1);
   };
   return (
-    <div className="py-4 md:py-10 grid grid-cols-1 md:grid-cols-5 gap-4 md:gap-8">
-      {/* Category sidebar */}
+    <div>
+      <h1 className="mt-6 text-center text-4xl font-bold underline text-black dark:text-white">All Products</h1>
       <div className="col-span-1 w-full">
         <ProCategory />
       </div>
-      {/* Products */}
-      {isLoading ? (
-        <div className="col-span-4">
-          <CompoLoading />
-        </div>
-      ) : (
-        <div className="col-span-4">
-          <h2 className="text-xl font-bold mb-6">
-            {category ? `${category} Products` : "All Products"} ({totalProducts})
-          </h2>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-            {products.map((pro) => (
-              <Product key={pro._id} pro={pro} />
-            ))}
+      <div className="py-4 md:py-10 grid grid-cols-1 md:grid-cols-5 gap-4 md:gap-8">
+        {/* Products */}
+        {isLoading ? (
+          <div className="col-span-5">
+            <CompoLoading />
           </div>
+        ) : (
+          <div className="col-span-5">
+            <h2 className="text-xl text-black dark:text-white font-bold mb-6">
+              {category ? `${category} Products` : "All Products"} (
+              {totalProducts})
+            </h2>
 
-          {/* Pagination Controls */}
-          <div className="flex flex-wrap justify-center mt-12 gap-4 items-center">
-            <button
-              onClick={handlePreviousPage}
-              disabled={currentPage === 0}
-              className="btn dark:bg-gray-800  border-none dark:text-white"
-            >
-              Previous
-            </button>
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
+              {products.map((pro) => (
+                <Product key={pro._id} pro={pro} />
+              ))}
+            </div>
 
-            {pages.map((page) => (
+            {/* Pagination Controls */}
+            <div className="flex flex-wrap justify-center mt-12 gap-4 items-center">
               <button
-                key={page}
-                onClick={() => setCurrentPage(page)}
-                className={`btn ${currentPage === page ? "bg-amber-500 border-none text-white" : "border-none"}`}
+                onClick={handlePreviousPage}
+                disabled={currentPage === 0}
+                className="px-4 py-2 bg-white/30 dark:bg-gray-800/90 text-black dark:text-white rounded"
               >
-                {page + 1}
+                Previous
               </button>
-            ))}
 
-            <button
-              onClick={handleNextPage}
-              disabled={currentPage === numOfPages - 1}
-              className="btn dark:bg-gray-800  border-none dark:text-white"
-            >
-              Next
-            </button>
+              {pages.map((page) => (
+                <button
+                  key={page}
+                  onClick={() => setCurrentPage(page)}
+                  className={`px-4 py-2 rounded-full ${currentPage === page ? "bg-indigo-500 border-none text-white" : "bg-indigo-500/20 text-white"}`}
+                >
+                  {page + 1}
+                </button>
+              ))}
 
-            <select
-              value={itemsPerPage}
-              onChange={handleItemsPerPage}
-              className="border rounded px-2 py-1 dark:bg-gray-800 dark:text-white"
-            >
-              <option value="10">10</option>
-              <option value="15">15</option>
-              <option value="20">20</option>
-              <option value="30">30</option>
-              <option value="50">50</option>
-              <option value="100">100</option>
-            </select>
+              <button
+                onClick={handleNextPage}
+                disabled={currentPage === numOfPages - 1}
+                className="px-4 py-2 bg-white/30 dark:bg-gray-800/90 text-black dark:text-white rounded"
+              >
+                Next
+              </button>
+
+              <select
+                value={itemsPerPage}
+                onChange={handleItemsPerPage}
+                className="border rounded px-2 py-1 dark:bg-gray-800 dark:text-white"
+              >
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+              </select>
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };

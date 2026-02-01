@@ -15,9 +15,7 @@ const Contact = () => {
     mutationFn: async (data) => {
       const res = await fetch(`${API_URL}/contact`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
 
@@ -28,7 +26,6 @@ const Contact = () => {
 
       return res.json();
     },
-
     onSuccess: () => {
       setFormData({ name: "", email: "", message: "" });
     },
@@ -44,41 +41,50 @@ const Contact = () => {
   };
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-10">
-      <h1 className="text-3xl md:text-4xl font-bold text-center mb-8 dark:text-white">
+    <div className="max-w-5xl mx-auto px-4 py-12">
+      <h1 className="text-3xl md:text-4xl font-bold text-center mb-10 dark:text-white">
         Contact Us
       </h1>
 
-      <div className="grid md:grid-cols-2 gap-8 bg-white dark:bg-gray-800 p-6 shadow rounded-lg">
+      <div className="grid md:grid-cols-2 gap-8 p-6 rounded-xl bg-gray-500/10 dark:bg-gray-500/10 shadow-md">
         {/* Contact Info */}
         <div>
-          <h2 className="text-xl font-semibold mb-4 dark:text-white">Get in Touch</h2>
-          <p className="text-gray-600 mb-3 dark:text-gray-300">
+          <h2 className="text-xl font-semibold mb-4 dark:text-white">
+            Get in Touch
+          </h2>
+
+          <p className="text-gray-600 dark:text-gray-300">
             Have any questions? Our team is ready to help you anytime.
           </p>
 
           <div className="space-y-4 mt-6">
             <div className="flex items-start gap-3">
-              <FiMapPin size={24} className="text-blue-600 dark:text-white" />
+              <FiMapPin size={24} className="text-primary" />
               <div>
                 <p className="font-medium dark:text-white">Address</p>
-                <p className="text-gray-600 dark:text-gray-400">Kushtia, Bangladesh</p>
+                <p className="text-gray-600 dark:text-gray-300">
+                  Kushtia, Bangladesh
+                </p>
               </div>
             </div>
 
             <div className="flex items-start gap-3">
-              <FiPhone size={24} className="text-blue-600 dark:text-white" />
+              <FiPhone size={24} className="text-primary" />
               <div>
                 <p className="font-medium dark:text-white">Phone</p>
-                <p className="text-gray-600 dark:text-gray-400">+880 1705470131</p>
+                <p className="text-gray-600 dark:text-gray-300">
+                  +880 1705470131
+                </p>
               </div>
             </div>
 
             <div className="flex items-start gap-3">
-              <FiMail size={24} className="text-blue-600 dark:text-white" />
+              <FiMail size={24} className="text-primary" />
               <div>
                 <p className="font-medium dark:text-white">Email</p>
-                <p className="text-gray-600 dark:text-gray-400">mdfuadamir@gmail.com</p>
+                <p className="text-gray-600 dark:text-gray-300">
+                  mdfuadamir@gmail.com
+                </p>
               </div>
             </div>
           </div>
@@ -86,7 +92,9 @@ const Contact = () => {
 
         {/* Contact Form */}
         <div>
-          <h2 className="text-xl font-semibold mb-4 dark:text-white">Send us a Message</h2>
+          <h2 className="text-xl font-semibold mb-4 dark:text-white">
+            Send us a Message
+          </h2>
 
           <form className="space-y-4" onSubmit={handleSubmit}>
             <input
@@ -94,8 +102,15 @@ const Contact = () => {
               value={formData.name}
               onChange={handleChange}
               type="text"
-              className="w-full border p-2 rounded dark:border-white dark:placeholder-gray-500 dark:text-white"
               placeholder="Enter your name"
+              className="
+                w-full p-3 rounded-lg
+                bg-white/10 dark:bg-gray-900/60
+                border border-gray-200 dark:border-white/10
+                text-gray-800 dark:text-white
+                placeholder-gray-500 dark:placeholder-gray-400
+                focus:outline-none focus:ring-2 focus:ring-primary/40
+              "
               required
             />
 
@@ -104,8 +119,15 @@ const Contact = () => {
               value={formData.email}
               onChange={handleChange}
               type="email"
-              className="w-full border p-2 rounded dark:border-white dark:placeholder-gray-500 dark:text-white"
               placeholder="Enter your email"
+              className="
+                w-full p-3 rounded-lg
+                bg-white/10 dark:bg-gray-900/60
+                border border-gray-200 dark:border-white/10
+                text-gray-800 dark:text-white
+                placeholder-gray-500 dark:placeholder-gray-400
+                focus:outline-none focus:ring-2 focus:ring-primary/40
+              "
               required
             />
 
@@ -114,28 +136,37 @@ const Contact = () => {
               value={formData.message}
               onChange={handleChange}
               rows="4"
-              className="w-full border p-2 rounded dark:border-white dark:placeholder-gray-500 dark:text-white"
               placeholder="Write your message..."
+              className="
+                w-full p-3 rounded-lg
+                bg-white/10 dark:bg-gray-900/60
+                border border-gray-200 dark:border-white/10
+                text-gray-800 dark:text-white
+                placeholder-gray-500 dark:placeholder-gray-400
+                focus:outline-none focus:ring-2 focus:ring-primary/40
+              "
               required
-            ></textarea>
+            />
 
             <button
               disabled={contactMutation.isPending}
-              className="w-full py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
+              className="
+                w-full py-3 rounded-xl
+                bg-primary text-white font-semibold
+                hover:opacity-90 transition
+              "
             >
               {contactMutation.isPending ? "Sending..." : "Send Message"}
             </button>
 
-            {/* Success Message */}
             {contactMutation.isSuccess && (
-              <p className="text-green-600 text-sm mt-2">
+              <p className="text-green-500 text-sm mt-2">
                 ✅ Message sent successfully
               </p>
             )}
 
-            {/* Error Message */}
             {contactMutation.isError && (
-              <p className="text-red-600 text-sm mt-2">
+              <p className="text-red-500 text-sm mt-2">
                 ❌ {contactMutation.error.message}
               </p>
             )}

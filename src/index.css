@@ -1,11 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 @plugin "daisyui";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-.arvo-regular {
-  font-family: "Arvo", serif;
-  font-weight: 400;
-  font-style: normal;
+html {
+  font-family: 'Inter', system-ui, sans-serif;
 }
+

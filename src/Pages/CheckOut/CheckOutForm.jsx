@@ -32,7 +32,7 @@ const CheckOutForm = ({ setMethods }) => {
   }, [methods.formState]);
 
   return (
-    <div className="space-y-2 p-4 md:p-6 rounded">
+    <div className="space-y-2 p-4 md:p-6 rounded-xl bg-gray-500/10 dark:bg-gray-500/10">
       {/* First Name */}
       <div className="flex flex-col space-y-1">
         <label className="text-sm font-md dark:text-white">First Name</label>
@@ -40,7 +40,7 @@ const CheckOutForm = ({ setMethods }) => {
           type="text"
           placeholder="full name.."
           {...register("fullName", { required: true })}
-          className="input w-full"
+          className="w-full px-4 py-2 border border-white/40 rounded dark:placeholder:text-gray-200 shadow-xl"
         />
         {errors.fullName && (
           <p className="text-red-500 text-sm">name required</p>
@@ -54,7 +54,7 @@ const CheckOutForm = ({ setMethods }) => {
           type="email"
           {...register("email")}
           readOnly
-          className="border w-full p-2 rounded bg-gray-100 cursor-not-allowed"
+          className="w-full px-4 py-2 border border-white/40 rounded dark:text-gray-200 cursor-not-allowed shadow-xl"
         />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2">
@@ -65,7 +65,7 @@ const CheckOutForm = ({ setMethods }) => {
             type="text"
             placeholder="street.."
             {...register("street", { required: true })}
-            className="input"
+            className="w-full px-4 py-2 border border-white/40 rounded dark:placeholder:text-gray-200 shadow-xl"
           />
           {errors.street && (
             <p className="text-red-500 text-sm">Street is required</p>
@@ -78,7 +78,7 @@ const CheckOutForm = ({ setMethods }) => {
             type="text"
             placeholder="city.."
             {...register("city", { required: true })}
-            className="input"
+            className="w-full px-4 py-2 border border-white/40 rounded dark:placeholder:text-gray-200 shadow-xl"
           />
           {errors.city && (
             <p className="text-red-500 text-sm">City is required</p>
@@ -91,7 +91,7 @@ const CheckOutForm = ({ setMethods }) => {
             type="number"
             placeholder="zip code.."
             {...register("zipCode", { required: true })}
-            className="input"
+            className="w-full px-4 py-2 border border-white/40 rounded dark:placeholder:text-gray-200 shadow-xl"
           />
           {errors.zipCode && (
             <p className="text-red-500 text-sm">Zip Code is required</p>
@@ -104,7 +104,7 @@ const CheckOutForm = ({ setMethods }) => {
             type="tel"
             defaultValue={dbUser?.phone}
             {...register("phone")}
-            className="input"
+            className="w-full px-4 py-2 border border-white/40 rounded dark:placeholder:text-gray-200 dark:text-gray-200 shadow-xl"
           />
         </div>
       </div>
@@ -116,7 +116,7 @@ const CheckOutForm = ({ setMethods }) => {
           type="text"
           defaultValue={dbUser?.address}
           {...register("fullAddress")}
-          className="input w-full"
+          className="w-full px-4 py-2 border border-white/40 rounded dark:placeholder:text-gray-200 dark:text-gray-200 shadow-xl"
         ></input>
       </div>
     </div>

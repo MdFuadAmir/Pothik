@@ -42,7 +42,7 @@ const Profile = () => {
         setEdit(false);
       }
     } catch (error) {
-      toast.error("Profile Updated Failed!",error.message);
+      toast.error("Profile Updated Failed!", error.message);
     }
 
     console.log(formData);
@@ -50,7 +50,7 @@ const Profile = () => {
 
   return (
     <div className="flex justify-center">
-      <div className="bg-white dark:bg-gray-800 shadow-xl rounded-2xl w-full p-4 max-w-3xl">
+      <div className="bg-gray-500/20 dark:bg-gray-500/10 shadow-xl rounded-2xl w-full p-4 max-w-3xl">
         {/* Header */}
         <div className="flex items-center gap-6 border-b dark:border-b-gray-200 pb-6">
           {user.photoURL ? (
@@ -63,7 +63,9 @@ const Profile = () => {
           )}
 
           <div>
-            <h1 className="text-2xl font-bold uppercase dark:text-white">{user.displayName}</h1>
+            <h1 className="text-2xl font-bold uppercase dark:text-white">
+              {user.displayName}
+            </h1>
             <button
               onClick={() => setEdit(!edit)}
               className="mt-2 px-4 py-1 bg-blue-600 text-white rounded-lg flex items-center gap-2"
@@ -95,7 +97,9 @@ const Profile = () => {
         {/* Edit Mode */}
         {edit && (
           <div className="mt-8 p-6 bg-gray-100 dark:bg-gray-800 rounded-xl shadow-inner">
-            <h2 className="font-bold text-xl mb-4 dark:text-gray-200">Edit Your Info</h2>
+            <h2 className="font-bold text-xl mb-4 dark:text-gray-200">
+              Edit Your Info
+            </h2>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
               <div className="flex flex-col space-y-1">
                 <input

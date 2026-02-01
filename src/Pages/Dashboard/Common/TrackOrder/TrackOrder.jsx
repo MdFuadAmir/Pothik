@@ -29,7 +29,7 @@ const TrackOrder = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto px-4 py-8 rounded border dark:border-white">
+    <div className="max-w-3xl mx-auto px-4 py-8 rounded bg-gray-500/20 dark:bg-gray-500/10 dark:border-white">
       <div className="text-center">
         <h1 className="text-2xl font-bold dark:text-white">Track Your Order</h1>
         <p className="text-sm text-gray-500">
@@ -57,7 +57,7 @@ const TrackOrder = () => {
         <p className="text-red-500 mt-3 text-sm text-center">{error}</p>
       )}
       {/*  */}
-      <div className="mt-6 p-4 bg-white dark:bg-gray-800 dark:text-gray-300 rounded shadow">
+      <div className="mt-6 p-4 bg-gray-500/20 dark:bg-gray-500/10 dark:text-gray-300 rounded shadow">
         <h2 className="text-xl font-bold mb-2">Order Status</h2>
         <div className="mb-6 space-y-1">
           <p>
@@ -83,7 +83,7 @@ const TrackOrder = () => {
                 className={
                   order?.status === "pending"
                     ? "text-blue-600"
-                    : "text-gray-400"
+                    : "text-gray-500"
                 }
               />
               <div>
@@ -115,7 +115,7 @@ const TrackOrder = () => {
                 className={
                   order?.status === "processing"
                     ? "text-blue-600"
-                    : "text-gray-400"
+                    : "text-gray-500"
                 }
               />
               <div>
@@ -148,7 +148,7 @@ const TrackOrder = () => {
                 className={
                   order?.status === "shipped"
                     ? "text-blue-600"
-                    : "text-gray-400"
+                    : "text-gray-500"
                 }
               />
               <div>
@@ -181,7 +181,7 @@ const TrackOrder = () => {
                 className={
                   order?.status === "in_transit"
                     ? "text-blue-600"
-                    : "text-gray-400"
+                    : "text-gray-500"
                 }
               />
               <div>
@@ -214,7 +214,7 @@ const TrackOrder = () => {
                 className={
                   order?.status === "out_for_delivery"
                     ? "text-blue-600"
-                    : "text-gray-400"
+                    : "text-gray-500"
                 }
               />
               <div>
@@ -247,7 +247,7 @@ const TrackOrder = () => {
                 className={
                   order?.status === "delivered"
                     ? "text-green-600"
-                    : "text-gray-400"
+                    : "text-gray-500"
                 }
               />
               <div>
@@ -280,7 +280,7 @@ const TrackOrder = () => {
                 className={
                   order?.status === "cancelled"
                     ? "text-red-600"
-                    : "text-gray-400"
+                    : "text-gray-500"
                 }
               />
               <div>

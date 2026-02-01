@@ -67,10 +67,10 @@ const MyDeliveredOrders = () => {
         Lorem ipsum, dolor sit amet consectetur adipisicing elit.
       </p>
 
-      <div className="overflow-x-auto border rounded p-4 dark:bg-gray-800">
+      <div className="overflow-x-auto  rounded p-4 bg-gray-500/20 dark:bg-gray-500/10">
         <table className="table w-full">
           <thead>
-            <tr className="bg-gray-100 dark:bg-gray-700 dark:text-white">
+            <tr className="bg-gray-500/20 dark:bg-gray-500/10 dark:text-white">
               <th>Order ID</th>
               <th>Product</th>
               <th>Qty</th>
@@ -117,7 +117,7 @@ const MyDeliveredOrders = () => {
           <button
             key={page}
             onClick={() => setCurrentPage(page)}
-            className={`btn ${currentPage === page ? "bg-amber-500" : ""}`}
+            className={`px-4 py-2 rounded-full ${currentPage === page ? "bg-indigo-500" : ""}`}
           >
             {page + 1}
           </button>

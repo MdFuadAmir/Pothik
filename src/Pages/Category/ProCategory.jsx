@@ -1,9 +1,8 @@
 import queryString from "query-string";
 import { useLocation, useNavigate, useSearchParams } from "react-router";
-import { useEffect, useState } from "react";
-import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 
 const categories = [
+  { title: "All" },
   { title: "Electronics" },
   { title: "Mobiles" },
   { title: "Fashion" },
@@ -26,62 +25,49 @@ const ProCategory = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [params] = useSearchParams();
-  const category = params.get("category");
-  const isMobile = window.innerWidth < 768;
-  const [showCategories, setShowCategories] = useState(!isMobile);
 
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 768) {
-        setShowCategories(true);
-      }
-    };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  const activeCategory = params.get("category") || "All";
 
   const handleClick = (categoryTitle) => {
     const currentQuery = queryString.parse(location.search);
-    const updatedQuery = {
-      ...currentQuery,
-      category: categoryTitle,
-    };
+
+    if (categoryTitle === "All") {
+      delete currentQuery.category;
+    } else {
+      currentQuery.category = categoryTitle;
+    }
+
     const url = queryString.stringifyUrl({
       url: "/products",
-      query: updatedQuery,
+      query: currentQuery,
     });
 
     navigate(url);
-    if (window.innerWidth < 768) {
-      setShowCategories(false);
-    }
   };
-  return (
-    <div className="md:border-r p-4 w-full dark:text-white">
-      <button
-        onClick={() => setShowCategories(!showCategories)}
-        className="px-4 py-2 w-full justify-between text-sm border overflow-hidden rounded flex items-center gap-2"
-      >
-        All Categories
-        {showCategories ? <FaChevronUp /> : <FaChevronDown />}
-      </button>
 
-      {showCategories && (
-        <div className="mt-2">
-          {categories.map((cat) => (
-            <div
-              key={cat.title}
-              onClick={() => handleClick(cat.title)}
-              role="button"
-              className={`flex flex-col p-2 rounded-lg cursor-pointer transition
-                ${category === cat.title ? "bg-gray-300" : "hover:bg-gray-100"}
-              `}
-            >
-              <span className="text-sm">{cat.title}</span>
-            </div>
-          ))}
-        </div>
-      )}
+  return (
+    <div className="flex flex-wrap justify-center gap-3 mt-8 max-w-5xl mx-auto">
+      {categories.map((categorie) => {
+        const isActive = activeCategory === categorie.title;
+
+        return (
+          <button
+            key={categorie.title}
+            onClick={() => handleClick(categorie.title)}
+            className={`
+              px-4 py-2 rounded-full text-sm font-medium
+              transition backdrop-blur
+              ${
+                isActive
+                  ? "bg-primary/20 dark:bg-indigo-500/70 text-primary dark:text-indigo-100"
+                  : "bg-white/20 dark:bg-gray-950/50 text-gray-700 dark:text-gray-200 hover:bg-white/30"
+              }
+            `}
+          >
+            {categorie.title}
+          </button>
+        );
+      })}
     </div>
   );
 };

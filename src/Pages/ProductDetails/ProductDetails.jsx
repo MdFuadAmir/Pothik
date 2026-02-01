@@ -1,7 +1,6 @@
 import { useNavigate, useParams } from "react-router";
 import useAxios from "../../Hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
-import Loading from "../../Components/Loading/Loading";
 import { FaStar } from "react-icons/fa";
 import { useState } from "react";
 import useAuth from "../../Hooks/useAuth";
@@ -64,10 +63,10 @@ const ProductDetails = () => {
     return <CompoLoading />;
   }
   return (
-    <div className="my-6 max-w-4xl mx-auto">
+    <div className="my-6 max-w-4xl mx-auto bg-gray-500/10 dark:bg-gray-500/10 p-4 rounded-xl">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <div className="w-full h-72 p-2 rounded-lg overflow-hidden border">
+          <div className="w-full h-72 p-2 rounded-lg overflow-hidden ">
             <img
               src={product?.images[mainImage]}
               alt={`Product ${mainImage}`}
@@ -93,7 +92,7 @@ const ProductDetails = () => {
           </div>
         </div>
         <div className="space-y-3">
-          <h1 className="text-xl font-bold">{product?.productName}</h1>
+          <h1 className="text-xl font-bold text-black dark:text-white">{product?.productName}</h1>
           <div className="flex gap-4 mt-2">
             {product?.discountPrice ? (
               <div className="flex items-center gap-2">

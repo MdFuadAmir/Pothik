@@ -111,13 +111,13 @@ const CheckOut = () => {
       {/* Form */}
       <div className="w-full md:w-1/2">
         <h2 className="text-xl font-medium mb-6 dark:text-white">DELIVERY INFORMATION --</h2>
-        <div className="border rounded dark:border-white">
+        <div className="rounded">
           <CheckOutForm setMethods={setMethods} />
         </div>
       </div>
 
       {/* Summary */}
-      <div className="w-full md:w-1/2 border p-4 rounded h-fit dark:border-white">
+      <div className="w-full md:w-1/2  p-4 rounded h-fit bg-gray-500/10 dark:bg-gray-500/10">
         <h2 className="text-lg font-bold mb-3 dark:text-white">Order Summary</h2>
 
         <div className="flex justify-between text-sm mb-2 dark:text-white">
@@ -143,7 +143,7 @@ const CheckOut = () => {
             <button
               onClick={() => setPaymentMethod("STRIPE")}
               disabled
-              className={`border rounded p-1 text-sm disabled:bg-gray-300 dark:disabled:bg-gray-800 ${
+              className={`border rounded p-1 text-sm disabled:bg-gray-300 dark:disabled:bg-gray-500 dark:text-white ${
                 paymentMethod === "STRIPE" ? "bg-blue-500 text-white" : ""
               }`}
             >

@@ -22,10 +22,10 @@ const PendingSeller = () => {
         users page and search the email and update to seller.
       </p>
  
-      <div className="overflow-x-auto bg-white dark:bg-gray-800 p-4 rounded-xl">
+      <div className="overflow-x-auto bg-gray-500/20 dark:bg-gray-500/10 p-4 rounded-xl">
         <table className="table">
           <thead>
-            <tr className="bg-gray-100 dark:bg-gray-950 dark:text-white">
+            <tr className="bg-gray-500/40 dark:text-white">
               <th>#</th>
               <th>Email</th>
               <th>Phone</th>

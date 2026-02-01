@@ -79,9 +79,9 @@ const ManageUsers = () => {
       </div>
 
       {/* Users Table */}
-      <div className="overflow-x-auto mt-6 mx-auto bg-gray-100 rounded">
+      <div className="overflow-x-auto mt-6 mx-auto bg-gray-500/20 dark:bg-gray-500/10 rounded">
         <table className="table w-full">
-          <thead className="bg-gray-700 dark:bg-gray-950 text-white">
+          <thead className="text-white bg-gray-500/40 dark:bg-gray-500/40">
             <tr>
               <th>#</th>
               <th>User ID</th>
@@ -91,7 +91,7 @@ const ManageUsers = () => {
               <th>Actions</th>
             </tr>
           </thead>
-          <tbody className="dark:bg-gray-800 dark:text-gray-300">
+          <tbody className="dark:text-gray-300">
             {isLoading ? (
               <tr>
                 <td

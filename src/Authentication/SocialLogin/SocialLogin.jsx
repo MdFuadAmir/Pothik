@@ -15,16 +15,16 @@ const SocialLogin = () => {
     loginWithGoogle()
       .then(async (result) => {
         const user = result.user;
-        console.log("current-user:",user);
+        console.log("current-user:", user);
         // update user profile info in database
         const userInfo = {
           email: user?.email,
           role: "user",
-          status:"verified",
+          status: "verified",
         };
         await axiosInstance.post("/users", userInfo);
         toast.success("Login Success !!");
-        console.log("Current_user",userInfo);
+        console.log("Current_user", userInfo);
         navigate(from);
       })
       .catch((error) => {
@@ -36,7 +36,7 @@ const SocialLogin = () => {
     <div>
       <button
         onClick={haldleGoogleSignIn}
-        className="flex items-center gap-4 btn btn-outline rounded w-full dark:text-white"
+        className="flex items-center justify-center px-6 py-2 border gap-4 rounded w-full bg-slate-600 hover:bg-slate-700 hover:text-white text-gray-300 duration-300"
       >
         <FaGoogle size={20} /> Login With Google
       </button>

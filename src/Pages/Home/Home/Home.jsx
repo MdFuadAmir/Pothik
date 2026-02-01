@@ -4,7 +4,7 @@ import Category from "../../Category/Category";
 
 const Home = () => {
   return (
-    <div>
+    <div className="space-y-32">
       <Banner />
       <Category />
       <BestDeals/>
