@@ -56,10 +56,11 @@ const Category = () => {
   };
 
   return (
-    <section className="max-w-7xl mx-auto px-4 py-10">
+    <section className="mx-auto px-4 md:px-10 lg:px-20 py-10">
       <h2
         className="text-2xl md:text-3xl font-bold mb-8 
-        text-gray-800 dark:text-gray-100"
+        text-white dark:text-emerald-400 px-4 py-2 rounded-md w-fit bg-gray-900/10 dark:bg-white/10"
+        
       >
         Shop by Category
       </h2>
@@ -78,7 +79,7 @@ const Category = () => {
               className="
               flex flex-col items-center justify-center
               h-full rounded-2xl p-4
-               bg-gray-500/10 dark:bg-gray-500/10
+              bg-gray-900/70
               transition
             "
             >
@@ -102,9 +103,9 @@ const Category = () => {
               </div>
               <p
                 className="
-                text-sm font-medium text-center
-                text-gray-700 dark:text-gray-200
-                group-hover:text-sky-500 dark:group-hover:text-sky-400
+                 font-medium text-center
+                text-emerald-400
+                group-hover:text-emerald-500
                 transition
               "
               >

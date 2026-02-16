@@ -11,10 +11,9 @@ import { IoIosStats } from "react-icons/io";
 import UserMenu from "./DashboardMenu/UserMenu";
 import toast from "react-hot-toast";
 import ApplySellerButton from "../../Pages/Dashboard/Common/ApplySellerButton/ApplySellerButton";
-import DashboardFooter from "../../Components/DashboardFooter/DashboardFooter";
 import DarkMood from "../../Components/DarkMood/DarkMood";
-import bg from "../../assets/bgimage.jpg";
-import bg2 from "../../assets/bgLight.jpg";
+import bg from "../../assets/HomeBanner/32042.jpg";
+import bg2 from "../../assets/HomeBanner/32671.jpg";
 import { useEffect, useState } from "react";
 
 const DashboardLayout = () => {
@@ -82,8 +81,16 @@ const DashboardLayout = () => {
         <div className="flex flex-col justify-between min-h-screen">
           <div className="p-4 md:p-8">
             <Outlet />
+            <div
+              title="Change Background"
+              className="
+    fixed bottom-24 right-4 z-50
+   
+  "
+            >
+            </div>
+              <DarkMood />
           </div>
-          <DashboardFooter />
         </div>
       </div>
 
@@ -126,8 +133,6 @@ const DashboardLayout = () => {
                 <FaSignOutAlt /> LogOut
               </Link>
             </li>
-
-            <DarkMood />
           </div>
         </ul>
       </div>

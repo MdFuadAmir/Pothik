@@ -6,7 +6,7 @@ const Product = ({ pro }) => {
       to={`/product/${pro._id}`}
       className="
         p-3 rounded-xl
-        bg-gray-500/10 dark:bg-gray-500/10
+        bg-gray-900/70
         shadow-md dark:shadow-black/40
         hover:shadow-lg transition
       "
@@ -15,18 +15,16 @@ const Product = ({ pro }) => {
       <img
         src={pro.images?.[0]}
         alt={pro?.productName}
-        className="w-full h-28 object-cover rounded-lg"
+        className="w-full  md:h-32 object-cover rounded-lg"
       />
 
       {/* Content */}
       <div className="flex flex-col flex-1 mt-3">
-        <h2 className="text-sm font-semibold line-clamp-2 text-gray-800 dark:text-gray-200">
+        <h2 className="text-sm font-semibold line-clamp-2 text-gray-100 ">
           {pro?.productName}
         </h2>
 
-        <p className="text-xs mt-1 text-gray-500 dark:text-gray-400">
-          {pro?.shortDescription}
-        </p>
+        <p className="text-xs mt-1 text-gray-300 ">{pro?.shortDescription}</p>
 
         <div className="flex-grow" />
 

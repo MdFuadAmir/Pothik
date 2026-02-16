@@ -1,9 +1,10 @@
 import { Outlet } from "react-router";
 import Navbar from "../../Components/Navbar/Navbar";
 import Footer from "../../Components/Footer/Footer";
-import bg from "../../assets/bgimage.jpg";
-import bg2 from "../../assets/bgLight.jpg";
+import bg from "../../assets/HomeBanner/32671.jpg";
+import bg1 from "../../assets/HomeBanner/32042.jpg";
 import { useEffect, useState } from "react";
+import DarkMood from "../../Components/DarkMood/DarkMood";
 
 const RootLayout = () => {
   const [isDark, setIsDark] = useState(false);
@@ -30,15 +31,19 @@ const RootLayout = () => {
       <div
         className="fixed inset-0 -z-10 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: `url(${isDark ? bg : bg2})`,
+          backgroundImage: `url(${isDark ? bg : bg1})`,
         }}
       >
         {/* overlay */}
         {!isDark && <div className="absolute inset-0 bg-black/20" />}
       </div>
       <Navbar />
-      <main className="min-h-[calc(100vh-64px)] max-w-[2520px] mx-auto px-4 pt-16 md:px-10 lg:px-20">
+      <main className="min-h-[calc(100vh-64px)] max-w-650 mx-auto pt-16">
         <Outlet />
+
+        <div title="Change Background" className="fixed bottom-24 right-4 z-50">
+          <DarkMood />
+        </div>
       </main>
       <Footer />
     </div>

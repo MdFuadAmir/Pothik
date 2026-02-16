@@ -59,8 +59,7 @@ const ProCategory = () => {
               transition backdrop-blur
               ${
                 isActive
-                  ? "bg-primary/20 dark:bg-indigo-500/70 text-primary dark:text-indigo-100"
-                  : "bg-white/20 dark:bg-gray-950/50 text-gray-700 dark:text-gray-200 hover:bg-white/30"
+                  ? "bg-indigo-500 dark:bg-blue-500 text-white backdrop-blur-xl": "bg-indigo-400/30 dark:bg-blue-400/30 backdrop-blur-xl text-white"
               }
             `}
           >

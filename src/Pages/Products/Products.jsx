@@ -1,18 +1,18 @@
-/* eslint-disable no-unused-vars */
 import { useSearchParams } from "react-router";
 import useAxios from "../../Hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
 import Product from "./Product";
 import CompoLoading from "../../Components/CompoLoading/CompoLoading";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import ProCategory from "../Category/ProCategory";
+import Pagination from "../../Components/Pagination/Pagination";
 
 const Products = () => {
   const axiosInstance = useAxios();
   const [params] = useSearchParams();
   const category = params.get("category");
 
-  const [itemsPerPage, setItemsPerPage] = useState(20);
+  const [itemsPerPage, setItemsPerPage] = useState(30);
   const [currentPage, setCurrentPage] = useState(0);
 
   const { data, isLoading } = useQuery({
@@ -31,7 +31,6 @@ const Products = () => {
   const totalProducts = data?.total || 0;
 
   const numOfPages = Math.ceil(totalProducts / itemsPerPage) || 1;
-  const pages = [...Array(numOfPages).keys()];
 
   const handleItemsPerPage = (e) => {
     const value = parseInt(e.target.value);
@@ -39,27 +38,24 @@ const Products = () => {
     setCurrentPage(0);
   };
 
-  const handlePreviousPage = () => {
-    if (currentPage > 0) setCurrentPage(currentPage - 1);
-  };
-  const handleNextPage = () => {
-    if (currentPage < numOfPages - 1) setCurrentPage(currentPage + 1);
-  };
   return (
-    <div>
-      <h1 className="mt-6 text-center text-4xl font-bold underline text-black dark:text-white">All Products</h1>
+    <div className="px-4 md:px-10 lg:px-20">
+      <h1 className="mt-6 text-center text-4xl font-bold underline text-emerald-400">
+        All Products
+      </h1>
+
       <div className="col-span-1 w-full">
         <ProCategory />
       </div>
+
       <div className="py-4 md:py-10 grid grid-cols-1 md:grid-cols-5 gap-4 md:gap-8">
-        {/* Products */}
         {isLoading ? (
           <div className="col-span-5">
             <CompoLoading />
           </div>
         ) : (
           <div className="col-span-5">
-            <h2 className="text-xl text-black dark:text-white font-bold mb-6">
+            <h2 className="text-2xl text-white dark:text-emerald-400 px-4 py-2 rounded bg-white/10 w-fit font-bold mb-6">
               {category ? `${category} Products` : "All Products"} (
               {totalProducts})
             </h2>
@@ -70,44 +66,22 @@ const Products = () => {
               ))}
             </div>
 
-            {/* Pagination Controls */}
-            <div className="flex flex-wrap justify-center mt-12 gap-4 items-center">
-              <button
-                onClick={handlePreviousPage}
-                disabled={currentPage === 0}
-                className="px-4 py-2 bg-white/30 dark:bg-gray-800/90 text-black dark:text-white rounded"
-              >
-                Previous
-              </button>
-
-              {pages.map((page) => (
-                <button
-                  key={page}
-                  onClick={() => setCurrentPage(page)}
-                  className={`px-4 py-2 rounded-full ${currentPage === page ? "bg-indigo-500 border-none text-white" : "bg-indigo-500/20 text-white"}`}
-                >
-                  {page + 1}
-                </button>
-              ))}
-
-              <button
-                onClick={handleNextPage}
-                disabled={currentPage === numOfPages - 1}
-                className="px-4 py-2 bg-white/30 dark:bg-gray-800/90 text-black dark:text-white rounded"
-              >
-                Next
-              </button>
+            {/* ✅ New Pagination (your custom one) */}
+            <div className="flex justify-center items-center gap-4 my-24">
+              <Pagination
+                page={currentPage + 1}
+                setPage={(p) => setCurrentPage(p - 1)}
+                totalPages={numOfPages}
+              />
 
               <select
                 value={itemsPerPage}
                 onChange={handleItemsPerPage}
-                className="border rounded px-2 py-1 dark:bg-gray-800 dark:text-white"
+                className="border rounded px-2 py-1 border-emerald-400 text-emerald-400"
               >
-                <option value="10">10</option>
-                <option value="15">15</option>
-                <option value="20">20</option>
                 <option value="30">30</option>
                 <option value="50">50</option>
+                <option value="75">75</option>
                 <option value="100">100</option>
               </select>
             </div>

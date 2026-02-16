@@ -2,8 +2,8 @@ import { Outlet } from "react-router";
 import Pothik from "../../Shared/Pothik/Pothik";
 import login from "../../assets/images.jpg";
 import DarkMood from "../../Components/DarkMood/DarkMood";
-import bg from "../../assets/bgimage.jpg";
-import bg2 from "../../assets/bgLight.jpg";
+import bg from "../../assets/HomeBanner/32042.jpg";
+import bg2 from "../../assets/HomeBanner/32671.jpg";
 import { useEffect, useState } from "react";
 
 const AuthLayout = () => {
@@ -39,9 +39,6 @@ const AuthLayout = () => {
       {/* header */}
       <div className="p-6">
         <Pothik />
-        <div className="hidden">
-          <DarkMood />
-        </div>
       </div>
 
       {/* content */}
@@ -49,6 +46,12 @@ const AuthLayout = () => {
         {/* outlet section */}
         <div className="w-full md:w-1/2">
           <Outlet />
+          <div
+            title="Change Background"
+            className="fixed bottom-24 right-4 z-50"
+          >
+            <DarkMood />
+          </div>
         </div>
 
         {/* right info section */}

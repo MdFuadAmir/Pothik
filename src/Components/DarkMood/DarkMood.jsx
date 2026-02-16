@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
-import { MdDarkMode } from "react-icons/md";
-import { CiLight } from "react-icons/ci";
-
+import { FaImage, FaRegImage } from "react-icons/fa";
 const DarkMood = () => {
   const [theme, setTheme] = useState("light");
 
@@ -22,16 +20,18 @@ const DarkMood = () => {
     <button
       onClick={toggleTheme}
       className="
-        px-3 py-2 rounded-full
-        bg-white dark:bg-slate-900
-        text-gray-800 dark:text-gray-200
-        border border-gray-200 dark:border-slate-800
-        flex items-center gap-2
-        transition-all duration-300
-        hover:bg-gray-100 dark:hover:bg-slate-800
+       text-sky-500 fixed bottom-24 right-4 z-50
+    flex items-center justify-center
+    w-12 h-12
+    rounded-full
+    bg-white dark:bg-gray-900/70
+    backdrop-blur-md
+    shadow-lg shadow-black/20
+    hover:scale-110 hover:shadow-xl
+    transition-all
       "
     >
-      {theme === "dark" ? <CiLight size={22} /> : <MdDarkMode size={20} />}
+      {theme === "dark" ? <FaImage size={22} /> : <FaRegImage size={20} />}
     </button>
   );
 };

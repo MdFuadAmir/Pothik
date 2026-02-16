@@ -37,7 +37,7 @@ const Navbar = () => {
                 ${
                   isActive
                     ? "bg-sky-500 text-white shadow"
-                    : "text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+                    : "text-white hover:border-sky-400 hover:border-b"
                 }
               `
               }
@@ -57,7 +57,7 @@ const Navbar = () => {
     <div
       className="
         fixed top-0 left-0 z-50 w-full
-        backdrop-blur bg-gray-950/10 dark:bg-gray-950/20
+        backdrop-blur bg-gray-950/50 dark:bg-gray-950/50
         transition-all duration-500
       "
     >
@@ -65,8 +65,12 @@ const Navbar = () => {
         {/* nav start */}
         <div className="navbar-start gap-2">
           <div className="dropdown">
-            <div tabIndex={0} role="button" className="lg:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
-              <FaAlignJustify size={20} className="dark:text-gray-200" />
+            <div
+              tabIndex={0}
+              role="button"
+              className="lg:hidden p-2 rounded-lg"
+            >
+              <FaAlignJustify size={20} className="text-white" />
             </div>
 
             <ul
@@ -74,8 +78,8 @@ const Navbar = () => {
               className="
                 menu dropdown-content mt-3 p-3 w-64
                 rounded-2xl shadow-lg
-                bg-white dark:bg-gray-900
-                dark:text-gray-200
+                bg-gray-900 dark:bg-gray-900
+                dark:text-gray-200 space-y-3
               "
             >
               {navLinks}
@@ -93,15 +97,23 @@ const Navbar = () => {
         <div className="navbar-end">
           <div className="flex items-center gap-4">
             {/* Cart */}
-            <Link to={"/cart"} className="relative p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800">
-              <FaCartPlus size={22} className="text-gray-700 dark:text-gray-200" />
-              <span className="
+            <Link
+              to={"/cart"}
+              className="relative p-2 rounded-full hover:scale-105 duration-200"
+            >
+              <FaCartPlus
+                size={22}
+                className="text-white"
+              />
+              <span
+                className="
                 absolute -top-1 -right-1
                 h-5 min-w-[20px] px-1
                 rounded-full bg-red-500 text-white
                 text-[11px] flex items-center justify-center
-              ">
-                {cart?.length}
+              "
+              >
+                {cart.length}
               </span>
             </Link>
 

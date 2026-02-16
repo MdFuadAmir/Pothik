@@ -1,4 +1,5 @@
 import Pothik from "../../Shared/Pothik/Pothik";
+
 const Footer = () => {
   const linkSections = [
     {
@@ -22,11 +23,14 @@ const Footer = () => {
   ];
 
   return (
-    <div className="backdrop-blur bg-gray-950/10 dark:bg-gray-950/20 px-4 md:px-10 lg:px-20">
-      <div className="flex flex-col md:flex-row items-start justify-between gap-10 py-10 border-b border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-400">
+    <footer className="relative bg-gradient-to-t from-gray-950 via-gray-900 to-gray-950 text-gray-300">
+      {/* Top area */}
+      <div className="px-4 md:px-10 lg:px-20 py-14 grid grid-cols-1 md:grid-cols-3 gap-12 border-b border-gray-700/50">
+        
+        {/* Brand Section */}
         <div>
           <Pothik />
-          <p className="max-w-[410px] mt-4 text-gray-900 dark:text-gray-400">
+          <p className="max-w-[420px] mt-4 text-sm leading-relaxed text-gray-400">
             Pothik is a Bangladesh-based platform, typically offering
             educational, business, or e-commerce services. <br />
             Users can browse various products or services, and sometimes access
@@ -34,18 +38,20 @@ const Footer = () => {
           </p>
         </div>
 
-        <div className="flex flex-wrap justify-between w-full md:w-[45%] gap-6">
+        {/* Links Section */}
+        <div className="md:col-span-2 grid grid-cols-2 sm:grid-cols-3 gap-8">
           {linkSections.map((section, index) => (
             <div key={index}>
-              <h3 className="font-semibold text-base text-gray-700 dark:text-gray-200 mb-3">
+              <h3 className="font-semibold text-base text-white mb-4 relative inline-block">
                 {section.title}
+                <span className="absolute left-0 -bottom-1 w-8 h-[2px] bg-sky-500"></span>
               </h3>
-              <ul className="text-sm space-y-1">
+              <ul className="text-sm space-y-2">
                 {section.links.map((link, i) => (
                   <li key={i}>
                     <a
                       href="#"
-                      className="text-gray-900 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition"
+                      className="text-gray-400 hover:text-white transition-all duration-200 hover:translate-x-1 inline-block"
                     >
                       {link}
                     </a>
@@ -55,12 +61,15 @@ const Footer = () => {
             </div>
           ))}
         </div>
+
       </div>
 
-      <p className="py-4 text-center text-sm md:text-base text-gray-700 dark:text-gray-400">
-        Copyright 2025 © Md Fuad Amir. All Rights Reserved.
-      </p>
-    </div>
+      {/* Bottom area */}
+      <div className="py-5 text-center text-sm text-gray-400">
+        <span className="text-gray-500">© 2025</span>{" "}
+        <span className="text-white font-medium">Md Fuad Amir</span>. All Rights Reserved.
+      </div>
+    </footer>
   );
 };
 

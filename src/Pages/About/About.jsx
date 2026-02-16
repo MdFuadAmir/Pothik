@@ -6,26 +6,25 @@ import {
   FiAward,
 } from "react-icons/fi";
 import happy from "../../assets/happy.png";
+import logo from "../../assets/pothik.png";
+import fuad from "../../assets/fuad.jpeg";
+import { Link } from "react-router";
 
 const About = () => {
   return (
-    <div className="max-w-6xl mx-auto py-12">
+    <div className="mx-auto pb-24 pt-8">
       {/* Page Title */}
-      <h1 className="text-3xl md:text-4xl font-bold text-center mb-10 dark:text-white">
-        About Us
+      <h1 className="text-3xl md:text-5xl font-bold text-center mb-10  text-sky-400 dark:text-emerald-400">
+        About Pothik
       </h1>
       {/* Who We Are */}
-      <div className="grid md:grid-cols-2 gap-8 items-center">
-        <img
-          src="https://i.ibb.co.com/BH7J0jGk/asf.png"
-          alt="team"
-          className="rounded-lg shadow-2xl"
-        />
-        <div className="p-4 rounded-xl bg-gray-500/10 dark:bg-gray-500/10">
-          <h2 className="text-2xl font-semibold mb-4 dark:text-white">
+      <section className="grid md:grid-cols-2 gap-8 items-center px-4 md:px-10 lg:px-20">
+        <img src={logo} alt="team" className="rounded-lg hidden md:block" />
+        <div className="p-4 rounded-xl bg-gray-900/80">
+          <h2 className="text-2xl font-semibold mb-4 text-emerald-400">
             Who We Are
           </h2>
-          <p className="text-gray-600 leading-7 dark:text-gray-300">
+          <p className="text-gray-200 leading-7">
             <span className="font-semibold text-blue-500">Pothik</span> is a
             modern and trusted e-commerce platform dedicated to providing
             high-quality products at affordable prices. We started our journey
@@ -33,157 +32,177 @@ const About = () => {
             enjoyable for everyone.
           </p>
 
-          <p className="text-gray-600 mt-4 leading-7 dark:text-gray-300">
+          <p className="text-gray-200 mt-4 leading-7 ">
             From daily essentials to lifestyle products, we carefully select and
             verify each item to ensure the best customer experience.
           </p>
         </div>
-      </div>
-
+      </section>
       {/* Mission & Vision */}
-      <div className="grid md:grid-cols-2 gap-8 mt-14">
-        <div className="p-6 bg-gray-500/10 dark:bg-gray-500/10 shadow-md rounded ">
-          <FiTarget size={32} className="text-primary mb-3" />
-          <h3 className="text-xl font-semibold mb-2 dark:text-white">
+      <section className="grid md:grid-cols-2 gap-8 my-24 px-4 md:px-10 lg:px-20">
+        <div className="p-6 bg-gray-900/80  shadow-md rounded-lg ">
+          <FiTarget size={32} className="text-emerald-400 mb-3" />
+          <h3 className="text-xl font-semibold mb-2 text-emerald-400">
             Our Mission
           </h3>
-          <p className="text-gray-600 leading-7 dark:text-gray-300">
+          <p className="text-gray-200 leading-7">
             Our mission is to deliver reliable products with fast delivery,
             secure payment systems, and outstanding customer support while
             building long-term trust with our customers.
           </p>
         </div>
 
-        <div className="p-6 bg-gray-500/10 dark:bg-gray-500/10  shadow-md rounded ">
-          <FiAward size={32} className="text-primary mb-3" />
-          <h3 className="text-xl font-semibold mb-2 dark:text-white">
+        <div className="p-6 bg-gray-900/80  shadow-md rounded-lg ">
+          <FiAward size={32} className="text-emerald-400 mb-3" />
+          <h3 className="text-xl font-semibold mb-2 text-emerald-400">
             Our Vision
           </h3>
-          <p className="text-gray-600 leading-7 dark:text-gray-300">
+          <p className="text-gray-200 leading-7">
             We envision Pothik as one of the most customer-centric e-commerce
             platforms, empowering people to shop confidently anytime, anywhere.
           </p>
         </div>
-      </div>
+      </section>
       {/* Features */}
-      <div className="grid md:grid-cols-3 gap-6 mt-14">
-        <div className="p-6 bg-gray-500/10 dark:bg-gray-500/10 shadow rounded flex items-start gap-4">
-          <FiTruck size={32} className="text-blue-600" />
+      <section className="grid md:grid-cols-3 gap-6 my-24 px-4 md:px-10 lg:px-20">
+        <div className="p-6 bg-gray-900/80  rounded-lg flex items-start gap-4">
+          <FiTruck size={32} className="text-emerald-400" />
           <div>
-            <h3 className="text-xl font-semibold mb-1 dark:text-white">
+            <h3 className="text-xl font-semibold mb-1 text-emerald-400">
               Fast Delivery
             </h3>
-            <p className="text-gray-600 dark:text-gray-300">
+            <p className="text-gray-200">
               Safe and quick delivery right to your doorstep.
             </p>
           </div>
         </div>
 
-        <div className="p-6 bg-gray-500/10 dark:bg-gray-500/10 shadow rounded flex items-start gap-4">
-          <FiCheckCircle size={32} className="text-blue-600" />
+        <div className="p-6 bg-gray-900/80 rounded-lg flex items-start gap-4">
+          <FiCheckCircle size={32} className="text-emerald-400" />
           <div>
-            <h3 className="text-xl font-semibold mb-1 dark:text-white">
+            <h3 className="text-xl font-semibold mb-1 text-emerald-400">
               Trusted Products
             </h3>
-            <p className="text-gray-600 dark:text-gray-300">
+            <p className="text-gray-200">
               Every product is quality-checked and verified.
             </p>
           </div>
         </div>
 
-        <div className="p-6 bg-gray-500/10 dark:bg-gray-500/10 shadow rounded flex items-start gap-4">
-          <FiMessageCircle size={32} className="text-blue-600" />
+        <div className="p-6 bg-gray-900/80 rounded-lg flex items-start gap-4">
+          <FiMessageCircle size={32} className="text-emerald-400" />
           <div>
-            <h3 className="text-xl font-semibold mb-1 dark:text-white">
+            <h3 className="text-xl font-semibold mb-1 text-emerald-400">
               24/7 Support
             </h3>
-            <p className="text-gray-600 dark:text-gray-300">
+            <p className="text-gray-200">
               Our support team is always ready to assist you.
             </p>
           </div>
         </div>
-      </div>
+      </section>
       {/* Founder Section */}
-      <div className="mt-16">
-        <h2 className="text-3xl font-bold text-center mb-8 dark:text-white">
+      <section className="my-24 px-4 md:px-10 lg:px-20">
+        <h2 className="text-4xl font-bold text-center mb-8 text-emerald-400">
           Meet the Founder
         </h2>
 
-        <div className="flex flex-col md:flex-row items-center gap-8 shadow-md rounded p-6 bg-gray-500/10 dark:bg-gray-500/10">
-          <img
-            src="https://i.ibb.co.com/sdnRqr8d/1665051423857-min-1.jpg"
-            alt="Founder"
-            className="w-40 h-40 object-cover  rounded-full"
-          />
+        <div className="flex flex-col md:flex-row items-center gap-8 shadow-md rounded-xl p-6 bg-gray-900/80">
+          {/* Image Wrapper */}
+          <div className="w-40 h-40 rounded-full overflow-hidden border-4 border-emerald-400 flex-shrink-0">
+            <img
+              src={fuad}
+              alt="Founder"
+              className="w-full h-full object-cover"
+            />
+          </div>
 
           <div>
-            <h3 className="text-xl font-semibold dark:text-white">
+            <h3 className="text-xl font-semibold text-emerald-400">
               Md Fuad Amir
             </h3>
-            <p className="text-sm text-gray-500 dark:text-gray-200 mb-3">
+            <p className="text-sm text-gray-400 mb-3">
               Founder & MERN Stack Developer
             </p>
-            <p className="text-gray-600 dark:text-gray-200 leading-7">
-              Pothik was founded by a passionate developer with a vision to
-              build a scalable and user-friendly e-commerce solution. The
-              platform is built using modern technologies with performance,
-              security, and user experience in mind.
+            <p className="text-gray-200 leading-7">
+              <b className="text-red-500">Pothik</b> was founded by a passionate{" "}
+              <span className="text-rose-500">MERN</span>{" "}
+              <span className="text-red-500">Stack</span> developer with a
+              strong vision to create a reliable and scalable e-commerce
+              platform for modern users. This platform is designed to deliver a
+              smooth, secure, and engaging shopping experience by combining
+              clean user interface design with powerful backend architecture.
+              <br />
+              <br />
+              With a deep interest in web technologies and problem-solving, the
+              founder focuses on building solutions that are efficient,
+              maintainable, and future-ready.{" "}
+              <span className="text-red-500">Pothik</span> reflects a commitment
+              to innovation, performance optimization, and customer-centric
+              design, ensuring long-term value for both users and businesses.
             </p>
           </div>
         </div>
-      </div>
+      </section>
       {/* Stats */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 text-center">
-        <div className="bg-gray-500/10 dark:bg-gray-500/10 shadow-md rounded p-6 transition-colors duration-500">
-          <h3 className="text-3xl font-bold text-primary dark:text-white ">
-            77 +
-          </h3>
-          <p className="text-gray-600 dark:text-gray-300 mt-1">
-            Happy Customers
-          </p>
+      <section className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 text-center px-4 md:px-10 lg:px-20">
+        <div className="bg-gray-900/80  shadow-md rounded p-6 transition-colors duration-500">
+          <h3 className="text-3xl font-bold text-emerald-400">77 +</h3>
+          <p className="text-gray-300 mt-1">Happy Customers</p>
         </div>
 
-        <div className="bg-gray-500/10 dark:bg-gray-500/10 shadow-md rounded p-6 transition-colors duration-500">
-          <h3 className="text-3xl font-bold text-primary dark:text-white">
-            65 +
-          </h3>
-          <p className="text-gray-600 dark:text-gray-300 mt-1">Products</p>
+        <div className="bg-gray-900/80  shadow-md rounded p-6 transition-colors duration-500">
+          <h3 className="text-3xl font-bold text-emerald-400">65 +</h3>
+          <p className="text-gray-300 mt-1">Products</p>
         </div>
 
-        <div className="bg-gray-500/10 dark:bg-gray-500/10 shadow-md rounded p-6 transition-colors duration-500">
-          <h3 className="text-3xl font-bold text-primary dark:text-white">
-            24/7
-          </h3>
-          <p className="text-gray-600 dark:text-gray-300 mt-1">Support</p>
+        <div className="bg-gray-900/80 shadow-md rounded p-6 transition-colors duration-500">
+          <h3 className="text-3xl font-bold text-emerald-400">24/7</h3>
+          <p className="text-gray-300 mt-1">Support</p>
         </div>
 
-        <div className="bg-gray-500/10 dark:bg-gray-500/10 shadow-md rounded p-6 transition-colors duration-500">
-          <h3 className="text-3xl font-bold text-primary dark:text-white">
-            99%
-          </h3>
-          <p className="text-gray-600 dark:text-gray-300 mt-1">Satisfaction</p>
+        <div className="bg-gray-900/80 shadow-md rounded p-6 transition-colors duration-500">
+          <h3 className="text-3xl font-bold text-emerald-400">99%</h3>
+          <p className="text-gray-300 mt-1">Satisfaction</p>
         </div>
-      </div>
+      </section>
       {/* Post Style Section */}
-      <div className="mt-16 grid md:grid-cols-2 gap-8 items-center">
+      <section className="mt-16 grid md:grid-cols-2 gap-8 items-center px-4 md:px-10 lg:px-20">
         <img src={happy} alt="shopping" className="rounded-lg" />
 
-        <div className="bg-gray-500/10 dark:bg-gray-500/10 p-4 rounded-xl shadow-md">
-          <h2 className="text-2xl font-semibold mb-4 dark:text-white">
+        <div className="bg-gray-900/80 p-4 rounded-xl shadow-md">
+          <h2 className="text-2xl font-semibol d mb-4 text-emerald-400">
             Why Customers Love Pothik
           </h2>
-          <p className="leading-7 dark:text-gray-300">
+          <p className="leading-7 text-gray-200">
             Customers choose Pothik because we prioritize trust, transparency,
             and convenience. Our platform is designed to ensure a smooth
             shopping experience from browsing to delivery.
           </p>
 
-          <p className="mt-4 leading-7 dark:text-gray-300">
+          <p className="mt-4 leading-7 text-gray-200">
             We continuously improve our services based on customer feedback to
             serve you better every day.
           </p>
         </div>
-      </div>
+      </section>
+      {/* CTA */}
+      <section className="py-20 px-6 text-center bg-gray-900/50 mt-24 mb-12">
+        <h2 className="text-3xl font-bold mb-4 text-white">
+          Start Your Journey With{" "}
+          <span className="text-indigo-500">Pothik</span>
+        </h2>
+        <p className="text-gray-400 mb-8">
+          Discover products, manage your store, and grow your business with our
+          platform.
+        </p>
+        <Link
+          to={"/products"}
+          className="px-8 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full transition font-semibold"
+        >
+          Explore Shop
+        </Link>
+      </section>
     </div>
   );
 };
