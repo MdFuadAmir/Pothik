@@ -1,20 +1,103 @@
-# React + Vite
-Pothik
-made by md fuad amir
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# 🛒 Pothik E-Commerce (MERN Stack)
 
-Currently, two official plugins are available:
+Pothik is a full-stack modern e-commerce web application built using the **MERN Stack (MongoDB, Express.js, React.js, Node.js)**.  
+It provides a complete online shopping experience including authentication, product management, cart system, order management, and role-based dashboards.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 🚀 Live Demo
+🔗 Frontend: https://pothik-c0c3a.web.app 
 
-The React Compiler is not enabled on this template. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 📌 Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 👤 User Features
+- User registration & login (Firebase Authentication)
+- Browse products by category
+- Search products
+- Add to cart & wishlist
+- Place orders
+- View order history
+- Responsive UI (Mobile, Tablet, Desktop)
+
+### 🛍️ Seller Features
+- Add, update & delete products
+- View customer orders
+- Mark orders as delivered
+- Manage product inventory
+
+### 🛡️ Admin Features
+- Manage all users
+- Manage all products
+- Manage all orders
+- Role-based access (Admin, Seller, User)
+
+---
+
+## 🧑‍💻 Tech Stack
+
+### Frontend
+- React.js
+- Tailwind CSS
+- React Router
+- TanStack Query (React Query)
+- Axios
+- Firebase Authentication
+
+### Backend
+- Node.js
+- Express.js
+- MongoDB
+- JWT Authentication
+- Middleware for role verification
+
+---
+
+## 📂 Project Structure
 
 
-Fuad Amir
+Pothik-Ecommerce/
+│
+├── client/ # Frontend (React)
+│ ├── src/
+│ ├── components/
+│ └── pages/
+│
+├── server/ # Backend (Node + Express)
+│ ├── routes/
+│ ├── models/
+│ └── middleware/
+│
+└── README.md
+
+
+
+
+
+---
+
+## 🔐 Authentication & Security
+
+- Firebase Authentication for user login/registration
+- JWT token based authorization
+- Protected routes for Admin & Seller
+- Secure API using middleware
+
+---
+
+## 📦 Database
+
+- MongoDB used as primary database
+- Collections:
+  - Users
+  - Products
+  - Orders
+  - Cart
+  - Reviews
+  - Wishlist
+
+---
+
+
+
