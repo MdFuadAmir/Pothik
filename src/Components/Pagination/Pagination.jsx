@@ -16,7 +16,7 @@ const Pagination = ({ page, setPage, totalPages }) => {
   }
 
   return (
-    <div className="flex justify-center items-center gap-2 flex-wrap">
+    <div className="flex justify-center items-center gap-2 flex-wrap bg-gray-900/70 px-6 py-2 rounded ">
       {/* Prev */}
       <button
         disabled={page === 1}

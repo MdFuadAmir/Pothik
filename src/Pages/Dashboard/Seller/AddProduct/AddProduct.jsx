@@ -64,8 +64,8 @@ const AddProduct = () => {
 
   return (
     <div>
-      <h2 className="text-2xl font-bold uppercase dark:text-white">Add New Product</h2>
-      <p className="text-sm text-gray-500 dark:text-gray-200 mb-8">
+      <h2 className="text-2xl font-bold uppercase text-emerald-400">Add New Product</h2>
+      <p className="text-sm text-gray-300 mb-8 max-w-xl">
         A smart, lightweight platform crafted for travelers and explorers.
         Navigate, discover, and manage everything with ease.
       </p>

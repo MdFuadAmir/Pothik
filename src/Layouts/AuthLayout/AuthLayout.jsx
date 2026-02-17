@@ -1,9 +1,8 @@
 import { Outlet } from "react-router";
 import Pothik from "../../Shared/Pothik/Pothik";
-import login from "../../assets/images.jpg";
 import DarkMood from "../../Components/DarkMood/DarkMood";
-import bg from "../../assets/HomeBanner/32042.jpg";
-import bg2 from "../../assets/HomeBanner/32671.jpg";
+import bg from "../../assets/HomeBanner/32671.jpg";
+import bg2 from "../../assets/HomeBanner/32042.jpg";
 import { useEffect, useState } from "react";
 
 const AuthLayout = () => {
@@ -59,19 +58,14 @@ const AuthLayout = () => {
           className="
           w-full md:w-1/2
           flex flex-col items-center justify-center
-          p-6 rounded-xl
+           rounded-xl
           "
         >
-          <img
-            src={login}
-            alt="login visual"
-            className="max-w-96 rounded-lg mb-6"
-          />
-          <div className="p-4 bg-white/10 rounded-xl">
-            <h1 className="text-xl text-black dark:text-gray-200 font-semibold text-center">
+          <div className="p-4 bg-gray-900/80 rounded-xl">
+            <h1 className="text-xl text-emerald-400 font-semibold text-center">
               Pothik Web – Modern Web Solutions
             </h1>
-            <p className="text-sm mt-4 leading-relaxed text-black dark:text-gray-400">
+            <p className="text-sm mt-4 leading-relaxed text-gray-200">
               Pothik Web is a leading web development platform dedicated to
               creating seamless digital experiences. Our team specializes in
               designing responsive and user-friendly websites tailored to your

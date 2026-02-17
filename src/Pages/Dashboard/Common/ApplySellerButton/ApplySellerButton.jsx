@@ -21,7 +21,7 @@ const ApplySellerButton = () => {
     <li>
       <button
         onClick={handleApplySeller}
-        className="flex items-center gap-2 text-gray-100 font-bold"
+        className="flex items-center gap-2 text-gray-100 hover:bg-emerald-600 font-bold"
       >
         <FaStore className="text-lg" />
         Apply to Seller

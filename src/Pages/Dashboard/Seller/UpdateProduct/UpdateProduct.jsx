@@ -49,125 +49,118 @@ const UpdateProduct = () => {
     return <Loading />;
   }
   return (
-    <div className="bg-white border rounded p-4 md:p-6">
-      <h2 className="text-xl font-bold">
+    <div className="bg-gray-900/80 border rounded p-4 md:p-6">
+      <h2 className="text-2xl font-bold text-emerald-400">
         Update Your Product{" "}
-        <span className="text-sm text-gray-500 font-light">({id})</span>
+        <span className="text-sm text-gray-400 font-light">({id})</span>
       </h2>
-      <p className="text-sm text-gray-500 mb-6">
+      <p className="text-sm text-gray-400 mb-6">
         Lorem, ipsum dolor sit amet consectetur adipisicing elit.
         Exercitationem, rerum!
       </p>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {/* 1 */}
-          <div className="flex flex-col">
-            <label className="text-sm">Product Name *</label>
-            <input
-              {...register("productName", {
-                required: "Product name is required",
-              })}
-              type="text"
-              className="input w-full focus:border-none"
-            />
-          </div>
-          {/* 2 */}
-          <div className="flex flex-col">
-            <label className="text-sm">Brand *</label>
-            <input
-              {...register("brand", { required: "Brand is required" })}
-              type="text"
-              className="input w-full focus:border-none"
-            />
-          </div>
-          {/* 3 */}
-          <div className="flex flex-col">
-            <label className="text-sm">Regular Price *</label>
-            <input
-              {...register("regularPrice", {
-                required: "Reguler price is required",
-              })}
-              type="number"
-              className="input w-full focus:border-none"
-            />
-          </div>
-          {/* 4 */}
-          <div className="flex flex-col">
-            <label className="text-sm">Discount Price</label>
-            <input
-              {...register("discountPrice")}
-              type="number"
-              className="input w-full focus:border-none"
-            />
-          </div>
-          {/* 5 */}
-          <div className="flex flex-col">
-            <label className="text-sm">Stock Quantity *</label>
-            <input
-              {...register("stockQua", {
-                required: "stock Quantity is required",
-              })}
-              type="number"
-              className="input w-full focus:border-none"
-            />
-          </div>
-          {/* 6 */}
-          <div className="flex flex-col">
-            <label className="text-sm">Return Policy *</label>
-            <select
-              {...register("returnPolicy", {
-                required: "Return policy is required",
-              })}
-              className="border px-3 py-2 rounded w-full"
-            >
-              <option value="">Select Return Policy</option>
-              <option value="no-return">No Return</option>
-              <option value="3-days">3 Days Return</option>
-              <option value="7-days">7 Days Return</option>
-              <option value="10-days">10 Days Return</option>
-              <option value="14-days">14 Days Return</option>
-              <option value="30-days">30 Days Return</option>
-              <option value="6-month">6 month Return</option>
-              <option value="1-year">1 year Return</option>
-              <option value="2-year">2 year Return</option>
-            </select>
-          </div>
-        </div>
-        <div>
-          {/* Short Description */}
-          <div className="flex flex-col mt-4">
-            <label className="text-sm">Short Description *</label>
-            <input
-              {...register("shortDescription", {
-                required: "Short description is required",
-                maxLength: {
-                  value: 70,
-                  message: "Maximum 70 characters allowed",
-                },
-              })}
-              type="text"
-              className="border px-3 py-2 rounded w-full"
-            />
-          </div>
-          {/* Long Description */}
-          <div className="flex flex-col mt-4">
-            <label className="text-sm">Long Description *</label>
-            <textarea
-              {...register("longDescription", {
-                required: "Long description is required",
-                minLength: {
-                  value: 50,
-                  message: "Minimum 50 characters required",
-                },
-              })}
-              className="border px-3 py-2 rounded w-full min-h-[150px]"
-            ></textarea>
-          </div>
-        </div>
-        <button className="btn btn-primary w-full" type="submit">
-          Update Product
-        </button>
-      </form>
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    {/* 1 */}
+    <div className="flex flex-col">
+      <label className="text-sm text-gray-200 dark:text-gray-300">Product Name *</label>
+      <input
+        {...register("productName", { required: "Product name is required" })}
+        type="text"
+        placeholder="Enter product name"
+        className="input w-full px-3 py-2 rounded border border-gray-600 bg-gray-800 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-400"
+      />
+    </div>
+    {/* 2 */}
+    <div className="flex flex-col">
+      <label className="text-sm text-gray-200 dark:text-gray-300">Brand *</label>
+      <input
+        {...register("brand", { required: "Brand is required" })}
+        type="text"
+        placeholder="Enter brand name"
+        className="input w-full px-3 py-2 rounded border border-gray-600 bg-gray-800 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-400"
+      />
+    </div>
+    {/* 3 */}
+    <div className="flex flex-col">
+      <label className="text-sm text-gray-200 dark:text-gray-300">Regular Price *</label>
+      <input
+        {...register("regularPrice", { required: "Reguler price is required" })}
+        type="number"
+        placeholder="৳ 0"
+        className="input w-full px-3 py-2 rounded border border-gray-600 bg-gray-800 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-400"
+      />
+    </div>
+    {/* 4 */}
+    <div className="flex flex-col">
+      <label className="text-sm text-gray-200 dark:text-gray-300">Discount Price</label>
+      <input
+        {...register("discountPrice")}
+        type="number"
+        placeholder="৳ 0"
+        className="input w-full px-3 py-2 rounded border border-gray-600 bg-gray-800 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-400"
+      />
+    </div>
+    {/* 5 */}
+    <div className="flex flex-col">
+      <label className="text-sm text-gray-200 dark:text-gray-300">Stock Quantity *</label>
+      <input
+        {...register("stockQua", { required: "Stock Quantity is required" })}
+        type="number"
+        placeholder="0"
+        className="input w-full px-3 py-2 rounded border border-gray-600 bg-gray-800 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-400"
+      />
+    </div>
+    {/* 6 */}
+    <div className="flex flex-col">
+      <label className="text-sm text-gray-200 dark:text-gray-300">Return Policy *</label>
+      <select
+        {...register("returnPolicy", { required: "Return policy is required" })}
+        className="border border-gray-600 bg-gray-800 text-gray-200 placeholder-gray-400 px-3 py-2 rounded w-full focus:outline-none focus:ring-2 focus:ring-emerald-400"
+      >
+        <option value="">Select Return Policy</option>
+        <option value="no-return">No Return</option>
+        <option value="3-days">3 Days Return</option>
+        <option value="7-days">7 Days Return</option>
+        <option value="10-days">10 Days Return</option>
+        <option value="14-days">14 Days Return</option>
+        <option value="30-days">30 Days Return</option>
+        <option value="6-month">6 month Return</option>
+        <option value="1-year">1 year Return</option>
+        <option value="2-year">2 year Return</option>
+      </select>
+    </div>
+  </div>
+
+  {/* Short & Long Description */}
+  <div className="flex flex-col mt-4">
+    <label className="text-sm text-gray-200 dark:text-gray-300">Short Description *</label>
+    <input
+      {...register("shortDescription", {
+        required: "Short description is required",
+        maxLength: { value: 70, message: "Maximum 70 characters allowed" },
+      })}
+      type="text"
+      placeholder="Enter short description"
+      className="border border-gray-600 bg-gray-800 text-gray-200 placeholder-gray-400 px-3 py-2 rounded w-full focus:outline-none focus:ring-2 focus:ring-emerald-400"
+    />
+  </div>
+  <div className="flex flex-col mt-4">
+    <label className="text-sm text-gray-200 dark:text-gray-300">Long Description *</label>
+    <textarea
+      {...register("longDescription", {
+        required: "Long description is required",
+        minLength: { value: 50, message: "Minimum 50 characters required" },
+      })}
+      placeholder="Enter detailed description"
+      className="border border-gray-600 bg-gray-800 text-gray-200 placeholder-gray-400 px-3 py-2 rounded w-full min-h-[150px] focus:outline-none focus:ring-2 focus:ring-emerald-400"
+    ></textarea>
+  </div>
+
+  <button className="btn btn-primary w-full mt-4" type="submit">
+    Update Product
+  </button>
+</form>
+
     </div>
   );
 };

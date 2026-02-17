@@ -66,16 +66,16 @@ const SignUp = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4">
+    <div className="min-h-screen flex items-center justify-center">
       <div
         className="
-        max-w-sm w-full p-6
-        bg-gray-500/20 dark:bg-gray-500/10
+        max-w-sm w-full p-4
+        bg-gray-900/80
         rounded-xl shadow-sm
         "
       >
-        <h1 className="text-center text-xl font-semibold mb-6 text-gray-800 dark:text-gray-200">
-          Sign Up
+        <h1 className="text-center text-xl font-semibold mb-6 text-emerald-400">
+          Sign Up !
         </h1>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -85,10 +85,10 @@ const SignUp = () => {
               <img
                 src={profilePic}
                 alt="profile"
-                className="rounded-full w-16 h-16 object-cover border p-1"
+                className="rounded-full w-16 h-16 object-cover border border-emerald-400 p-1"
               />
             ) : (
-              <FaRegUser className="rounded-full w-16 h-16 border p-1 dark:text-white" />
+              <FaRegUser className="rounded-full w-16 h-16 border border-emerald-400 p-1 text-emerald-400" />
             )}
             <input
               onChange={handleUploadeImage}
@@ -96,7 +96,7 @@ const SignUp = () => {
               className="rounded-full w-12 h-12 text-transparent absolute border-red-600 cursor-pointer"
               placeholder="photo"
             />
-            <p className="text-xs dark:text-gray-300">Sellect Photo</p>
+            <p className="text-xs text-emerald-400">Sellect Photo</p>
           </div>
 
           {/* name */}
@@ -109,11 +109,8 @@ const SignUp = () => {
               type="text"
               placeholder="your name..."
               className="
-              w-full px-3 py-2 rounded-lg
-               dark:bg-slate-800
-              border border-gray-300 dark:border-gray-700
-              text-gray-800 dark:text-gray-200
-              focus:outline-none focus:ring-2 focus:ring-blue-500
+              w-full px-3 py-2 rounded-lg bg-gray-900/60 placeholder:text-gray-300 text-gray-300              
+              focus:outline-none focus:ring-2 focus:ring-emerald-400
               "
             />
             {errors?.name && (
@@ -131,11 +128,8 @@ const SignUp = () => {
               type="email"
               placeholder="your email..."
               className="
-              w-full px-3 py-2 rounded-lg
-               dark:bg-slate-800
-              border border-gray-300 dark:border-gray-700
-              text-gray-800 dark:text-gray-200
-              focus:outline-none focus:ring-2 focus:ring-blue-500
+             w-full px-3 py-2 rounded-lg bg-gray-900/60 placeholder:text-gray-300 text-gray-300              
+              focus:outline-none focus:ring-2 focus:ring-emerald-400
               "
             />
             {errors?.email && (
@@ -153,11 +147,8 @@ const SignUp = () => {
               type="password"
               placeholder="your password..."
               className="
-              w-full px-3 py-2 rounded-lg
-               dark:bg-slate-800
-              border border-gray-300 dark:border-gray-700
-              text-gray-800 dark:text-gray-200
-              focus:outline-none focus:ring-2 focus:ring-blue-500
+      w-full px-3 py-2 rounded-lg bg-gray-900/60 placeholder:text-gray-300 text-gray-300              
+              focus:outline-none focus:ring-2 focus:ring-emerald-400
               "
             />
             {errors?.password && (
@@ -173,8 +164,8 @@ const SignUp = () => {
             className="
             mt-6
             w-full py-2 rounded-lg font-medium
-            bg-blue-600 hover:bg-blue-700
-            text-white transition disabled:opacity-60
+            bg-emerald-600 hover:bg-emerald-800
+            text-white transition disabled:bg-emerald-900/50
             "
           >
             {isUploading ? "Uploading..." : "Create Account"}
@@ -185,16 +176,16 @@ const SignUp = () => {
           Already have an account?{" "}
           <Link
             to="/login"
-            className="text-blue-600 dark:text-blue-400 font-medium"
+            className="text-emerald-400 font-medium"
           >
             Login
           </Link>
         </p>
 
         <div className="flex items-center gap-3 mt-6 mb-4">
-          <div className="h-px w-full bg-gray-300 dark:bg-gray-700"></div>
-          <span className="text-sm text-gray-500 dark:text-gray-400">OR</span>
-          <div className="h-px w-full bg-gray-300 dark:bg-gray-700"></div>
+          <div className="h-px w-full bg-emerald-400 "></div>
+          <span className="text-sm text-emerald-400">OR</span>
+          <div className="h-px w-full bg-emerald-400"></div>
         </div>
 
         <SocialLogin />

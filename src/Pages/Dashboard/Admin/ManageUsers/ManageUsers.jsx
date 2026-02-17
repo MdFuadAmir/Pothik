@@ -27,7 +27,7 @@ const ManageUsers = () => {
     queryKey: ["users", debouncedSearch],
     queryFn: async () => {
       const res = await axiosSecure.get(
-        `/users${debouncedSearch ? `?search=${debouncedSearch}` : ""}`
+        `/users${debouncedSearch ? `?search=${debouncedSearch}` : ""}`,
       );
       return res.data;
     },
@@ -60,8 +60,10 @@ const ManageUsers = () => {
     <div className="">
       {/* Header */}
       <div>
-        <h2 className="text-2xl font-bold dark:text-white">Manage Your Users</h2>
-        <p className="text-sm text-gray-500">
+        <h2 className="text-2xl font-bold text-emerald-400">
+          Manage Your Users
+        </h2>
+        <p className="text-sm text-gray-300 max-w-xl">
           A smart, lightweight platform crafted for travelers and explorers.
           Navigate, discover, and manage everything with ease.
         </p>
@@ -74,14 +76,14 @@ const ManageUsers = () => {
           placeholder="Search by email"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="input input-bordered w-full md:w-1/2"
+          className="w-full md:w-1/2 px-4 py-2 bg-gray-900/70 rounded-md placeholder:text-gray-300 text-gray-300"
         />
       </div>
 
       {/* Users Table */}
-      <div className="overflow-x-auto mt-6 mx-auto bg-gray-500/20 dark:bg-gray-500/10 rounded">
+      <div className="overflow-x-auto mt-6 mx-auto bg-gray-900/80 rounded">
         <table className="table w-full">
-          <thead className="text-white bg-gray-500/40 dark:bg-gray-500/40">
+          <thead className="text-white bg-gray-900">
             <tr>
               <th>#</th>
               <th>User ID</th>
@@ -91,7 +93,7 @@ const ManageUsers = () => {
               <th>Actions</th>
             </tr>
           </thead>
-          <tbody className="dark:text-gray-300">
+          <tbody className="text-gray-300">
             {isLoading ? (
               <tr>
                 <td
@@ -119,8 +121,8 @@ const ManageUsers = () => {
                         user.role === "user"
                           ? "bg-amber-200 text-amber-700"
                           : user.role === "seller"
-                          ? "bg-red-200 text-red-700"
-                          : "bg-purple-200 text-purple-700"
+                            ? "bg-red-200 text-red-700"
+                            : "bg-purple-200 text-purple-700"
                       }`}
                     >
                       {user.role}
@@ -143,7 +145,7 @@ const ManageUsers = () => {
                         handleRoleChange(user.email, e.target.value)
                       }
                       defaultValue="Update Role"
-                      className="select bg-gray-100 text-gray-600 text-xs"
+                      className="select bg-gray-800 text-gray-200 text-xs"
                     >
                       <option disabled>Update Role</option>
                       <option value="user">User</option>

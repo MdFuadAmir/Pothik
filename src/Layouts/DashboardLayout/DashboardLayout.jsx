@@ -12,8 +12,8 @@ import UserMenu from "./DashboardMenu/UserMenu";
 import toast from "react-hot-toast";
 import ApplySellerButton from "../../Pages/Dashboard/Common/ApplySellerButton/ApplySellerButton";
 import DarkMood from "../../Components/DarkMood/DarkMood";
-import bg from "../../assets/HomeBanner/32042.jpg";
-import bg2 from "../../assets/HomeBanner/32671.jpg";
+import bg from "../../assets/HomeBanner/32671.jpg";
+import bg2 from "../../assets/HomeBanner/32042.jpg";
 import { useEffect, useState } from "react";
 
 const DashboardLayout = () => {
@@ -66,14 +66,14 @@ const DashboardLayout = () => {
       {/* MAIN CONTENT */}
       <div className="drawer-content flex flex-col">
         {/* Mobile Navbar */}
-        <div className="navbar sticky top-0 z-50 lg:hidden ">
+        <div className="navbar sticky top-0 z-50 lg:hidden bg-gray-900">
           <label htmlFor="my-drawer-2" className="btn btn-ghost">
             <FaAlignJustify
               size={20}
-              className="text-gray-800 dark:text-gray-200"
+              className="text-gray-200"
             />
           </label>
-          <span className="flex-1 text-center font-semibold text-gray-800 dark:text-gray-200">
+          <span className="flex-1 text-center font-semibold">
             <Pothik />
           </span>
         </div>
@@ -84,12 +84,9 @@ const DashboardLayout = () => {
             <div
               title="Change Background"
               className="
-    fixed bottom-24 right-4 z-50
-   
-  "
-            >
-            </div>
-              <DarkMood />
+    fixed bottom-24 right-4 z-50"
+            ></div>
+            <DarkMood />
           </div>
         </div>
       </div>
@@ -98,7 +95,7 @@ const DashboardLayout = () => {
       <div className="drawer-side">
         <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
 
-        <ul className="menu w-64 min-h-full bg-gray-500/20 dark:bg-gray-500/10 flex flex-col justify-between p-4 backdrop-blur">
+        <ul className="menu w-64 min-h-full flex flex-col justify-between p-4 bg-gray-900">
           <div>
             <Pothik />
             <div className="mt-6 space-y-1">
@@ -115,7 +112,7 @@ const DashboardLayout = () => {
             </div>
           </div>
 
-          <div className="mt-6 rounded-lg bg-gray-500/20 dark:bg-gray-500/10 p-4 space-y-2">
+          <div className="mt-6 rounded-lg bg-gray-700/50 p-4 space-y-2">
             <DashboardMenu
               labal="Profile"
               to="/dashboard/profile"
@@ -141,3 +138,4 @@ const DashboardLayout = () => {
 };
 
 export default DashboardLayout;
+

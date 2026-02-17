@@ -29,10 +29,12 @@ const TrackOrder = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto px-4 py-8 rounded bg-gray-500/20 dark:bg-gray-500/10 dark:border-white">
+    <div className="max-w-3xl mx-auto px-4 py-8 rounded-lg bg-gray-900/80">
       <div className="text-center">
-        <h1 className="text-2xl font-bold dark:text-white">Track Your Order</h1>
-        <p className="text-sm text-gray-500">
+        <h1 className="text-2xl font-bold text-emerald-400">
+          Track Your Order
+        </h1>
+        <p className="text-sm text-gray-300">
           Enter your order tracking id and see your order status
         </p>
       </div>
@@ -41,12 +43,12 @@ const TrackOrder = () => {
         <input
           type="text"
           placeholder="Enter Tracking ID (e.g. TRK-18A8XKT2)"
-          className="input w-full dark:bg-gray-700 dark:placeholder-gray-300 dark:text-white shadow"
+          className="input w-full bg-gray-700 placeholder-gray-300 text-white shadow"
           value={trackId}
           onChange={(e) => setTrackId(e.target.value)}
         />
         <button
-          className="btn bg-black dark:bg-gray-700 text-white"
+          className="px-3 py-1 flex items-center gap-2 rounded-lg bg-emerald-500 hover:bg-emerald-600  text-white"
           onClick={handleSearch}
         >
           <FaRoute /> Track
@@ -57,13 +59,15 @@ const TrackOrder = () => {
         <p className="text-red-500 mt-3 text-sm text-center">{error}</p>
       )}
       {/*  */}
-      <div className="mt-6 p-4 bg-gray-500/20 dark:bg-gray-500/10 dark:text-gray-300 rounded shadow">
-        <h2 className="text-xl font-bold mb-2">Order Status</h2>
+      <div className="mt-6 p-4 bg-gray-800/50 rounded-lg shadow">
+        <h2 className="text-xl font-bold mb-2 text-emerald-400">
+          Order Status
+        </h2>
         <div className="mb-6 space-y-1">
-          <p>
+          <p className="text-gray-300">
             <b>Tracking ID:</b> {order?.trackingId}
           </p>
-          <p>
+          <p className="text-gray-300">
             <b>Payment Status:</b> {order?.paymentStatus}
           </p>
           {/* status */}
@@ -74,7 +78,7 @@ const TrackOrder = () => {
               className={`flex items-center gap-4 border rounded p-4
     ${
       order?.status === "pending"
-        ? "border-blue-600 bg-blue-50"
+        ? "border-emerald-400 bg-emerald-500/10"
         : "border-gray-200"
     }`}
             >
@@ -82,16 +86,16 @@ const TrackOrder = () => {
                 size={28}
                 className={
                   order?.status === "pending"
-                    ? "text-blue-600"
-                    : "text-gray-500"
+                    ? "text-emerald-400"
+                    : "text-gray-300"
                 }
               />
               <div>
                 <h2
                   className={`font-bold ${
                     order?.status === "pending"
-                      ? "text-blue-700"
-                      : "text-gray-700 dark:text-gray-200"
+                      ? "text-emerald-400"
+                      : "text-gray-300 "
                   }`}
                 >
                   Pending
@@ -106,7 +110,7 @@ const TrackOrder = () => {
               className={`flex items-center gap-4 border rounded p-4
     ${
       order?.status === "processing"
-        ? "border-blue-600 bg-blue-50"
+        ? "border-emerald-400 bg-emerald-500/10"
         : "border-gray-200"
     }`}
             >
@@ -114,7 +118,7 @@ const TrackOrder = () => {
                 size={28}
                 className={
                   order?.status === "processing"
-                    ? "text-blue-600"
+                    ? "text-emerald-400"
                     : "text-gray-500"
                 }
               />
@@ -122,8 +126,8 @@ const TrackOrder = () => {
                 <h2
                   className={`font-bold ${
                     order?.status === "processing"
-                      ? "text-blue-700"
-                      : "text-gray-700 dark:text-gray-200"
+                      ? "text-emerald-400"
+                      : "text-gray-500 "
                   }`}
                 >
                   Processing
@@ -139,7 +143,7 @@ const TrackOrder = () => {
               className={`flex items-center gap-4 border rounded p-4
     ${
       order?.status === "shipped"
-        ? "border-blue-600 bg-blue-50"
+        ? "border-emerald-400 bg-emerald-500/10"
         : "border-gray-200"
     }`}
             >
@@ -148,15 +152,15 @@ const TrackOrder = () => {
                 className={
                   order?.status === "shipped"
                     ? "text-blue-600"
-                    : "text-gray-500"
+                    : "text-gray-300"
                 }
               />
               <div>
                 <h2
                   className={`font-bold ${
                     order?.status === "shipped"
-                      ? "text-blue-700"
-                      : "text-gray-700 dark:text-gray-200"
+                      ? "text-emerald-400"
+                      : "text-gray-300 "
                   }`}
                 >
                   Shipped
@@ -172,7 +176,7 @@ const TrackOrder = () => {
               className={`flex items-center gap-4 border rounded p-4
     ${
       order?.status === "in_transit"
-        ? "border-blue-600 bg-blue-50"
+        ? "border-emerald-400 bg-emerald-500/10"
         : "border-gray-200"
     }`}
             >
@@ -181,15 +185,15 @@ const TrackOrder = () => {
                 className={
                   order?.status === "in_transit"
                     ? "text-blue-600"
-                    : "text-gray-500"
+                    : "text-gray-300"
                 }
               />
               <div>
                 <h2
                   className={`font-bold ${
                     order?.status === "in_transit"
-                      ? "text-blue-700"
-                      : "text-gray-700 dark:text-gray-200"
+                      ? "text-emerald-400"
+                      : "text-gray-300 "
                   }`}
                 >
                   In Transit
@@ -205,7 +209,7 @@ const TrackOrder = () => {
               className={`flex items-center gap-4 border rounded p-4
     ${
       order?.status === "out_for_delivery"
-        ? "border-blue-600 bg-blue-50"
+        ? "border-emerald-400 bg-emerald-500/10"
         : "border-gray-200"
     }`}
             >
@@ -214,15 +218,15 @@ const TrackOrder = () => {
                 className={
                   order?.status === "out_for_delivery"
                     ? "text-blue-600"
-                    : "text-gray-500"
+                    : "text-gray-300"
                 }
               />
               <div>
                 <h2
                   className={`font-bold ${
                     order?.status === "out_for_delivery"
-                      ? "text-blue-700"
-                      : "text-gray-700 dark:text-gray-200"
+                      ? "text-emerald-400"
+                      : "text-gray-300"
                   }`}
                 >
                   Out for delivery
@@ -238,7 +242,7 @@ const TrackOrder = () => {
               className={`flex items-center gap-4 border rounded p-4
     ${
       order?.status === "delivered"
-        ? "border-green-600 bg-green-50"
+        ? "border-emerald-400 bg-emerald-500/10"
         : "border-gray-200"
     }`}
             >
@@ -246,16 +250,16 @@ const TrackOrder = () => {
                 size={28}
                 className={
                   order?.status === "delivered"
-                    ? "text-green-600"
-                    : "text-gray-500"
+                    ? "text-emerald-400"
+                    : "text-gray-300"
                 }
               />
               <div>
                 <h2
                   className={`font-bold ${
                     order?.status === "delivered"
-                      ? "text-green-700"
-                      : "text-gray-700 dark:text-gray-200"
+                      ? "text-emerald-400"
+                      : "text-gray-300 "
                   }`}
                 >
                   Delivered
@@ -269,18 +273,18 @@ const TrackOrder = () => {
             {/* Cancelled */}
             <div
               className={`flex items-center gap-4 border rounded p-4
-    ${
-      order?.status === "cancelled"
-        ? "border-red-600 bg-red-50"
-        : "border-gray-200"
-    }`}
+                ${
+                  order?.status === "cancelled"
+                    ? "border-red-600 bg-red-500/20"
+                    : "border-gray-200"
+                }`}
             >
               <FaTimesCircle
                 size={28}
                 className={
                   order?.status === "cancelled"
                     ? "text-red-600"
-                    : "text-gray-500"
+                    : "text-gray-300"
                 }
               />
               <div>
@@ -288,7 +292,7 @@ const TrackOrder = () => {
                   className={`font-bold ${
                     order?.status === "cancelled"
                       ? "text-red-700"
-                      : "text-gray-700 dark:text-gray-200"
+                      : "text-gray-300"
                   }`}
                 >
                   Cancelled
@@ -301,10 +305,12 @@ const TrackOrder = () => {
           </div>
         </div>
         {/* user info and amount */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 border-t ">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 border-t border-white">
           <div>
-            <h3 className="font-semibold mb-2">Customer Info</h3>
-            <div className="pl-4 space-y-1">
+            <h3 className="font-semibold mb-2 text-emerald-400">
+              Customer Info
+            </h3>
+            <div className="pl-4 space-y-1 text-gray-300">
               <p>
                 <b>Name:</b>{" "}
                 {order?.userInfo?.fullName
@@ -325,8 +331,10 @@ const TrackOrder = () => {
           </div>
           {/*  */}
           <div>
-            <h3 className="font-semibold mb-2">Order Amount</h3>
-            <div className="pl-4 space-y-1">
+            <h3 className="font-semibold mb-2 text-emerald-400">
+              Order Amount
+            </h3>
+            <div className="pl-4 space-y-1 text-gray-300">
               <p>
                 <b>Subtotal:</b> {order?.subTotal ? order?.subTotal : 0}$
               </p>

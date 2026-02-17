@@ -50,20 +50,20 @@ const Profile = () => {
 
   return (
     <div className="flex justify-center">
-      <div className="bg-gray-500/20 dark:bg-gray-500/10 shadow-xl rounded-2xl w-full p-4 max-w-3xl">
+      <div className="bg-gray-900/80  shadow-xl rounded-2xl w-full p-4 max-w-3xl">
         {/* Header */}
-        <div className="flex items-center gap-6 border-b dark:border-b-gray-200 pb-6">
+        <div className="flex items-center gap-6 border-b border-b-gray-200 pb-6">
           {user.photoURL ? (
             <img
               src={user.photoURL}
-              className="w-24 h-24 rounded-full border"
+              className="w-24 h-24 rounded-full border-2 border-emerald-400"
             />
           ) : (
-            <FaUserCircle className="text-gray-500 w-24 h-24" />
+            <FaUserCircle className="text-gray-300 w-24 h-24" />
           )}
 
           <div>
-            <h1 className="text-2xl font-bold uppercase dark:text-white">
+            <h1 className="text-2xl font-bold uppercase text-emerald-400">
               {user.displayName}
             </h1>
             <button
@@ -76,19 +76,19 @@ const Profile = () => {
         </div>
         {/* Info Section */}
         <div className="mt-6 space-y-4">
-          <div className="flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-xl">
+          <div className="flex items-center gap-4 p-4 bg-gray-900 rounded-xl">
             <FaEnvelope className="text-blue-600 text-xl" />
-            <p className="text-gray-700 dark:text-gray-200">{user.email}</p>
+            <p className="text-gray-200">{user.email}</p>
           </div>
-          <div className="flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-xl">
+          <div className="flex items-center gap-4 p-4 bg-gray-900 rounded-xl">
             <FaPhone className="text-green-600 text-xl" />
-            <p className="text-gray-700 dark:text-gray-200">
+            <p className="text-gray-200">
               {dbUser?.phone ? dbUser?.phone : "01xxxxxxxxx"}
             </p>
           </div>
-          <div className="flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-xl">
+          <div className="flex items-center gap-4 p-4 bg-gray-900 rounded-xl">
             <FaMapMarkerAlt className="text-red-600 text-xl" />
-            <p className="text-gray-700 dark:text-gray-200">
+            <p className="text-gray-200">
               {dbUser?.address ? dbUser?.address : "Update your address"}
             </p>
           </div>
@@ -96,8 +96,8 @@ const Profile = () => {
 
         {/* Edit Mode */}
         {edit && (
-          <div className="mt-8 p-6 bg-gray-100 dark:bg-gray-800 rounded-xl shadow-inner">
-            <h2 className="font-bold text-xl mb-4 dark:text-gray-200">
+          <div className="mt-8 p-6 bg-gray-900 rounded-xl shadow-inner">
+            <h2 className="font-bold text-xl mb-4 text-gray-200">
               Edit Your Info
             </h2>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
@@ -106,7 +106,7 @@ const Profile = () => {
                   {...register("phone", { required: true })}
                   type="tel"
                   placeholder="your phone no ...."
-                  className="input w-full dark:bg-gray-700 dark:placeholder-gray-300 dark:text-white"
+                  className="input w-full bg-gray-800 placeholder-gray-300 text-gray-300"
                 />
                 {errors?.phone?.type === "required" && (
                   <span className="text-red-500 text-sm">
@@ -119,7 +119,7 @@ const Profile = () => {
                   {...register("address", { required: true })}
                   type="text"
                   placeholder="your address ...."
-                  className="input w-full dark:bg-gray-700 dark:placeholder-gray-300 dark:text-white"
+                  className="input w-full bg-gray-800 placeholder-gray-300 text-gray-300"
                 />
                 {errors?.address?.type === "required" && (
                   <span className="text-red-500 text-sm">
@@ -129,7 +129,7 @@ const Profile = () => {
               </div>
               <button
                 type="submit"
-                className="btn w-full bg-green-500 text-white"
+                className="py-2 px-6 rounded-md w-full bg-green-500 text-white"
               >
                 U P D A T E
               </button>

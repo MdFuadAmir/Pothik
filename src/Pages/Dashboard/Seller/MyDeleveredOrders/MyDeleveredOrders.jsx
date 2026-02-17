@@ -3,12 +3,13 @@ import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import useAuth from "../../../../Hooks/useAuth";
 import CompoLoading from "../../../../Components/CompoLoading/CompoLoading";
 import { useState } from "react";
+import Pagination from "../../../../Components/Pagination/Pagination";
 
 const MyDeliveredOrders = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
 
-  // 🔥 pagination state
+  // ✅ Pagination state
   const [itemsPerPage, setItemsPerPage] = useState(20);
   const [currentPage, setCurrentPage] = useState(0);
 
@@ -21,7 +22,7 @@ const MyDeliveredOrders = () => {
     ],
     queryFn: async () => {
       const res = await axiosSecure.get(
-        `/seller/delivered-orders/${user.email}?page=${currentPage}&size=${itemsPerPage}`
+        `/seller/delivered-orders/${user.email}?page=${currentPage}&size=${itemsPerPage}`,
       );
       return res.data;
     },
@@ -34,26 +35,17 @@ const MyDeliveredOrders = () => {
   const orders = data?.orders || [];
   const totalOrders = data?.total || 0;
 
-  // 🔥 flatten delivered items
+  // Flatten delivered items
   const rows = orders.flatMap((order) =>
     (order.items || []).map((item) => ({
       ...item,
       orderId: order._id,
       deliveredAt: order.updatedAt || order.createdAt,
-    }))
+    })),
   );
 
-  // 🔥 pagination calc
+  // Pagination calculation
   const numOfPages = Math.ceil(totalOrders / itemsPerPage) || 1;
-  const pages = [...Array(numOfPages).keys()];
-
-  const handlePreviousPage = () => {
-    if (currentPage > 0) setCurrentPage(currentPage - 1);
-  };
-
-  const handleNextPage = () => {
-    if (currentPage < numOfPages - 1) setCurrentPage(currentPage + 1);
-  };
 
   const handleItemsPerPage = (e) => {
     setItemsPerPage(parseInt(e.target.value));
@@ -62,15 +54,17 @@ const MyDeliveredOrders = () => {
 
   return (
     <div>
-      <h2 className="text-2xl font-bold dark:text-white">My Delivered Items ({totalOrders})</h2>
-      <p className="text-sm text-gray-500 mb-6">
+      <h2 className="text-2xl font-bold text-emerald-400">
+        My Delivered Items ({totalOrders})
+      </h2>
+      <p className="text-sm text-gray-300 mb-6">
         Lorem ipsum, dolor sit amet consectetur adipisicing elit.
       </p>
 
-      <div className="overflow-x-auto  rounded p-4 bg-gray-500/20 dark:bg-gray-500/10">
+      <div className="overflow-x-auto rounded p-4 bg-gray-900/80">
         <table className="table w-full">
           <thead>
-            <tr className="bg-gray-500/20 dark:bg-gray-500/10 dark:text-white">
+            <tr className="bg-gray-900 text-white">
               <th>Order ID</th>
               <th>Product</th>
               <th>Qty</th>
@@ -82,59 +76,37 @@ const MyDeliveredOrders = () => {
           <tbody>
             {rows.length === 0 && (
               <tr>
-                <td colSpan="5" className="text-center py-6 text-gray-500">
+                <td colSpan="5" className="text-center py-6 text-gray-300">
                   No delivered items yet
                 </td>
               </tr>
             )}
 
             {rows.map((row) => (
-              <tr key={`${row.orderId}-${row._id}`} className="dark:text-gray-300">
+              <tr key={`${row.orderId}-${row._id}`} className="text-gray-300">
                 <td className="whitespace-nowrap">{row.orderId}</td>
                 <td>{row.productName}</td>
                 <td>{row.quantity}</td>
                 <td>${row.price * row.quantity}</td>
-                <td>
-                  {new Date(row.deliveredAt).toLocaleDateString()}
-                </td>
+                <td>{new Date(row.deliveredAt).toLocaleDateString()}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
 
-      {/* 🔥 Pagination UI (same style) */}
-      <div className="flex flex-wrap justify-center mt-10 gap-4 items-center">
-        <button
-          onClick={handlePreviousPage}
-          disabled={currentPage === 0}
-          className="btn dark:bg-gray-800 dark:text-white"
-        >
-          Previous
-        </button>
-
-        {pages.map((page) => (
-          <button
-            key={page}
-            onClick={() => setCurrentPage(page)}
-            className={`px-4 py-2 rounded-full ${currentPage === page ? "bg-indigo-500" : ""}`}
-          >
-            {page + 1}
-          </button>
-        ))}
-
-        <button
-          onClick={handleNextPage}
-          disabled={currentPage === numOfPages - 1}
-          className="btn dark:bg-gray-800 dark:text-white"
-        >
-          Next
-        </button>
+      {/* ✅ Pagination UI like Products page */}
+      <div className="flex justify-center items-center gap-4 my-6">
+        <Pagination
+          page={currentPage + 1}
+          setPage={(p) => setCurrentPage(p - 1)}
+          totalPages={numOfPages}
+        />
 
         <select
           value={itemsPerPage}
           onChange={handleItemsPerPage}
-          className="border rounded px-2 py-1 dark:bg-gray-800 dark:text-white"
+          className="border rounded px-2 py-1 border-emerald-400 text-emerald-400"
         >
           <option value="10">10</option>
           <option value="20">20</option>
@@ -142,7 +114,6 @@ const MyDeliveredOrders = () => {
           <option value="50">50</option>
         </select>
       </div>
-      
     </div>
   );
 };

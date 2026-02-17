@@ -31,20 +31,20 @@ const AddProductForm = ({
     <div>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="space-y-2  p-4 rounded mb-12 bg-gray-500/20 dark:bg-gray-500/10"
+        className="space-y-2  p-4 rounded mb-12 bg-gray-900/80"
       >
-        <p className="font-bold text-sm dark:text-gray-200">Basic Info</p>
-        
+        <p className="font-bold text-xl text-emerald-400">Basic Info</p>
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
           {/* 1 */}
           <div className="flex flex-col">
-            <label className="text-sm dark:text-gray-200">Product Name *</label>
+            <label className="text-sm text-gray-200">Product Name *</label>
             <input
               {...register("productName", {
                 required: "Product name is required",
               })}
               type="text"
-              className="input w-full focus:border-none dark:bg-gray-700 dark:text-white border dark:border-gray-200 border-black"
+              className="w-full px-3 py-2 rounded border border-gray-300 bg-gray-800 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-400"
               placeholder="product name .."
             />
             {errors.productName && (
@@ -55,11 +55,11 @@ const AddProductForm = ({
           </div>
           {/* 2 */}
           <div className="flex flex-col">
-            <label className="text-sm dark:text-gray-200">Brand *</label>
+            <label className="text-sm text-gray-200">Brand *</label>
             <input
               {...register("brand", { required: "Brand is required" })}
               type="text"
-              className="input w-full focus:border-none dark:bg-gray-700 dark:text-white border dark:border-gray-200 border-black"
+              className="w-full px-3 py-2 rounded border border-gray-300 bg-gray-800 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-400"
               placeholder="brand .."
             />
             {errors.brand && (
@@ -68,11 +68,11 @@ const AddProductForm = ({
           </div>
           {/* 3 */}
           <div className="flex flex-col">
-            <label className="text-sm dark:text-gray-200">SKU / Product Code *</label>
+            <label className="text-sm text-gray-200">SKU / Product Code *</label>
             <input
               {...register("skuCode", { required: "Brand is required" })}
               type="text"
-              className="input w-full focus:border-none dark:bg-gray-700 dark:text-white border dark:border-gray-200 border-black"
+              className="w-full px-3 py-2 rounded border border-gray-300 bg-gray-800 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-400"
               placeholder="skuCode .."
             />
             {errors.skuCode && (
@@ -81,10 +81,10 @@ const AddProductForm = ({
           </div>
           {/* 4 */}
           <div className="flex flex-col">
-            <label className="text-sm dark:text-gray-200">Category *</label>
+            <label className="text-sm text-gray-200">Category *</label>
             <select
               {...register("category", { required: "Select one category" })}
-              className="border px-3 py-2 rounded w-full dark:bg-gray-700 dark:text-white dark:border-gray-200 border-black"
+              className="w-full px-3 py-2 rounded border border-gray-300 bg-gray-800 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-400"
             >
               <option value="">Select category</option>
               {categories.map((c) => (
@@ -99,13 +99,13 @@ const AddProductForm = ({
           </div>
           {/* 5 */}
           <div className="flex flex-col">
-            <label className="text-sm dark:text-gray-200">Regular Price *</label>
+            <label className="text-sm text-gray-200">Regular Price *</label>
             <input
               {...register("regularPrice", {
                 required: "Reguler price is required",
               })}
               type="number"
-              className="input w-full focus:border-none dark:bg-gray-700 dark:text-white border dark:border-gray-200 border-black"
+              className="w-full px-3 py-2 rounded border border-gray-300 bg-gray-800 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-400"
               placeholder="regular price .."
             />
             {errors.regularPrice && (
@@ -116,23 +116,23 @@ const AddProductForm = ({
           </div>
           {/* 6 */}
           <div className="flex flex-col">
-            <label className="text-sm dark:text-gray-200">Discount Price</label>
+            <label className="text-sm text-gray-200">Discount Price</label>
             <input
               {...register("discountPrice")}
               type="number"
-              className="input w-full focus:border-none dark:bg-gray-700 dark:text-white border dark:border-gray-200 border-black"
+              className="w-full px-3 py-2 rounded border border-gray-300 bg-gray-800 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-400"
               placeholder="discount price .."
             />
           </div>
           {/* 7 */}
           <div className="flex flex-col">
-            <label className="text-sm dark:text-gray-200">Stock Quantity *</label>
+            <label className="text-sm text-gray-200">Stock Quantity *</label>
             <input
               {...register("stockQua", {
                 required: "stock Quantity is required",
               })}
               type="number"
-              className="input w-full focus:border-none dark:bg-gray-700 dark:text-white border dark:border-gray-200 border-black"
+              className="w-full px-3 py-2 rounded border border-gray-300 bg-gray-800 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-400"
               placeholder="stock quantity .."
             />
             {errors.stockQua && (
@@ -141,12 +141,12 @@ const AddProductForm = ({
           </div>
           {/* 8 */}
           <div className="flex flex-col">
-            <label className="text-sm dark:text-gray-200">Return Policy *</label>
+            <label className="text-sm text-gray-200">Return Policy *</label>
             <select
               {...register("returnPolicy", {
                 required: "Return policy is required",
               })}
-              className="border px-3 py-2 rounded w-full dark:bg-gray-700 dark:text-white dark:border-gray-200 border-black"
+              className="w-full px-3 py-2 rounded border border-gray-300 bg-gray-800 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-400"
             >
               <option value="">Select Return Policy</option>
               <option value="no-return">No Return</option>
@@ -175,15 +175,15 @@ const AddProductForm = ({
           selectedCategory === "Shoes" ||
           selectedCategory === "Baby") && (
           <div className="mt-4">
-            <h2 className="text-sm dark:text-gray-200 font-bold mb-4 ">Details Info</h2>
+            <h2 className="text-lg  font-bold mb-4 text-emerald-400">Details Info</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* 1 */}
               <div>
-                <label className="text-sm dark:text-gray-200">Size (comma separated)*</label>
+                <label className="text-sm text-gray-200">Size (comma separated)*</label>
                 <input
                   {...register("size", { required: "Size is required" })}
                   type="text"
-                  className="input w-full dark:bg-gray-700 dark:text-white border dark:border-gray-200 border-black"
+                  className="w-full px-3 py-2 rounded border border-gray-300 bg-gray-800 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-400"
                   placeholder="S, M, L, XL"
                 />
                 {errors.size && (
@@ -192,11 +192,11 @@ const AddProductForm = ({
               </div>
               {/* 2 */}
               <div>
-                <label className="text-sm dark:text-gray-200">Color (comma separated)*</label>
+                <label className="text-sm text-gray-200">Color (comma separated)*</label>
                 <input
                   {...register("color", { required: "Color is required" })}
                   type="text"
-                  className="input w-full dark:bg-gray-700 dark:text-white border dark:border-gray-200 border-black"
+                  className="w-full px-3 py-2 rounded border border-gray-300 bg-gray-800 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-400"
                   placeholder="Red, Blue, Black"
                 />
                 {errors.color && (
@@ -205,12 +205,12 @@ const AddProductForm = ({
               </div>
               {/* 3 */}
               <div>
-                <label className="text-sm dark:text-gray-200">Fabric Type *</label>
+                <label className="text-sm text-gray-200">Fabric Type *</label>
                 <input
                   {...register("fabric", {
                     required: "Fabric Type is required",
                   })}
-                  className="input w-full dark:bg-gray-700 dark:text-white border dark:border-gray-200 border-black"
+                  className="w-full px-3 py-2 rounded border border-gray-300 bg-gray-800 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-400"
                   placeholder="Denim, Cotton, Wool"
                 />
                 {errors.fabric && (
@@ -225,16 +225,16 @@ const AddProductForm = ({
         {/* Grocery */}
         {selectedCategory === "Grocery" && (
           <div className="mt-4">
-            <p className="font-bold text-sm mb-3 dark:text-gray-200">Details Info</p>
+            <p className="font-bold text-lg mb-3 text-emerald-400">Details Info</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* 1 */}
               <div className="flex flex-col">
-                <label className="text-sm dark:text-gray-200">Weight / packet*</label>
+                <label className="text-sm text-gray-200">Weight / packet*</label>
                 <input
                   {...register("weightQty", {
                     required: "Weight is required",
                   })}
-                  className="input w-full dark:bg-gray-700 dark:text-white border dark:border-gray-200 border-black"
+                  className="w-full px-3 py-2 rounded border border-gray-300 bg-gray-800 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-400"
                   placeholder="1kg / 500g"
                 />
                 {errors.weightQty && (
@@ -245,12 +245,12 @@ const AddProductForm = ({
               </div>
               {/* 2 */}
               <div className="flex flex-col">
-                <label className="text-sm dark:text-gray-200">Ingredients *</label>
+                <label className="text-sm text-gray-200">Ingredients *</label>
                 <input
                   {...register("ingredients", {
                     required: "ingredients is required",
                   })}
-                  className="input w-full dark:bg-gray-700 dark:text-white border dark:border-gray-200 border-black"
+                  className="w-full px-3 py-2 rounded border border-gray-300 bg-gray-800 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-400"
                   placeholder="Milk, Sugar, Wheat, Rice, etc."
                 />
                 {errors.ingredients && (
@@ -261,13 +261,13 @@ const AddProductForm = ({
               </div>
               {/* 3 */}
               <div className="flex flex-col">
-                <label className="text-sm font-medium dark:text-gray-200">Packaging Type *</label>
+                <label className="text-sm font-medium text-gray-200">Packaging Type *</label>
 
                 <select
                   {...register("packagingType", {
                     required: "Packaging Type is required",
                   })}
-                  className="border px-3 py-2 rounded w-full dark:text-white dark:bg-gray-700"
+                  className="w-full px-3 py-2 rounded border border-gray-300 bg-gray-800 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-400"
                 >
                   <option value="">-- Select Packaging Type --</option>
                   <option value="Pouch">Pouch</option>
@@ -292,16 +292,16 @@ const AddProductForm = ({
           selectedCategory === "Computers" ||
           selectedCategory === "Watches") && (
           <div className="mt-4">
-            <p className="font-bold text-sm mb-3 dark:text-gray-200">Details Info</p>
+            <p className="font-bold text-lg mb-3 text-emerald-400">Details Info</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* 1 */}
               <div className="flex flex-col">
-                <label className="text-sm dark:text-gray-200">Model *</label>
+                <label className="text-sm text-gray-200">Model *</label>
                 <input
                   {...register("model", {
                     required: "Model is required",
                   })}
-                  className="input w-full border border-black dark:border-gray-200 dark:text-gray-200 dark:bg-gray-700 "
+                  className="w-full px-3 py-2 rounded border border-gray-300 bg-gray-800 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-400"
                   placeholder="model .."
                 />
                 {errors.model && (
@@ -310,13 +310,13 @@ const AddProductForm = ({
               </div>
               {/* 2 */}
               <div className="flex flex-col">
-                <label className="text-sm font-medium dark:text-gray-200">Condition *</label>
+                <label className="text-sm font-medium text-gray-200">Condition *</label>
 
                 <select
                   {...register("condition", {
                     required: "Condition is required",
                   })}
-                  className="border px-3 py-2 rounded w-full dark:bg-gray-700 dark:text-gray-200"
+                  className="w-full px-3 py-2 rounded border border-gray-300 bg-gray-800 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-400"
                 >
                   <option value="">Select Condition</option>
                   <option value="New">New</option>
@@ -333,7 +333,7 @@ const AddProductForm = ({
         )}
         {/* Short Description */}
         <div className="flex flex-col mt-4">
-          <label className="text-sm dark:text-gray-200">Short Description *</label>
+          <label className="text-sm text-gray-200">Short Description *</label>
           <input
             {...register("shortDescription", {
               required: "Short description is required",
@@ -343,7 +343,7 @@ const AddProductForm = ({
               },
             })}
             type="text"
-            className="border px-3 py-2 rounded w-full dark:text-gray-200 dark:bg-gray-700"
+            className="w-full px-3 py-2 rounded border border-gray-300 bg-gray-800 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-400"
             placeholder="Enter short product summary..."
           />
           {errors.shortDescription && (
@@ -354,7 +354,7 @@ const AddProductForm = ({
         </div>
         {/* Long Description */}
         <div className="flex flex-col mt-4">
-          <label className="text-sm dark:text-gray-200 ">Long Description *</label>
+          <label className="text-sm  text-gray-200">Long Description *</label>
           <textarea
             {...register("longDescription", {
               required: "Long description is required",
@@ -363,7 +363,7 @@ const AddProductForm = ({
                 message: "Minimum 50 characters required",
               },
             })}
-            className="border px-3 py-2 rounded w-full min-h-[150px] dark:text-gray-200 dark:placeholder-text-gray-200 dark:bg-gray-700"
+            className="w-full px-3 py-2 rounded border border-gray-300 bg-gray-800 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-400"
             placeholder="Write full product details here..."
           ></textarea>
           {errors.longDescription && (
@@ -389,7 +389,7 @@ const AddProductForm = ({
             type="file"
             multiple
             onChange={handleMultiImageUpload}
-            className="w-full px-4 py-3 rounded-lg border cursor-pointer dark:text-gray-200 dark:bg-gray-700"
+            className="w-full px-3 py-2 rounded border border-gray-300 bg-gray-800 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-400"
           />
 
           {/* Hidden form field */}
@@ -406,8 +406,8 @@ const AddProductForm = ({
         <button
           type="submit"
           disabled={uploading}
-          className={`w-full mt-4 cursor-pointer px-4 py-2 rounded bg-blue-300 font-bold
-    ${uploading && "bg-gray-400 cursor-not-allowed"}`}
+          className={`w-full mt-4 cursor-pointer px-4 py-2 rounded bg-emerald-600 font-bold text-white
+    ${uploading && "bg-emerald-900 cursor-not-allowed"}`}
         >
           {uploading ? "Uploading..." : "Submit"}
         </button>

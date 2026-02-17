@@ -63,10 +63,10 @@ const MyShop = () => {
     <div>
       {/* Header */}
       <div className="mb-6">
-        <h2 className="text-xl font-bold mb-1 dark:text-white">
+        <h2 className="text-2xl font-bold mb-1 text-emerald-400">
           My Shop ({totalProducts})
         </h2>
-        <p className="text-sm text-gray-600">
+        <p className="text-sm text-gray-300">
           Manage all your uploaded products here
         </p>
       </div>
@@ -74,7 +74,7 @@ const MyShop = () => {
       {/* Products */}
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
         {products.length === 0 ? (
-          <p className="col-span-full text-center text-gray-500 dark:text-gray-200">
+          <p className="col-span-full text-center text-gray-300">
             No products found
           </p>
         ) : (

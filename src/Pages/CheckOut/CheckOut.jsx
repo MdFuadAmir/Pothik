@@ -20,7 +20,7 @@ const CheckOut = () => {
   const subTotal = useMemo(() => {
     return cart.reduce(
       (acc, item) => acc + item.price * (item.quantity ?? 1),
-      0
+      0,
     );
   }, [cart]);
 
@@ -36,14 +36,13 @@ const CheckOut = () => {
     return map;
   }, [cart]);
 
-  // 🚚 Shipping calculation (seller-wise)
   // const SHIPPING_PER_SELLER = 80;
   const SHIPPING_PER_SELLER =
     paymentMethod === "CASH_ON_DELIVERY"
       ? 120
       : paymentMethod === "STRIPE"
-      ? 80
-      : 120;
+        ? 80
+        : 120;
 
   const shipping = useMemo(() => {
     const sellerCount = Object.keys(sellerGroups).length;
@@ -66,7 +65,7 @@ const CheckOut = () => {
         userInfo: data,
         paymentMethod,
         items: cart,
-        sellerWiseItems: sellerGroups, // 🔥 IMPORTANT
+        sellerWiseItems: sellerGroups,
         subTotal,
         shipping,
         grandTotal,
@@ -107,44 +106,50 @@ const CheckOut = () => {
     !methods || !methods.formState?.isValid || !paymentMethod;
 
   return (
-    <div className="flex flex-col md:flex-row items-center gap-6 my-12">
+    <div className="flex flex-col md:flex-row items-center gap-6 my-12 px-4 md:px-10 lg:px-20">
       {/* Form */}
       <div className="w-full md:w-1/2">
-        <h2 className="text-xl font-medium mb-6 dark:text-white">DELIVERY INFORMATION --</h2>
+        <h2 className="text-2xl font-bold mb-6 text-emerald-400">
+          DELIVERY INFORMATION --
+        </h2>
         <div className="rounded">
           <CheckOutForm setMethods={setMethods} />
         </div>
       </div>
 
       {/* Summary */}
-      <div className="w-full md:w-1/2  p-4 rounded h-fit bg-gray-500/10 dark:bg-gray-500/10">
-        <h2 className="text-lg font-bold mb-3 dark:text-white">Order Summary</h2>
+      <div className="w-full md:w-1/2  p-4 rounded h-fit bg-gray-900/80">
+        <h2 className="text-lg font-bold mb-3 text-emerald-400">
+          Order Summary
+        </h2>
 
-        <div className="flex justify-between text-sm mb-2 dark:text-white">
+        <div className="flex justify-between text-sm mb-2 text-white">
           <span>Subtotal</span>
           <span>৳{subTotal}</span>
         </div>
 
-        <div className="flex justify-between text-sm mb-2 dark:text-white">
+        <div className="flex justify-between text-sm mb-2 text-white">
           <span>Shipping ({Object.keys(sellerGroups).length} seller)</span>
           <span>৳{shipping}</span>
         </div>
 
-        <div className="flex justify-between text-sm border-t dark:border-white dark:text-white pt-3">
+        <div className="flex justify-between text-sm border-t border-white text-white pt-3">
           <span>Total</span>
           <span className="font-bold">৳{grandTotal}</span>
         </div>
 
         {/* Payment */}
         <div className="mt-6">
-          <h3 className="text-gray-600 dark:text-gray-300">PAYMENT METHOD --</h3>
+          <h3 className="text-emerald-400">PAYMENT METHOD --</h3>
           <div className="grid grid-cols-3 gap-4 mt-4">
             {/* stripe */}
             <button
               onClick={() => setPaymentMethod("STRIPE")}
               disabled
-              className={`border rounded p-1 text-sm disabled:bg-gray-300 dark:disabled:bg-gray-500 dark:text-white ${
-                paymentMethod === "STRIPE" ? "bg-blue-500 text-white" : ""
+              className={`rounded p-1 text-sm  disabled:bg-emerald-900/50 text-white ${
+                paymentMethod === "STRIPE"
+                  ? "bg-emerald-400 text-white"
+                  : "bg-gray-800"
               }`}
             >
               STRIPE
@@ -152,8 +157,10 @@ const CheckOut = () => {
 
             <button
               onClick={() => setPaymentMethod("CASH_ON_DELIVERY")}
-              className={`border rounded p-1 text-sm dark:text-white ${
-                paymentMethod === "CASH_ON_DELIVERY" ? "bg-blue-500 text-white" : ""
+              className={`rounded p-1 text-sm text-white ${
+                paymentMethod === "CASH_ON_DELIVERY"
+                  ? "bg-emerald-400 text-white"
+                  : "bg-gray-800"
               }`}
             >
               CASH_ON_DELIVERY
@@ -164,7 +171,7 @@ const CheckOut = () => {
           onClick={handleOrderSubmit}
           disabled={isButtonDisabled}
           className={`mt-6 w-full py-2 rounded ${
-            isButtonDisabled ? "bg-gray-400" : "bg-blue-500 text-white"
+            isButtonDisabled ? "bg-emerald-900/50 text-white cursor-not-allowed" : "bg-emerald-500 text-white"
           }`}
         >
           Confirm Order

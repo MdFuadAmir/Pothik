@@ -63,7 +63,7 @@ const ProductDetails = () => {
     return <CompoLoading />;
   }
   return (
-    <div className="my-6 max-w-4xl mx-auto bg-gray-500/10 dark:bg-gray-500/10 p-4 rounded-xl">
+    <div className="my-6 max-w-4xl mx-auto bg-gray-900/80 p-4 rounded-xl">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <div className="w-full h-72 p-2 rounded-lg overflow-hidden ">
@@ -92,7 +92,9 @@ const ProductDetails = () => {
           </div>
         </div>
         <div className="space-y-3">
-          <h1 className="text-xl font-bold text-black dark:text-white">{product?.productName}</h1>
+          <h1 className="text-xl font-bold text-white">
+            {product?.productName}
+          </h1>
           <div className="flex gap-4 mt-2">
             {product?.discountPrice ? (
               <div className="flex items-center gap-2">
@@ -109,7 +111,7 @@ const ProductDetails = () => {
               </p>
             )}
           </div>
-          <p className="text-sm text-gray-600 dark:text-gray-300">
+          <p className="text-sm text-gray-200 ">
             In Stock:{" "}
             <span
               className={`font-semibold ${
@@ -119,70 +121,93 @@ const ProductDetails = () => {
               {product?.stockQua > 0 ? product.stockQua : "Out of Stock"}
             </span>
           </p>
-          <p className="text-sm text-gray-700 dark:text-gray-300">
-            Brand: <span className="font-semibold">{product?.brand}</span>
+          <p className="text-sm text-gray-200 ">
+            Brand:{" "}
+            <span className="font-semibold text-gray-400">
+              {product?.brand}
+            </span>
           </p>
           {product?.model && (
-            <p className="text-sm text-gray-700 dark:text-gray-300">
-              Model: <span className="font-semibold">{product?.model}</span>
+            <p className="text-sm text-gray-200 ">
+              Model:{" "}
+              <span className="font-semibold text-gray-400">
+                {product?.model}
+              </span>
             </p>
           )}
 
           {product?.size && (
-            <p className="text-sm text-gray-700 dark:text-gray-300">
-              Size: <span className="font-semibold">{product?.size}</span>
+            <p className="text-sm text-gray-200 ">
+              Size:{" "}
+              <span className="font-semibold text-gray-400">
+                {product?.size}
+              </span>
             </p>
           )}
           {product?.color && (
-            <p className="text-sm text-gray-700 dark:text-gray-300">
-              Color: <span className="font-semibold">{product?.color}</span>
+            <p className="text-sm text-gray-200">
+              Color:{" "}
+              <span className="font-semibold text-gray-400">
+                {product?.color}
+              </span>
             </p>
           )}
           {product?.fabric && (
-            <p className="text-sm text-gray-700 dark:text-gray-300">
-              Fabric: <span className="font-semibold">{product?.fabric}</span>
+            <p className="text-sm text-gray-200">
+              Fabric:{" "}
+              <span className="font-semibold text-gray-400">
+                {product?.fabric}
+              </span>
             </p>
           )}
           {product?.weightQty && (
-            <p className="text-sm text-gray-700 dark:text-gray-300">
+            <p className="text-sm text-gray-200">
               Weight:{" "}
-              <span className="font-semibold">{product?.weightQty}</span>
+              <span className="font-semibold text-gray-400">
+                {product?.weightQty}
+              </span>
             </p>
           )}
           {product?.ingredients && (
-            <p className="text-sm text-gray-700 dark:text-gray-300">
+            <p className="text-sm text-gray-700 ">
               Ingredients:{" "}
               <span className="font-semibold">{product?.ingredients}</span>
             </p>
           )}
           {product?.packagingType && (
-            <p className="text-sm text-gray-700 dark:text-gray-300">
+            <p className="text-sm text-gray-200">
               Packaging Type:{" "}
-              <span className="font-semibold">{product?.packagingType}</span>
+              <span className="font-semibold text-gray-400">
+                {product?.packagingType}
+              </span>
             </p>
           )}
           {product?.condition && (
-            <p className="text-sm text-gray-700 dark:text-gray-300">
+            <p className="text-sm text-gray-200 ">
               condition:{" "}
-              <span className="font-semibold">{product?.condition}</span>
+              <span className="font-semibold text-gray-400">
+                {product?.condition}
+              </span>
             </p>
           )}
-          <p className="text-sm text-gray-700 dark:text-gray-300">
+          <p className="text-sm text-gray-200 ">
             Return Policy:{" "}
-            <span className="font-semibold">{product?.returnPolicy}</span>
+            <span className="font-semibold text-gray-400">
+              {product?.returnPolicy}
+            </span>
           </p>
           <div className="flex items-center gap-2">
             <FaStar className="text-yellow-500" />
-            <p className="font-medium dark:text-gray-300">{product?.rating}</p>
+            <p className="font-medium text-gray-400">({product?.rating})</p>
           </div>
           <button
             onClick={handleAddToCart}
             disabled={Number(product?.stockQua) === 0}
-            className={`px-6 py-2 w-full md:w-1/2 mx-auto mt-4 rounded border-2
+            className={`px-6 py-2 w-full md:w-1/2 mx-auto mt-4 text-white rounded
     ${
       Number(product?.stockQua) === 0
-        ? "bg-gray-300 cursor-not-allowed text-gray-500"
-        : "hover:bg-gray-400 hover:text-white cursor-pointer dark:text-gray-300"
+        ? "cursor-not-allowed bg-emerald-900"
+        : "cursor-pointer bg-emerald-600 hover:bg-emerald-500"
     }`}
           >
             Add to Cart
@@ -190,8 +215,8 @@ const ProductDetails = () => {
         </div>
       </div>
       <div className="mt-12">
-        <h2 className="text-lg font-bold dark:text-white">Description</h2>
-        <p className="text-sm dark:text-gray-300">{product?.longDescription}</p>
+        <h2 className="text-lg font-bold text-emerald-500">Description</h2>
+        <p className="text-sm text-gray-200">{product?.longDescription}</p>
       </div>
       <div className="my-12 p-4">
         <Reviews productId={product._id} />

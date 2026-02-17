@@ -44,8 +44,8 @@ const MyOrders = () => {
   if (orderData.length <= 0) {
     return (
       <>
-        <p className="text-gray-500 text-lg mt-4">No orders found</p>
-        <p className="text-gray-400 text-sm">
+        <p className="text-gray-300 text-lg mt-4">No orders found</p>
+        <p className="text-gray-300 text-sm">
           Place your first order to see it here.
         </p>
       </>
@@ -61,15 +61,15 @@ const MyOrders = () => {
   };
 
   if (isLoading || loading) return <CompoLoading />;
-  if (error) return <p>Error loading orders</p>;
+  if (error) return <p className="text-gray-300">Error loading orders</p>;
 
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-xl font-bold dark:text-white">
+        <h2 className="text-xl font-bold text-emerald-400">
           Orders by {user?.displayName}
         </h2>
-        <p className="text-sm text-gray-500">
+        <p className="text-sm text-gray-200">
           this is your order history and recent order list
         </p>
       </div>
@@ -77,11 +77,11 @@ const MyOrders = () => {
         {orderData.map((order) => (
           <div
             key={order._id}
-            className="rounded-xl p-5 shadow-sm bg-gray-500/20 dark:bg-gray-500/10 space-y-3"
+            className="rounded-xl p-5 shadow-sm bg-gray-900/80 space-y-3"
           >
             {/* Header */}
             <div className="flex justify-between items-center">
-              <p className="text-sm text-gray-600 dark:text-gray-300">
+              <p className="text-sm text-gray-300 dark:text-gray-300">
                 <span className="font-semibold ">Order ID:</span> {order._id}
               </p>
               <span
@@ -96,8 +96,8 @@ const MyOrders = () => {
             </div>
 
             {/* Items List */}
-            <div className="bg-gray-500/20 dark:bg-gray-500/10 p-3 rounded-lg space-y-2">
-              <p className="text-sm font-semibold text-gray-700 dark:text-gray-300">
+            <div className="bg-gray-500/20 p-3 rounded-lg space-y-2">
+              <p className="text-sm font-semibold text-gray-300 dark:text-gray-300">
                 Items:
               </p>
 
@@ -113,10 +113,10 @@ const MyOrders = () => {
                       className="w-14 h-14 object-cover rounded"
                     />
                     <div className="text-sm">
-                      <p className="font-medium dark:text-gray-300">
+                      <p className="font-medium text-gray-300">
                         {item.productName}
                       </p>
-                      <p className="text-gray-500 text-xs dark:text-gray-300">
+                      <p className="text-xs text-gray-400">
                         Qty: {item.quantity}
                       </p>
                     </div>
@@ -134,7 +134,7 @@ const MyOrders = () => {
             </div>
 
             {/* Order Info */}
-            <div className="text-sm space-y-1 pt-1 dark:text-gray-300">
+            <div className="text-sm space-y-1 pt-1 text-gray-300">
               <p>
                 <span className="font-semibold">Total:</span> $
                 {order.grandTotal}
@@ -159,7 +159,7 @@ const MyOrders = () => {
             ) : (
               <button
                 onClick={() => cancelOrder.mutate(order._id)}
-                className="btn btn-sm bg-red-500 text-white w-full"
+                className="px-2 py-1 rounded bg-red-500 text-white w-full"
               >
                 Cancel Order
               </button>
